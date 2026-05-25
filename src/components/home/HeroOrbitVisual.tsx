@@ -16,6 +16,13 @@ const Label = ({children}: {children: ReactNode}) => (
     </div>
 );
 
+const MiniLabel = ({children}: {children: ReactNode}) => (
+    <div className="rounded-full border border-white/12 bg-slate-950/56 px-2 py-0.5 text-[9px] font-bold text-white shadow-[0_0_12px_rgba(56,189,248,0.12)] backdrop-blur-xl">
+        <span className="mr-1 inline-block h-1 w-1 rounded-full bg-emerald-400" />
+        {children}
+    </div>
+);
+
 const Orbit = ({
                    children,
                    className,
@@ -75,10 +82,8 @@ const Moon = () => (
 const ISSVisual = () => (
     <div className="relative h-5 w-9 sm:h-6 sm:w-11">
         <div className="absolute left-1/2 top-1/2 h-2.5 w-4 -translate-x-1/2 -translate-y-1/2 rounded-sm border border-cyan-200/70 bg-slate-900/80 shadow-[0_0_12px_rgba(56,189,248,0.45)]" />
-
         <div className="absolute left-0 top-1/2 h-2 w-4 -translate-y-1/2 border border-cyan-200/60 bg-cyan-300/15" />
         <div className="absolute right-0 top-1/2 h-2 w-4 -translate-y-1/2 border border-cyan-200/60 bg-cyan-300/15" />
-
         <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-cyan-100/45" />
     </div>
 );
@@ -94,7 +99,10 @@ const EarthSystem = () => (
                 transition={{duration: 7, repeat: Infinity, ease: "linear"}}
             >
                 <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-                    <Moon />
+                    <div className="flex items-center gap-1">
+                        <Moon />
+                        <MiniLabel>Moon</MiniLabel>
+                    </div>
                 </div>
             </motion.div>
 
@@ -104,7 +112,10 @@ const EarthSystem = () => (
                 transition={{duration: 4.5, repeat: Infinity, ease: "linear"}}
             >
                 <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-                    <ISSVisual />
+                    <div className="flex items-center gap-1">
+                        <ISSVisual />
+                        <MiniLabel>ISS</MiniLabel>
+                    </div>
                 </div>
             </motion.div>
         </div>
