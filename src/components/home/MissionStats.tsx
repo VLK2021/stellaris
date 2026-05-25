@@ -24,7 +24,7 @@ export const MissionStats = () => {
                         viewport={{once: true, margin: "-80px"}}
                         transition={{delay: index * 0.08}}
                         whileHover={{y: -5, scale: 1.01}}
-                        className="border border-[var(--color-border)] bg-[rgba(255,255,255,0.04)] p-5 backdrop-blur-2xl transition"
+                        className="border border-[var(--color-border)] bg-[var(--color-glass)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl transition"
                     >
                         <div className="text-3xl font-black tracking-[-0.05em] text-[var(--color-text)] sm:text-4xl">
                             {item.value}

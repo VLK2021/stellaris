@@ -40,7 +40,7 @@ export const FooterBrand = ({locale}: FooterBrandProps) => {
 
                 <Link
                     href="/about"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-[rgba(255,255,255,0.04)] px-5 py-3 text-sm font-semibold text-[var(--color-text)] transition hover:border-[rgba(56,189,248,0.35)] hover:text-[var(--color-accent)]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-5 py-3 text-sm font-semibold text-[var(--color-text)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-accent)]"
                 >
                     {locale.footer.about}
                 </Link>

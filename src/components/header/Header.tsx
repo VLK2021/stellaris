@@ -55,7 +55,7 @@ export const Header = () => {
     };
 
     return (
-        <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--color-border)] bg-[rgba(2,6,23,0.72)] backdrop-blur-2xl">
+        <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-header)] shadow-[var(--shadow-card)] backdrop-blur-2xl">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent" />
 
             <div className="relative flex h-20 w-full items-center justify-between px-4 sm:px-6 lg:px-10">
@@ -75,7 +75,7 @@ export const Header = () => {
                 <button
                     type="button"
                     onClick={() => setIsMobileOpen((prev) => !prev)}
-                    className="grid h-11 w-11 place-items-center rounded-full border border-[var(--color-border)] bg-[rgba(255,255,255,0.05)] text-[var(--color-text)] xl:hidden"
+                    className="grid h-11 w-11 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] text-[var(--color-text)] backdrop-blur-xl xl:hidden"
                     aria-label="Toggle menu"
                 >
                     {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -88,7 +88,7 @@ export const Header = () => {
                         initial={{height: 0, opacity: 0}}
                         animate={{height: "auto", opacity: 1}}
                         exit={{height: 0, opacity: 0}}
-                        className="overflow-hidden border-t border-[var(--color-border)] bg-[rgba(2,6,23,0.94)] backdrop-blur-2xl xl:hidden"
+                        className="overflow-hidden border-t border-[var(--color-border)] bg-[var(--color-menu)] backdrop-blur-2xl xl:hidden"
                     >
                         <HeaderMobileMenu
                             links={[...mainLinks, ...exploreLinks]}

@@ -11,13 +11,13 @@ export const StellarisLogo = ({subtitle}: StellarisLogoProps) => {
         <div className="group flex items-center gap-3">
             <div className="relative grid h-12 w-12 place-items-center">
                 <motion.div
-                    className="absolute inset-0 rounded-full border border-[rgba(56,189,248,0.55)]"
+                    className="absolute inset-0 rounded-full border border-[var(--color-border-strong)]"
                     animate={{rotate: 360}}
                     transition={{duration: 18, repeat: Infinity, ease: "linear"}}
                 />
 
                 <motion.div
-                    className="absolute inset-[5px] rounded-full border border-dashed border-[rgba(139,92,246,0.55)]"
+                    className="absolute inset-[5px] rounded-full border border-dashed border-[var(--color-nebula)]/60"
                     animate={{rotate: -360}}
                     transition={{duration: 26, repeat: Infinity, ease: "linear"}}
                 />
@@ -33,7 +33,7 @@ export const StellarisLogo = ({subtitle}: StellarisLogoProps) => {
 
                 <svg
                     viewBox="0 0 64 64"
-                    className="relative h-8 w-8 drop-shadow-[0_0_18px_rgba(56,189,248,0.55)]"
+                    className="relative h-8 w-8 drop-shadow-[0_0_18px_var(--color-accent)]"
                     aria-hidden="true"
                 >
                     <defs>
@@ -49,8 +49,8 @@ export const StellarisLogo = ({subtitle}: StellarisLogoProps) => {
                         fill="url(#stellaris-core)"
                     />
 
-                    <circle cx="32" cy="32" r="7" fill="#020617" opacity="0.9" />
-                    <circle cx="32" cy="32" r="3" fill="#F8FAFC" />
+                    <circle cx="32" cy="32" r="7" fill="var(--color-background)" opacity="0.9" />
+                    <circle cx="32" cy="32" r="3" fill="var(--color-text)" />
                 </svg>
             </div>
 

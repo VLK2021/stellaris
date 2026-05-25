@@ -1,54 +1,71 @@
 @import "tailwindcss";
 
 @theme {
-    /* LIGHT — premium soft cosmic */
-    --color-background: #edf3ff;
+    --color-background: #eaf2ff;
     --color-surface: #f8fbff;
-
     --color-card: rgba(255, 255, 255, 0.78);
     --color-card-solid: #ffffff;
-    --color-card-deep: #e8f0ff;
+    --color-card-deep: #dbeafe;
 
-    --color-border: rgba(65, 91, 135, 0.18);
+    --color-header: rgba(244, 249, 255, 0.88);
+    --color-menu: rgba(255, 255, 255, 0.96);
+    --color-glass: rgba(255, 255, 255, 0.62);
+    --color-glass-strong: rgba(255, 255, 255, 0.9);
+
+    --color-border: rgba(30, 64, 175, 0.18);
+    --color-border-strong: rgba(30, 64, 175, 0.34);
 
     --color-text: #06111f;
-    --color-text-muted: #52647f;
-    --color-text-soft: #7b8aa2;
+    --color-text-muted: #42526d;
+    --color-text-soft: #687894;
 
-    --color-brand: #315dff;
-    --color-brand-secondary: #7c3cff;
-    --color-accent: #0077ff;
-    --color-accent-soft: rgba(0, 119, 255, 0.12);
+    --color-brand: #245cff;
+    --color-brand-secondary: #6d28d9;
+    --color-accent: #006fee;
+    --color-accent-soft: rgba(0, 111, 238, 0.14);
 
-    --color-orbit: #0284c7;
-    --color-star: #0f172a;
-    --color-sun: #f97316;
-    --color-mars: #c2410c;
-    --color-earth: #2563eb;
-    --color-nebula: #7c3aed;
-    --color-plasma: #db2777;
+    --color-sun: #ea580c;
+    --color-mars: #b93815;
+    --color-earth: #155eef;
+    --color-nebula: #6d28d9;
+    --color-plasma: #be185d;
 
-    --color-success: #16a34a;
-    --color-warning: #d97706;
+    --color-success: #15803d;
+    --color-warning: #b45309;
     --color-error: #dc2626;
 
-    --shadow-soft: 0 18px 60px rgba(37, 99, 235, 0.14);
-    --shadow-card: 0 18px 50px rgba(15, 23, 42, 0.10);
-    --shadow-glow: 0 0 50px rgba(37, 99, 235, 0.20);
+    --shadow-soft: 0 18px 60px rgba(37, 99, 235, 0.18);
+    --shadow-card: 0 24px 70px rgba(15, 23, 42, 0.14);
+    --shadow-glow: 0 0 70px rgba(0, 111, 238, 0.22);
 
-    --backdrop-blur: blur(22px);
+    --hero-bg:
+            radial-gradient(circle at 18% 18%, rgba(0, 111, 238, 0.22), transparent 30%),
+            radial-gradient(circle at 82% 16%, rgba(109, 40, 217, 0.22), transparent 32%),
+            radial-gradient(circle at 50% 100%, rgba(190, 24, 93, 0.14), transparent 36%),
+            linear-gradient(135deg, #f8fbff 0%, #eaf2ff 45%, #dbeafe 100%);
+
+    --body-bg:
+            radial-gradient(circle at top left, rgba(0, 111, 238, 0.18), transparent 34%),
+            radial-gradient(circle at top right, rgba(109, 40, 217, 0.14), transparent 32%),
+            linear-gradient(180deg, #f8fbff, #eaf2ff 46%, #dbeafe);
+
+    --star-color: rgba(15, 23, 42, 0.28);
 }
 
 .dark {
-    /* DARK — Stellaris core */
     --color-background: #020617;
     --color-surface: #07111f;
-
     --color-card: rgba(8, 18, 34, 0.72);
     --color-card-solid: #0b1220;
     --color-card-deep: #050b16;
 
+    --color-header: rgba(2, 6, 23, 0.76);
+    --color-menu: rgba(5, 11, 22, 0.96);
+    --color-glass: rgba(8, 18, 34, 0.72);
+    --color-glass-strong: rgba(5, 11, 22, 0.92);
+
     --color-border: rgba(148, 163, 184, 0.16);
+    --color-border-strong: rgba(148, 163, 184, 0.30);
 
     --color-text: #f8fafc;
     --color-text-muted: #94a3b8;
@@ -59,8 +76,6 @@
     --color-accent: #38bdf8;
     --color-accent-soft: rgba(56, 189, 248, 0.12);
 
-    --color-orbit: #38bdf8;
-    --color-star: #ffffff;
     --color-sun: #fb923c;
     --color-mars: #ef6a3a;
     --color-earth: #3b82f6;
@@ -75,7 +90,18 @@
     --shadow-card: 0 22px 70px rgba(0, 0, 0, 0.42);
     --shadow-glow: 0 0 70px rgba(56, 189, 248, 0.24);
 
-    --backdrop-blur: blur(22px);
+    --hero-bg:
+            radial-gradient(circle at 18% 18%, rgba(56, 189, 248, 0.16), transparent 30%),
+            radial-gradient(circle at 82% 16%, rgba(139, 92, 246, 0.18), transparent 32%),
+            radial-gradient(circle at 50% 100%, rgba(236, 72, 153, 0.12), transparent 36%),
+            linear-gradient(135deg, #020617 0%, #07111f 48%, #050b16 100%);
+
+    --body-bg:
+            radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 34%),
+            radial-gradient(circle at top right, rgba(139, 92, 246, 0.12), transparent 32%),
+            linear-gradient(180deg, #020617, #07111f 48%, #050b16);
+
+    --star-color: rgba(248, 250, 252, 0.48);
 }
 
 * {
@@ -89,14 +115,11 @@ html {
 
 body {
     min-height: 100%;
-    background:
-            radial-gradient(circle at top left, var(--color-accent-soft), transparent 34%),
-            radial-gradient(circle at top right, rgba(139, 92, 246, 0.12), transparent 32%),
-            linear-gradient(180deg, var(--color-background), var(--color-card-deep));
+    background: var(--body-bg);
     color: var(--color-text);
 }
 
 ::selection {
     background: var(--color-accent);
-    color: #020617;
+    color: #ffffff;
 }

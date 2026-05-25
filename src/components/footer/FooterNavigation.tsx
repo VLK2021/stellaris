@@ -12,7 +12,7 @@ export const FooterNavigation = ({groups}: FooterNavigationProps) => {
             {groups.map((group) => (
                 <div
                     key={group.title}
-                    className="border border-[var(--color-border)] bg-[rgba(255,255,255,0.035)] p-5 backdrop-blur-xl sm:border-0 sm:bg-transparent sm:p-0"
+                    className="border border-[var(--color-border)] bg-[var(--color-glass)] p-5 backdrop-blur-xl sm:border-0 sm:bg-transparent sm:p-0"
                 >
                     <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-text)] sm:text-sm">
                         {group.title}

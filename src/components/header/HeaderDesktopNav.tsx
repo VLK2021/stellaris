@@ -46,11 +46,11 @@ export const HeaderDesktopNav = ({
                         {active && (
                             <motion.div
                                 layoutId="active-nav-pill"
-                                className="absolute inset-0 rounded-full border border-[rgba(56,189,248,0.32)] bg-[rgba(56,189,248,0.11)] shadow-[0_0_30px_rgba(56,189,248,0.20)]"
+                                className="absolute inset-0 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent-soft)] shadow-[var(--shadow-soft)]"
                             />
                         )}
 
-                        <span className="relative grid h-9 w-9 place-items-center rounded-full border border-[var(--color-border)] bg-[rgba(255,255,255,0.045)] transition group-hover:border-[rgba(56,189,248,0.55)] group-hover:text-[var(--color-accent)]">
+                        <span className="relative grid h-9 w-9 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] text-[var(--color-text-muted)] transition group-hover:border-[var(--color-border-strong)] group-hover:text-[var(--color-accent)]">
                             <Icon className="h-4 w-4" />
                         </span>
 
@@ -76,7 +76,7 @@ export const HeaderDesktopNav = ({
                     type="button"
                     className="group flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] transition hover:text-[var(--color-text)]"
                 >
-                    <span className="grid h-9 w-9 place-items-center rounded-full border border-[var(--color-border)] bg-[rgba(255,255,255,0.045)] transition group-hover:border-[rgba(139,92,246,0.6)] group-hover:text-[var(--color-nebula)]">
+                    <span className="grid h-9 w-9 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] transition group-hover:border-[var(--color-border-strong)] group-hover:text-[var(--color-nebula)]">
                         <Telescope className="h-4 w-4" />
                     </span>
 
