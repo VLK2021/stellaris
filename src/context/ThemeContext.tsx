@@ -25,7 +25,7 @@ const isTheme = (value: string | null): value is Theme => {
 };
 
 const getTheme = (): Theme => {
-    if (typeof window === "undefined") return "light";
+    if (typeof window === "undefined") return "dark";
 
     const saved = localStorage.getItem("theme");
 
@@ -33,12 +33,13 @@ const getTheme = (): Theme => {
         return saved;
     }
 
-    return "light";
+    return "dark";
 };
 
 const getServerTheme = (): Theme => {
-    return "light";
+    return "dark";
 };
+
 
 const subscribe = (callback: () => void) => {
     if (typeof window === "undefined") {
