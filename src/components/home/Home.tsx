@@ -14,7 +14,7 @@ export const Home = ({assets}: HomeProps) => {
     return (
         <div className="relative">
             <HeroSection assets={assets} />
-            <ModuleOrbitRail />
+            <ModuleOrbitRail assets={assets} />
             <TrustCards />
         </div>
     );
