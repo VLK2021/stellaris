@@ -10,13 +10,13 @@ type Props = {
 };
 
 const Label = ({children}: {children: ReactNode}) => (
-    <div className="rounded-full border border-white/15 bg-slate-950/62 px-2.5 py-1 text-[10px] font-bold text-white shadow-[0_0_16px_rgba(56,189,248,0.16)] backdrop-blur-xl">
+    <div className="rounded-full border border-white/15 bg-slate-950/62 px-2 py-1 text-[10px] font-bold text-white shadow-[0_0_16px_rgba(56,189,248,0.16)] backdrop-blur-xl">
         {children}
     </div>
 );
 
 const MiniLabel = ({children}: {children: ReactNode}) => (
-    <div className="rounded-full border border-white/12 bg-slate-950/56 px-2 py-0.5 text-[9px] font-bold text-white shadow-[0_0_12px_rgba(56,189,248,0.12)] backdrop-blur-xl">
+    <div className="rounded-full border border-white/12 bg-slate-950/56 px-1.5 py-0.5 text-[9px] font-bold text-white shadow-[0_0_12px_rgba(56,189,248,0.12)] backdrop-blur-xl">
         {children}
     </div>
 );
@@ -49,11 +49,24 @@ const Orbit = ({
 
 const Sun = () => (
     <motion.div
-        animate={{scale: [1, 1.035, 1]}}
-        transition={{duration: 4, repeat: Infinity, ease: "easeInOut"}}
-        className="relative h-24 w-24 rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff7ad,#fb923c_42%,#c2410c_72%,#431407_100%)] shadow-[0_0_85px_rgba(251,146,60,0.68)] sm:h-28 sm:w-28"
+        animate={{
+            scale: [1, 1.045, 1],
+            rotate: 360,
+        }}
+        transition={{
+            scale: {duration: 4, repeat: Infinity, ease: "easeInOut"},
+            rotate: {duration: 90, repeat: Infinity, ease: "linear"},
+        }}
+        className="relative h-26 w-26 rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff7ad_0%,#fde68a_18%,#fb923c_42%,#ea580c_64%,#7c2d12_100%)] shadow-[0_0_90px_rgba(251,146,60,0.75)] sm:h-28 sm:w-28"
     >
-        <div className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.38),transparent_38%,rgba(0,0,0,0.35)_82%)]" />
+        <div className="absolute inset-[-14px] rounded-full bg-orange-400/18 blur-xl" />
+        <div className="absolute inset-[-6px] rounded-full border border-orange-200/20" />
+
+        <div className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.48),transparent_34%,rgba(0,0,0,0.34)_82%)]" />
+
+        <div className="absolute left-4 top-5 h-2 w-10 rounded-full bg-yellow-100/35 blur-[1px]" />
+        <div className="absolute bottom-5 right-3 h-2 w-9 rounded-full bg-orange-100/25 blur-[1px]" />
+        <div className="absolute left-6 top-9 h-1.5 w-8 rounded-full bg-yellow-200/25 blur-[1px]" />
     </motion.div>
 );
 
@@ -92,7 +105,7 @@ const EarthSystem = () => (
             <Earth />
 
             <motion.div
-                className="absolute left-1/2 top-1/2 h-[86px] w-[86px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/18"
+                className="absolute left-1/2 top-1/2 h-[92px] w-[92px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/18"
                 animate={{rotate: 360}}
                 transition={{duration: 7, repeat: Infinity, ease: "linear"}}
             >
@@ -105,7 +118,7 @@ const EarthSystem = () => (
             </motion.div>
 
             <motion.div
-                className="absolute left-1/2 top-1/2 h-[108px] w-[108px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/14"
+                className="absolute left-1/2 top-1/2 h-[116px] w-[116px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/14"
                 animate={{rotate: -360}}
                 transition={{duration: 4.5, repeat: Infinity, ease: "linear"}}
             >
@@ -128,22 +141,22 @@ export const HeroOrbitVisual = (_props: Props) => {
             initial={{opacity: 0, scale: 0.94}}
             animate={{opacity: 1, scale: 1}}
             transition={{duration: 0.8, delay: 0.15}}
-            className="relative z-10 mx-auto grid aspect-square w-full max-w-[350px] place-items-center sm:max-w-[500px] lg:max-w-[610px]"
+            className="relative z-10 mx-auto grid aspect-square w-full max-w-[370px] place-items-center sm:max-w-[520px] lg:max-w-[640px]"
         >
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08),transparent_68%)]" />
 
-            <div className="absolute inset-[44%] rounded-full border border-white/10" />
-            <div className="absolute inset-[36%] rounded-full border border-white/12" />
-            <div className="absolute inset-[27%] rounded-full border border-cyan-300/55" />
-            <div className="absolute inset-[15%] rounded-full border border-orange-400/50" />
+            <div className="absolute inset-[47%] rounded-full border border-white/10" />
+            <div className="absolute inset-[38%] rounded-full border border-white/12" />
+            <div className="absolute inset-[26%] rounded-full border border-cyan-300/60" />
+            <div className="absolute inset-[10%] rounded-full border border-orange-400/55" />
 
             <Sun />
 
-            <Orbit className="inset-[27%]" duration={30} delay={-5}>
+            <Orbit className="inset-[26%]" duration={30} delay={-5}>
                 <EarthSystem />
             </Orbit>
 
-            <Orbit className="inset-[15%]" duration={48} delay={-17}>
+            <Orbit className="inset-[10%]" duration={48} delay={-17}>
                 <div className="flex items-center gap-1.5">
                     <Mars />
                     <Label>Mars</Label>
