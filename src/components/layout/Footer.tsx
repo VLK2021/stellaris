@@ -4,7 +4,7 @@ import Link from "next/link";
 import {ExternalLink, Rocket} from "lucide-react";
 
 import {useLanguage} from "@/src/context";
-import {StellarisLogo} from "./StellarisLogo";
+import {StellarisLogo} from "../StellarisLogo";
 
 export const Footer = () => {
     const {locale} = useLanguage();

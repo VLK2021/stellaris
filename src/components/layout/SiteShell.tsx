@@ -1,5 +1,5 @@
 import type {ReactNode} from "react";
-import {Header} from "@/src/components/layout/Header";
+import {Header} from "@/src/components/header/Header";
 import {Footer} from "@/src/components/layout/Footer";
 
 type SiteShellProps = {
