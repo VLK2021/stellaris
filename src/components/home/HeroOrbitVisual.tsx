@@ -9,39 +9,67 @@ type Props = {
     assets?: NasaAsset[];
 };
 
-const OrbitObject = ({
-                         children,
-                         className,
-                         duration,
-                         delay,
-                     }: {
+const Label = ({children}: {children: ReactNode}) => (
+    <div className="rounded-full border border-white/15 bg-slate-950/62 px-2.5 py-1 text-[10px] font-bold text-white shadow-[0_0_16px_rgba(56,189,248,0.16)] backdrop-blur-xl">
+        <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
+        {children}
+    </div>
+);
+
+const Orbit = ({
+                   children,
+                   className,
+                   duration,
+                   delay = 0,
+               }: {
     children: ReactNode;
     className: string;
     duration: number;
-    delay: number;
-}) => {
-    return (
+    delay?: number;
+}) => (
+    <motion.div
+        className={`absolute rounded-full ${className}`}
+        animate={{rotate: 360}}
+        transition={{duration, repeat: Infinity, ease: "linear", delay}}
+    >
         <motion.div
-            className={`absolute ${className} rounded-full`}
-            animate={{rotate: 360}}
+            className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
+            animate={{rotate: -360}}
             transition={{duration, repeat: Infinity, ease: "linear", delay}}
         >
-            <motion.div
-                className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
-                animate={{rotate: -360}}
-                transition={{duration, repeat: Infinity, ease: "linear", delay}}
-            >
-                {children}
-            </motion.div>
+            {children}
         </motion.div>
-    );
-};
+    </motion.div>
+);
 
-const Label = ({children}: {children: ReactNode}) => (
-    <div className="rounded-full border border-[var(--color-border)] bg-[rgba(2,6,23,0.58)] px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur-xl">
-        <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-success)]" />
-        {children}
+const Sun = () => (
+    <motion.div
+        animate={{scale: [1, 1.035, 1]}}
+        transition={{duration: 4, repeat: Infinity, ease: "easeInOut"}}
+        className="relative h-24 w-24 rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff7ad,#fb923c_42%,#c2410c_72%,#431407_100%)] shadow-[0_0_85px_rgba(251,146,60,0.68)] sm:h-28 sm:w-28"
+    >
+        <div className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.38),transparent_38%,rgba(0,0,0,0.35)_82%)]" />
+    </motion.div>
+);
+
+const Earth = () => (
+    <div className="relative h-14 w-14 rounded-full bg-[radial-gradient(circle_at_32%_26%,#eff6ff,#60a5fa_20%,#2563eb_36%,#0f766e_55%,#020617_90%)] shadow-[0_0_34px_rgba(56,189,248,0.52)] sm:h-16 sm:w-16">
+        <div className="absolute left-4 top-4 h-4 w-6 rounded-full bg-emerald-300/70 blur-[1px]" />
+        <div className="absolute bottom-3 right-3 h-5 w-3 rounded-full bg-emerald-400/55 blur-[1px]" />
+        <div className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.42),transparent_38%,rgba(0,0,0,0.44)_82%)]" />
     </div>
+);
+
+const Mars = () => (
+    <div className="relative h-10 w-10 rounded-full bg-[radial-gradient(circle_at_32%_26%,#fed7aa,#ea580c_42%,#7c2d12_76%,#2b0d05_100%)] shadow-[0_0_28px_rgba(239,106,58,0.48)] sm:h-12 sm:w-12">
+        <div className="absolute left-3 top-4 h-1.5 w-6 rounded-full bg-orange-950/35" />
+        <div className="absolute bottom-3 right-3 h-1.5 w-5 rounded-full bg-orange-950/35" />
+        <div className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.38),transparent_38%,rgba(0,0,0,0.4)_82%)]" />
+    </div>
+);
+
+const Moon = () => (
+    <div className="h-5 w-5 rounded-full bg-[radial-gradient(circle_at_35%_28%,#f8fafc,#cbd5e1_34%,#64748b_66%,#1e293b_96%)] shadow-[0_0_20px_rgba(203,213,225,0.38)] sm:h-6 sm:w-6" />
 );
 
 export const HeroOrbitVisual = (_props: Props) => {
@@ -52,37 +80,53 @@ export const HeroOrbitVisual = (_props: Props) => {
             transition={{duration: 0.8, delay: 0.15}}
             className="relative z-10 mx-auto grid aspect-square w-full max-w-[350px] place-items-center sm:max-w-[500px] lg:max-w-[610px]"
         >
-            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.07),transparent_68%)]" />
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08),transparent_68%)]" />
 
-            <div className="absolute inset-[4%] rounded-full border border-[var(--color-border)]" />
-            <div className="absolute inset-[13%] rounded-full border border-orange-500/30" />
-            <div className="absolute inset-[26%] rounded-full border border-cyan-400/32" />
-            <div className="absolute inset-[40%] rounded-full border border-dashed border-[var(--color-border-strong)]" />
+            {/* Mercury — 1st orbit */}
+            <div className="absolute inset-[44%] rounded-full border border-white/10" />
 
-            <div className="relative h-28 w-28 rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff7ad,#fb923c_42%,#7c2d12_78%,#431407_100%)] shadow-[0_0_80px_rgba(251,146,60,0.62)] sm:h-32 sm:w-32" />
+            {/* Venus — 2nd orbit */}
+            <div className="absolute inset-[36%] rounded-full border border-white/12" />
 
-            <OrbitObject className="inset-[13%]" duration={42} delay={-12}>
-                <div className="flex items-center gap-1.5">
-                    <div className="h-12 w-12 rounded-full bg-[radial-gradient(circle_at_32%_26%,#fed7aa,#ea580c_42%,#7c2d12_76%,#2b0d05_100%)] shadow-[0_0_28px_rgba(239,106,58,0.45)]" />
-                    <Label>Mars</Label>
-                </div>
-            </OrbitObject>
+            {/* Earth — 3rd orbit */}
+            <div className="absolute inset-[27%] rounded-full border border-cyan-300/55" />
 
-            <OrbitObject className="inset-[26%]" duration={28} delay={0}>
-                <div className="flex items-center gap-1.5">
-                    <div className="h-16 w-16 rounded-full bg-[radial-gradient(circle_at_32%_26%,#eff6ff,#60a5fa_20%,#2563eb_36%,#0f766e_54%,#020617_88%)] shadow-[0_0_34px_rgba(56,189,248,0.52)]" />
+            {/* Mars — 4th orbit */}
+            <div className="absolute inset-[15%] rounded-full border border-orange-400/50" />
+
+            <Sun />
+
+            {/* Earth on 3rd orbit */}
+            <Orbit className="inset-[27%]" duration={30} delay={-5}>
+                <div className="relative flex items-center gap-2">
+                    <div className="relative">
+                        <Earth />
+
+                        {/* Moon orbit around Earth */}
+                        <motion.div
+                            className="absolute left-1/2 top-1/2 h-[86px] w-[86px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/18"
+                            animate={{rotate: 360}}
+                            transition={{duration: 7, repeat: Infinity, ease: "linear"}}
+                        >
+                            <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
+                                <Moon />
+                            </div>
+                        </motion.div>
+                    </div>
+
                     <Label>Earth</Label>
                 </div>
-            </OrbitObject>
+            </Orbit>
 
-            <OrbitObject className="inset-[40%]" duration={20} delay={-7}>
+            {/* Mars on 4th orbit */}
+            <Orbit className="inset-[15%]" duration={48} delay={-17}>
                 <div className="flex items-center gap-1.5">
-                    <div className="h-8 w-8 rounded-full bg-[radial-gradient(circle_at_35%_28%,#f8fafc,#cbd5e1_34%,#64748b_66%,#1e293b_96%)] shadow-[0_0_20px_rgba(203,213,225,0.38)]" />
-                    <Label>Moon</Label>
+                    <Mars />
+                    <Label>Mars</Label>
                 </div>
-            </OrbitObject>
+            </Orbit>
 
-            <div className="absolute left-[7%] top-[54%] hidden rounded-full border border-[var(--color-border)] bg-[rgba(2,6,23,0.58)] px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-xl sm:block">
+            <div className="absolute left-[8%] top-[55%] hidden rounded-full border border-white/15 bg-slate-950/58 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-xl sm:block">
                 ISS
             </div>
         </motion.div>
