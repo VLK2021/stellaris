@@ -1,6 +1,7 @@
 import type {ReactNode} from "react";
-import {Header} from "@/src/components/header/Header";
-import {Footer} from "@/src/components/layout/Footer";
+
+import {Header} from "@/src/components/header";
+import {Footer} from "@/src/components/footer";
 
 type SiteShellProps = {
     children: ReactNode;
