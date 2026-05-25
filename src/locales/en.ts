@@ -63,6 +63,38 @@ const en = {
             experience: "cinematic experience",
         },
     },
+
+    spaceExperience: {
+        liveSignals: "Live Space Signals",
+        live: "Live",
+        viewModule: "View Module",
+        missionFeed: "Live Mission Feed",
+        stats: {
+            datasets: "Active Datasets",
+            streams: "Live Data Streams",
+            apis: "NASA APIs Integrated",
+            media: "Images & Media",
+            open: "Free & Open Data",
+        },
+        modulesTitle: "Explore All Modules",
+        viewAll: "View All Modules",
+        signals: {
+            earthTitle: "Earth Observation",
+            earthText: "Real-time imagery and planetary monitoring",
+            marsTitle: "Mars Surface Feed",
+            marsText: "Latest rover images and mission updates",
+            weatherTitle: "Space Weather",
+            weatherText: "Solar activity and geomagnetic conditions",
+        },
+        trust: {
+            realTitle: "Real NASA Data",
+            realText: "All data comes directly from NASA’s official sources and APIs.",
+            explorersTitle: "Built for Explorers",
+            explorersText: "Designed for researchers, developers, students, and space enthusiasts.",
+            updatedTitle: "Always Up to Date",
+            updatedText: "Live feeds, real-time updates and continuous mission coverage.",
+        },
+    },
 };
 
 export default en;
