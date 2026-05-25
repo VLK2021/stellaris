@@ -94,6 +94,7 @@ export const Header = () => {
                             links={[...mainLinks, ...exploreLinks]}
                             isActive={isActive}
                             onClose={() => setIsMobileOpen(false)}
+                            searchLabel={locale.nav.search}
                         />
                     </motion.div>
                 )}

@@ -13,14 +13,14 @@ type FooterBottomProps = {
 
 export const FooterBottom = ({locale}: FooterBottomProps) => {
     return (
-        <div className="mt-12 flex flex-col gap-4 border-t border-[var(--color-border)] pt-6 text-xs text-[var(--color-text-muted)] md:flex-row md:items-center md:justify-between">
-            <p>
+        <div className="mt-10 flex flex-col gap-5 border-t border-[var(--color-border)] pt-6 text-xs text-[var(--color-text-muted)] lg:mt-12 lg:flex-row lg:items-center lg:justify-between">
+            <p className="leading-6">
                 © {new Date().getFullYear()} Stellaris. {locale.footer.copyright}
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="grid gap-3 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
                 <span>{locale.footer.powered}</span>
-                <span className="hidden h-1 w-1 rounded-full bg-[var(--color-text-muted)] md:block" />
+                <span className="hidden h-1 w-1 rounded-full bg-[var(--color-text-muted)] sm:block" />
                 <span>{locale.footer.independent}</span>
 
                 <Link

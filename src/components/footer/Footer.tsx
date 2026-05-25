@@ -46,13 +46,13 @@ export const Footer = () => {
     ];
 
     return (
-        <footer className="relative z-10 mt-24 w-full border-t border-[var(--color-border)] bg-[rgba(2,6,23,0.62)] backdrop-blur-2xl">
+        <footer className="relative z-10 mt-16 w-full border-t border-[var(--color-border)] bg-[var(--color-card)] backdrop-blur-2xl sm:mt-20 lg:mt-24">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-70" />
-            <div className="pointer-events-none absolute left-0 top-0 h-full w-1/3 bg-[radial-gradient(circle_at_left,rgba(56,189,248,0.13),transparent_60%)]" />
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 bg-[radial-gradient(circle_at_right,rgba(139,92,246,0.13),transparent_60%)]" />
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_left,rgba(56,189,248,0.12),transparent_62%)]" />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_right,rgba(139,92,246,0.12),transparent_62%)]" />
 
-            <div className="relative w-full px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
-                <div className="grid gap-10 lg:grid-cols-[1.35fr_2fr]">
+            <div className="relative w-full px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-16">
+                <div className="grid gap-10 lg:grid-cols-[1.2fr_2fr]">
                     <FooterBrand locale={locale} />
                     <FooterNavigation groups={footerNavigation} />
                 </div>
