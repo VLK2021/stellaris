@@ -46,6 +46,23 @@ const en = {
         description:
             "Stellaris is a cinematic space exploration platform powered by NASA open data, built to transform cosmic datasets, imagery, missions, and space events into an immersive digital experience.",
     },
+
+    home: {
+        seoTitle: "Stellaris — Explore the Universe Through NASA Open Data",
+        seoDescription:
+            "Stellaris is a premium cinematic space exploration platform powered by NASA open data. Explore Earth, Mars, asteroids, space weather, missions and cosmic media.",
+        heroBadge: "NASA Open Data Experience",
+        heroTitle: "Explore the universe through living space data.",
+        heroText:
+            "Stellaris transforms NASA imagery, missions, asteroid feeds, Earth observations and cosmic events into a cinematic interactive experience.",
+        primaryAction: "Start exploring",
+        secondaryAction: "View NASA modules",
+        stats: {
+            dataSources: "NASA data sources",
+            modules: "space modules",
+            experience: "cinematic experience",
+        },
+    },
 };
 
 export default en;
