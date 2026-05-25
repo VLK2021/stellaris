@@ -4,23 +4,29 @@ import {
     createContext,
     useContext,
     useEffect,
+    useMemo,
     useState,
     type ReactNode,
 } from "react";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 
-type Language = "uk" | "en";
+import en from "@/src/locales/en";
+import uk from "@/src/locales/uk";
+import type {AppLanguage} from "@/src/helpers";
 
-type LangContextType = {
-    lang: Language;
-    setLang: (lang: Language) => void;
+type Dictionary = typeof en;
+
+type LanguageContextType = {
+    lang: AppLanguage;
+    setLang: (lang: AppLanguage) => void;
+    locale: Dictionary;
 };
 
-const LanguageContext = createContext<LangContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 type LanguageProviderProps = {
     children: ReactNode;
-    initialLang: Language;
+    initialLang: AppLanguage;
 };
 
 export const LanguageProvider = ({
@@ -28,9 +34,13 @@ export const LanguageProvider = ({
                                      initialLang,
                                  }: LanguageProviderProps) => {
     const router = useRouter();
-    const [lang, setLangState] = useState<Language>(initialLang);
+    const [lang, setLangState] = useState<AppLanguage>(initialLang);
 
-    const setLang = (nextLang: Language) => {
+    const locale = useMemo(() => {
+        return lang === "en" ? en : uk;
+    }, [lang]);
+
+    const setLang = (nextLang: AppLanguage) => {
         setLangState(nextLang);
 
         localStorage.setItem("lang", nextLang);
@@ -45,18 +55,24 @@ export const LanguageProvider = ({
     }, [lang]);
 
     return (
-        <LanguageContext.Provider value={{ lang, setLang }}>
+        <LanguageContext.Provider
+            value={{
+                lang,
+                setLang,
+                locale,
+            }}
+        >
             {children}
         </LanguageContext.Provider>
     );
 };
 
 export const useLanguage = () => {
-    const ctx = useContext(LanguageContext);
+    const context = useContext(LanguageContext);
 
-    if (!ctx) {
+    if (!context) {
         throw new Error("useLanguage must be used within LanguageProvider");
     }
 
-    return ctx;
+    return context;
 };
