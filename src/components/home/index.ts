@@ -5,3 +5,4 @@ export * from './MissionStats';
 export * from './SpaceSignalsPanel';
 export * from './ModuleOrbitRail';
 export * from './TrustCards';
+export * from './NasaAssetVisual';

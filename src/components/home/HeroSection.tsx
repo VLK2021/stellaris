@@ -4,11 +4,17 @@ import Link from "next/link";
 import {motion} from "framer-motion";
 import {ArrowRight} from "lucide-react";
 
+import type {NasaAsset} from "@/src/types/nasa";
 import {useLanguage} from "@/src/context";
 import {HeroOrbitVisual} from "./HeroOrbitVisual";
 import {SpaceSignalsPanel} from "./SpaceSignalsPanel";
 
-export const HeroSection = () => {
+
+type Props = {
+    assets: NasaAsset[];
+};
+
+export const HeroSection = ({assets}: Props) => {
     const {locale} = useLanguage();
 
     return (
@@ -76,11 +82,11 @@ export const HeroSection = () => {
                 </motion.div>
 
                 <div className="z-10 lg:-translate-y-6">
-                    <HeroOrbitVisual />
+                    <HeroOrbitVisual assets={assets} />
                 </div>
 
                 <div className="z-10 lg:-translate-y-5">
-                    <SpaceSignalsPanel />
+                    <SpaceSignalsPanel assets={assets} />
                 </div>
             </div>
         </section>

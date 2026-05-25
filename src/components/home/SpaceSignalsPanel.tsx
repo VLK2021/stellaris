@@ -4,7 +4,12 @@ import Link from "next/link";
 import {ArrowRight} from "lucide-react";
 import {motion} from "framer-motion";
 
+import type {NasaAsset} from "@/src/types/nasa";
 import {useLanguage} from "@/src/context";
+
+type Props = {
+    assets?: NasaAsset[];
+};
 
 const visuals = {
     earth:
@@ -15,7 +20,7 @@ const visuals = {
         "bg-[radial-gradient(circle_at_35%_30%,#fff7ad,#fb923c_42%,#b45309_72%,#431407_100%)]",
 };
 
-export const SpaceSignalsPanel = () => {
+export const SpaceSignalsPanel = (_props: Props) => {
     const {locale} = useLanguage();
 
     const cards = [
@@ -24,21 +29,21 @@ export const SpaceSignalsPanel = () => {
             text: locale.spaceExperience.signals.earthText,
             href: "/earth",
             visual: visuals.earth,
-            glow: "var(--color-accent)",
+            glow: "rgba(56,189,248,0.38)",
         },
         {
             title: locale.spaceExperience.signals.marsTitle,
             text: locale.spaceExperience.signals.marsText,
             href: "/mars",
             visual: visuals.mars,
-            glow: "var(--color-warning)",
+            glow: "rgba(239,106,58,0.36)",
         },
         {
             title: locale.spaceExperience.signals.weatherTitle,
             text: locale.spaceExperience.signals.weatherText,
             href: "/space-weather",
             visual: visuals.sun,
-            glow: "var(--color-success)",
+            glow: "rgba(251,146,60,0.42)",
         },
     ];
 
@@ -52,7 +57,6 @@ export const SpaceSignalsPanel = () => {
             <div className="mb-4 flex items-center justify-between gap-3">
                 <h2 className="flex items-center gap-2 text-base font-black sm:text-lg">
                     <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-success)] shadow-[0_0_14px_var(--color-success)]" />
-
                     <span className="bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-success)] bg-clip-text text-transparent">
                         {locale.spaceExperience.liveSignals}
                     </span>
@@ -102,9 +106,7 @@ export const SpaceSignalsPanel = () => {
                         <div className="absolute right-4 top-1/2 grid h-[86px] w-[86px] -translate-y-1/2 place-items-center sm:h-[96px] sm:w-[96px]">
                             <div
                                 className={`relative h-[78px] w-[78px] rounded-full sm:h-[88px] sm:w-[88px] ${card.visual}`}
-                                style={{
-                                    boxShadow: `0 0 30px ${card.glow}`,
-                                }}
+                                style={{boxShadow: `0 0 30px ${card.glow}`}}
                             >
                                 <div className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.42),transparent_38%,rgba(0,0,0,0.46)_82%)]" />
                                 <div className="absolute inset-[-4px] rounded-full border border-[var(--color-border)]" />
