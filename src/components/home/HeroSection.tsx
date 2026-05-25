@@ -23,14 +23,28 @@ export const HeroSection = ({assets}: Props) => {
         <section className="relative isolate overflow-hidden px-4 pb-6 pt-5 sm:px-6 sm:pt-7 lg:px-10 lg:pb-8 lg:pt-8">
             <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-[#020617]">
                 {background && (
-                    <Image
-                        src={background.imageUrl}
-                        alt={background.title}
-                        fill
-                        priority
-                        sizes="100vw"
-                        className="object-cover object-center opacity-80"
-                    />
+                    <motion.div
+                        className="absolute inset-0"
+                        animate={{
+                            scale: [1.04, 1.08, 1.04],
+                            x: [0, -18, 0],
+                            y: [0, 10, 0],
+                        }}
+                        transition={{
+                            duration: 28,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                        }}
+                    >
+                        <Image
+                            src={background.imageUrl}
+                            alt={background.title}
+                            fill
+                            priority
+                            sizes="100vw"
+                            className="object-cover object-center opacity-80"
+                        />
+                    </motion.div>
                 )}
 
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.78)_0%,rgba(2,6,23,0.34)_45%,rgba(2,6,23,0.72)_100%)]" />
