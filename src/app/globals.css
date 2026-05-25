@@ -119,6 +119,10 @@ body {
     color: var(--color-text);
 }
 
+.grid-cols-13 {
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+}
+
 ::selection {
     background: var(--color-accent);
     color: #ffffff;
