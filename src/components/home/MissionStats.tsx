@@ -17,7 +17,7 @@ export const MissionStats = () => {
     ];
 
     return (
-        <section className="px-4 pb-5 sm:px-6 lg:px-10">
+        <section className="relative z-10 -mt-2 px-4 pb-5 sm:px-6 lg:-mt-4 lg:px-10">
             <motion.div
                 initial={{opacity: 0, y: 24}}
                 whileInView={{opacity: 1, y: 0}}
@@ -28,7 +28,10 @@ export const MissionStats = () => {
                     const Icon = item.icon;
 
                     return (
-                        <div key={item.label} className="flex items-center gap-4 lg:border-r lg:border-[var(--color-border)] lg:last:border-r-0">
+                        <div
+                            key={item.label}
+                            className="flex items-center gap-4 lg:border-r lg:border-[var(--color-border)] lg:last:border-r-0"
+                        >
                             <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
                                 <Icon className="h-7 w-7" />
                             </div>
