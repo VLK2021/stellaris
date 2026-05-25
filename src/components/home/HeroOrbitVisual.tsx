@@ -11,14 +11,12 @@ type Props = {
 
 const Label = ({children}: {children: ReactNode}) => (
     <div className="rounded-full border border-white/15 bg-slate-950/62 px-2.5 py-1 text-[10px] font-bold text-white shadow-[0_0_16px_rgba(56,189,248,0.16)] backdrop-blur-xl">
-        <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
         {children}
     </div>
 );
 
 const MiniLabel = ({children}: {children: ReactNode}) => (
     <div className="rounded-full border border-white/12 bg-slate-950/56 px-2 py-0.5 text-[9px] font-bold text-white shadow-[0_0_12px_rgba(56,189,248,0.12)] backdrop-blur-xl">
-        <span className="mr-1 inline-block h-1 w-1 rounded-full bg-emerald-400" />
         {children}
     </div>
 );
