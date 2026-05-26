@@ -1,7 +1,7 @@
 "use client";
 
-import {Canvas, useFrame, useLoader} from "@react-three/fiber";
-import {useRef} from "react";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { useRef } from "react";
 import * as THREE from "three";
 
 const EARTH_TEXTURE =
@@ -26,14 +26,18 @@ const EarthModel = () => {
         <group>
             <mesh ref={earthRef}>
                 <sphereGeometry args={[1.35, 96, 96]} />
-                <meshStandardMaterial map={earthTexture} roughness={0.72} metalness={0.04} />
+                <meshStandardMaterial
+                    map={earthTexture}
+                    roughness={0.72}
+                    metalness={0.04}
+                />
             </mesh>
 
             <mesh ref={cloudsRef}>
                 <sphereGeometry args={[1.39, 96, 96]} />
                 <meshStandardMaterial
                     map={cloudsTexture}
-                    transparent={true}
+                    transparent
                     opacity={0.26}
                     depthWrite={false}
                 />
@@ -43,7 +47,7 @@ const EarthModel = () => {
                 <sphereGeometry args={[1.35, 96, 96]} />
                 <meshBasicMaterial
                     color="#38e8ff"
-                    transparent={true}
+                    transparent
                     opacity={0.08}
                     side={THREE.BackSide}
                 />
@@ -52,67 +56,83 @@ const EarthModel = () => {
     );
 };
 
-const OrbitRing = () => (
-    <mesh rotation={[0.95, 0.15, -0.45]}>
-        <torusGeometry args={[2.15, 0.01, 16, 240]} />
-        <meshBasicMaterial color="#39e6ff" transparent={true} opacity={0.22} />
-    </mesh>
-);
-
-const Satellite = () => {
-    const satelliteRef = useRef<THREE.Group>(null);
-
-    useFrame(({clock}) => {
-        const time = clock.getElapsedTime();
-        const angle = time * 0.72;
-        const radius = 2.15;
-
-        if (!satelliteRef.current) return;
-
-        const front = Math.max(0, Math.sin(angle));
-
-        satelliteRef.current.position.x = Math.cos(angle) * radius;
-        satelliteRef.current.position.y = Math.sin(angle) * radius * 0.55;
-        satelliteRef.current.position.z = Math.sin(angle) * 1.75;
-
-        satelliteRef.current.scale.setScalar(0.42 + front * 0.22);
-        satelliteRef.current.rotation.z = -angle;
-        satelliteRef.current.rotation.y = time * 0.5;
-    });
-
+const SatelliteModel = () => {
     return (
-        <group ref={satelliteRef}>
+        <group scale={0.12}>
+            {/* body */}
             <mesh>
-                <boxGeometry args={[0.38, 0.18, 0.18]} />
+                <boxGeometry args={[1.2, 0.45, 0.45]} />
                 <meshStandardMaterial
                     color="#dffcff"
                     emissive="#38e8ff"
                     emissiveIntensity={0.35}
-                    roughness={0.35}
-                    metalness={0.6}
+                    metalness={0.8}
+                    roughness={0.2}
                 />
             </mesh>
 
-            <mesh position={[-0.42, 0, 0]}>
-                <boxGeometry args={[0.38, 0.12, 0.02]} />
-                <meshStandardMaterial color="#1ddfff" emissive="#1ddfff" emissiveIntensity={0.3} />
+            {/* left panel */}
+            <mesh position={[-1.15, 0, 0]}>
+                <boxGeometry args={[1.1, 0.22, 0.04]} />
+                <meshStandardMaterial
+                    color="#1ddfff"
+                    emissive="#1ddfff"
+                    emissiveIntensity={0.25}
+                />
             </mesh>
 
-            <mesh position={[0.42, 0, 0]}>
-                <boxGeometry args={[0.38, 0.12, 0.02]} />
-                <meshStandardMaterial color="#1ddfff" emissive="#1ddfff" emissiveIntensity={0.3} />
+            {/* right panel */}
+            <mesh position={[1.15, 0, 0]}>
+                <boxGeometry args={[1.1, 0.22, 0.04]} />
+                <meshStandardMaterial
+                    color="#1ddfff"
+                    emissive="#1ddfff"
+                    emissiveIntensity={0.25}
+                />
             </mesh>
 
-            <mesh position={[0, 0.18, 0]}>
-                <cylinderGeometry args={[0.015, 0.015, 0.18]} />
+            {/* antenna */}
+            <mesh position={[0, 0.45, 0]}>
+                <cylinderGeometry args={[0.04, 0.04, 0.6]} />
                 <meshStandardMaterial color="#ffffff" />
             </mesh>
-
-            <mesh scale={1.8}>
-                <sphereGeometry args={[0.12, 16, 16]} />
-                <meshBasicMaterial color="#38e8ff" transparent={true} opacity={0.08} />
-            </mesh>
         </group>
+    );
+};
+
+const OrbitSystem = () => {
+    const satelliteRef = useRef<THREE.Group>(null);
+
+    useFrame(({ clock }) => {
+        const t = clock.getElapsedTime();
+        const radius = 2.15;
+
+        if (satelliteRef.current) {
+            satelliteRef.current.position.x = Math.cos(t * 0.65) * radius;
+            satelliteRef.current.position.z = Math.sin(t * 0.65) * radius;
+            satelliteRef.current.position.y = Math.sin(t * 1.3) * 0.28;
+
+            satelliteRef.current.rotation.y = -t * 1.5;
+        }
+    });
+
+    return (
+        <>
+            {/* clean orbit ring */}
+            <mesh rotation={[Math.PI / 2.2, 0.3, -0.15]}>
+                <torusGeometry args={[2.15, 0.01, 16, 220]} />
+                <meshBasicMaterial
+                    color="#39e6ff"
+                    transparent
+                    opacity={0.22}
+                />
+            </mesh>
+
+            {/* ONE satellite */}
+            <group ref={satelliteRef}>
+                <SatelliteModel />
+            </group>
+        </>
     );
 };
 
@@ -121,16 +141,23 @@ const LiveEarthScene = () => {
         <div className="absolute inset-0">
             <Canvas
                 dpr={[1, 1.5]}
-                camera={{position: [0, 0.05, 5.2], fov: 36}}
-                gl={{antialias: true, alpha: true, powerPreference: "high-performance"}}
+                camera={{ position: [0, 0.05, 5.2], fov: 36 }}
+                gl={{
+                    antialias: true,
+                    alpha: true,
+                    powerPreference: "high-performance",
+                }}
             >
                 <ambientLight intensity={0.55} />
                 <directionalLight position={[5, 3, 5]} intensity={2.4} />
-                <pointLight position={[-4, -2, 4]} intensity={1.2} color="#38e8ff" />
+                <pointLight
+                    position={[-4, -2, 4]}
+                    intensity={1.2}
+                    color="#38e8ff"
+                />
 
                 <EarthModel />
-                <OrbitRing />
-                <Satellite />
+                <OrbitSystem />
             </Canvas>
         </div>
     );
