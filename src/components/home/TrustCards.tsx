@@ -1,62 +1,90 @@
 "use client";
 
-import {RefreshCw, Rocket, ShieldCheck} from "lucide-react";
+import {Database, Orbit, RefreshCw} from "lucide-react";
 import {motion} from "framer-motion";
 
+import type {NasaAsset} from "@/src/types/nasa";
+import type {TrustCardItem} from "@/src/types/trustCards";
+import {getAssetByKey} from "@/src/helpers/nasa.helpers";
 import {useLanguage} from "@/src/context";
 
-export const TrustCards = () => {
+import {TrustCard} from "./TrustCard";
+
+type Props = {
+    assets: NasaAsset[];
+};
+
+export const TrustCards = ({assets}: Props) => {
     const {locale} = useLanguage();
 
-    const cards = [
+    const earth = getAssetByKey(assets, "earth");
+    const galaxy = getAssetByKey(assets, "galaxy");
+    const sun = getAssetByKey(assets, "sun");
+
+    const cards: TrustCardItem[] = [
         {
             title: locale.spaceExperience.trust.realTitle,
             text: locale.spaceExperience.trust.realText,
-            icon: ShieldCheck,
+            href: "/open-data",
+            action: "Open datasets",
+            badge: "NASA API",
+            facts: ["APOD", "NeoWs", "DONKI"],
+            image: earth,
+            icon: Database,
+            glow: "rgba(56,189,248,0.28)",
         },
         {
             title: locale.spaceExperience.trust.explorersTitle,
             text: locale.spaceExperience.trust.explorersText,
-            icon: Rocket,
+            href: "/explore",
+            action: "Explore modules",
+            badge: "Explorer Hub",
+            facts: ["Earth", "Mars", "Missions"],
+            image: galaxy,
+            icon: Orbit,
+            glow: "rgba(139,92,246,0.26)",
         },
         {
             title: locale.spaceExperience.trust.updatedTitle,
             text: locale.spaceExperience.trust.updatedText,
+            href: "/live",
+            action: "View live feeds",
+            badge: "Live data",
+            facts: ["Asteroids", "Solar events", "Media"],
+            image: sun,
             icon: RefreshCw,
+            glow: "rgba(16,185,129,0.24)",
         },
     ];
 
     return (
-        <section className="px-4 pb-12 sm:px-6 lg:px-10">
-            <div className="grid gap-4 lg:grid-cols-3">
-                {cards.map((item, index) => {
-                    const Icon = item.icon;
+        <section className="relative px-4 pb-16 pt-6 sm:px-6 lg:px-10">
+            <div className="mx-auto max-w-[1800px]">
+                <motion.div
+                    initial={{opacity: 0, y: 18}}
+                    whileInView={{opacity: 1, y: 0}}
+                    viewport={{once: true, margin: "-80px"}}
+                    transition={{duration: 0.55}}
+                    className="mb-8 max-w-3xl"
+                >
+                    <h2 className="bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-success)] bg-clip-text text-2xl font-black tracking-[-0.045em] text-transparent sm:text-3xl lg:text-4xl">
+                        Trusted space intelligence, powered by open NASA data.
+                    </h2>
 
-                    return (
-                        <motion.article
-                            key={item.title}
-                            initial={{opacity: 0, y: 24}}
-                            whileInView={{opacity: 1, y: 0}}
-                            viewport={{once: true}}
-                            transition={{delay: index * 0.08}}
-                            className="flex gap-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-glass)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl"
-                        >
-                            <div className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-[var(--color-accent-soft)] text-[var(--color-nebula)] shadow-[var(--shadow-soft)]">
-                                <Icon className="h-8 w-8" />
-                            </div>
+                    <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--color-text-muted)] sm:text-base">
+                        Stellaris is built around real NASA datasets, structured exploration modules, and live space signals — not static mock content.
+                    </p>
+                </motion.div>
 
-                            <div>
-                                <h3 className="text-lg font-black text-[var(--color-text)]">
-                                    {item.title}
-                                </h3>
-
-                                <p className="mt-2 text-sm leading-7 text-[var(--color-text-muted)]">
-                                    {item.text}
-                                </p>
-                            </div>
-                        </motion.article>
-                    );
-                })}
+                <div className="grid gap-4 lg:grid-cols-3">
+                    {cards.map((card, index) => (
+                        <TrustCard
+                            key={card.href}
+                            card={card}
+                            index={index}
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     );

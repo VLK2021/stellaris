@@ -18,7 +18,7 @@ export const Home = ({assets}: HomeProps) => {
 
             <GlobalLandingBackground assets={assets}>
                 <ModuleOrbitRail assets={assets} />
-                <TrustCards />
+                <TrustCards assets={assets} />
             </GlobalLandingBackground>
         </div>
     );
