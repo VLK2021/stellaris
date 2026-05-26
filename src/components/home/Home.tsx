@@ -16,7 +16,7 @@ export const Home = ({assets}: HomeProps) => {
         <div className="relative">
             <HeroSection assets={assets} />
 
-            <GlobalLandingBackground>
+            <GlobalLandingBackground assets={assets}>
                 <ModuleOrbitRail assets={assets} />
                 <TrustCards />
             </GlobalLandingBackground>
