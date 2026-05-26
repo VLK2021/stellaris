@@ -5,7 +5,8 @@ import {motion} from "framer-motion";
 
 import type {NasaAsset} from "@/src/types/nasa";
 import type {TrustCardItem} from "@/src/types/trustCards";
-import {getAssetByKey} from "@/src/helpers/nasa.helpers";
+
+import {getAssetByKey} from "@/src/helpers";
 import {useLanguage} from "@/src/context";
 
 import {TrustCard} from "./TrustCard";
@@ -26,8 +27,8 @@ export const TrustCards = ({assets}: Props) => {
             title: locale.spaceExperience.trust.realTitle,
             text: locale.spaceExperience.trust.realText,
             href: "/open-data",
-            action: "Open datasets",
-            badge: "NASA API",
+            action: locale.trustSection.actions.datasets,
+            badge: locale.trustSection.badges.api,
             facts: ["APOD", "NeoWs", "DONKI"],
             image: earth,
             icon: Database,
@@ -37,9 +38,13 @@ export const TrustCards = ({assets}: Props) => {
             title: locale.spaceExperience.trust.explorersTitle,
             text: locale.spaceExperience.trust.explorersText,
             href: "/explore",
-            action: "Explore modules",
-            badge: "Explorer Hub",
-            facts: ["Earth", "Mars", "Missions"],
+            action: locale.trustSection.actions.modules,
+            badge: locale.trustSection.badges.hub,
+            facts: [
+                locale.nav.earth,
+                locale.nav.mars,
+                locale.nav.missions,
+            ],
             image: galaxy,
             icon: Orbit,
             glow: "rgba(139,92,246,0.26)",
@@ -48,9 +53,13 @@ export const TrustCards = ({assets}: Props) => {
             title: locale.spaceExperience.trust.updatedTitle,
             text: locale.spaceExperience.trust.updatedText,
             href: "/live",
-            action: "View live feeds",
-            badge: "Live data",
-            facts: ["Asteroids", "Solar events", "Media"],
+            action: locale.trustSection.actions.live,
+            badge: locale.trustSection.badges.live,
+            facts: [
+                locale.nav.asteroids,
+                locale.nav.spaceWeather,
+                locale.nav.media,
+            ],
             image: sun,
             icon: RefreshCw,
             glow: "rgba(16,185,129,0.24)",
@@ -68,11 +77,11 @@ export const TrustCards = ({assets}: Props) => {
                     className="mb-8 max-w-3xl"
                 >
                     <h2 className="bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-success)] bg-clip-text text-2xl font-black tracking-[-0.045em] text-transparent sm:text-3xl lg:text-4xl">
-                        Trusted space intelligence, powered by open NASA data.
+                        {locale.trustSection.title}
                     </h2>
 
                     <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--color-text-muted)] sm:text-base">
-                        Stellaris is built around real NASA datasets, structured exploration modules, and live space signals — not static mock content.
+                        {locale.trustSection.text}
                     </p>
                 </motion.div>
 

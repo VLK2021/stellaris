@@ -95,6 +95,21 @@ const en = {
             updatedText: "Live feeds, real-time updates and continuous mission coverage.",
         },
     },
+
+    trustSection: {
+        title: "Trusted space intelligence, powered by open NASA data.",
+        text: "Stellaris is built around real NASA datasets, structured exploration modules, and live space signals — not static mock content.",
+        actions: {
+            datasets: "Open datasets",
+            modules: "Explore modules",
+            live: "View live feeds",
+        },
+        badges: {
+            api: "NASA API",
+            hub: "Explorer Hub",
+            live: "Live data",
+        },
+    },
 };
 
 export default en;
