@@ -120,11 +120,11 @@ const OrbitSystem = () => {
         <>
             {/* clean orbit ring */}
             <mesh rotation={[Math.PI / 2.2, 0.3, -0.15]}>
-                <torusGeometry args={[2.15, 0.01, 16, 220]} />
+                <torusGeometry args={[2.15, 0.004, 16, 220]} />
                 <meshBasicMaterial
                     color="#39e6ff"
                     transparent
-                    opacity={0.22}
+                    opacity={0.12}
                 />
             </mesh>
 

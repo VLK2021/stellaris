@@ -11,7 +11,7 @@ export const LiveOrbitShowcase = () => {
             whileInView={{opacity: 1, scale: 1, y: 0}}
             viewport={{once: true, margin: "-100px"}}
             transition={{duration: 0.65}}
-            className="relative mx-auto aspect-square w-full max-w-[390px] overflow-hidden rounded-full border border-cyan-300/20 bg-[#020611]/80 shadow-[0_0_95px_rgba(34,211,238,0.22)] backdrop-blur-2xl lg:mr-8"
+            className="relative mx-auto aspect-square w-full max-w-[390px] overflow-hidden rounded-full border border-cyan-300/20 bg-[#020611]/80 shadow-[0_0_95px_rgba(34,211,238,0.22)] backdrop-blur-2xl lg:mr-16"
         >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,211,238,0.24),transparent_50%)]" />
 
