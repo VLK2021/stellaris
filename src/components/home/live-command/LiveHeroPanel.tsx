@@ -5,24 +5,31 @@ import {ArrowRight, Orbit} from "lucide-react";
 import type {NasaLiveApod, NasaLiveEpic} from "@/src/types/nasaLive";
 
 type Props = {
+    locale: {
+        visual: {
+            badge: string;
+            primaryAction: string;
+            secondaryAction: string;
+        };
+    };
     apod: NasaLiveApod | null;
     epic: NasaLiveEpic | null;
 };
 
-export const LiveHeroPanel = ({apod, epic}: Props) => {
+export const LiveHeroPanel = ({locale, apod, epic}: Props) => {
     return (
         <motion.article
             initial={{opacity: 0, scale: 0.98, y: 28}}
             whileInView={{opacity: 1, scale: 1, y: 0}}
             viewport={{once: true, margin: "-100px"}}
             transition={{duration: 0.7}}
-            className="group relative min-h-[720px] overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.055] shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl"
+            className="group relative min-h-[580px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-[0_24px_90px_rgba(0,0,0,0.42)] backdrop-blur-2xl"
         >
             {apod?.imageUrl && (
                 <img
                     src={apod.imageUrl}
                     alt={apod.title}
-                    className="absolute inset-0 h-full w-full object-cover opacity-70 transition duration-1000 group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-cover opacity-72 transition duration-1000 group-hover:scale-105"
                 />
             )}
 
@@ -39,7 +46,7 @@ export const LiveHeroPanel = ({apod, epic}: Props) => {
 
             <div className="relative z-10 flex h-full flex-col justify-between p-7 sm:p-9 lg:p-11">
                 <div className="w-fit rounded-full border border-white/15 bg-white/10 px-5 py-3 text-xs font-black uppercase tracking-[0.28em] text-cyan-200 backdrop-blur-xl">
-                    NASA visual stream
+                    {locale.visual.badge}
                 </div>
 
                 <div className="max-w-3xl">
@@ -59,7 +66,7 @@ export const LiveHeroPanel = ({apod, epic}: Props) => {
                             target="_blank"
                             className="inline-flex items-center gap-3 rounded-full bg-cyan-300 px-6 py-4 text-sm font-black text-slate-950 transition hover:gap-4"
                         >
-                            Open HD source
+                            {locale.visual.primaryAction}
                             <ArrowRight className="h-4 w-4" />
                         </a>
 
@@ -70,7 +77,7 @@ export const LiveHeroPanel = ({apod, epic}: Props) => {
                                 className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl"
                             >
                                 <Orbit className="h-4 w-4 text-cyan-300" />
-                                EPIC Earth frame
+                                {locale.visual.secondaryAction}
                             </a>
                         )}
                     </div>

@@ -4,3 +4,4 @@ export * from './LiveCommandHeader';
 export * from './LiveHeroPanel';
 export * from './LiveTelemetryDeck';
 export * from './LiveMediaDock';
+export * from './LiveOrbitShowcase';
