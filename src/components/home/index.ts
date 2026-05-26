@@ -8,3 +8,4 @@ export * from './NasaAssetVisual';
 export * from './moduleOrbitRail.data';
 export * from './ModuleOrbitRailVisual';
 export * from './ModuleOrbitRailCard';
+export * from './GlobalLandingBackground';
