@@ -9,9 +9,11 @@ export type NasaParamValue =
     | Array<string | number | boolean>;
 
 type NasaRequestOptions = {
+    baseUrl?: string;
     params?: Record<string, NasaParamValue>;
     revalidate?: number;
     timeoutMs?: number;
+    withApiKey?: boolean;
 };
 
 export class NasaApiError extends Error {
@@ -39,10 +41,15 @@ export const getNasaApiKey = () => {
 export const buildNasaUrl = (
     path: string,
     params: Record<string, NasaParamValue> = {},
+    baseUrl = NASA_BASE_URL,
+    withApiKey = true,
 ) => {
-    const url = new URL(`${NASA_BASE_URL}${path.startsWith("/") ? path : `/${path}`}`);
+    const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+    const url = new URL(`${baseUrl}${normalizedPath}`);
 
-    url.searchParams.set("api_key", getNasaApiKey());
+    if (withApiKey) {
+        url.searchParams.set("api_key", getNasaApiKey());
+    }
 
     Object.entries(params).forEach(([key, value]) => {
         if (value === undefined || value === null || value === "") return;
@@ -62,8 +69,15 @@ export const fetchNasaJson = async <T>(
     path: string,
     options: NasaRequestOptions = {},
 ): Promise<T> => {
-    const {params = {}, revalidate = 900, timeoutMs = 20000} = options;
-    const url = buildNasaUrl(path, params);
+    const {
+        baseUrl = NASA_BASE_URL,
+        params = {},
+        revalidate = 900,
+        timeoutMs = 20000,
+        withApiKey = true,
+    } = options;
+
+    const url = buildNasaUrl(path, params, baseUrl, withApiKey);
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -72,30 +86,20 @@ export const fetchNasaJson = async <T>(
         const response = await fetch(url, {
             signal: controller.signal,
             next: {revalidate},
-            headers: {
-                Accept: "application/json",
-            },
+            headers: {Accept: "application/json"},
         });
 
         const text = await response.text();
 
         if (!response.ok) {
             throw new NasaApiError(
-                `NASA request failed: ${response.status} ${response.statusText}. Body: ${text.slice(0, 400)}`,
+                `Request failed: ${response.status} ${response.statusText}. Body: ${text.slice(0, 400)}`,
                 url,
                 response.status,
             );
         }
 
-        try {
-            return JSON.parse(text) as T;
-        } catch {
-            throw new NasaApiError(
-                `NASA response is not valid JSON. Body: ${text.slice(0, 400)}`,
-                url,
-                response.status,
-            );
-        }
+        return JSON.parse(text) as T;
     } finally {
         clearTimeout(timeout);
     }
