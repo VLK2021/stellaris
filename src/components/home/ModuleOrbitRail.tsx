@@ -17,15 +17,15 @@ export const ModuleOrbitRail = (_props: Props) => {
     const modules = getModuleItems(locale);
 
     return (
-        <section className="relative px-4 pb-10 pt-4 sm:px-6 lg:px-10">
+        <section className="relative px-4 pb-8 pt-3 sm:px-6 lg:px-10">
             <motion.div
-                initial={{opacity: 0, y: 16}}
+                initial={{opacity: 0, y: 14}}
                 whileInView={{opacity: 1, y: 0}}
                 viewport={{once: true, margin: "-80px"}}
-                transition={{duration: 0.55}}
+                transition={{duration: 0.5}}
                 className="relative mx-auto max-w-[1800px]"
             >
-                <div className="mb-5 flex items-center justify-between gap-4">
+                <div className="mb-4 flex items-center justify-between gap-4">
                     <h2 className="bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-success)] bg-clip-text text-xl font-black tracking-[-0.04em] text-transparent sm:text-2xl">
                         {locale.spaceExperience.modulesTitle}
                     </h2>
@@ -39,13 +39,9 @@ export const ModuleOrbitRail = (_props: Props) => {
                     </a>
                 </div>
 
-                <div className="grid grid-cols-13 gap-2.5">
+                <div className="grid grid-cols-13 gap-2">
                     {modules.map((item, index) => (
-                        <ModuleOrbitRailCard
-                            key={item.href}
-                            item={item}
-                            index={index}
-                        />
+                        <ModuleOrbitRailCard key={item.href} item={item} index={index} />
                     ))}
                 </div>
             </motion.div>

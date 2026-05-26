@@ -27,10 +27,10 @@ export const ModuleOrbitRailCard = ({item, index}: Props) => {
                 <motion.div
                     whileHover={{y: -6, scale: 1.06}}
                     transition={{type: "spring", stiffness: 260, damping: 18}}
-                    className="relative grid h-[82px] w-[82px] place-items-center rounded-full border border-white/10 bg-slate-950/34 backdrop-blur-xl"
+                    className="relative grid h-[82px] w-[82px] place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] backdrop-blur-xl"
                 >
                     <motion.div
-                        className="absolute inset-[-7px] rounded-full border border-white/10"
+                        className="absolute inset-[-7px] rounded-full border border-[var(--color-border)]"
                         animate={{rotate: 360}}
                         transition={{
                             duration: 20 + index,
@@ -39,20 +39,10 @@ export const ModuleOrbitRailCard = ({item, index}: Props) => {
                         }}
                     />
 
-                    <motion.div
-                        className="absolute inset-[-13px] rounded-full border border-dashed border-white/10 opacity-0 transition-opacity group-hover:opacity-100"
-                        animate={{rotate: -360}}
-                        transition={{
-                            duration: 34 + index,
-                            repeat: Infinity,
-                            ease: "linear",
-                        }}
-                    />
-
                     <ModuleOrbitRailVisual visual={item.visual} />
                 </motion.div>
 
-                <span className="line-clamp-2 min-h-[30px] text-[11px] font-bold leading-4 text-slate-200 transition group-hover:text-cyan-200">
+                <span className="line-clamp-2 min-h-[30px] text-[11px] font-bold leading-4 text-[var(--color-text-muted)] transition group-hover:text-[var(--color-accent)]">
                     {item.label}
                 </span>
             </Link>
