@@ -70,3 +70,8 @@ export type NasaLiveData = {
     iss: IssPosition | null;
     updatedAt: string;
 };
+
+export type NasaLiveApiResponse = {
+    success: boolean;
+    data: NasaLiveData;
+};

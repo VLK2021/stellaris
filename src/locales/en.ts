@@ -110,6 +110,18 @@ const en = {
             live: "Live data",
         },
     },
+
+    liveData: {
+        title: "Live NASA command center.",
+        text: "A cinematic real-time dashboard powered by NASA open data: daily astronomy imagery, near-Earth objects, solar events, Earth observation frames, Mars media and ISS orbital telemetry.",
+        badge: "Live Command Center",
+        status: {
+            loading: "Synchronizing...",
+            live: "Live signal",
+            error: "Signal error",
+            updated: "Updated",
+        },
+    },
 };
 
 export default en;
