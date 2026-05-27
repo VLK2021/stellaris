@@ -40,14 +40,8 @@ type Props = {
     donki: NasaLiveDonki | null;
 };
 
-export const LiveMediaDock = ({
-                                  locale,
-                                  epic,
-                                  marsMedia,
-                                  donki,
-                              }: Props) => {
+export const LiveMediaDock = ({locale, epic, marsMedia, donki}: Props) => {
     const t = locale.dock;
-
     const onlineCount = [epic, marsMedia, donki].filter(Boolean).length;
 
     return (
@@ -56,19 +50,16 @@ export const LiveMediaDock = ({
             whileInView={{opacity: 1, y: 0}}
             viewport={{once: true}}
             transition={{duration: 0.7}}
-            className="relative mt-12 min-h-[560px] overflow-hidden bg-transparent"
+            className="relative mt-10 overflow-hidden bg-transparent py-8 lg:mt-12 lg:min-h-[560px] lg:py-0"
         >
             <div className="pointer-events-none absolute inset-0 opacity-40">
-                <div
-                    className="absolute left-[20%] top-[18%] h-[240px] w-[240px] rounded-full bg-cyan-400/6 blur-[120px]"/>
-                <div
-                    className="absolute bottom-[10%] right-[18%] h-[260px] w-[260px] rounded-full bg-orange-400/5 blur-[140px]"/>
-                <div
-                    className="absolute left-1/2 top-1/2 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/5 blur-[120px]"/>
+                <div className="absolute left-[20%] top-[18%] h-[240px] w-[240px] rounded-full bg-cyan-400/6 blur-[120px]" />
+                <div className="absolute bottom-[10%] right-[18%] h-[260px] w-[260px] rounded-full bg-orange-400/5 blur-[140px]" />
+                <div className="absolute left-1/2 top-1/2 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/5 blur-[120px]" />
             </div>
 
             <svg
-                className="pointer-events-none absolute inset-0 h-full w-full opacity-70"
+                className="pointer-events-none absolute inset-0 hidden h-full w-full opacity-70 lg:block"
                 viewBox="0 0 1200 560"
                 preserveAspectRatio="none"
             >
@@ -100,11 +91,7 @@ export const LiveMediaDock = ({
                     fill="none"
                     strokeDasharray="100 900"
                     animate={{strokeDashoffset: [0, -1000]}}
-                    transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "linear",
-                    }}
+                    transition={{duration: 5, repeat: Infinity, ease: "linear"}}
                 />
 
                 <motion.path
@@ -114,28 +101,20 @@ export const LiveMediaDock = ({
                     fill="none"
                     strokeDasharray="120 880"
                     animate={{strokeDashoffset: [0, 1000]}}
-                    transition={{
-                        duration: 6,
-                        repeat: Infinity,
-                        ease: "linear",
-                    }}
+                    transition={{duration: 6, repeat: Infinity, ease: "linear"}}
                 />
             </svg>
 
-            <LiveFlyingStar/>
+            <div className="hidden lg:block">
+                <LiveFlyingStar />
+            </div>
 
-            <div className="relative z-10 h-[560px] w-full">
-                <div
-                    className="absolute left-1/2 top-[40%] z-10 flex h-[138px] w-[138px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-cyan-300/12 bg-white/[0.02] backdrop-blur-xl"
-                >
+            <div className="relative z-10 grid gap-5 sm:grid-cols-2 lg:block lg:h-[560px]">
+                <div className="order-first mx-auto flex h-[138px] w-[138px] flex-col items-center justify-center rounded-full border border-cyan-300/12 bg-white/[0.02] backdrop-blur-xl sm:col-span-2 lg:absolute lg:left-1/2 lg:top-[40%] lg:z-10 lg:mx-0 lg:-translate-x-1/2 lg:-translate-y-1/2">
                     <motion.div
                         className="absolute inset-0 rounded-full border border-cyan-300/10"
                         animate={{rotate: 360}}
-                        transition={{
-                            duration: 30,
-                            repeat: Infinity,
-                            ease: "linear",
-                        }}
+                        transition={{duration: 30, repeat: Infinity, ease: "linear"}}
                     />
 
                     <p className="text-[8px] font-black uppercase tracking-[0.22em] text-cyan-300">
@@ -147,20 +126,9 @@ export const LiveMediaDock = ({
                     </h3>
 
                     <div className="mt-2 space-y-0.5 text-[8px] uppercase tracking-[0.1em] text-slate-500">
-                        <p>
-                            {t.sourceEpic}:{" "}
-                            {epic ? t.sourceOnline : t.sourceSync}
-                        </p>
-
-                        <p>
-                            {t.sourceMars}:{" "}
-                            {marsMedia ? t.sourceOnline : t.sourceSync}
-                        </p>
-
-                        <p>
-                            {t.sourceDonki}:{" "}
-                            {donki ? t.sourceOnline : t.sourceSync}
-                        </p>
+                        <p>{t.sourceEpic}: {epic ? t.sourceOnline : t.sourceSync}</p>
+                        <p>{t.sourceMars}: {marsMedia ? t.sourceOnline : t.sourceSync}</p>
+                        <p>{t.sourceDonki}: {donki ? t.sourceOnline : t.sourceSync}</p>
                     </div>
                 </div>
 
@@ -168,7 +136,7 @@ export const LiveMediaDock = ({
                     href="/earth"
                     icon={Orbit}
                     tone="cyan"
-                    className="absolute left-[4%] top-[8%] h-[235px] w-[235px]"
+                    className="relative mx-auto h-[230px] w-[230px] lg:absolute lg:left-[4%] lg:top-[8%] lg:h-[235px] lg:w-[235px]"
                     label={t.earthSignal ?? "EPIC Earth feed"}
                     title={t.earth}
                     value={epic?.caption ?? t.earthFallback}
@@ -179,7 +147,7 @@ export const LiveMediaDock = ({
                     href="/mars"
                     icon={Radar}
                     tone="violet"
-                    className="absolute left-[37%] bottom-[4%] h-[215px] w-[215px]"
+                    className="relative mx-auto h-[220px] w-[220px] lg:absolute lg:left-[37%] lg:bottom-[4%] lg:h-[215px] lg:w-[215px]"
                     label={t.marsSignal ?? t.nasaLibrary}
                     title={marsMedia?.title ?? t.marsFallbackTitle}
                     value={marsMedia?.description ?? t.marsFallbackText}
@@ -190,7 +158,7 @@ export const LiveMediaDock = ({
                     href="/space-weather"
                     icon={SunMedium}
                     tone="orange"
-                    className="absolute right-[4%] top-[10%] h-[240px] w-[240px]"
+                    className="relative mx-auto h-[235px] w-[235px] sm:col-span-2 lg:absolute lg:right-[4%] lg:top-[10%] lg:h-[240px] lg:w-[240px]"
                     label={t.solarSignal ?? t.donkiStream}
                     title={`${donki?.cmeEvents ?? 0} CME`}
                     value={`${t.solarFlares}: ${donki?.solarFlares ?? 0} · ${t.geomagneticStorms}: ${donki?.geomagneticStorms ?? 0}`}
