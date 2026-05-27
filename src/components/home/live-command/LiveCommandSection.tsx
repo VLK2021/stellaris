@@ -18,7 +18,7 @@ export const LiveCommandSection = () => {
     const {data, isLoading, error} = useNasaLiveData();
 
     return (
-        <section className="relative isolate min-h-screen overflow-hidden bg-[#020611] px-4 pb-14 pt-8 text-white sm:px-6 lg:px-10 lg:pt-10">
+        <section className="relative isolate min-h-screen overflow-hidden bg-[#020611] px-4 py-8 text-white sm:px-6 lg:px-10">
             <LiveSpaceBackdrop imageUrl={data?.apod?.imageUrl ?? data?.epic?.imageUrl} />
 
             <AnimatePresence>

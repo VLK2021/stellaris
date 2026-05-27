@@ -33,12 +33,12 @@ export const LiveHeroPanel = ({locale, apod, epic}: Props) => {
             whileInView={{opacity: 1, scale: 1, y: 0}}
             viewport={{once: true, margin: "-100px"}}
             transition={{duration: 0.7}}
-            className="group relative min-h-[520px] overflow-hidden rounded-[2rem] border border-cyan-300/15 bg-[#050a16]/80 shadow-[0_24px_90px_rgba(0,0,0,0.45)] backdrop-blur-2xl"
+            className="group relative min-h-[480px] overflow-hidden rounded-[2rem] border border-cyan-300/15 bg-[#050a16]/80 shadow-[0_24px_90px_rgba(0,0,0,0.45)] backdrop-blur-2xl"
         >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.16),transparent_32%),radial-gradient(circle_at_85%_35%,rgba(16,185,129,0.12),transparent_34%)]" />
             <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(2,6,17,0.95),rgba(2,6,17,0.74),rgba(2,6,17,0.45))]" />
 
-            <div className="relative z-10 grid h-full min-h-[520px] gap-6 p-5 sm:p-7 lg:grid-cols-[1.15fr_0.85fr] lg:p-8">
+            <div className="relative z-10 grid h-full min-h-[480px] gap-5 p-4 sm:p-6 lg:grid-cols-[1.15fr_0.85fr] lg:p-6">
                 <div className="relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-black/45 shadow-[0_0_80px_rgba(34,211,238,0.12)]">
                     <iframe
                         src={ISS_LIVE_EMBED_URL}
@@ -61,7 +61,7 @@ export const LiveHeroPanel = ({locale, apod, epic}: Props) => {
                             {t.badge}
                         </div>
 
-                        <h3 className="text-4xl font-black leading-[0.95] tracking-[-0.06em] text-white sm:text-5xl">
+                        <h3 className="text-3xl font-black leading-[0.95] tracking-[-0.06em] text-white sm:text-4xl lg:text-5xl">
                             {t.liveTitle ?? "Live orbital window"}
                         </h3>
 
