@@ -125,6 +125,11 @@ const en = {
             badge: "NASA visual stream",
             primaryAction: "Open HD source",
             secondaryAction: "EPIC Earth frame",
+            liveTitle: "Live orbital window",
+            liveText: "Real-time space station video feed with live orbital context. During signal loss, the stream may temporarily show a standby screen.",
+            liveBadge: "ISS LIVE",
+            signal: "Signal source",
+            lossSignal: "Signal note",
         },
         orbit: {
             title: "Orbital signal",

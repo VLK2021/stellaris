@@ -1,7 +1,7 @@
 "use client";
 
 import {motion} from "framer-motion";
-import {ArrowRight, Orbit} from "lucide-react";
+import {ArrowRight, Radio, Satellite, Signal} from "lucide-react";
 import type {NasaLiveApod, NasaLiveEpic} from "@/src/types/nasaLive";
 
 type Props = {
@@ -10,76 +10,105 @@ type Props = {
             badge: string;
             primaryAction: string;
             secondaryAction: string;
+            liveTitle?: string;
+            liveText?: string;
+            liveBadge?: string;
+            signal?: string;
+            lossSignal?: string;
         };
     };
     apod: NasaLiveApod | null;
     epic: NasaLiveEpic | null;
 };
 
+const ISS_LIVE_EMBED_URL =
+    "https://www.youtube.com/embed/FuuC4dpSQ1M?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1";
+
 export const LiveHeroPanel = ({locale, apod, epic}: Props) => {
+    const t = locale.visual;
+
     return (
         <motion.article
             initial={{opacity: 0, scale: 0.98, y: 28}}
             whileInView={{opacity: 1, scale: 1, y: 0}}
             viewport={{once: true, margin: "-100px"}}
             transition={{duration: 0.7}}
-            className="group relative min-h-[580px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-[0_24px_90px_rgba(0,0,0,0.42)] backdrop-blur-2xl"
+            className="group relative min-h-[520px] overflow-hidden rounded-[2rem] border border-cyan-300/15 bg-[#050a16]/80 shadow-[0_24px_90px_rgba(0,0,0,0.45)] backdrop-blur-2xl"
         >
-            {apod?.imageUrl && (
-                <img
-                    src={apod.imageUrl}
-                    alt={apod.title}
-                    className="absolute inset-0 h-full w-full object-cover opacity-72 transition duration-1000 group-hover:scale-105"
-                />
-            )}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.16),transparent_32%),radial-gradient(circle_at_85%_35%,rgba(16,185,129,0.12),transparent_34%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(2,6,17,0.95),rgba(2,6,17,0.74),rgba(2,6,17,0.45))]" />
 
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,17,0.96),rgba(2,6,17,0.72),rgba(2,6,17,0.22)),radial-gradient(circle_at_72%_28%,rgba(34,211,238,0.2),transparent_26%)]" />
-            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/70 to-transparent" />
+            <div className="relative z-10 grid h-full min-h-[520px] gap-6 p-5 sm:p-7 lg:grid-cols-[1.15fr_0.85fr] lg:p-8">
+                <div className="relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-black/45 shadow-[0_0_80px_rgba(34,211,238,0.12)]">
+                    <iframe
+                        src={ISS_LIVE_EMBED_URL}
+                        title="NASA ISS Live Stream"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="absolute inset-0 h-full w-full"
+                    />
 
-            <motion.div
-                className="absolute right-10 top-12 h-64 w-64 rounded-full border border-cyan-300/25"
-                animate={{rotate: 360}}
-                transition={{duration: 28, repeat: Infinity, ease: "linear"}}
-            >
-                <div className="absolute -left-2 top-1/2 h-5 w-5 rounded-full bg-cyan-300 shadow-[0_0_35px_rgba(34,211,238,0.9)]" />
-            </motion.div>
-
-            <div className="relative z-10 flex h-full flex-col justify-between p-7 sm:p-9 lg:p-11">
-                <div className="w-fit rounded-full border border-white/15 bg-white/10 px-5 py-3 text-xs font-black uppercase tracking-[0.28em] text-cyan-200 backdrop-blur-xl">
-                    {locale.visual.badge}
+                    <div className="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-red-400/25 bg-red-500/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-red-200 backdrop-blur-xl">
+                        <span className="h-2 w-2 animate-pulse rounded-full bg-red-400" />
+                        {t.liveBadge ?? "ISS LIVE"}
+                    </div>
                 </div>
 
-                <div className="max-w-3xl">
-                    <p className="mb-4 text-sm font-black text-cyan-300">{apod?.date}</p>
+                <div className="flex flex-col justify-between rounded-[1.6rem] border border-white/10 bg-white/[0.055] p-6 backdrop-blur-2xl">
+                    <div>
+                        <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-5 py-3 text-xs font-black uppercase tracking-[0.24em] text-cyan-200">
+                            <Radio className="h-4 w-4" />
+                            {t.badge}
+                        </div>
 
-                    <h3 className="text-5xl font-black tracking-[-0.075em] text-white sm:text-6xl">
-                        {apod?.title ?? "NASA deep space visual"}
-                    </h3>
+                        <h3 className="text-4xl font-black leading-[0.95] tracking-[-0.06em] text-white sm:text-5xl">
+                            {t.liveTitle ?? "Live orbital window"}
+                        </h3>
 
-                    <p className="mt-6 line-clamp-5 max-w-3xl text-base leading-8 text-slate-200">
-                        {apod?.explanation}
-                    </p>
+                        <p className="mt-5 text-base leading-8 text-slate-300">
+                            {t.liveText ??
+                                "Real-time space station video feed with live orbital context. During signal loss, the stream may temporarily show a standby screen."}
+                        </p>
+                    </div>
 
-                    <div className="mt-8 flex flex-wrap gap-4">
-                        <a
-                            href={apod?.hdUrl ?? apod?.imageUrl ?? "#"}
-                            target="_blank"
-                            className="inline-flex items-center gap-3 rounded-full bg-cyan-300 px-6 py-4 text-sm font-black text-slate-950 transition hover:gap-4"
-                        >
-                            {locale.visual.primaryAction}
-                            <ArrowRight className="h-4 w-4" />
-                        </a>
+                    <div className="mt-7 grid gap-3">
+                        <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/25 px-4 py-3">
+                            <span className="inline-flex items-center gap-2 text-sm font-bold text-slate-300">
+                                <Signal className="h-4 w-4 text-cyan-300" />
+                                {t.signal ?? "Signal source"}
+                            </span>
+                            <strong className="text-sm text-cyan-300">NASA / ISS</strong>
+                        </div>
 
-                        {epic?.imageUrl && (
+                        <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/25 px-4 py-3">
+                            <span className="inline-flex items-center gap-2 text-sm font-bold text-slate-300">
+                                <Satellite className="h-4 w-4 text-cyan-300" />
+                                {t.lossSignal ?? "Signal note"}
+                            </span>
+                            <strong className="text-sm text-slate-100">Live / LOS</strong>
+                        </div>
+
+                        <div className="flex flex-wrap gap-3 pt-2">
                             <a
-                                href={epic.imageUrl}
+                                href="https://www.nasa.gov/live/"
                                 target="_blank"
-                                className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl"
+                                className="inline-flex items-center gap-3 rounded-full bg-cyan-300 px-5 py-3 text-sm font-black text-slate-950 transition hover:gap-4"
                             >
-                                <Orbit className="h-4 w-4 text-cyan-300" />
-                                {locale.visual.secondaryAction}
+                                {t.primaryAction}
+                                <ArrowRight className="h-4 w-4" />
                             </a>
-                        )}
+
+                            {epic?.imageUrl && (
+                                <a
+                                    href={epic.imageUrl}
+                                    target="_blank"
+                                    className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white backdrop-blur-xl"
+                                >
+                                    {t.secondaryAction}
+                                    <ArrowRight className="h-4 w-4" />
+                                </a>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
