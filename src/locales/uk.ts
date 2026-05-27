@@ -165,6 +165,12 @@ const uk = {
             earthSignal: "Потік EPIC Earth",
             marsSignal: "Архів медіа Марса",
             solarSignal: "Монітор DONKI Solar",
+            sources: "Живі джерела",
+            sourceEpic: "EPIC",
+            sourceMars: "Марс",
+            sourceDonki: "DONKI",
+            sourceOnline: "онлайн",
+            sourceSync: "синхронізація",
         },
     },
 };

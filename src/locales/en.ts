@@ -165,6 +165,12 @@ const en = {
             earthSignal: "EPIC Earth feed",
             marsSignal: "Mars media archive",
             solarSignal: "DONKI solar monitor",
+            sources: "Live sources",
+            sourceEpic: "EPIC",
+            sourceMars: "MARS",
+            sourceDonki: "DONKI",
+            sourceOnline: "online",
+            sourceSync: "sync",
         },
     },
 };
