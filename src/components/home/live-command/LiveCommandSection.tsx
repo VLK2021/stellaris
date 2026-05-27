@@ -28,7 +28,7 @@ export const LiveCommandSection = () => {
             </AnimatePresence>
 
             <div className="relative z-10 mx-auto max-w-[1680px]">
-                <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+                <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-center">
                     <LiveCommandHeader
                         locale={locale.liveData}
                         isLoading={isLoading}
@@ -39,7 +39,7 @@ export const LiveCommandSection = () => {
                     <LiveOrbitShowcase />
                 </div>
 
-                <div className="mt-8 grid gap-5 lg:grid-cols-[1.25fr_0.85fr]">
+                <div className="mt-7 grid gap-5 lg:grid-cols-[1.08fr_0.92fr]">
                     <LiveHeroPanel
                         locale={locale.liveData}
                         apod={data?.apod ?? null}
