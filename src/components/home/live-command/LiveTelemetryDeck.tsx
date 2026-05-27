@@ -7,7 +7,6 @@ import type {
 } from "@/src/types/nasaLive";
 
 import {NeoApproachModule} from "./NeoApproachModule";
-import {NeoRiskModule} from "./NeoRiskModule";
 
 type Props = {
     locale: {
@@ -26,11 +25,10 @@ type Props = {
             flares: string;
             storms: string;
             approach?: string;
-            diameter?: string;
+            radarText?: string;
             hazard?: string;
             clear?: string;
             potential?: string;
-            radarText?: string;
         };
     };
     neo: NasaLiveNeo | null;
@@ -44,11 +42,6 @@ export const LiveTelemetryDeck = ({locale, neo}: Props) => {
     return (
         <div className="grid gap-5">
             <NeoApproachModule
-                neo={neo}
-                locale={t}
-            />
-
-            <NeoRiskModule
                 neo={neo}
                 locale={t}
             />
