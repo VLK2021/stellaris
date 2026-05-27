@@ -162,6 +162,9 @@ const en = {
             solarFlares: "Solar flares",
             geomagneticStorms: "Geomagnetic storms",
             latestEvent: "Latest event",
+            earthSignal: "EPIC Earth feed",
+            marsSignal: "Mars media archive",
+            solarSignal: "DONKI solar monitor",
         },
     },
 };

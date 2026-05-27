@@ -162,6 +162,9 @@ const uk = {
             solarFlares: "Сонячні спалахи",
             geomagneticStorms: "Геомагнітні бурі",
             latestEvent: "Остання подія",
+            earthSignal: "Потік EPIC Earth",
+            marsSignal: "Архів медіа Марса",
+            solarSignal: "Монітор DONKI Solar",
         },
     },
 };

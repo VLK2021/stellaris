@@ -9,3 +9,6 @@ export * from './LiveCommandLoader';
 export * from './NeoApproachModule';
 export * from './SolarPulseModule';
 export * from './DeepSpaceSignalModule';
+export * from './EpicEarthModule';
+export * from './MarsArchiveModule';
+export * from './DonkiSolarModule';
