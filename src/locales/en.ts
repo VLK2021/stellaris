@@ -152,6 +152,12 @@ const en = {
             kmhRelative: "km/h relative velocity",
             flares: "solar flares",
             storms: "geomagnetic storms",
+            approach: "Closest approach",
+            diameter: "Estimated size",
+            hazard: "Hazard status",
+            clear: "Clear",
+            potential: "Potential",
+            radarText: "Near-Earth object tracking based on today's NASA NeoWs feed.",
         },
         dock: {
             earth: "Earth observation",
