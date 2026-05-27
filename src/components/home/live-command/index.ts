@@ -5,3 +5,4 @@ export * from './LiveHeroPanel';
 export * from './LiveTelemetryDeck';
 export * from './LiveMediaDock';
 export * from './LiveOrbitShowcase';
+export * from './LiveCommandLoader';
