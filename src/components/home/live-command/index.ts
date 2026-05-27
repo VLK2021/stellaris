@@ -7,3 +7,5 @@ export * from './LiveMediaDock';
 export * from './LiveOrbitShowcase';
 export * from './LiveCommandLoader';
 export * from './NeoApproachModule';
+export * from './SolarPulseModule';
+export * from './DeepSpaceSignalModule';
