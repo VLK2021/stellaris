@@ -12,6 +12,8 @@ import {LiveTelemetryDeck} from "./LiveTelemetryDeck";
 import {LiveMediaDock} from "./LiveMediaDock";
 import {LiveOrbitShowcase} from "./LiveOrbitShowcase";
 import {LiveCommandLoader} from "./LiveCommandLoader";
+import {NasaDataArchitectureSection} from "@/src/components/home/nasa-architecture";
+import {NasaArchitectureLocale} from "@/src/types";
 
 export const LiveCommandSection = () => {
     const {locale} = useLanguage();
@@ -61,6 +63,10 @@ export const LiveCommandSection = () => {
                     donki={data?.donki ?? null}
                 />
             </div>
+
+            <NasaDataArchitectureSection
+                locale={locale.nasaArchitecture as NasaArchitectureLocale}
+            />
         </section>
     );
 };

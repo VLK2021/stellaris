@@ -173,6 +173,101 @@ const uk = {
             sourceSync: "синхронізація",
         },
     },
+
+    nasaArchitecture: {
+        badge: "Архітектура NASA API",
+        title: "Єдине ядро даних для всієї екосистеми NASA.",
+        text: "Stellaris об’єднує live, near-live, архівні та дослідницькі API в один структурований шар космічної аналітики — з готовністю до пошуку, фільтрів, аналітики та майбутніх route-модулів.",
+
+        coreTitle: "API Core",
+        coreSubtitle: "Єдиний шар даних",
+
+        stats: [
+            {
+                value: "16+",
+                label: "NASA API",
+                icon: "database",
+            },
+            {
+                value: "6",
+                label: "Live-потоків",
+                icon: "activity",
+            },
+            {
+                value: "100+",
+                label: "Endpointів",
+                icon: "terminal",
+            },
+            {
+                value: "∞",
+                label: "Open data",
+                icon: "shield",
+            },
+        ],
+
+        nodes: {
+            liveStreams: {
+                title: "Live-потоки",
+                text: "Real-time та near-real-time потоки з ISS, сонячної активності, астероїдів і live event систем.",
+            },
+            earthSystems: {
+                title: "Системи Землі",
+                text: "Планетарний моніторинг через EPIC, EONET та глобальні сервіси супутникових зображень.",
+            },
+            planetaryMedia: {
+                title: "Планетарне медіа",
+                text: "Зображення, відео та mission media з Марса, APOD і візуальних архівів NASA.",
+            },
+            deepResearch: {
+                title: "Deep research",
+                text: "Наукові датасети для екзопланет, орбітальних об’єктів, CNEOS і довгострокових досліджень.",
+            },
+            satelliteOrbits: {
+                title: "Супутники й орбіти",
+                text: "TLE, satellite situation data та орбітальний трекінг для навколоземних апаратів.",
+            },
+            openData: {
+                title: "Open data й бібліотеки",
+                text: "NASA Image Library, Open Science Repository та публічні дослідницькі ресурси.",
+            },
+            technology: {
+                title: "Технології й інсайти",
+                text: "Технологічні проєкти, патенти, software, transfer reports та mission insight системи.",
+            },
+            infrastructure: {
+                title: "Інфраструктура",
+                text: "Кешування, rate limiting, нормалізовані схеми, моніторинг і масштабована API-доставка.",
+            },
+        },
+
+        features: [
+            {
+                title: "Live & near-live",
+                text: "Реальні та near-real-time дані з активних систем NASA.",
+                icon: "activity",
+            },
+            {
+                title: "Єдині схеми",
+                text: "Однакові frontend-friendly структури для різних API.",
+                icon: "database",
+            },
+            {
+                title: "Пошук і фільтри",
+                text: "Майбутні route-модулі підтримуватимуть пошук, фільтри та сортування.",
+                icon: "terminal",
+            },
+            {
+                title: "Історичний архів",
+                text: "Доступ до історії місій, медіаархівів і минулих подій.",
+                icon: "earth",
+            },
+            {
+                title: "Масштабована платформа",
+                text: "Спроєктовано під кешування, захист API та майбутню аналітику.",
+                icon: "shield",
+            },
+        ],
+    },
 };
 
 export default uk;

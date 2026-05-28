@@ -173,6 +173,101 @@ const en = {
             sourceSync: "sync",
         },
     },
+
+    nasaArchitecture: {
+        badge: "NASA API architecture",
+        title: "A unified data core for the entire NASA ecosystem.",
+        text: "Stellaris connects live, near-live, archive and research APIs into one structured space intelligence layer — ready for search, filtering, analytics and future route modules.",
+
+        coreTitle: "API Core",
+        coreSubtitle: "Unified data layer",
+
+        stats: [
+            {
+                value: "16+",
+                label: "NASA APIs",
+                icon: "database",
+            },
+            {
+                value: "6",
+                label: "Live streams",
+                icon: "activity",
+            },
+            {
+                value: "100+",
+                label: "Endpoints",
+                icon: "terminal",
+            },
+            {
+                value: "∞",
+                label: "Open data",
+                icon: "shield",
+            },
+        ],
+
+        nodes: {
+            liveStreams: {
+                title: "Live streams",
+                text: "Real-time and near-real-time feeds from ISS, solar activity, asteroids and live event systems.",
+            },
+            earthSystems: {
+                title: "Earth systems",
+                text: "Planetary monitoring through EPIC, EONET and global satellite imagery services.",
+            },
+            planetaryMedia: {
+                title: "Planetary media",
+                text: "Images, videos and mission media from Mars, APOD and NASA visual archives.",
+            },
+            deepResearch: {
+                title: "Deep research",
+                text: "Scientific datasets for exoplanets, orbital objects, CNEOS and long-range research.",
+            },
+            satelliteOrbits: {
+                title: "Satellite & orbits",
+                text: "TLE, satellite situation data and orbital tracking for Earth-based spacecraft.",
+            },
+            openData: {
+                title: "Open data & libraries",
+                text: "NASA Image Library, Open Science Repository and public research resources.",
+            },
+            technology: {
+                title: "Technology & insight",
+                text: "Technology projects, patents, software, transfer reports and mission insight systems.",
+            },
+            infrastructure: {
+                title: "Infrastructure",
+                text: "Caching, rate limiting, normalized schemas, monitoring and scalable API delivery.",
+            },
+        },
+
+        features: [
+            {
+                title: "Live & near-live",
+                text: "Real and near-real-time data from active NASA systems.",
+                icon: "activity",
+            },
+            {
+                title: "Unified schemas",
+                text: "Consistent frontend-friendly structures across different APIs.",
+                icon: "database",
+            },
+            {
+                title: "Search & filter",
+                text: "Future route modules will support search, filters and sorting.",
+                icon: "terminal",
+            },
+            {
+                title: "Historical archive",
+                text: "Access to mission history, media archives and past events.",
+                icon: "earth",
+            },
+            {
+                title: "Scalable platform",
+                text: "Designed for caching, API protection and future analytics.",
+                icon: "shield",
+            },
+        ],
+    },
 };
 
 export default en;

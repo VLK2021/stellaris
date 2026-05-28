@@ -1,0 +1,68 @@
+import type {NasaArchitectureNode} from "@/src/types/nasaArchitecture";
+
+export const NASA_ARCHITECTURE_NODES: NasaArchitectureNode[] = [
+    {
+        id: "liveStreams",
+        icon: "activity",
+        tone: "cyan",
+        status: "live",
+        apis: ["ISS", "DONKI", "NeoWs"],
+        position: "left",
+    },
+    {
+        id: "earthSystems",
+        icon: "earth",
+        tone: "green",
+        status: "live",
+        apis: ["EPIC", "EONET", "GIBS"],
+        position: "left",
+    },
+    {
+        id: "planetaryMedia",
+        icon: "mars",
+        tone: "orange",
+        status: "archive",
+        apis: ["Mars", "Image Library", "APOD"],
+        position: "left",
+    },
+    {
+        id: "deepResearch",
+        icon: "galaxy",
+        tone: "violet",
+        status: "research",
+        apis: ["Exoplanets", "SSD-CNEOS", "TLE"],
+        position: "left",
+    },
+    {
+        id: "satelliteOrbits",
+        icon: "satellite",
+        tone: "blue",
+        status: "live",
+        apis: ["TLE API", "Satellite Situation Center"],
+        position: "right",
+    },
+    {
+        id: "openData",
+        icon: "database",
+        tone: "blue",
+        status: "archive",
+        apis: ["Image Library", "Open Science Repository"],
+        position: "right",
+    },
+    {
+        id: "technology",
+        icon: "terminal",
+        tone: "pink",
+        status: "archive",
+        apis: ["TechPort", "TechTransfer", "Insight"],
+        position: "right",
+    },
+    {
+        id: "infrastructure",
+        icon: "shield",
+        tone: "violet",
+        status: "system",
+        apis: ["Caching", "Rate limiting", "Monitoring"],
+        position: "right",
+    },
+];
