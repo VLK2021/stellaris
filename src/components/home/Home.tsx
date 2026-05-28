@@ -6,6 +6,7 @@ import {HeroSection} from "./HeroSection";
 import {ModuleOrbitRail} from "./ModuleOrbitRail";
 import {TrustCards} from "./TrustCards";
 import {LiveCommandSection} from "@/src/components/home/live-command";
+import {MissionTimelineSection} from "@/src/components/home/mission-timeline";
 
 type HomeProps = {
     assets: NasaAsset[];
@@ -18,6 +19,7 @@ export const Home = ({assets}: HomeProps) => {
             <ModuleOrbitRail assets={assets} />
             <TrustCards assets={assets} />
             <LiveCommandSection />
+            <MissionTimelineSection />
         </div>
     );
 };

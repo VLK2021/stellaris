@@ -268,6 +268,106 @@ const en = {
             },
         ],
     },
+
+    missionTimeline: {
+        badge: "NASA mission timeline",
+        title: "From Moon landings to deep space intelligence.",
+        text: "Explore the missions that shaped modern space exploration — from the first lunar landing to robotic explorers, orbital telescopes and the next generation of lunar missions.",
+
+        explore: "Explore mission",
+
+        stats: [
+            {
+                value: "60+",
+                label: "Years of exploration",
+            },
+            {
+                value: "150+",
+                label: "Missions completed",
+            },
+            {
+                value: "500+",
+                label: "Astronauts traveled",
+            },
+            {
+                value: "1.4M+",
+                label: "Images captured",
+            },
+            {
+                value: "∞",
+                label: "Discoveries ahead",
+            },
+        ],
+
+        missions: {
+            apollo11: {
+                name: "Apollo 11",
+                short: "First crewed Moon landing",
+                description:
+                    "Apollo 11 was the mission that first landed humans on the Moon and became one of the defining moments in space exploration history.",
+                tag: "Historic mission",
+                launch: "July 16, 1969",
+                type: "Lunar landing",
+                status: "Completed",
+                legacy: "Humanity milestone",
+            },
+            voyager1: {
+                name: "Voyager 1",
+                short: "Journey beyond our solar system",
+                description:
+                    "Voyager 1 became humanity’s farthest operating spacecraft, carrying scientific instruments and the Golden Record into interstellar space.",
+                tag: "Deep space mission",
+                launch: "September 5, 1977",
+                type: "Outer planet / interstellar",
+                status: "Active",
+                legacy: "Interstellar probe",
+            },
+            hubble: {
+                name: "Hubble Space Telescope",
+                short: "Revolutionizing our view of the universe",
+                description:
+                    "Hubble transformed astronomy with deep observations of galaxies, nebulae, stars and the expanding universe.",
+                tag: "Orbital observatory",
+                launch: "April 24, 1990",
+                type: "Space telescope",
+                status: "Active",
+                legacy: "Modern astronomy",
+            },
+            curiosity: {
+                name: "Curiosity",
+                short: "Exploring the Red Planet",
+                description:
+                    "Curiosity studies Mars geology, climate and habitability while exploring Gale Crater with advanced scientific instruments.",
+                tag: "Mars rover",
+                launch: "November 26, 2011",
+                type: "Robotic rover",
+                status: "Active",
+                legacy: "Mars science",
+            },
+            perseverance: {
+                name: "Perseverance",
+                short: "Searching for signs of ancient life",
+                description:
+                    "Perseverance explores Jezero Crater, collects rock samples and prepares the foundation for future Mars sample return missions.",
+                tag: "Mars exploration",
+                launch: "July 30, 2020",
+                type: "Robotic rover",
+                status: "Active",
+                legacy: "Sample return pathfinder",
+            },
+            artemis: {
+                name: "Artemis",
+                short: "The next chapter of lunar exploration",
+                description:
+                    "Artemis is NASA’s program to return humans to the Moon, build long-term lunar capabilities and prepare for future Mars missions.",
+                tag: "Future exploration",
+                launch: "2024+",
+                type: "Lunar program",
+                status: "In progress",
+                legacy: "Moon to Mars",
+            },
+        },
+    },
 };
 
 export default en;
