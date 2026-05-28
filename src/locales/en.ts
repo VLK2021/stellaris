@@ -396,6 +396,10 @@ const en = {
         footerText: "Global communication infrastructure supporting missions across the solar system and beyond.",
 
         signalStrength: "Signal strength",
+        unavailable: "Data unavailable",
+        distanceFromEarth: "Distance",
+        lightDelay: "Light delay",
+        source: "Source",
 
         stats: [
             {
@@ -438,50 +442,34 @@ const en = {
             voyager1: {
                 title: "Voyager 1",
                 region: "Interstellar space",
-                distance: "24.1B km from Earth",
-                delay: "Signal delay: 22h 35m",
             },
             jamesWebb: {
                 title: "James Webb",
                 region: "L2 orbit",
-                distance: "1.5M km from Earth",
-                delay: "Signal delay: 5s",
             },
             newHorizons: {
                 title: "New Horizons",
                 region: "Kuiper Belt",
-                distance: "6.4B km from Earth",
-                delay: "Signal delay: 6h 18m",
             },
             iss: {
                 title: "International Space Station",
                 region: "Low Earth orbit",
-                distance: "408 km from Earth",
-                delay: "Signal delay: < 1s",
             },
             hubble: {
                 title: "Hubble Space Telescope",
                 region: "Low Earth orbit",
-                distance: "547 km from Earth",
-                delay: "Signal delay: < 1s",
             },
             mro: {
                 title: "Mars Reconnaissance Orbiter",
                 region: "Mars orbit",
-                distance: "225M km from Earth",
-                delay: "Signal delay: 12m 20s",
             },
             perseverance: {
                 title: "Perseverance",
                 region: "Mars surface",
-                distance: "225M km from Earth",
-                delay: "Signal delay: 12m 40s",
             },
             artemis: {
                 title: "Artemis Mission",
                 region: "Translunar orbit",
-                distance: "384,000 km from Earth",
-                delay: "Signal delay: 1.3s",
             },
         },
     },

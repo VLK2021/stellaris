@@ -1,5 +1,3 @@
-import type {LucideIcon} from "lucide-react";
-
 export type DeepSpaceSignalId =
     | "voyager1"
     | "jamesWebb"
@@ -10,6 +8,8 @@ export type DeepSpaceSignalId =
     | "perseverance"
     | "artemis";
 
+export type DeepSpaceSignalStatus = "online" | "syncing" | "unavailable";
+
 export type DeepSpaceSignal = {
     id: DeepSpaceSignalId;
     image: string;
@@ -17,6 +17,24 @@ export type DeepSpaceSignal = {
     x: string;
     y: string;
     align: "left" | "right";
+};
+
+export type DeepSpaceSignalTelemetry = {
+    id: DeepSpaceSignalId;
+    status: DeepSpaceSignalStatus;
+    distanceKm: number | null;
+    lightDelay: string | null;
+    updatedAt: string | null;
+};
+
+export type DeepSpaceNetworkData = {
+    signals: DeepSpaceSignalTelemetry[];
+    updatedAt: string;
+};
+
+export type DeepSpaceNetworkApiResponse = {
+    success: boolean;
+    data: DeepSpaceNetworkData;
 };
 
 export type DeepSpaceNetworkStat = {
@@ -39,20 +57,20 @@ export type DeepSpaceNetworkLocale = {
     coreStatus: string;
     coreSubtitle: string;
     viewAll: string;
-    statusTitle: string;
-    statusValue: string;
     footerTitle: string;
     footerText: string;
     signalStrength: string;
-    footerStats: DeepSpaceNetworkFooterStat[];
+    unavailable: string;
+    distanceFromEarth: string;
+    lightDelay: string;
+    source: string;
     stats: DeepSpaceNetworkStat[];
+    footerStats: DeepSpaceNetworkFooterStat[];
     signals: Record<
         DeepSpaceSignalId,
         {
             title: string;
             region: string;
-            distance: string;
-            delay: string;
         }
     >;
 };

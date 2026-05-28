@@ -396,6 +396,10 @@ const uk = {
         footerText: "Глобальна комунікаційна інфраструктура, що підтримує місії по всій Сонячній системі та за її межами.",
 
         signalStrength: "Сила сигналу",
+        unavailable: "Дані недоступні",
+        distanceFromEarth: "Відстань",
+        lightDelay: "Затримка світла",
+        source: "Джерело",
 
         stats: [
             {
@@ -438,50 +442,34 @@ const uk = {
             voyager1: {
                 title: "Voyager 1",
                 region: "Міжзоряний простір",
-                distance: "24.1B км від Землі",
-                delay: "Затримка сигналу: 22г 35хв",
             },
             jamesWebb: {
                 title: "James Webb",
                 region: "Орбіта L2",
-                distance: "1.5M км від Землі",
-                delay: "Затримка сигналу: 5с",
             },
             newHorizons: {
                 title: "New Horizons",
                 region: "Пояс Койпера",
-                distance: "6.4B км від Землі",
-                delay: "Затримка сигналу: 6г 18хв",
             },
             iss: {
                 title: "Міжнародна космічна станція",
                 region: "Низька орбіта Землі",
-                distance: "408 км від Землі",
-                delay: "Затримка сигналу: < 1с",
             },
             hubble: {
                 title: "Hubble Space Telescope",
                 region: "Низька орбіта Землі",
-                distance: "547 км від Землі",
-                delay: "Затримка сигналу: < 1с",
             },
             mro: {
                 title: "Mars Reconnaissance Orbiter",
                 region: "Орбіта Марса",
-                distance: "225M км від Землі",
-                delay: "Затримка сигналу: 12хв 20с",
             },
             perseverance: {
                 title: "Perseverance",
                 region: "Поверхня Марса",
-                distance: "225M км від Землі",
-                delay: "Затримка сигналу: 12хв 40с",
             },
             artemis: {
                 title: "Artemis Mission",
                 region: "Транслунарна орбіта",
-                distance: "384 000 км від Землі",
-                delay: "Затримка сигналу: 1.3с",
             },
         },
     },
