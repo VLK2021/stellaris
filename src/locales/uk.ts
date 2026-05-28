@@ -276,6 +276,13 @@ const uk = {
 
         explore: "Відкрити місію",
 
+        labels: {
+            launch: "Запуск",
+            type: "Тип місії",
+            status: "Статус",
+            legacy: "Спадщина",
+        },
+
         stats: [
             {
                 value: "60+",
@@ -366,6 +373,7 @@ const uk = {
                 status: "У процесі",
                 legacy: "Moon to Mars",
             },
+
         },
     },
 };

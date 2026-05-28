@@ -276,6 +276,13 @@ const en = {
 
         explore: "Explore mission",
 
+        labels: {
+            launch: "Launch",
+            type: "Mission type",
+            status: "Status",
+            legacy: "Legacy",
+        },
+
         stats: [
             {
                 value: "60+",
@@ -366,6 +373,7 @@ const en = {
                 status: "In progress",
                 legacy: "Moon to Mars",
             },
+
         },
     },
 };

@@ -10,6 +10,7 @@ export type MissionTimelineMission = {
     id: MissionTimelineId;
     year: string;
     image: string;
+    href: string;
     tone: "cyan" | "blue" | "violet" | "orange";
 };
 
@@ -18,6 +19,12 @@ export type MissionTimelineLocale = {
     title: string;
     text: string;
     explore: string;
+    labels: {
+        launch: string;
+        type: string;
+        status: string;
+        legacy: string;
+    };
     stats: {
         value: string;
         label: string;
