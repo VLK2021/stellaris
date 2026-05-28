@@ -377,6 +377,37 @@ const en = {
         },
     },
 
+    explorationManifest: {
+        eyebrow: "Our manifest",
+        title: "The Exploration Manifest",
+        text: "Stellaris exists to make NASA open data accessible, understandable and cinematic. We transform complex space datasets into a visual experience built for exploration.",
+
+        quote: "We don't just show data. We reveal the universe.",
+        quoteAuthor: "Stellaris Team",
+
+        features: {
+            liveObservation: {
+                title: "Live observation",
+                text: "Real-time signals from NASA systems, observatories and orbital sources.",
+            },
+            missionHistory: {
+                title: "Mission history",
+                text: "A structured journey through missions, spacecraft and exploration milestones.",
+            },
+            spaceWeather: {
+                title: "Space weather",
+                text: "Solar activity, cosmic alerts and space environment monitoring.",
+            },
+            planetaryMedia: {
+                title: "Planetary media",
+                text: "High-quality images, video archives and planetary visual data.",
+            },
+            deepResearch: {
+                title: "Deep research",
+                text: "Scientific datasets, discovery layers and advanced NASA archives.",
+            },
+        },
+    },
 };
 
 export default en;

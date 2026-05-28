@@ -377,6 +377,37 @@ const uk = {
         },
     },
 
+    explorationManifest: {
+        eyebrow: "Наш маніфест",
+        title: "The Exploration Manifest",
+        text: "Stellaris існує для того, щоб зробити відкриті дані NASA доступними, зрозумілими та кінематографічними. Ми перетворюємо складні космічні датасети на візуальний досвід для дослідження.",
+
+        quote: "Ми не просто показуємо дані. Ми відкриваємо Всесвіт.",
+        quoteAuthor: "Команда Stellaris",
+
+        features: {
+            liveObservation: {
+                title: "Live observation",
+                text: "Реальні сигнали з NASA-систем, обсерваторій та орбітальних джерел.",
+            },
+            missionHistory: {
+                title: "Mission history",
+                text: "Структурована подорож крізь місії, апарати та ключові етапи дослідження.",
+            },
+            spaceWeather: {
+                title: "Space weather",
+                text: "Сонячна активність, космічні події та моніторинг середовища.",
+            },
+            planetaryMedia: {
+                title: "Planetary media",
+                text: "Якісні зображення, відеоархіви та планетарні візуальні дані.",
+            },
+            deepResearch: {
+                title: "Deep research",
+                text: "Наукові датасети, шари відкриттів і розширені архіви NASA.",
+            },
+        },
+    },
 };
 
 export default uk;
