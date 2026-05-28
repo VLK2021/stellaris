@@ -7,6 +7,7 @@ import {ModuleOrbitRail} from "./ModuleOrbitRail";
 import {TrustCards} from "./TrustCards";
 import {LiveCommandSection} from "@/src/components/home/live-command";
 import {MissionTimelineSection} from "@/src/components/home/mission-timeline";
+import {DeepSpaceNetworkSection} from "@/src/components/home/deep-space-network/DeepSpaceNetworkSection";
 
 type HomeProps = {
     assets: NasaAsset[];
@@ -20,6 +21,7 @@ export const Home = ({assets}: HomeProps) => {
             <TrustCards assets={assets} />
             <LiveCommandSection />
             <MissionTimelineSection />
+            <DeepSpaceNetworkSection />
         </div>
     );
 };

@@ -376,6 +376,115 @@ const en = {
 
         },
     },
+
+    deepSpaceNetwork: {
+        eyebrow: "NASA systems",
+        title: "NASA Deep Space Network",
+        subtitle: "Live signals from across the universe.",
+        text: "Tracking active missions, orbiting observatories and deep-space probes as they explore space and send valuable data back to Earth.",
+
+        coreTitle: "NASA Deep Space Network",
+        coreStatus: "8 Active Signals",
+        coreSubtitle: "Live orbital infrastructure",
+
+        viewAll: "View all systems",
+
+        statusTitle: "Network status",
+        statusValue: "All systems nominal",
+
+        footerTitle: "Deep Space Network",
+        footerText: "Global communication infrastructure supporting missions across the solar system and beyond.",
+
+        signalStrength: "Signal strength",
+
+        stats: [
+            {
+                value: "8",
+                label: "Active signals",
+                icon: "signal",
+            },
+            {
+                value: "24/7",
+                label: "Live monitoring",
+                icon: "radar",
+            },
+            {
+                value: "99.98%",
+                label: "Network uptime",
+                icon: "uptime",
+            },
+        ],
+
+        footerStats: [
+            {
+                value: "Strong",
+                label: "Signal strength",
+            },
+            {
+                value: "12.84 TB",
+                label: "Data received today",
+            },
+            {
+                value: "24.1B km",
+                label: "Top distance · Voyager 1",
+            },
+            {
+                value: "2 sec ago",
+                label: "Last updated",
+            },
+        ],
+
+        signals: {
+            voyager1: {
+                title: "Voyager 1",
+                region: "Interstellar space",
+                distance: "24.1B km from Earth",
+                delay: "Signal delay: 22h 35m",
+            },
+            jamesWebb: {
+                title: "James Webb",
+                region: "L2 orbit",
+                distance: "1.5M km from Earth",
+                delay: "Signal delay: 5s",
+            },
+            newHorizons: {
+                title: "New Horizons",
+                region: "Kuiper Belt",
+                distance: "6.4B km from Earth",
+                delay: "Signal delay: 6h 18m",
+            },
+            iss: {
+                title: "International Space Station",
+                region: "Low Earth orbit",
+                distance: "408 km from Earth",
+                delay: "Signal delay: < 1s",
+            },
+            hubble: {
+                title: "Hubble Space Telescope",
+                region: "Low Earth orbit",
+                distance: "547 km from Earth",
+                delay: "Signal delay: < 1s",
+            },
+            mro: {
+                title: "Mars Reconnaissance Orbiter",
+                region: "Mars orbit",
+                distance: "225M km from Earth",
+                delay: "Signal delay: 12m 20s",
+            },
+            perseverance: {
+                title: "Perseverance",
+                region: "Mars surface",
+                distance: "225M km from Earth",
+                delay: "Signal delay: 12m 40s",
+            },
+            artemis: {
+                title: "Artemis Mission",
+                region: "Translunar orbit",
+                distance: "384,000 km from Earth",
+                delay: "Signal delay: 1.3s",
+            },
+        },
+    },
 };
 
 export default en;

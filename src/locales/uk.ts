@@ -376,6 +376,115 @@ const uk = {
 
         },
     },
+
+    deepSpaceNetwork: {
+        eyebrow: "Системи NASA",
+        title: "NASA Deep Space Network",
+        subtitle: "Живі сигнали з глибокого космосу.",
+        text: "Відстеження активних місій, орбітальних обсерваторій і deep-space зондів, які досліджують космос і передають цінні дані назад на Землю.",
+
+        coreTitle: "NASA Deep Space Network",
+        coreStatus: "8 активних сигналів",
+        coreSubtitle: "Жива орбітальна інфраструктура",
+
+        viewAll: "Переглянути всі системи",
+
+        statusTitle: "Статус мережі",
+        statusValue: "Усі системи працюють штатно",
+
+        footerTitle: "Deep Space Network",
+        footerText: "Глобальна комунікаційна інфраструктура, що підтримує місії по всій Сонячній системі та за її межами.",
+
+        signalStrength: "Сила сигналу",
+
+        stats: [
+            {
+                value: "8",
+                label: "Активних сигналів",
+                icon: "signal",
+            },
+            {
+                value: "24/7",
+                label: "Live-моніторинг",
+                icon: "radar",
+            },
+            {
+                value: "99.98%",
+                label: "Uptime мережі",
+                icon: "uptime",
+            },
+        ],
+
+        footerStats: [
+            {
+                value: "Strong",
+                label: "Сила сигналу",
+            },
+            {
+                value: "12.84 TB",
+                label: "Даних отримано сьогодні",
+            },
+            {
+                value: "24.1B km",
+                label: "Найдальший сигнал · Voyager 1",
+            },
+            {
+                value: "2 сек тому",
+                label: "Останнє оновлення",
+            },
+        ],
+
+        signals: {
+            voyager1: {
+                title: "Voyager 1",
+                region: "Міжзоряний простір",
+                distance: "24.1B км від Землі",
+                delay: "Затримка сигналу: 22г 35хв",
+            },
+            jamesWebb: {
+                title: "James Webb",
+                region: "Орбіта L2",
+                distance: "1.5M км від Землі",
+                delay: "Затримка сигналу: 5с",
+            },
+            newHorizons: {
+                title: "New Horizons",
+                region: "Пояс Койпера",
+                distance: "6.4B км від Землі",
+                delay: "Затримка сигналу: 6г 18хв",
+            },
+            iss: {
+                title: "Міжнародна космічна станція",
+                region: "Низька орбіта Землі",
+                distance: "408 км від Землі",
+                delay: "Затримка сигналу: < 1с",
+            },
+            hubble: {
+                title: "Hubble Space Telescope",
+                region: "Низька орбіта Землі",
+                distance: "547 км від Землі",
+                delay: "Затримка сигналу: < 1с",
+            },
+            mro: {
+                title: "Mars Reconnaissance Orbiter",
+                region: "Орбіта Марса",
+                distance: "225M км від Землі",
+                delay: "Затримка сигналу: 12хв 20с",
+            },
+            perseverance: {
+                title: "Perseverance",
+                region: "Поверхня Марса",
+                distance: "225M км від Землі",
+                delay: "Затримка сигналу: 12хв 40с",
+            },
+            artemis: {
+                title: "Artemis Mission",
+                region: "Транслунарна орбіта",
+                distance: "384 000 км від Землі",
+                delay: "Затримка сигналу: 1.3с",
+            },
+        },
+    },
 };
 
 export default uk;
