@@ -5,12 +5,9 @@ type Props = {
     subtitle: string;
 };
 
-const NASA_LOGO =
-    "https://www.nasa.gov/wp-content/uploads/2023/04/nasa-logo-web-rgb.png";
-
 export const NasaArchitectureCore = ({title, subtitle}: Props) => {
     return (
-        <div className="relative mx-auto grid h-[190px] w-[190px] place-items-center rounded-full border border-cyan-300/20 bg-[#03101f]/75 shadow-[0_0_80px_rgba(34,211,238,0.18)] backdrop-blur-2xl lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
+        <div className="relative mx-auto grid h-[190px] w-[190px] place-items-center rounded-full border border-cyan-300/20 bg-[#03101f]/55 shadow-[0_0_90px_rgba(34,211,238,0.22)] backdrop-blur-xl lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
             <motion.div
                 className="absolute inset-3 rounded-full border border-cyan-300/18"
                 animate={{rotate: 360}}
@@ -25,15 +22,13 @@ export const NasaArchitectureCore = ({title, subtitle}: Props) => {
 
             <div className="relative z-10 text-center">
                 <motion.div
-                    animate={{scale: [1, 1.05, 1]}}
-                    transition={{duration: 3, repeat: Infinity}}
-                    className="relative mx-auto h-16 w-16"
+                    animate={{scale: [1, 1.06, 1], rotate: [0, 2, -2, 0]}}
+                    transition={{duration: 4, repeat: Infinity}}
+                    className="mx-auto grid h-16 w-16 place-items-center rounded-full border border-cyan-300/25 bg-[radial-gradient(circle,rgba(34,211,238,0.25),rgba(2,6,17,0.78))] shadow-[0_0_38px_rgba(34,211,238,0.35)]"
                 >
-                    <img
-                        src={NASA_LOGO}
-                        alt="NASA"
-                        className="h-full w-full object-contain"
-                    />
+                    <span className="text-xl font-black tracking-[-0.08em] text-white">
+                        NASA
+                    </span>
                 </motion.div>
 
                 <h3 className="mt-3 text-xl font-black tracking-[-0.055em] text-white">
