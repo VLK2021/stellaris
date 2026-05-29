@@ -61,6 +61,7 @@ export const getApodExplorerData = async (
         "/planetary/apod",
         {
             revalidate: 60 * 60,
+            timeoutMs: 60000,
             params: {
                 date: query.date,
                 start_date: query.startDate,

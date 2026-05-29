@@ -23,6 +23,24 @@ type State = {
     error: string | null;
 };
 
+const getApodErrorMessage = (message: string) => {
+    const normalized = message.toLowerCase();
+
+    if (normalized.includes("aborted")) {
+        return "NASA API занадто довго відповідає. Спробуй менший діапазон дат або повтори запит.";
+    }
+
+    if (normalized.includes("maximum period")) {
+        return "Максимальний період для APOD — 365 днів.";
+    }
+
+    if (normalized.includes("invalid apod date")) {
+        return "Некоректна дата. Для APOD можна вибирати дати від 1995-06-16 до сьогодні.";
+    }
+
+    return message;
+};
+
 export const initialApodExplorerState: ApodExplorerState = {
     mode: "today",
     date: getTodayDate(),
@@ -96,14 +114,16 @@ export const useApodExplorer = () => {
                 error: null,
             });
         } catch (error) {
+            const message =
+                error instanceof Error
+                    ? getApodErrorMessage(error.message)
+                    : "Невідома помилка APOD";
+
             setState({
                 data: null,
                 pagination: null,
                 loading: false,
-                error:
-                    error instanceof Error
-                        ? error.message
-                        : "Unknown APOD error",
+                error: message,
             });
         }
     };
