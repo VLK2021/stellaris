@@ -30,10 +30,10 @@ export const ApodPageClient = () => {
     }, []);
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[#020611] px-4 py-10 text-white sm:px-6 lg:px-10">
+        <main className="relative min-h-screen overflow-hidden bg-[#020611] px-3 py-8 text-white sm:px-5 lg:px-8">
             <ApodBackground />
 
-            <div className="relative z-10 mx-auto max-w-[1680px]">
+            <div className="relative z-10 mx-auto max-w-[1580px]">
                 <ApodHero item={featured} locale={t} />
 
                 <ApodControls

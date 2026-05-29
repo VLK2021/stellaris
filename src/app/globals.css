@@ -130,14 +130,26 @@ body {
 
 .input {
     width: 100%;
-    border-radius: 1rem;
+    border-radius: 0.9rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.06);
-    padding: 1rem;
+    background: rgba(255, 255, 255, 0.055);
+    padding: 0.85rem 1rem;
     color: white;
     outline: none;
+    font-size: 0.82rem;
+    transition:
+            border-color 180ms ease,
+            background 180ms ease,
+            box-shadow 180ms ease;
 }
 
 .input:focus {
     border-color: rgba(103, 232, 249, 0.45);
+    background: rgba(255, 255, 255, 0.075);
+    box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.08);
+}
+
+.input option {
+    background: #020611;
+    color: white;
 }
