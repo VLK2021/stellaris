@@ -15,14 +15,14 @@ export const ApodCard = ({item, locale}: Props) => {
 
     return (
         <motion.article
-            initial={{opacity: 0, y: 20}}
+            initial={{opacity: 0, y: 18}}
             whileInView={{opacity: 1, y: 0}}
             whileHover={{y: -5}}
             viewport={{once: true}}
-            transition={{duration: 0.42}}
-            className="group overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/[0.032] shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl"
+            transition={{duration: 0.4}}
+            className="group overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.032] shadow-[0_16px_55px_rgba(0,0,0,0.2)] backdrop-blur-xl"
         >
-            <div className="relative h-60 overflow-hidden bg-black/30">
+            <div className="relative h-52 overflow-hidden bg-black/30 sm:h-56">
                 {image ? (
                     <img
                         src={image}
@@ -35,23 +35,23 @@ export const ApodCard = ({item, locale}: Props) => {
                     </div>
                 )}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#020611]/70 to-transparent opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020611]/75 to-transparent opacity-75" />
 
                 <div className="absolute left-4 top-4 rounded-full bg-black/55 px-3 py-1 text-[9px] font-black uppercase tracking-[0.16em] text-cyan-300 backdrop-blur-xl">
                     {locale[item.mediaType]}
                 </div>
             </div>
 
-            <div className="p-4.5 p-5">
+            <div className="p-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-300">
                     {item.date}
                 </p>
 
-                <h3 className="mt-2.5 line-clamp-2 text-xl font-black tracking-[-0.045em] text-white">
+                <h3 className="mt-2.5 line-clamp-2 text-lg font-black tracking-[-0.045em] text-white sm:text-xl">
                     {item.title}
                 </h3>
 
-                <p className="mt-3.5 line-clamp-4 text-[13px] leading-6 text-slate-400">
+                <p className="mt-3 line-clamp-4 text-[13px] leading-6 text-slate-400">
                     {item.explanation}
                 </p>
 

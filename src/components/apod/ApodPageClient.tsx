@@ -2,8 +2,8 @@
 
 import {useEffect} from "react";
 
-import {useApodExplorer} from "@/src/hooks/apod/useApodExplorer";
 import {useLanguage} from "@/src/context/LanguageContext";
+import {useApodExplorer} from "@/src/hooks/apod/useApodExplorer";
 import type {ApodExplorerLocale} from "@/src/types/apod/apod.types";
 
 import {ApodBackground} from "./ApodBackground";
@@ -16,13 +16,8 @@ export const ApodPageClient = () => {
     const {locale} = useLanguage();
     const t = locale.apod as ApodExplorerLocale;
 
-    const {
-        explorer,
-        state,
-        loadApod,
-        visibleItems,
-        featured,
-    } = useApodExplorer();
+    const {explorer, state, loadApod, visibleItems, featured} =
+        useApodExplorer();
 
     useEffect(() => {
         loadApod();
@@ -30,10 +25,10 @@ export const ApodPageClient = () => {
     }, []);
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[#020611] px-3 py-8 text-white sm:px-5 lg:px-8">
+        <main className="relative min-h-screen overflow-hidden bg-[#020611] px-3 py-6 text-white sm:px-5 sm:py-8 lg:px-8">
             <ApodBackground />
 
-            <div className="relative z-10 mx-auto max-w-[1580px]">
+            <div className="relative z-10 mx-auto max-w-[1540px]">
                 <ApodHero item={featured} locale={t} />
 
                 <ApodControls
@@ -46,11 +41,7 @@ export const ApodPageClient = () => {
                 {state.loading ? (
                     <ApodLoadingState locale={t} />
                 ) : (
-                    <ApodGrid
-                        locale={t}
-                        items={visibleItems}
-                        error={state.error}
-                    />
+                    <ApodGrid locale={t} items={visibleItems} error={state.error} />
                 )}
             </div>
         </main>

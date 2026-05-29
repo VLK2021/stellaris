@@ -1,9 +1,9 @@
 "use client";
 
+import type {ReactNode} from "react";
 import {Controller, useForm, useWatch} from "react-hook-form";
 import {X} from "lucide-react";
 import {motion} from "framer-motion";
-import type {ReactNode} from "react";
 
 import type {
     ApodExplorerLocale,
@@ -24,30 +24,22 @@ const modes: ApodMode[] = ["today", "date", "range", "random"];
 const sorts: ApodSort[] = ["newest", "oldest"];
 const filters: ApodMediaFilter[] = ["all", "image", "video", "other"];
 
-export const ApodControls = ({
-                                 locale,
-                                 defaultValues,
-                                 onLoad,
-                                 loading,
-                             }: Props) => {
+export const ApodControls = ({locale, defaultValues, onLoad, loading}: Props) => {
     const {control, handleSubmit, setValue} = useForm<ApodExplorerState>({
         defaultValues,
         mode: "onChange",
     });
 
-    const mode = useWatch({
-        control,
-        name: "mode",
-    });
+    const mode = useWatch({control, name: "mode"});
 
     return (
         <motion.form
             onSubmit={handleSubmit(onLoad)}
-            initial={{opacity: 0, y: 20}}
+            initial={{opacity: 0, y: 18}}
             whileInView={{opacity: 1, y: 0}}
             viewport={{once: true}}
-            transition={{duration: 0.5}}
-            className="mt-6 rounded-[1.7rem] border border-white/10 bg-white/[0.032] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-2xl sm:p-5"
+            transition={{duration: 0.45}}
+            className="mt-5 rounded-[1.5rem] border border-white/10 bg-white/[0.032] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-2xl sm:p-5"
         >
             <Controller
                 control={control}
@@ -59,7 +51,7 @@ export const ApodControls = ({
                                 key={item}
                                 type="button"
                                 onClick={() => field.onChange(item)}
-                                className={`rounded-full px-4 py-2.5 text-[10px] font-black uppercase tracking-[0.17em] transition ${
+                                className={`rounded-full px-4 py-2.5 text-[10px] font-black uppercase tracking-[0.16em] transition ${
                                     field.value === item
                                         ? "bg-cyan-300 text-slate-950 shadow-[0_0_28px_rgba(34,211,238,0.25)]"
                                         : "border border-white/10 bg-white/5 text-slate-300 hover:border-cyan-300/30"
@@ -219,7 +211,7 @@ const ClearableDateInput = ({
             type="date"
             value={value ?? ""}
             onChange={(event) => onChange(event.target.value)}
-            className="input pr-10"
+            className="input pr-16"
         />
 
         {value && (
@@ -227,7 +219,7 @@ const ClearableDateInput = ({
                 type="button"
                 onClick={onClear}
                 aria-label={locale.clear}
-                className="absolute right-2.5 top-1/2 z-10 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-white/10 text-slate-300 transition hover:border-cyan-300/40 hover:text-cyan-300"
+                className="absolute right-10 top-1/2 z-20 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-white/10 text-slate-300 transition hover:border-cyan-300/40 hover:text-cyan-300"
             >
                 <X className="h-3.5 w-3.5" />
             </button>
