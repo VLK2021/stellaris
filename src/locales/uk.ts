@@ -438,6 +438,52 @@ const uk = {
         loading: "Завантаження...",
         clear: "Очистити поле",
     },
+
+    asteroids: {
+        badge: "NASA NeoWs",
+        title: "Near Earth Object Tracker",
+        text: "Реальні дані NASA про навколоземні астероїди: зближення, швидкість, відстань, розміри та потенційну небезпеку.",
+
+        feed: "Період",
+        browse: "Каталог",
+        lookup: "Пошук ID",
+
+        startDate: "Початкова дата",
+        endDate: "Кінцева дата",
+        asteroidId: "ID астероїда",
+
+        load: "Завантажити",
+        loading: "Завантаження...",
+
+        sort: "Сортування",
+        closest: "Найближчі",
+        fastest: "Найшвидші",
+        largest: "Найбільші",
+        name: "Назва",
+
+        hazard: "Небезпека",
+        all: "Усі",
+        hazardous: "Потенційно небезпечні",
+        safe: "Безпечні",
+
+        total: "Усього обʼєктів",
+        hazardousCount: "Небезпечні",
+        safeCount: "Безпечні",
+        closestObject: "Найближчий обʼєкт",
+        fastestObject: "Найшвидший обʼєкт",
+        largestObject: "Найбільший обʼєкт",
+
+        diameter: "Діаметр",
+        velocity: "Швидкість",
+        distance: "Відстань",
+        magnitude: "Абс. величина",
+        orbitingBody: "Орбітальне тіло",
+        sentry: "Sentry",
+        details: "Деталі",
+        source: "Джерело NASA",
+        noData: "Дані не знайдено",
+        clear: "Очистити поле",
+    },
 };
 
 export default uk;

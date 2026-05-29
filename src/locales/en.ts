@@ -438,6 +438,52 @@ const en = {
         loading: "Loading...",
         clear: "Clear field",
     },
+
+    asteroids: {
+        badge: "NASA NeoWs",
+        title: "Near Earth Object Tracker",
+        text: "Real NASA data about near-Earth asteroids: close approaches, velocity, distance, size and potential hazard status.",
+
+        feed: "Feed",
+        browse: "Catalog",
+        lookup: "Lookup ID",
+
+        startDate: "Start date",
+        endDate: "End date",
+        asteroidId: "Asteroid ID",
+
+        load: "Load",
+        loading: "Loading...",
+
+        sort: "Sort",
+        closest: "Closest",
+        fastest: "Fastest",
+        largest: "Largest",
+        name: "Name",
+
+        hazard: "Hazard",
+        all: "All",
+        hazardous: "Potentially hazardous",
+        safe: "Safe",
+
+        total: "Total objects",
+        hazardousCount: "Hazardous",
+        safeCount: "Safe",
+        closestObject: "Closest object",
+        fastestObject: "Fastest object",
+        largestObject: "Largest object",
+
+        diameter: "Diameter",
+        velocity: "Velocity",
+        distance: "Distance",
+        magnitude: "Abs. magnitude",
+        orbitingBody: "Orbiting body",
+        sentry: "Sentry",
+        details: "Details",
+        source: "NASA source",
+        noData: "No data found",
+        clear: "Clear field",
+    },
 };
 
 export default en;

@@ -1,7 +1,7 @@
-export default function AsteroidPage() {
-    return (
-        <div>
-            asteroids
-        </div>
-    )
-}
+import {AsteroidsPageClient} from "@/src/components/asteroids";
+
+const AsteroidsPage = () => {
+    return <AsteroidsPageClient />;
+};
+
+export default AsteroidsPage;
