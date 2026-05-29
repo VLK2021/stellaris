@@ -62,12 +62,14 @@ export const AsteroidCard = ({item, locale}: Props) => {
             <div className="relative z-10">
                 <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-accent)]">
-                            JPL ID · {item.neoReferenceId}
+                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--color-text-soft)]">
+                            JPL ID · <span className="text-[var(--color-accent)]">{item.neoReferenceId}</span>
                         </p>
 
-                        <h3 className="mt-2 line-clamp-2 text-xl font-black tracking-[-0.05em] text-[var(--color-text)]">
-                            {item.name}
+                        <h3 className="mt-2 line-clamp-2 text-xl font-black tracking-[-0.035em] sm:text-2xl">
+                            <span className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-text)] to-[var(--color-warning)] bg-clip-text text-transparent">
+                                {item.name}
+                            </span>
                         </h3>
                     </div>
 
