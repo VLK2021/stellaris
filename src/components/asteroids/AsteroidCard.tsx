@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {motion} from "framer-motion";
-import {ExternalLink, ShieldAlert, ShieldCheck} from "lucide-react";
+import {ExternalLink, Orbit, ShieldAlert, ShieldCheck} from "lucide-react";
 
 import type {AsteroidItem} from "@/src/types/asteroids/asteroids.types";
 import type {AsteroidsLocale} from "@/src/types/asteroids/asteroidsUi.types";
@@ -28,12 +28,36 @@ export const AsteroidCard = ({item, locale}: Props) => {
         <motion.article
             initial={{opacity: 0, y: 18}}
             whileInView={{opacity: 1, y: 0}}
-            whileHover={{y: -5}}
+            whileHover={{y: -6}}
             viewport={{once: true}}
             transition={{duration: 0.4}}
-            className="group relative overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl"
+            className={`group relative overflow-hidden rounded-[1.55rem] border bg-[var(--color-card)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl ${
+                isHazardous
+                    ? "border-[var(--color-error)]/35"
+                    : "border-[var(--color-border)]"
+            }`}
         >
-            <div className="absolute right-[-40px] top-[-40px] h-28 w-28 rounded-full bg-[var(--color-accent-soft)] blur-2xl transition group-hover:scale-125" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,var(--color-accent-soft),transparent_34%)] opacity-80" />
+
+            {isHazardous && (
+                <motion.div
+                    className="absolute inset-0 border border-[var(--color-error)]/30"
+                    animate={{opacity: [0.15, 0.45, 0.15]}}
+                    transition={{duration: 2.4, repeat: Infinity, ease: "easeInOut"}}
+                />
+            )}
+
+            <motion.div
+                className="absolute right-[-44px] top-[-44px] h-32 w-32 rounded-full border border-[var(--color-border)] opacity-45"
+                animate={{rotate: 360}}
+                transition={{duration: 22, repeat: Infinity, ease: "linear"}}
+            />
+
+            <motion.div
+                className="absolute right-7 top-7 h-2.5 w-2.5 rounded-full bg-[var(--color-warning)] shadow-[0_0_18px_var(--color-warning)]"
+                animate={{scale: [1, 1.7, 1], opacity: [0.5, 1, 0.5]}}
+                transition={{duration: 2.2, repeat: Infinity, ease: "easeInOut"}}
+            />
 
             <div className="relative z-10">
                 <div className="flex items-start justify-between gap-3">
@@ -63,33 +87,21 @@ export const AsteroidCard = ({item, locale}: Props) => {
                 </div>
 
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                    <Metric
-                        label={locale.distance}
-                        value={formatKm(getAsteroidDistance(item))}
-                    />
-
-                    <Metric
-                        label={locale.velocity}
-                        value={`${formatNumber(getAsteroidVelocity(item))} km/h`}
-                    />
-
-                    <Metric
-                        label={locale.diameter}
-                        value={`${formatNumber(item.estimatedDiameter.avgKm, 3)} km`}
-                    />
-
-                    <Metric
-                        label={locale.magnitude}
-                        value={formatNumber(item.absoluteMagnitudeH, 2)}
-                    />
+                    <Metric label={locale.distance} value={formatKm(getAsteroidDistance(item))} />
+                    <Metric label={locale.velocity} value={`${formatNumber(getAsteroidVelocity(item))} km/h`} />
+                    <Metric label={locale.diameter} value={`${formatNumber(item.estimatedDiameter.avgKm, 3)} km`} />
+                    <Metric label={locale.magnitude} value={formatNumber(item.absoluteMagnitudeH, 2)} />
                 </div>
 
                 <div className="mt-4 rounded-[1.1rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-3">
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--color-text-soft)]">
-                        {approach?.fullDate || approach?.date || "—"}
-                    </p>
+                    <div className="flex items-center gap-2">
+                        <Orbit className="h-3.5 w-3.5 text-[var(--color-accent)]" />
+                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--color-text-soft)]">
+                            {approach?.fullDate || approach?.date || "—"}
+                        </p>
+                    </div>
 
-                    <p className="mt-1 text-xs text-[var(--color-text-muted)]">
+                    <p className="mt-2 text-xs text-[var(--color-text-muted)]">
                         {locale.orbitingBody}: {approach?.orbitingBody || "—"}
                     </p>
 

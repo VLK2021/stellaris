@@ -25,6 +25,12 @@ export const AsteroidsBackground = () => {
                 transition={{duration: 10, repeat: Infinity, ease: "easeInOut"}}
             />
 
+            <motion.div
+                className="absolute left-[8%] top-[68%] h-2 w-2 rounded-full bg-[var(--color-warning)] shadow-[0_0_18px_var(--color-warning)]"
+                animate={{x: [0, 900], y: [0, -260], opacity: [0, 1, 0]}}
+                transition={{duration: 12, repeat: Infinity, ease: "easeInOut"}}
+            />
+
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,var(--star-color)_1px,transparent_1px),radial-gradient(circle_at_72%_38%,var(--color-accent)_1px,transparent_1px),radial-gradient(circle_at_88%_76%,var(--color-mars)_1px,transparent_1px)] bg-[size:105px_105px] opacity-25" />
         </div>
     );
