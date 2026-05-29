@@ -21,7 +21,7 @@ type State = {
     error: string | null;
 };
 
-const initialExplorerState: ApodExplorerState = {
+export const initialApodExplorerState: ApodExplorerState = {
     mode: "today",
     date: getTodayDate(),
     startDate: getTodayDate(),
@@ -33,7 +33,7 @@ const initialExplorerState: ApodExplorerState = {
 
 export const useApodExplorer = () => {
     const [explorer, setExplorer] =
-        useState<ApodExplorerState>(initialExplorerState);
+        useState<ApodExplorerState>(initialApodExplorerState);
 
     const [state, setState] = useState<State>({
         data: null,
@@ -41,7 +41,9 @@ export const useApodExplorer = () => {
         error: null,
     });
 
-    const loadApod = async () => {
+    const loadApod = async (values: ApodExplorerState = explorer) => {
+        setExplorer(values);
+
         setState((prev) => ({
             ...prev,
             loading: true,
@@ -51,17 +53,17 @@ export const useApodExplorer = () => {
         try {
             const params = new URLSearchParams();
 
-            if (explorer.mode === "date") {
-                params.set("date", explorer.date);
+            if (values.mode === "date") {
+                params.set("date", values.date);
             }
 
-            if (explorer.mode === "range") {
-                params.set("start_date", explorer.startDate);
-                params.set("end_date", explorer.endDate);
+            if (values.mode === "range") {
+                params.set("start_date", values.startDate);
+                params.set("end_date", values.endDate);
             }
 
-            if (explorer.mode === "random") {
-                params.set("count", String(explorer.count));
+            if (values.mode === "random") {
+                params.set("count", String(values.count));
             }
 
             params.set("thumbs", "true");
@@ -95,6 +97,7 @@ export const useApodExplorer = () => {
 
     const visibleItems = useMemo(() => {
         const items = asApodArray(state.data);
+
         return sortApodItems(
             filterApodItems(items, explorer.mediaFilter),
             explorer.sort,
@@ -105,7 +108,6 @@ export const useApodExplorer = () => {
 
     return {
         explorer,
-        setExplorer,
         state,
         loadApod,
         visibleItems,

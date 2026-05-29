@@ -1,7 +1,7 @@
-export default function ApodPage() {
-    return (
-        <div>
-            apodPage
-        </div>
-    )
-}
+import {ApodPageClient} from "@/src/components/apod/ApodPageClient";
+
+const ApodPage = () => {
+    return <ApodPageClient />;
+};
+
+export default ApodPage;

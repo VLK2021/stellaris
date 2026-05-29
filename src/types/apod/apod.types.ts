@@ -68,4 +68,5 @@ export type ApodExplorerLocale = {
     explanation: string;
     noData: string;
     loading: string;
+    clear: string;
 };
