@@ -1,7 +1,7 @@
 "use client";
 
 import {motion} from "framer-motion";
-import {ExternalLink, ShieldAlert, ShieldCheck} from "lucide-react";
+import {ExternalLink, ShieldAlert, ShieldCheck, Sparkles} from "lucide-react";
 
 import type {AsteroidDetails} from "@/src/types/asteroids/asteroidDetails.types";
 import type {AsteroidsLocale} from "@/src/types/asteroids/asteroidsUi.types";
@@ -18,25 +18,35 @@ export const AsteroidDetailsHero = ({locale, details}: Props) => {
     const hazardous = asteroid.isPotentiallyHazardous;
 
     return (
-        <section className="relative overflow-hidden rounded-[1.9rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl sm:p-7 lg:p-8">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_28%,var(--color-accent-soft),transparent_34%)]" />
+        <section className="relative overflow-hidden rounded-[2.2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl sm:p-7 lg:p-8">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_36%,var(--color-accent-soft),transparent_32%),radial-gradient(circle_at_18%_82%,rgba(234,88,12,0.14),transparent_36%)]" />
 
-            <div className="relative z-10 grid gap-6 xl:grid-cols-[1fr_420px] xl:items-center">
+            <motion.div
+                className="absolute left-[-20%] top-[22%] h-[2px] w-[70%] rotate-[-12deg] bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
+                animate={{x: ["-20%", "140%"], opacity: [0, 0.6, 0]}}
+                transition={{duration: 8, repeat: Infinity, ease: "easeInOut"}}
+            />
+
+            <div className="relative z-10 grid gap-6 xl:grid-cols-[0.95fr_1.05fr] xl:items-center">
                 <motion.div
-                    initial={{opacity: 0, y: 20}}
+                    initial={{opacity: 0, y: 22}}
                     animate={{opacity: 1, y: 0}}
-                    transition={{duration: 0.5}}
+                    transition={{duration: 0.55}}
                 >
-                    <p className="w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-accent-soft)] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-accent)]">
-                        NASA NEO DATABASE
+                    <p className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-accent-soft)] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-accent)]">
+                        <Sparkles className="h-3.5 w-3.5" />
+                        NASA NEO DOSSIER
                     </p>
 
-                    <h1 className="mt-4 text-3xl font-black tracking-[-0.045em] text-[var(--color-text)] sm:text-4xl lg:text-[46px]">
-                        {asteroid.name}
+                    <h1 className="mt-5 max-w-4xl text-3xl font-black tracking-[-0.045em] text-[var(--color-text)] sm:text-4xl lg:text-[48px] lg:leading-[0.95]">
+                        <span className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-text)] to-[var(--color-warning)] bg-clip-text text-transparent">
+                            {asteroid.name}
+                        </span>
                     </h1>
 
                     <div className="mt-4 flex flex-wrap gap-2.5">
                         <Badge label={`JPL ID · ${asteroid.neoReferenceId}`} />
+                        <Badge label={`SPK ID · ${asteroid.id}`} />
 
                         <span
                             className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.16em] ${
@@ -45,11 +55,7 @@ export const AsteroidDetailsHero = ({locale, details}: Props) => {
                                     : "border-[var(--color-success)]/35 bg-[var(--color-success)]/10 text-[var(--color-success)]"
                             }`}
                         >
-                            {hazardous ? (
-                                <ShieldAlert className="h-3.5 w-3.5" />
-                            ) : (
-                                <ShieldCheck className="h-3.5 w-3.5" />
-                            )}
+                            {hazardous ? <ShieldAlert className="h-3.5 w-3.5" /> : <ShieldCheck className="h-3.5 w-3.5" />}
                             {hazardous ? locale.hazardous : locale.safe}
                         </span>
                     </div>

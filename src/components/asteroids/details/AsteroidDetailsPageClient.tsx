@@ -8,12 +8,12 @@ import {useAsteroidDetails} from "@/src/hooks/asteroids/useAsteroidDetails";
 import type {AsteroidsLocale} from "@/src/types/asteroids/asteroidsUi.types";
 
 import {AsteroidsBackground} from "../AsteroidsBackground";
+import {AsteroidApproachesPanel} from "./AsteroidApproachesPanel";
 import {AsteroidDetailsHero} from "./AsteroidDetailsHero";
 import {AsteroidDetailsLoadingState} from "./AsteroidDetailsLoadingState";
 import {AsteroidMetricsPanel} from "./AsteroidMetricsPanel";
-import {AsteroidRiskPanel} from "./AsteroidRiskPanel";
 import {AsteroidOrbitPanel} from "./AsteroidOrbitPanel";
-import {AsteroidApproachesPanel} from "./AsteroidApproachesPanel";
+import {AsteroidRiskPanel} from "./AsteroidRiskPanel";
 
 type Props = {
     id: string;
@@ -50,9 +50,9 @@ export const AsteroidDetailsPageClient = ({id}: Props) => {
                     <div className="grid gap-5">
                         <AsteroidDetailsHero locale={t} details={data} />
 
-                        <div className="grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
-                            <AsteroidMetricsPanel locale={t} asteroid={data.asteroid} />
+                        <div className="grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
                             <AsteroidRiskPanel locale={t} details={data} />
+                            <AsteroidMetricsPanel locale={t} asteroid={data.asteroid} />
                         </div>
 
                         <AsteroidOrbitPanel locale={t} details={data} />
