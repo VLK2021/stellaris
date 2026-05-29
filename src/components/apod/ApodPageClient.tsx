@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {useLanguage} from "@/src/context/LanguageContext";
 import {useApodExplorer} from "@/src/hooks/apod/useApodExplorer";
 import type {ApodExplorerLocale} from "@/src/types/apod/apod.types";
+import {Pagination} from "@/src/common/pagination";
 
 import {ApodBackground} from "./ApodBackground";
 import {ApodControls} from "./ApodControls";
@@ -24,6 +25,14 @@ export const ApodPageClient = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handlePageChange = (page: number) => {
+        loadApod(explorer, page);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
     return (
         <main className="relative min-h-screen overflow-hidden bg-[var(--color-background)] px-3 py-6 text-[var(--color-text)] sm:px-5 sm:py-8 lg:px-8">
             <ApodBackground />
@@ -34,18 +43,30 @@ export const ApodPageClient = () => {
                 <ApodControls
                     locale={t}
                     defaultValues={explorer}
-                    onLoad={loadApod}
+                    onLoad={(values) => loadApod(values, 1)}
                     loading={state.loading}
                 />
 
                 {state.loading ? (
                     <ApodLoadingState locale={t} />
                 ) : (
-                    <ApodGrid
-                        locale={t}
-                        items={visibleItems}
-                        error={state.error}
-                    />
+                    <>
+                        <ApodGrid
+                            locale={t}
+                            items={visibleItems}
+                            error={state.error}
+                        />
+
+                        {state.pagination && state.pagination.totalPages > 1 && (
+                            <Pagination
+                                currentPage={state.pagination.page}
+                                totalPages={state.pagination.totalPages}
+                                onPageChange={handlePageChange}
+                                isLoading={state.loading}
+                                showInfo
+                            />
+                        )}
+                    </>
                 )}
             </div>
         </main>

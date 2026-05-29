@@ -3,9 +3,10 @@
 import {useMemo, useState} from "react";
 
 import type {
-    ApodExplorerApiResponse,
+    ApodExplorerApiResponseWithPagination,
     ApodExplorerState,
     ApodItem,
+    ApodPaginationMeta,
 } from "@/src/types/apod/apod.types";
 
 import {
@@ -17,6 +18,7 @@ import {
 
 type State = {
     data: ApodItem | ApodItem[] | null;
+    pagination: ApodPaginationMeta | null;
     loading: boolean;
     error: string | null;
 };
@@ -37,11 +39,15 @@ export const useApodExplorer = () => {
 
     const [state, setState] = useState<State>({
         data: null,
+        pagination: null,
         loading: false,
         error: null,
     });
 
-    const loadApod = async (values: ApodExplorerState = explorer) => {
+    const loadApod = async (
+        values: ApodExplorerState = explorer,
+        page = 1,
+    ) => {
         setExplorer(values);
 
         setState((prev) => ({
@@ -60,6 +66,8 @@ export const useApodExplorer = () => {
             if (values.mode === "range") {
                 params.set("start_date", values.startDate);
                 params.set("end_date", values.endDate);
+                params.set("page", String(page));
+                params.set("limit", "24");
             }
 
             if (values.mode === "random") {
@@ -72,20 +80,25 @@ export const useApodExplorer = () => {
                 cache: "no-store",
             });
 
-            if (!response.ok) {
-                throw new Error("Failed to load APOD data");
-            }
+            const json =
+                (await response.json()) as ApodExplorerApiResponseWithPagination & {
+                    message?: string;
+                };
 
-            const json = (await response.json()) as ApodExplorerApiResponse;
+            if (!response.ok || !json.success) {
+                throw new Error(json.message ?? "Failed to load APOD data");
+            }
 
             setState({
                 data: json.data,
+                pagination: json.pagination ?? null,
                 loading: false,
                 error: null,
             });
         } catch (error) {
             setState({
                 data: null,
+                pagination: null,
                 loading: false,
                 error:
                     error instanceof Error

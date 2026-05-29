@@ -70,3 +70,16 @@ export type ApodExplorerLocale = {
     loading: string;
     clear: string;
 };
+
+export type ApodPaginationMeta = {
+    page: number;
+    limit: number;
+    totalItems: number;
+    totalPages: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+};
+
+export type ApodExplorerApiResponseWithPagination = ApodExplorerApiResponse & {
+    pagination?: ApodPaginationMeta;
+};
