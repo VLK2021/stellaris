@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 
-import {getAsteroidById} from "@/src/services/asteroids/asteroidsLookup.service";
+import {getAsteroidDetails} from "@/src/services/asteroids/asteroidDetails.service";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +17,7 @@ export async function GET(
     try {
         const {id} = await params;
 
-        const data = await getAsteroidById(id);
+        const data = await getAsteroidDetails(id);
 
         return NextResponse.json({
             success: true,
