@@ -1,9 +1,9 @@
 "use client";
 
-import {useEffect} from "react";
-import {Controller, useForm, useWatch, UseFormRegisterReturn} from "react-hook-form";
+import {Controller, useForm, useWatch} from "react-hook-form";
 import {X} from "lucide-react";
 import {motion} from "framer-motion";
+import type {ReactNode} from "react";
 
 import type {
     ApodExplorerLocale,
@@ -30,16 +30,15 @@ export const ApodControls = ({
                                  onLoad,
                                  loading,
                              }: Props) => {
-    const {control, register, handleSubmit, resetField, setValue} =
-        useForm<ApodExplorerState>({
-            defaultValues,
-        });
+    const {control, handleSubmit, setValue} = useForm<ApodExplorerState>({
+        defaultValues,
+        mode: "onChange",
+    });
 
-    const mode = useWatch({control, name: "mode"});
-
-    useEffect(() => {
-        setValue("mode", mode);
-    }, [mode, setValue]);
+    const mode = useWatch({
+        control,
+        name: "mode",
+    });
 
     return (
         <motion.form
@@ -76,11 +75,17 @@ export const ApodControls = ({
             <div className="mt-5 grid gap-3.5 md:grid-cols-2 xl:grid-cols-5">
                 {mode === "date" && (
                     <Field label={locale.selectedDate}>
-                        <ClearableInput
-                            type="date"
-                            register={register("date")}
-                            onClear={() => resetField("date")}
-                            locale={locale}
+                        <Controller
+                            control={control}
+                            name="date"
+                            render={({field}) => (
+                                <ClearableDateInput
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    onClear={() => setValue("date", "")}
+                                    locale={locale}
+                                />
+                            )}
                         />
                     </Field>
                 )}
@@ -88,20 +93,32 @@ export const ApodControls = ({
                 {mode === "range" && (
                     <>
                         <Field label={locale.startDate}>
-                            <ClearableInput
-                                type="date"
-                                register={register("startDate")}
-                                onClear={() => resetField("startDate")}
-                                locale={locale}
+                            <Controller
+                                control={control}
+                                name="startDate"
+                                render={({field}) => (
+                                    <ClearableDateInput
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        onClear={() => setValue("startDate", "")}
+                                        locale={locale}
+                                    />
+                                )}
                             />
                         </Field>
 
                         <Field label={locale.endDate}>
-                            <ClearableInput
-                                type="date"
-                                register={register("endDate")}
-                                onClear={() => resetField("endDate")}
-                                locale={locale}
+                            <Controller
+                                control={control}
+                                name="endDate"
+                                render={({field}) => (
+                                    <ClearableDateInput
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        onClear={() => setValue("endDate", "")}
+                                        locale={locale}
+                                    />
+                                )}
                             />
                         </Field>
                     </>
@@ -109,37 +126,58 @@ export const ApodControls = ({
 
                 {mode === "random" && (
                     <Field label={locale.count}>
-                        <select
-                            {...register("count", {valueAsNumber: true})}
-                            className="input"
-                        >
-                            {[3, 6, 9, 12, 18, 24].map((value) => (
-                                <option key={value} value={value}>
-                                    {value}
-                                </option>
-                            ))}
-                        </select>
+                        <Controller
+                            control={control}
+                            name="count"
+                            render={({field}) => (
+                                <select
+                                    value={field.value}
+                                    onChange={(event) =>
+                                        field.onChange(Number(event.target.value))
+                                    }
+                                    className="input"
+                                >
+                                    {[3, 6, 9, 12, 18, 24].map((value) => (
+                                        <option key={value} value={value}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
+                        />
                     </Field>
                 )}
 
                 <Field label={locale.sort}>
-                    <select {...register("sort")} className="input">
-                        {sorts.map((sort) => (
-                            <option key={sort} value={sort}>
-                                {locale[sort]}
-                            </option>
-                        ))}
-                    </select>
+                    <Controller
+                        control={control}
+                        name="sort"
+                        render={({field}) => (
+                            <select {...field} className="input">
+                                {sorts.map((sort) => (
+                                    <option key={sort} value={sort}>
+                                        {locale[sort]}
+                                    </option>
+                                ))}
+                            </select>
+                        )}
+                    />
                 </Field>
 
                 <Field label={locale.media}>
-                    <select {...register("mediaFilter")} className="input">
-                        {filters.map((filter) => (
-                            <option key={filter} value={filter}>
-                                {locale[filter]}
-                            </option>
-                        ))}
-                    </select>
+                    <Controller
+                        control={control}
+                        name="mediaFilter"
+                        render={({field}) => (
+                            <select {...field} className="input">
+                                {filters.map((filter) => (
+                                    <option key={filter} value={filter}>
+                                        {locale[filter]}
+                                    </option>
+                                ))}
+                            </select>
+                        )}
+                    />
                 </Field>
 
                 <div className="flex items-end">
@@ -156,7 +194,7 @@ export const ApodControls = ({
     );
 };
 
-const Field = ({label, children}: {label: string; children: React.ReactNode}) => (
+const Field = ({label, children}: {label: string; children: ReactNode}) => (
     <label className="grid gap-2">
         <span className="text-[9px] font-black uppercase tracking-[0.22em] text-slate-500">
             {label}
@@ -165,27 +203,34 @@ const Field = ({label, children}: {label: string; children: React.ReactNode}) =>
     </label>
 );
 
-const ClearableInput = ({
-                            type,
-                            register,
-                            onClear,
-                            locale,
-                        }: {
-    type: "date" | "text";
-    register: UseFormRegisterReturn;
+const ClearableDateInput = ({
+                                value,
+                                onChange,
+                                onClear,
+                                locale,
+                            }: {
+    value: string;
+    onChange: (value: string) => void;
     onClear: () => void;
     locale: ApodExplorerLocale;
 }) => (
     <div className="relative">
-        <input {...register} type={type} className="input pr-10" />
+        <input
+            type="date"
+            value={value ?? ""}
+            onChange={(event) => onChange(event.target.value)}
+            className="input pr-10"
+        />
 
-        <button
-            type="button"
-            onClick={onClear}
-            aria-label={locale.clear}
-            className="absolute right-2.5 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-white/10 text-slate-300 transition hover:border-cyan-300/40 hover:text-cyan-300"
-        >
-            <X className="h-3.5 w-3.5" />
-        </button>
+        {value && (
+            <button
+                type="button"
+                onClick={onClear}
+                aria-label={locale.clear}
+                className="absolute right-2.5 top-1/2 z-10 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-white/10 text-slate-300 transition hover:border-cyan-300/40 hover:text-cyan-300"
+            >
+                <X className="h-3.5 w-3.5" />
+            </button>
+        )}
     </div>
 );
