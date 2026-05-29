@@ -25,7 +25,7 @@ export const ApodPageClient = () => {
     }, []);
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[#020611] px-3 py-6 text-white sm:px-5 sm:py-8 lg:px-8">
+        <main className="relative min-h-screen overflow-hidden bg-[var(--color-background)] px-3 py-6 text-[var(--color-text)] sm:px-5 sm:py-8 lg:px-8">
             <ApodBackground />
 
             <div className="relative z-10 mx-auto max-w-[1540px]">
@@ -41,7 +41,11 @@ export const ApodPageClient = () => {
                 {state.loading ? (
                     <ApodLoadingState locale={t} />
                 ) : (
-                    <ApodGrid locale={t} items={visibleItems} error={state.error} />
+                    <ApodGrid
+                        locale={t}
+                        items={visibleItems}
+                        error={state.error}
+                    />
                 )}
             </div>
         </main>
