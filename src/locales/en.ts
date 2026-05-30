@@ -506,6 +506,56 @@ const en = {
         units: "Units",
         reference: "Reference",
     },
+
+    spaceWeather: {
+        badge: "NASA DONKI",
+        title: "Space Weather Center",
+        text: "Real NASA DONKI data about solar flares, coronal mass ejections, geomagnetic storms, particles, shock events and official notifications.",
+
+        overview: "Overview",
+        events: "Events",
+        notifications: "Notifications",
+
+        startDate: "Start date",
+        endDate: "End date",
+        type: "Event type",
+        load: "Load",
+        loading: "Loading...",
+        all: "All",
+
+        total: "Total events",
+        cme: "CME",
+        cmeAnalysis: "CME Analysis",
+        gst: "Geomagnetic storms",
+        ips: "Interplanetary shocks",
+        flr: "Solar flares",
+        sep: "Solar particles",
+        mpc: "Magnetopause crossing",
+        rbe: "Radiation belt",
+        hss: "High speed streams",
+        enlil: "WSA-Enlil",
+
+        strongestFlare: "Strongest flare",
+        fastestCme: "Fastest CME",
+        strongestStorm: "Strongest storm",
+        latestEvent: "Latest event",
+
+        speed: "Speed",
+        halfAngle: "Half angle",
+        coordinates: "Coordinates",
+        kpIndex: "Kp index",
+        classType: "Class",
+        sourceLocation: "Source location",
+        activeRegion: "Active region",
+        catalog: "Catalog",
+        instruments: "Instruments",
+        linkedEvents: "Linked events",
+        note: "Note",
+        source: "NASA source",
+        issueTime: "Issue time",
+        noData: "No data found",
+        clear: "Clear field",
+    },
 };
 
 export default en;

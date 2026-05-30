@@ -506,6 +506,56 @@ const uk = {
         units: "Одиниці",
         reference: "Джерело",
     },
+
+    spaceWeather: {
+        badge: "NASA DONKI",
+        title: "Центр космічної погоди",
+        text: "Реальні дані NASA DONKI про сонячні спалахи, корональні викиди маси, геомагнітні бурі, частинки, ударні хвилі та офіційні повідомлення.",
+
+        overview: "Огляд",
+        events: "Події",
+        notifications: "Повідомлення",
+
+        startDate: "Початкова дата",
+        endDate: "Кінцева дата",
+        type: "Тип події",
+        load: "Завантажити",
+        loading: "Завантаження...",
+        all: "Усі",
+
+        total: "Усього подій",
+        cme: "CME",
+        cmeAnalysis: "CME аналіз",
+        gst: "Геомагнітні бурі",
+        ips: "Міжпланетні удари",
+        flr: "Сонячні спалахи",
+        sep: "Сонячні частинки",
+        mpc: "Магнітопауза",
+        rbe: "Радіаційний пояс",
+        hss: "Швидкісні потоки",
+        enlil: "WSA-Enlil",
+
+        strongestFlare: "Найсильніший спалах",
+        fastestCme: "Найшвидший CME",
+        strongestStorm: "Найсильніша буря",
+        latestEvent: "Остання подія",
+
+        speed: "Швидкість",
+        halfAngle: "Кут",
+        coordinates: "Координати",
+        kpIndex: "Kp індекс",
+        classType: "Клас",
+        sourceLocation: "Локація джерела",
+        activeRegion: "Активний регіон",
+        catalog: "Каталог",
+        instruments: "Інструменти",
+        linkedEvents: "Повʼязані події",
+        note: "Примітка",
+        source: "Джерело NASA",
+        issueTime: "Час публікації",
+        noData: "Дані не знайдено",
+        clear: "Очистити поле",
+    },
 };
 
 export default uk;
