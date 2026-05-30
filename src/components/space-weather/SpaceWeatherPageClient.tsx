@@ -84,6 +84,8 @@ export const SpaceWeatherPageClient = () => {
                                 <SpaceWeatherEventsGrid
                                     locale={t}
                                     events={state.events}
+                                    startDate={explorer.startDate}
+                                    endDate={explorer.endDate}
                                 />
 
                                 <aside className="grid content-start gap-5">

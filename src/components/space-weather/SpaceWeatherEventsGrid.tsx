@@ -6,9 +6,16 @@ import {SpaceWeatherEventCard} from "./SpaceWeatherEventCard";
 type Props = {
     locale: SpaceWeatherLocale;
     events: SpaceWeatherEvent[];
+    startDate: string;
+    endDate: string;
 };
 
-export const SpaceWeatherEventsGrid = ({locale, events}: Props) => {
+export const SpaceWeatherEventsGrid = ({
+                                           locale,
+                                           events,
+                                           startDate,
+                                           endDate,
+                                       }: Props) => {
     if (!events.length) {
         return (
             <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-card)] p-7 text-center text-sm text-[var(--color-text-muted)]">
@@ -45,6 +52,8 @@ export const SpaceWeatherEventsGrid = ({locale, events}: Props) => {
                             event={event}
                             locale={locale}
                             index={index}
+                            startDate={startDate}
+                            endDate={endDate}
                         />
                     ))}
                 </div>

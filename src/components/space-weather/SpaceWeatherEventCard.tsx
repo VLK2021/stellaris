@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import {motion} from "framer-motion";
 import {
     ExternalLink,
+    Eye,
     Flame,
     Gauge,
     RadioTower,
@@ -26,6 +28,8 @@ type Props = {
     event: SpaceWeatherEvent;
     locale: SpaceWeatherLocale;
     index?: number;
+    startDate: string;
+    endDate: string;
 };
 
 const getEventIcon = (type: SpaceWeatherEvent["type"]) => {
@@ -43,9 +47,20 @@ export const SpaceWeatherEventCard = ({
                                           event,
                                           locale,
                                           index = 0,
+                                          startDate,
+                                          endDate,
                                       }: Props) => {
     const tone = getEventTone(event.type);
     const Icon = getEventIcon(event.type);
+
+    const detailsHref = {
+        pathname: `/space-weather/${encodeURIComponent(event.id)}`,
+        query: {
+            type: event.type,
+            startDate,
+            endDate,
+        },
+    };
 
     return (
         <motion.article
@@ -121,17 +136,27 @@ export const SpaceWeatherEventCard = ({
                         <span>{locale.catalog}: {event.catalog || "—"}</span>
                     </div>
 
-                    {event.link && (
-                        <a
-                            href={event.link}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-3.5 py-2 text-[10px] font-black text-white transition hover:gap-3"
+                    <div className="flex flex-wrap gap-2">
+                        <Link
+                            href={detailsHref}
+                            className="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent-soft)] px-3.5 py-2 text-[10px] font-black text-[var(--color-accent)] transition hover:gap-3"
                         >
-                            {locale.source}
-                            <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                    )}
+                            Details
+                            <Eye className="h-3.5 w-3.5" />
+                        </Link>
+
+                        {event.link && (
+                            <a
+                                href={event.link}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-3.5 py-2 text-[10px] font-black text-white transition hover:gap-3"
+                            >
+                                {locale.source}
+                                <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
+                        )}
+                    </div>
                 </div>
             </div>
         </motion.article>
