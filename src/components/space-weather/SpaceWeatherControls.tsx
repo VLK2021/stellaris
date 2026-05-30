@@ -2,8 +2,7 @@
 
 import type {ReactNode} from "react";
 import {Controller, useForm, useWatch} from "react-hook-form";
-import {motion} from "framer-motion";
-import {X} from "lucide-react";
+import {CalendarDays, Search, X} from "lucide-react";
 
 import {SPACE_WEATHER_EVENT_TYPES} from "@/src/constants/space-weather/spaceWeather.constants";
 import type {
@@ -35,38 +34,36 @@ export const SpaceWeatherControls = ({
     const tab = useWatch({control, name: "tab"});
 
     return (
-        <motion.form
+        <form
             onSubmit={handleSubmit(onLoad)}
-            initial={{opacity: 0, y: 18}}
-            whileInView={{opacity: 1, y: 0}}
-            viewport={{once: true}}
-            transition={{duration: 0.45}}
-            className="mt-5 rounded-[1.6rem] border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-[var(--shadow-card)] backdrop-blur-2xl sm:p-5"
+            className="grid gap-4 xl:grid-cols-[1fr_auto]"
         >
-            <Controller
-                control={control}
-                name="tab"
-                render={({field}) => (
-                    <div className="flex flex-wrap gap-2.5">
-                        {tabs.map((item) => (
-                            <button
-                                key={item}
-                                type="button"
-                                onClick={() => field.onChange(item)}
-                                className={`rounded-full px-4 py-2.5 text-[10px] font-black uppercase tracking-[0.16em] transition ${
-                                    field.value === item
-                                        ? "bg-[var(--color-accent)] text-white shadow-[var(--shadow-glow)]"
-                                        : "border border-[var(--color-border)] bg-[var(--color-glass)] text-[var(--color-text-muted)] hover:border-[var(--color-border-strong)]"
-                                }`}
-                            >
-                                {locale[item]}
-                            </button>
-                        ))}
-                    </div>
-                )}
-            />
+            <div className="flex flex-wrap items-center gap-2.5">
+                <Controller
+                    control={control}
+                    name="tab"
+                    render={({field}) => (
+                        <>
+                            {tabs.map((item) => (
+                                <button
+                                    key={item}
+                                    type="button"
+                                    onClick={() => field.onChange(item)}
+                                    className={`rounded-xl px-4 py-2.5 text-[10px] font-black uppercase tracking-[0.16em] transition ${
+                                        field.value === item
+                                            ? "bg-[var(--color-accent)] text-white shadow-[var(--shadow-glow)]"
+                                            : "border border-[var(--color-border)] bg-[var(--color-card-solid)] text-[var(--color-text-muted)] hover:border-[var(--color-border-strong)]"
+                                    }`}
+                                >
+                                    {locale[item]}
+                                </button>
+                            ))}
+                        </>
+                    )}
+                />
+            </div>
 
-            <div className="mt-5 grid gap-3.5 md:grid-cols-2 xl:grid-cols-5">
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[180px_180px_190px_220px]">
                 <Field label={locale.startDate}>
                     <Controller
                         control={control}
@@ -105,7 +102,7 @@ export const SpaceWeatherControls = ({
                             control={control}
                             name="type"
                             render={({field}) => (
-                                <select {...field} className="input">
+                                <select {...field} className="input h-[46px]">
                                     {SPACE_WEATHER_EVENT_TYPES.map((item) => (
                                         <option key={item} value={item}>
                                             {item === "all" ? locale.all : item}
@@ -117,17 +114,18 @@ export const SpaceWeatherControls = ({
                     </Field>
                 )}
 
-                <div className="flex items-end xl:col-span-2">
+                <div className="flex items-end">
                     <button
                         disabled={loading}
                         type="submit"
-                        className="w-full rounded-2xl bg-[var(--color-accent)] px-5 py-3.5 text-xs font-black uppercase tracking-[0.14em] text-white transition hover:scale-[1.018] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="inline-flex h-[46px] w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] px-5 text-[11px] font-black uppercase tracking-[0.16em] text-white transition hover:scale-[1.018] disabled:cursor-not-allowed disabled:opacity-60"
                     >
+                        <Search className="h-4 w-4" />
                         {loading ? locale.loading : locale.load}
                     </button>
                 </div>
             </div>
-        </motion.form>
+        </form>
     );
 };
 
@@ -154,11 +152,13 @@ const ClearableInput = ({
     locale: SpaceWeatherLocale;
 }) => (
     <div className="relative">
+        <CalendarDays className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-text-soft)]" />
+
         <input
             type={type}
             value={value ?? ""}
             onChange={(event) => onChange(event.target.value)}
-            className="input pr-12"
+            className="input h-[46px] pl-10 pr-12"
         />
 
         {value && (
