@@ -328,9 +328,9 @@ const LinkedEventsPanel = ({
 
         {events.length ? (
             <div className="mt-5 grid gap-3 lg:grid-cols-2">
-                {events.map((event) => (
+                {events.map((event, index) => (
                     <div
-                        key={`${event.id}-${event.type}`}
+                        key={`${event.id}-${event.type}-${index}`}
                         className="rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4"
                     >
                         <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)]">
