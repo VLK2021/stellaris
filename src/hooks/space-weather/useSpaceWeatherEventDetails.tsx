@@ -6,7 +6,6 @@ import type {
     SpaceWeatherEventDetails,
     SpaceWeatherEventDetailsResponse,
 } from "@/src/types/space-weather/spaceWeatherEventDetails.types";
-
 import type {SpaceWeatherEvent} from "@/src/types/space-weather/spaceWeather.types";
 
 type State = {
@@ -33,6 +32,8 @@ export const useSpaceWeatherEventDetails = ({
     });
 
     useEffect(() => {
+        const controller = new AbortController();
+
         const loadDetails = async () => {
             if (!eventId || !type || !startDate || !endDate) {
                 setState({
@@ -60,7 +61,9 @@ export const useSpaceWeatherEventDetails = ({
 
                 const response = await fetch(
                     `/api/space-weather/event?${params.toString()}`,
-                    {cache: "no-store"},
+                    {
+                        signal: controller.signal,
+                    },
                 );
 
                 const json = (await response.json()) as SpaceWeatherEventDetailsResponse & {
@@ -77,6 +80,10 @@ export const useSpaceWeatherEventDetails = ({
                     error: null,
                 });
             } catch (error) {
+                if (error instanceof DOMException && error.name === "AbortError") {
+                    return;
+                }
+
                 setState({
                     data: null,
                     loading: false,
@@ -89,6 +96,10 @@ export const useSpaceWeatherEventDetails = ({
         };
 
         loadDetails();
+
+        return () => {
+            controller.abort();
+        };
     }, [eventId, type, startDate, endDate]);
 
     return state;

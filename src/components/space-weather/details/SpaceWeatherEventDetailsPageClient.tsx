@@ -10,6 +10,7 @@ import type {SpaceWeatherLocale} from "@/src/types/space-weather/spaceWeatherUi.
 
 import {SpaceWeatherBackground} from "../SpaceWeatherBackground";
 import {SpaceWeatherEventDetailsHero} from "./SpaceWeatherEventDetailsHero";
+import {SpaceWeatherEventDetailsLoading} from "./SpaceWeatherEventDetailsLoading";
 import {SpaceWeatherEventDetailsPanels} from "./SpaceWeatherEventDetailsPanels";
 
 type Props = {
@@ -45,20 +46,18 @@ export const SpaceWeatherEventDetailsPageClient = ({
                     className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-2 text-xs font-black text-[var(--color-text-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-accent)]"
                 >
                     <ArrowLeft className="h-4 w-4" />
-                    Back to space weather
+                    {t.backToSpaceWeather}
                 </Link>
 
-                {loading && (
-                    <div className="h-[520px] animate-pulse rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)]" />
-                )}
+                {loading && <SpaceWeatherEventDetailsLoading />}
 
-                {error && (
+                {!loading && error && (
                     <div className="rounded-[1.5rem] border border-[var(--color-error)]/30 bg-[var(--color-error)]/10 p-5 text-sm text-[var(--color-error)]">
                         {error}
                     </div>
                 )}
 
-                {data && (
+                {!loading && data && (
                     <div className="grid gap-5">
                         <SpaceWeatherEventDetailsHero
                             locale={t}
