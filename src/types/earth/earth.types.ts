@@ -101,8 +101,11 @@ export type EpicResponse = {
 export type EarthLayer = {
     id: string;
     title: string;
-    type: string;
-    source: string;
+    abstract: string | null;
+    format: string | null;
+    tileMatrixSet: string | null;
+    resourceUrl: string | null;
+    source: "NASA GIBS WMTS";
 };
 
 export type EarthLayersResponse = {

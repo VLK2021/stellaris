@@ -1,10 +1,22 @@
 import {NextResponse} from "next/server";
 
-import {GIBS_SAMPLE_LAYERS} from "@/src/constants/earth/earth.constants";
+import {getGibsLayers} from "@/src/services/earth";
 
 export async function GET() {
-    return NextResponse.json({
-        success: true,
-        data: [...GIBS_SAMPLE_LAYERS],
-    });
+    try {
+        const response = await getGibsLayers();
+
+        return NextResponse.json(response);
+    } catch (error) {
+        return NextResponse.json(
+            {
+                success: false,
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "Failed to load NASA GIBS layers.",
+            },
+            {status: 500},
+        );
+    }
 }

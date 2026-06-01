@@ -4,17 +4,22 @@ const getNasaApiKey = () => {
     return process.env.NASA_API_KEY || "DEMO_KEY";
 };
 
-type FetchOptions = {
+type FetchJsonOptions = {
     url: string;
     revalidate: number;
     withApiKey?: boolean;
+};
+
+type FetchTextOptions = {
+    url: string;
+    revalidate: number;
 };
 
 export const fetchEarthJson = async <T>({
                                             url,
                                             revalidate,
                                             withApiKey = true,
-                                        }: FetchOptions): Promise<T> => {
+                                        }: FetchJsonOptions): Promise<T> => {
     const requestUrl = withApiKey
         ? `${url}${url.includes("?") ? "&" : "?"}api_key=${getNasaApiKey()}`
         : url;
@@ -30,6 +35,23 @@ export const fetchEarthJson = async <T>({
     }
 
     return response.json() as Promise<T>;
+};
+
+export const fetchEarthText = async ({
+                                         url,
+                                         revalidate,
+                                     }: FetchTextOptions): Promise<string> => {
+    const response = await fetch(url, {
+        next: {
+            revalidate,
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error(`NASA Earth text request failed with status ${response.status}`);
+    }
+
+    return response.text();
 };
 
 export const createNasaUrl = (path: string) => {

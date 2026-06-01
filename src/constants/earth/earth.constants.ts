@@ -9,29 +9,11 @@ export const EARTH_REVALIDATE_SECONDS = {
 
 export const EONET_API_URL = "https://eonet.gsfc.nasa.gov/api/v3";
 
+export const GIBS_WMTS_CAPABILITIES_URL =
+    "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml";
+
 export const EONET_EVENT_LIMIT = 24;
 
 export const EONET_STATUS_OPTIONS = ["all", "open", "closed"] as const;
 
 export const EPIC_IMAGE_TYPES = ["natural", "enhanced"] as const;
-
-export const GIBS_SAMPLE_LAYERS = [
-    {
-        id: "VIIRS_SNPP_CorrectedReflectance_TrueColor",
-        title: "VIIRS SNPP Corrected Reflectance True Color",
-        type: "Global imagery",
-        source: "GIBS / Worldview",
-    },
-    {
-        id: "MODIS_Terra_CorrectedReflectance_TrueColor",
-        title: "MODIS Terra Corrected Reflectance True Color",
-        type: "Global imagery",
-        source: "GIBS / Worldview",
-    },
-    {
-        id: "VIIRS_Black_Marble",
-        title: "VIIRS Black Marble Night Lights",
-        type: "Night imagery",
-        source: "GIBS / Worldview",
-    },
-] as const;
