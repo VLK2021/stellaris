@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {motion} from "framer-motion";
-import {ArrowUpRight, MapPin, RadioTower} from "lucide-react";
+import {ArrowUpRight, ExternalLink, MapPin, RadioTower} from "lucide-react";
 
 import type {EarthOverview} from "@/src/types/earth/earth.types";
 import type {EarthLocale} from "@/src/types/earth/earthUi.types";
@@ -17,22 +16,17 @@ export const EarthOverviewTab = ({data, t}: Props) => {
 
     return (
         <section className="grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
-            <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_18%,var(--color-accent-soft),transparent_32%)]" />
-
-                <h2 className="relative z-10 text-2xl font-black uppercase tracking-[-0.05em]">
+            <section className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)]">
+                <h2 className="text-2xl font-black uppercase tracking-[-0.05em]">
                     {t.latestEvents}
                 </h2>
 
-                <div className="relative z-10 mt-5 grid gap-4">
-                    {data.events.slice(0, 6).map((event, index) => (
-                        <motion.div
+                <div className="mt-5 grid gap-4">
+                    {data.events.slice(0, 8).map((event) => (
+                        <Link
                             key={event.id}
-                            initial={{opacity: 0, x: -18}}
-                            whileInView={{opacity: 1, x: 0}}
-                            viewport={{once: true}}
-                            transition={{duration: 0.35, delay: index * 0.04}}
-                            className="group relative overflow-hidden rounded-[1.35rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4"
+                            href={`/earth/${encodeURIComponent(event.id)}`}
+                            className="group relative overflow-hidden rounded-[1.35rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 transition hover:border-[var(--color-accent)]/70 hover:shadow-[var(--shadow-glow)]"
                         >
                             <div className="absolute right-[-50px] top-[-50px] h-28 w-28 rounded-full bg-[var(--color-accent-soft)] blur-3xl" />
 
@@ -54,37 +48,52 @@ export const EarthOverviewTab = ({data, t}: Props) => {
 
                                         <span className="inline-flex items-center gap-1.5">
                                             <RadioTower className="h-3.5 w-3.5" />
-                                            {event.geometryCount} track points
+                                            {event.geometryCount} {t.details.geometryPoints}
                                         </span>
                                     </div>
                                 </div>
 
-                                <Link
-                                    href={`/earth/${encodeURIComponent(event.id)}`}
-                                    className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] text-[var(--color-accent)] transition group-hover:rotate-45"
-                                >
+                                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] text-[var(--color-accent)] transition group-hover:rotate-45">
                                     <ArrowUpRight className="h-4 w-4" />
-                                </Link>
+                                </span>
                             </div>
-                        </motion.div>
+                        </Link>
                     ))}
                 </div>
-            </div>
+            </section>
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(34,197,94,0.18),transparent_32%)]" />
+            <section className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)]">
+                <div className="flex items-center justify-between gap-4">
+                    <h2 className="text-2xl font-black uppercase tracking-[-0.05em]">
+                        {t.latestEarthImages}
+                    </h2>
 
-                <h2 className="relative z-10 text-2xl font-black uppercase tracking-[-0.05em]">
-                    {t.latestEarthImages}
-                </h2>
+                    <button
+                        type="button"
+                        className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-accent)]"
+                    >
+                        {t.epic}
+                    </button>
+                </div>
 
                 {featuredImage && (
-                    <div className="relative z-10 mt-5 overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)]">
-                        <img
-                            src={featuredImage.imageUrl}
-                            alt={featuredImage.caption}
-                            className="aspect-square w-full object-cover"
-                        />
+                    <a
+                        href={featuredImage.imageUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group mt-5 block overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)] transition hover:border-[var(--color-accent)]/70 hover:shadow-[var(--shadow-glow)]"
+                    >
+                        <div className="relative overflow-hidden">
+                            <img
+                                src={featuredImage.imageUrl}
+                                alt={featuredImage.caption}
+                                className="aspect-square w-full object-cover transition duration-700 group-hover:scale-105"
+                            />
+
+                            <div className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-black/40 text-[var(--color-accent)] backdrop-blur-xl">
+                                <ExternalLink className="h-4 w-4" />
+                            </div>
+                        </div>
 
                         <div className="p-4">
                             <p className="text-sm font-black text-[var(--color-text)]">
@@ -94,10 +103,14 @@ export const EarthOverviewTab = ({data, t}: Props) => {
                             <p className="mt-2 text-xs leading-5 text-[var(--color-text-muted)]">
                                 {featuredImage.caption}
                             </p>
+
+                            <p className="mt-4 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                                {t.details.viewImage} →
+                            </p>
                         </div>
-                    </div>
+                    </a>
                 )}
-            </div>
+            </section>
         </section>
     );
 };

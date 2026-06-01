@@ -14,15 +14,15 @@ type Props = {
 
 export const EarthTabsContent = ({activeTab, data, t}: Props) => {
     if (activeTab === "events") {
-        return <EarthEventsTab data={data} title={t.latestEvents} />;
+        return <EarthEventsTab data={data} title={t.latestEvents} t={t} />;
     }
 
     if (activeTab === "epic") {
-        return <EarthEpicTab data={data} title={t.latestEarthImages} />;
+        return <EarthEpicTab data={data} title={t.latestEarthImages} t={t} />;
     }
 
     if (activeTab === "layers") {
-        return <EarthLayersTab data={data} title={t.gibsLayers} />;
+        return <EarthLayersTab data={data} title={t.gibsLayers} t={t} />;
     }
 
     return <EarthOverviewTab data={data} t={t} />;
