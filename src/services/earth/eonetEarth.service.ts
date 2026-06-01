@@ -11,11 +11,23 @@ import {
 import {fetchEarthJson} from "./nasaEarthClient.service";
 
 import type {
+    EarthEventDetailsResponse,
     EarthEventsQuery,
     EarthEventsResponse,
 } from "@/src/types/earth/earth.types";
 
-import type {RawEonetEventsResponse} from "@/src/types/earth/earthRaw.types";
+import type {
+    RawEonetEvent,
+    RawEonetEventsResponse,
+} from "@/src/types/earth/earthRaw.types";
+
+const sortEventsByLatestDate = (events: ReturnType<typeof normalizeEonetEvent>[]) => {
+    return [...events].sort(
+        (a, b) =>
+            new Date(b.latestDate ?? 0).getTime() -
+            new Date(a.latestDate ?? 0).getTime(),
+    );
+};
 
 export const getEonetEvents = async ({
                                          page = 1,
@@ -29,7 +41,9 @@ export const getEonetEvents = async ({
         withApiKey: false,
     });
 
-    let events = (response.events ?? []).map(normalizeEonetEvent);
+    let events = sortEventsByLatestDate(
+        (response.events ?? []).map(normalizeEonetEvent),
+    );
 
     if (status !== "all") {
         events = events.filter((event) => event.status === status);
@@ -55,5 +69,24 @@ export const getEonetEvents = async ({
         success: true,
         data: result.data,
         pagination: result.pagination,
+    };
+};
+
+export const getEonetEventById = async (
+    eventId: string,
+): Promise<EarthEventDetailsResponse> => {
+    if (!eventId) {
+        throw new Error("Earth event id is required.");
+    }
+
+    const response = await fetchEarthJson<RawEonetEvent>({
+        url: `${EONET_API_URL}/events/${encodeURIComponent(eventId)}`,
+        revalidate: EARTH_REVALIDATE_SECONDS.eonet,
+        withApiKey: false,
+    });
+
+    return {
+        success: true,
+        data: normalizeEonetEvent(response),
     };
 };

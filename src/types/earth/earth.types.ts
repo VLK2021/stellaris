@@ -46,12 +46,14 @@ export type EarthEvent = {
     geometry: EarthEventGeometry[];
     latestDate: string | null;
     coordinates: number[] | null;
+    geometryCount: number;
+    sourceCount: number;
+    raw: Record<string, unknown>;
 };
 
 export type EarthEventsQuery = {
     status?: EonetStatus;
     category?: string;
-    days?: number;
     page?: number;
     limit?: number;
 };
@@ -60,6 +62,11 @@ export type EarthEventsResponse = {
     success: boolean;
     data: EarthEvent[];
     pagination: EarthPaginationMeta;
+};
+
+export type EarthEventDetailsResponse = {
+    success: boolean;
+    data: EarthEvent;
 };
 
 export type EpicCoordinates = {
@@ -86,6 +93,7 @@ export type EpicImage = {
     dscovrPosition: EpicVector;
     lunarPosition: EpicVector;
     sunPosition: EpicVector;
+    raw: Record<string, unknown>;
 };
 
 export type EpicQuery = {

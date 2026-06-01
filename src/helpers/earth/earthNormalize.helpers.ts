@@ -65,6 +65,9 @@ export const normalizeEonetEvent = (event: RawEonetEvent): EarthEvent => {
         })),
         latestDate: latestGeometry?.date ?? null,
         coordinates: latestGeometry?.coordinates ?? null,
+        geometryCount: geometry.length,
+        sourceCount: event.sources?.length ?? 0,
+        raw: event as Record<string, unknown>,
     };
 };
 
@@ -98,5 +101,6 @@ export const normalizeEpicImage = (
         dscovrPosition: normalizeVector(item.dscovr_j2000_position),
         lunarPosition: normalizeVector(item.lunar_j2000_position),
         sunPosition: normalizeVector(item.sun_j2000_position),
+        raw: item as Record<string, unknown>,
     };
 };
