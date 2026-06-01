@@ -574,6 +574,29 @@ const en = {
         linkedTab: "Linked events",
         rawTab: "Raw NASA",
     },
+
+    earth: {
+        badge: "NASA EARTH",
+        title: "EARTH INTELLIGENCE CENTER",
+        subtitle: "Real NASA data about Earth natural events, GIBS satellite layers and EPIC DSCOVR imagery.",
+        overview: "Overview",
+        events: "Events",
+        epic: "EPIC",
+        layers: "Layers",
+        activeEvents: "Active Events",
+        closedEvents: "Closed Events",
+        epicImages: "EPIC Images",
+        satelliteLayers: "Satellite Layers",
+        latestEvents: "Latest Natural Events",
+        latestEarthImages: "Latest Earth Images",
+        gibsLayers: "NASA GIBS Layers",
+        source: "Source",
+        status: "Status",
+        category: "Category",
+        coordinates: "Coordinates",
+        date: "Date",
+        noData: "No data",
+    },
 };
 
 export default en;

@@ -574,6 +574,29 @@ const uk = {
         linkedTab: "Повʼязані події",
         rawTab: "Raw NASA",
     },
+
+    earth: {
+        badge: "NASA EARTH",
+        title: "EARTH INTELLIGENCE CENTER",
+        subtitle: "Реальні дані NASA про природні події Землі, супутникові шари GIBS та знімки EPIC з DSCOVR.",
+        overview: "Огляд",
+        events: "Події",
+        epic: "EPIC",
+        layers: "Шари",
+        activeEvents: "Активні події",
+        closedEvents: "Закриті події",
+        epicImages: "EPIC знімки",
+        satelliteLayers: "Супутникові шари",
+        latestEvents: "Останні природні події",
+        latestEarthImages: "Останні знімки Землі",
+        gibsLayers: "NASA GIBS шари",
+        source: "Джерело",
+        status: "Статус",
+        category: "Категорія",
+        coordinates: "Координати",
+        date: "Дата",
+        noData: "Немає даних",
+    },
 };
 
 export default uk;
