@@ -18,7 +18,7 @@ export const EarthTabsContent = ({activeTab, data, t}: Props) => {
     }
 
     if (activeTab === "epic") {
-        return <EarthEpicTab data={data} title={t.latestEarthImages} t={t} />;
+        return <EarthEpicTab title={t.latestEarthImages} t={t} />;
     }
 
     if (activeTab === "layers") {

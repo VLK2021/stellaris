@@ -111,11 +111,14 @@ export type EpicImage = {
 export type EpicQuery = {
     type?: EpicImageType;
     date?: string;
+    page?: number;
+    limit?: number;
 };
 
 export type EpicResponse = {
     success: boolean;
     data: EpicImage[];
+    pagination: EarthPaginationMeta;
 };
 
 export type EarthLayer = {
