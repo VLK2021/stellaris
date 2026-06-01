@@ -22,7 +22,7 @@ export const EarthTabsContent = ({activeTab, data, t}: Props) => {
     }
 
     if (activeTab === "layers") {
-        return <EarthLayersTab data={data} title={t.gibsLayers} t={t} />;
+        return <EarthLayersTab title={t.gibsLayers} t={t} />;
     }
 
     return <EarthOverviewTab data={data} t={t} />;

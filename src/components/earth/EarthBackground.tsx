@@ -4,24 +4,37 @@ import {motion} from "framer-motion";
 
 export const EarthBackground = () => {
     return (
-        <>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(34,197,94,0.18),transparent_32%),radial-gradient(circle_at_82%_12%,var(--color-accent-soft),transparent_34%),radial-gradient(circle_at_55%_92%,rgba(59,130,246,0.14),transparent_38%)]" />
-
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.04)_1px,transparent_1px)] bg-[size:82px_82px] opacity-70" />
+        <div className="pointer-events-none fixed inset-0 overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(34,197,94,0.22),transparent_30%),radial-gradient(circle_at_86%_12%,rgba(56,189,248,0.18),transparent_34%),radial-gradient(circle_at_50%_100%,rgba(99,102,241,0.18),transparent_42%)]" />
 
             <motion.div
-                className="absolute left-[-20%] top-[18%] h-[2px] w-[70%] rotate-[-12deg] bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent blur-[1px]"
-                animate={{x: ["0%", "190%"], opacity: [0, 0.75, 0]}}
-                transition={{duration: 7, repeat: Infinity, ease: "easeInOut"}}
+                className="absolute inset-0 opacity-50"
+                style={{
+                    backgroundImage:
+                        "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                    backgroundSize: "86px 86px",
+                }}
+                animate={{backgroundPosition: ["0px 0px", "86px 172px"]}}
+                transition={{duration: 42, repeat: Infinity, ease: "linear"}}
             />
 
             <motion.div
-                className="absolute right-[-20%] bottom-[22%] h-[2px] w-[62%] rotate-[10deg] bg-gradient-to-r from-transparent via-emerald-400/70 to-transparent blur-[1px]"
-                animate={{x: ["0%", "-190%"], opacity: [0, 0.65, 0]}}
-                transition={{duration: 8, repeat: Infinity, ease: "easeInOut"}}
+                className="absolute -left-52 top-20 h-[740px] w-[740px] rounded-full border border-[var(--color-accent)]/15"
+                animate={{rotate: 360, scale: [1, 1.06, 1]}}
+                transition={{duration: 55, repeat: Infinity, ease: "linear"}}
             />
 
-            <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.035),transparent)]" />
-        </>
+            <motion.div
+                className="absolute -right-64 bottom-[-180px] h-[900px] w-[900px] rounded-full border border-emerald-400/10"
+                animate={{rotate: -360, scale: [1, 1.05, 1]}}
+                transition={{duration: 68, repeat: Infinity, ease: "linear"}}
+            />
+
+            <motion.div
+                className="absolute left-[-40%] top-[38%] h-[2px] w-[90%] rotate-[-12deg] bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent blur-[1px]"
+                animate={{x: ["0%", "230%"], opacity: [0, 0.9, 0]}}
+                transition={{duration: 6, repeat: Infinity, ease: "easeInOut"}}
+            />
+        </div>
     );
 };

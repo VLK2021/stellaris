@@ -5,12 +5,11 @@ import {useState} from "react";
 import {useLanguage} from "@/src/context/LanguageContext";
 import {useEarthExplorer} from "@/src/hooks/earth/useEarthExplorer";
 
-import type {EarthTab, EarthLocale} from "@/src/types/earth/earthUi.types";
+import type {EarthLocale, EarthTab} from "@/src/types/earth/earthUi.types";
 
 import {EarthBackground} from "./EarthBackground";
 import {EarthHero} from "./EarthHero";
 import {EarthLoading} from "./EarthLoading";
-import {EarthStatsGrid} from "./EarthStatsGrid";
 import {EarthTabsContent} from "./EarthTabsContent";
 
 export const EarthPageClient = () => {
@@ -18,14 +17,13 @@ export const EarthPageClient = () => {
     const t = locale.earth as EarthLocale;
 
     const [activeTab, setActiveTab] = useState<EarthTab>("overview");
-
     const {data, loading, error} = useEarthExplorer();
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[var(--color-background)] px-3 py-6 text-[var(--color-text)] sm:px-5 sm:py-8 lg:px-8">
+        <main className="relative min-h-screen overflow-hidden bg-[var(--color-background)] text-[var(--color-text)]">
             <EarthBackground />
 
-            <div className="relative z-10 mx-auto max-w-[1540px]">
+            <div className="relative z-10 mx-auto w-full max-w-[1680px] px-4 py-6 sm:px-6 lg:px-8">
                 {loading && <EarthLoading />}
 
                 {!loading && error && (
@@ -35,16 +33,11 @@ export const EarthPageClient = () => {
                 )}
 
                 {!loading && data && (
-                    <div className="grid gap-5">
+                    <div className="space-y-6">
                         <EarthHero
                             data={data}
                             activeTab={activeTab}
                             setActiveTab={setActiveTab}
-                            t={t}
-                        />
-
-                        <EarthStatsGrid
-                            data={data}
                             t={t}
                         />
 

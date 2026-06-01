@@ -9,6 +9,8 @@ export type EonetStatus = (typeof EONET_STATUS_OPTIONS)[number];
 
 export type EpicImageType = (typeof EPIC_IMAGE_TYPES)[number];
 
+export type EarthSortOrder = "asc" | "desc";
+
 export type EarthPaginationMeta = {
     page: number;
     limit: number;
@@ -51,11 +53,21 @@ export type EarthEvent = {
     raw: Record<string, unknown>;
 };
 
+export type EarthEventsSortBy =
+    | "title"
+    | "status"
+    | "latestDate"
+    | "geometryCount"
+    | "sourceCount";
+
 export type EarthEventsQuery = {
     status?: EonetStatus;
     category?: string;
+    search?: string;
     page?: number;
     limit?: number;
+    sortBy?: EarthEventsSortBy;
+    order?: EarthSortOrder;
 };
 
 export type EarthEventsResponse = {
@@ -116,9 +128,21 @@ export type EarthLayer = {
     source: "NASA GIBS WMTS";
 };
 
+export type EarthLayersSortBy = "title" | "id" | "format";
+
+export type EarthLayersQuery = {
+    page?: number;
+    limit?: number;
+    search?: string;
+    format?: string;
+    sortBy?: EarthLayersSortBy;
+    order?: EarthSortOrder;
+};
+
 export type EarthLayersResponse = {
     success: boolean;
     data: EarthLayer[];
+    pagination: EarthPaginationMeta;
 };
 
 export type EarthOverview = {
