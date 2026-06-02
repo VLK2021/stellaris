@@ -164,3 +164,21 @@ export type EarthOverviewResponse = {
     success: boolean;
     data: EarthOverview;
 };
+
+export type EarthLayerDimension = {
+    id: string;
+    defaultValue: string | null;
+    values: string[];
+};
+
+export type EarthLayerDetails = EarthLayer & {
+    resourceTemplate: string | null;
+    dimensions: EarthLayerDimension[];
+    previewUrl: string | null;
+    rawXml: string;
+};
+
+export type EarthLayerDetailsResponse = {
+    success: boolean;
+    data: EarthLayerDetails;
+};

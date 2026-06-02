@@ -13,35 +13,40 @@ const decodeXml = (value: string | null) => {
 
 const getTagValue = (xml: string, tag: string) => {
     const match = xml.match(
-        new RegExp(`<(?:[a-zA-Z0-9_-]+:)?${tag}[^>]*>([\\s\\S]*?)<\\/(?:[a-zA-Z0-9_-]+:)?${tag}>`, "i"),
+        new RegExp(
+            `<(?:[a-zA-Z0-9_-]+:)?${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/(?:[a-zA-Z0-9_-]+:)?${tag}>`,
+            "i",
+        ),
     );
 
     return decodeXml(match?.[1]?.trim() ?? null);
 };
 
 const getFirstResourceUrl = (xml: string) => {
-    const match = xml.match(/<[^>]*ResourceURL[^>]*template="([^"]+)"/i);
+    const match = xml.match(/template=['"]([^'"]+)['"]/i);
 
     return decodeXml(match?.[1] ?? null);
 };
 
 const getFormat = (xml: string) => {
-    const match = xml.match(/<(?:[a-zA-Z0-9_-]+:)?Format[^>]*>([\s\S]*?)<\/(?:[a-zA-Z0-9_-]+:)?Format>/i);
-
-    return decodeXml(match?.[1]?.trim() ?? null);
+    return getTagValue(xml, "Format");
 };
 
 const getTileMatrixSet = (xml: string) => {
-    const match = xml.match(
-        /<(?:[a-zA-Z0-9_-]+:)?TileMatrixSet[^>]*>([\s\S]*?)<\/(?:[a-zA-Z0-9_-]+:)?TileMatrixSet>/i,
+    const linkMatch = xml.match(
+        /<(?:[a-zA-Z0-9_-]+:)?TileMatrixSetLink(?:\s[^>]*)?>[\s\S]*?<\/(?:[a-zA-Z0-9_-]+:)?TileMatrixSetLink>/i,
     );
 
-    return decodeXml(match?.[1]?.trim() ?? null);
+    if (!linkMatch) return null;
+
+    return getTagValue(linkMatch[0], "TileMatrixSet");
 };
 
 export const parseGibsWmtsLayers = (xml: string): EarthLayer[] => {
     const layerBlocks =
-        xml.match(/<(?:[a-zA-Z0-9_-]+:)?Layer(?:\s[^>]*)?>[\s\S]*?<\/(?:[a-zA-Z0-9_-]+:)?Layer>/gi) ?? [];
+        xml.match(
+            /<(?:[a-zA-Z0-9_-]+:)?Layer(?:\s[^>]*)?>[\s\S]*?<\/(?:[a-zA-Z0-9_-]+:)?Layer>/gi,
+        ) ?? [];
 
     return layerBlocks
         .map((block) => {
