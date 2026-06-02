@@ -23,19 +23,22 @@ export const EarthHero = ({data, activeTab, setActiveTab, t}: Props) => {
                     src={image}
                     alt="NASA EPIC Earth"
                     className="absolute right-[-120px] top-[-110px] h-[720px] w-[720px] rounded-full object-cover opacity-45"
-                    animate={{scale: [1, 1.035, 1], rotate: [0, 1.5, 0]}}
+                    animate={{scale: [1, 1.04, 1], rotate: [0, 1.5, 0]}}
                     transition={{duration: 12, repeat: Infinity, ease: "easeInOut"}}
                 />
             )}
 
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-card)_0%,rgba(10,18,32,0.92)_42%,rgba(10,18,32,0.42)_100%)]" />
-
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent" />
+            <motion.div
+                className="absolute inset-0"
+                style={{background: "var(--hero-bg)"}}
+                animate={{opacity: [0.74, 0.92, 0.74]}}
+                transition={{duration: 9, repeat: Infinity, ease: "easeInOut"}}
+            />
 
             <div className="relative z-10 flex min-h-[520px] flex-col justify-between p-6 sm:p-8 lg:p-10">
                 <div className="max-w-4xl">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-accent)]">
-                        <Satellite className="h-3.5 w-3.5" />
+                    <div className="earth-label inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em]">
+                        <Satellite className="h-3.5 w-3.5 text-[var(--color-accent)]" />
                         {t.badge}
                     </div>
 
@@ -43,7 +46,7 @@ export const EarthHero = ({data, activeTab, setActiveTab, t}: Props) => {
                         {t.title}
                     </h1>
 
-                    <p className="mt-5 max-w-2xl text-sm leading-7 text-[var(--color-text-muted)] sm:text-base">
+                    <p className="earth-muted mt-5 max-w-2xl text-sm leading-7 sm:text-base">
                         {t.subtitle}
                     </p>
                 </div>
@@ -108,7 +111,7 @@ const HeroMetric = ({
     >
         <Icon className="h-4 w-4 text-[var(--color-accent)]" />
         <p className="mt-3 text-3xl font-black">{value}</p>
-        <p className="mt-1 text-[9px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+        <p className="earth-label mt-1 text-[9px] font-black uppercase tracking-[0.18em]">
             {label}
         </p>
     </button>

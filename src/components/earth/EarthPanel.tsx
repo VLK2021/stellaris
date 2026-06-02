@@ -1,3 +1,6 @@
+"use client";
+
+import {motion} from "framer-motion";
 import type {ReactNode} from "react";
 
 type Props = {
@@ -7,18 +10,31 @@ type Props = {
 
 export const EarthPanel = ({title, children}: Props) => {
     return (
-        <section className="relative overflow-hidden rounded-[1.7rem] border border-[var(--color-border)] bg-[linear-gradient(145deg,var(--color-card),rgba(34,197,94,0.05),rgba(14,165,233,0.04))] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(34,197,94,0.08),transparent_32%),radial-gradient(circle_at_86%_6%,rgba(56,189,248,0.08),transparent_30%)]" />
+        <motion.section
+            initial={{opacity: 0, y: 18}}
+            whileInView={{opacity: 1, y: 0}}
+            viewport={{once: true, amount: 0.15}}
+            transition={{duration: 0.45, ease: "easeOut"}}
+            className="relative overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl"
+        >
+            <motion.div
+                className="absolute inset-0"
+                style={{background: "var(--hero-bg)"}}
+                animate={{opacity: [0.18, 0.38, 0.18]}}
+                transition={{duration: 7, repeat: Infinity, ease: "easeInOut"}}
+            />
 
-            <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)]/60 to-transparent" />
+            <motion.div
+                className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
+                animate={{x: ["-100%", "100%"]}}
+                transition={{duration: 5, repeat: Infinity, ease: "easeInOut"}}
+            />
 
-            <h2 className="relative z-10 mb-4 text-xl font-black uppercase tracking-[-0.04em] text-[var(--color-text)]">
+            <h2 className="relative z-10 mb-4 text-xl font-black uppercase tracking-[-0.04em]">
                 {title}
             </h2>
 
-            <div className="relative z-10">
-                {children}
-            </div>
-        </section>
+            <div className="relative z-10">{children}</div>
+        </motion.section>
     );
 };
