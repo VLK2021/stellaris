@@ -10,31 +10,45 @@ import type {EarthLocale} from "@/src/types/earth/earthUi.types";
 type Props = {
     image: EpicImage;
     t: EarthLocale;
+    index?: number;
 };
 
-export const EarthImageCard = ({image, t}: Props) => {
+export const EarthImageCard = ({image, t, index = 0}: Props) => {
     const [loaded, setLoaded] = useState(false);
 
     return (
-        <a
+        <motion.a
             href={image.imageUrl}
             target="_blank"
             rel="noreferrer"
-            className="group overflow-hidden rounded-[1.3rem] border border-[var(--color-border)] bg-[linear-gradient(145deg,var(--color-glass),rgba(34,197,94,0.08))] transition hover:border-[var(--color-accent)]/70 hover:shadow-[var(--shadow-glow)]"
+            initial={{opacity: 0, y: 18, scale: 0.985}}
+            whileInView={{opacity: 1, y: 0, scale: 1}}
+            viewport={{once: true, amount: 0.2}}
+            transition={{duration: 0.35, delay: Math.min(index * 0.03, 0.2)}}
+            className="group relative block overflow-hidden rounded-[1.35rem] border border-[var(--color-border)] bg-[var(--color-glass)] shadow-[var(--shadow-card)] backdrop-blur-xl transition hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
         >
+            <motion.div
+                className="absolute inset-0"
+                style={{background: "var(--hero-bg)"}}
+                animate={{opacity: [0.08, 0.22, 0.08]}}
+                transition={{duration: 6, repeat: Infinity, ease: "easeInOut"}}
+            />
+
             <div className="relative aspect-square overflow-hidden">
                 {!loaded && (
-                    <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(circle_at_50%_45%,rgba(34,197,94,0.18),var(--color-card)_62%)]">
+                    <div className="absolute inset-0 z-10 grid place-items-center bg-[var(--color-card)]">
                         <motion.div
-                            className="absolute h-36 w-36 rounded-full border border-[var(--color-accent)]/25"
+                            className="absolute h-36 w-36 rounded-full border border-[var(--color-accent)]/30"
                             animate={{rotate: 360}}
                             transition={{duration: 8, repeat: Infinity, ease: "linear"}}
                         />
+
                         <motion.div
-                            className="absolute h-24 w-24 rounded-full border border-emerald-400/25"
+                            className="absolute h-24 w-24 rounded-full border border-[var(--color-border)]"
                             animate={{rotate: -360}}
                             transition={{duration: 6, repeat: Infinity, ease: "linear"}}
                         />
+
                         <ImageIcon className="relative z-10 h-9 w-9 text-[var(--color-accent)]" />
                     </div>
                 )}
@@ -48,17 +62,15 @@ export const EarthImageCard = ({image, t}: Props) => {
                     }`}
                 />
 
-                <span className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-[var(--color-border)] bg-black/40 text-[var(--color-accent)] backdrop-blur-xl">
+                <span className="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)]/75 text-[var(--color-accent)] backdrop-blur-xl">
                     <ExternalLink className="h-4 w-4" />
                 </span>
             </div>
 
-            <div className="p-4">
-                <p className="text-sm font-black text-[var(--color-text)]">
-                    {image.date}
-                </p>
+            <div className="relative z-10 p-4">
+                <h3 className="text-sm font-black">{image.date}</h3>
 
-                <p className="mt-2 text-xs leading-5 text-[var(--color-text-muted)]">
+                <p className="earth-muted mt-2 line-clamp-3 text-xs leading-5">
                     {image.caption}
                 </p>
 
@@ -69,10 +81,10 @@ export const EarthImageCard = ({image, t}: Props) => {
                     <p>TYPE: {image.type}</p>
                 </div>
 
-                <p className="mt-4 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                <p className="earth-label mt-4 text-[10px] font-black uppercase tracking-[0.18em]">
                     {t.details.viewImage} →
                 </p>
             </div>
-        </a>
+        </motion.a>
     );
 };

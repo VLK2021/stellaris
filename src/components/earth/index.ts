@@ -14,3 +14,4 @@ export * from './EarthBackground';
 export * from './EarthTabsContent';
 export * from './EarthImageCard';
 export * from './EarthEventCard';
+export * from './EarthLayerCard';
