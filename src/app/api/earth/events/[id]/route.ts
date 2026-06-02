@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 
-import {getEonetEventById} from "@/src/services/earth";
+import {getEarthEventEnrichment} from "@/src/services/earth/earthEventEnrichment.service";
 
 type Props = {
     params: Promise<{
@@ -10,13 +10,14 @@ type Props = {
 
 export async function GET(_request: NextRequest, {params}: Props) {
     try {
-        const resolvedParams = await params;
+        const {id} = await params;
 
-        const response = await getEonetEventById(
-            decodeURIComponent(resolvedParams.id),
-        );
+        const data = await getEarthEventEnrichment(decodeURIComponent(id));
 
-        return NextResponse.json(response);
+        return NextResponse.json({
+            success: true,
+            data,
+        });
     } catch (error) {
         return NextResponse.json(
             {

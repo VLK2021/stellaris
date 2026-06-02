@@ -3,54 +3,62 @@
 import {motion} from "framer-motion";
 import {Calendar, Database, MapPin, RadioTower, Tag} from "lucide-react";
 
-import type {EarthEvent} from "@/src/types/earth/earth.types";
+import type {EarthEventEnrichment} from "@/src/types/earth/earthEnrichment.types";
 import type {EarthLocale} from "@/src/types/earth/earthUi.types";
 
 type Props = {
-    event: EarthEvent;
+    enrichment: EarthEventEnrichment;
     t: EarthLocale;
 };
 
-export const EarthEventDetailsHero = ({event, t}: Props) => {
+export const EarthEventDetailsHero = ({enrichment, t}: Props) => {
+    const {event, epicBackground} = enrichment;
+
     return (
         <motion.section
             initial={{opacity: 0, y: 18}}
             animate={{opacity: 1, y: 0}}
             transition={{duration: 0.45}}
-            className="relative overflow-hidden rounded-[2.2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl sm:p-8"
+            className="relative min-h-[480px] overflow-hidden rounded-[2.2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl sm:p-8"
         >
+            {epicBackground?.imageUrl && (
+                <motion.img
+                    src={epicBackground.imageUrl}
+                    alt={epicBackground.caption}
+                    className="absolute right-[-110px] top-[-120px] h-[620px] w-[620px] rounded-full object-cover opacity-35"
+                    animate={{scale: [1, 1.04, 1], rotate: [0, 1.5, 0]}}
+                    transition={{duration: 12, repeat: Infinity, ease: "easeInOut"}}
+                />
+            )}
+
             <motion.div
                 className="absolute inset-0"
                 style={{background: "var(--hero-bg)"}}
-                animate={{opacity: [0.32, 0.55, 0.32]}}
-                transition={{duration: 7, repeat: Infinity, ease: "easeInOut"}}
+                animate={{opacity: [0.72, 0.95, 0.72]}}
+                transition={{duration: 8, repeat: Infinity, ease: "easeInOut"}}
             />
 
-            <motion.div
-                className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
-                animate={{x: ["-100%", "100%"]}}
-                transition={{duration: 5, repeat: Infinity, ease: "easeInOut"}}
-            />
+            <div className="relative z-10 flex min-h-[420px] flex-col justify-between">
+                <div>
+                    <p className="earth-label text-[11px] font-black uppercase tracking-[0.24em]">
+                        {t.details.nasaEvent}
+                    </p>
 
-            <div className="relative z-10">
-                <p className="earth-label text-[11px] font-black uppercase tracking-[0.24em]">
-                    {t.details.nasaEvent}
-                </p>
+                    <div className="mt-4 flex flex-wrap items-start justify-between gap-5">
+                        <div className="max-w-5xl">
+                            <h1 className="text-4xl font-black uppercase tracking-[-0.06em] sm:text-5xl">
+                                {event.title}
+                            </h1>
 
-                <div className="mt-4 flex flex-wrap items-start justify-between gap-5">
-                    <div className="max-w-5xl">
-                        <h1 className="bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-4xl font-black uppercase tracking-[-0.06em] text-transparent sm:text-5xl">
-                            {event.title}
-                        </h1>
+                            <p className="earth-muted mt-4 max-w-4xl text-sm leading-7">
+                                {event.description ?? t.details.descriptionFallback}
+                            </p>
+                        </div>
 
-                        <p className="mt-4 max-w-4xl text-sm leading-7 text-[var(--color-text-muted)]">
-                            {event.description ?? t.details.descriptionFallback}
-                        </p>
+                        <span className="earth-label rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase">
+                            {event.status === "open" ? t.details.open : t.details.closed}
+                        </span>
                     </div>
-
-                    <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase text-[var(--color-accent)]">
-                        {event.status === "open" ? t.details.open : t.details.closed}
-                    </span>
                 </div>
 
                 <div className="mt-7 grid gap-3 md:grid-cols-2 xl:grid-cols-5">

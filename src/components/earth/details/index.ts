@@ -3,3 +3,4 @@ export * from './EarthEventDetailsHero';
 export * from './EarthEventSources';
 export * from './EarthEventGeometryList';
 export * from './EarthEventRawData';
+export * from './EarthEventOfficialInfo';
