@@ -11,6 +11,7 @@ import type {EarthLocale} from "@/src/types/earth/earthUi.types";
 import {EarthBackground} from "../EarthBackground";
 import {EarthLayerDetailsHero} from "./EarthLayerDetailsHero";
 import {EarthLayerPreview} from "./EarthLayerPreview";
+import {EarthLayerTemplateBlock} from "@/src/components/earth/layers/EarthLayerTemplateBlock";
 
 type Props = {
     layerId: string;
@@ -110,23 +111,7 @@ export const EarthLayerDetailsPage = ({layerId}: Props) => {
                             </section>
                         </section>
 
-                        <section className="relative overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl">
-                            <div className="absolute inset-0 opacity-25" style={{background: "var(--hero-bg)"}} />
-
-                            <div className="relative z-10">
-                                <h2 className="text-xl font-black uppercase tracking-[-0.04em]">
-                                    WMTS Resource Template
-                                </h2>
-
-                                <p className="earth-muted mt-2 text-sm leading-6">
-                                    Official NASA GIBS tile template returned by WMTS capabilities.
-                                </p>
-
-                                <pre className="mt-4 max-h-[260px] overflow-auto rounded-[1rem] border border-[var(--color-border)] bg-[var(--color-card)]/60 p-4 text-xs leading-6 text-[var(--color-text-muted)]">
-                                    {data.resourceTemplate ?? "—"}
-                                </pre>
-                            </div>
-                        </section>
+                        <EarthLayerTemplateBlock template={data.resourceTemplate} />
                     </>
                 )}
             </div>
