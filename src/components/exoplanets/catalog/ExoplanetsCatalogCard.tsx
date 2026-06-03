@@ -18,8 +18,8 @@ const formatNumber = (value: number | null, digits = 2) => {
     return Number(value.toFixed(digits));
 };
 
-const getPlanetSlug = (name: string | null) => {
-    return encodeURIComponent((name ?? "unknown-planet").toLowerCase());
+const getPlanetHref = (name: string | null) => {
+    return `/exoplanets/catalog/${encodeURIComponent(name ?? "")}`;
 };
 
 export const ExoplanetsCatalogCard = ({item, index}: Props) => {
@@ -33,7 +33,11 @@ export const ExoplanetsCatalogCard = ({item, index}: Props) => {
             transition={{duration: 0.4, delay: Math.min(index * 0.035, 0.22)}}
             className="group relative min-h-[350px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] backdrop-blur-2xl transition duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
         >
-            <div className="absolute inset-0 opacity-25 transition duration-500 group-hover:opacity-55" style={{background: "var(--hero-bg)"}} />
+            <div
+                className="absolute inset-0 opacity-25 transition duration-500 group-hover:opacity-55"
+                style={{background: "var(--hero-bg)"}}
+            />
+
             <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:26px_26px]" />
 
             <motion.div
@@ -43,7 +47,7 @@ export const ExoplanetsCatalogCard = ({item, index}: Props) => {
             />
 
             <Link
-                href={`/exoplanets/catalog/${getPlanetSlug(item.pl_name)}`}
+                href={getPlanetHref(item.pl_name)}
                 className="relative z-10 flex min-h-[350px] flex-col p-5"
             >
                 <div className="flex items-start justify-between gap-4">
