@@ -32,4 +32,5 @@ export type ExoplanetFilters = {
     sortBy: ExoplanetSortBy;
     order: ExoplanetOrder;
     limit: number;
+    page: number;
 };

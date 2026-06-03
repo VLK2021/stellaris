@@ -3,15 +3,17 @@
 import {motion} from "framer-motion";
 
 import type {ExoplanetPlanet} from "@/src/types/exoplanets/exoplanets.types";
+import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 
 import {ExoplanetRow} from "./ExoplanetRow";
 
 type Props = {
     planet: ExoplanetPlanet;
     index: number;
+    t: ExoplanetsLocale;
 };
 
-export const ExoplanetCard = ({planet, index}: Props) => {
+export const ExoplanetCard = ({planet, index, t}: Props) => {
     return (
         <motion.article
             initial={{opacity: 0, y: 16}}
@@ -27,22 +29,22 @@ export const ExoplanetCard = ({planet, index}: Props) => {
 
             <div className="relative z-10">
                 <p className="exo-label text-[10px] font-black uppercase tracking-[0.18em]">
-                    {planet.discoverymethod ?? "Unknown method"}
+                    {planet.discoverymethod ?? t.explorer.unknownMethod}
                 </p>
 
                 <h3 className="mt-2 text-2xl font-black">
-                    {planet.pl_name ?? "Unknown planet"}
+                    {planet.pl_name ?? t.explorer.unknownPlanet}
                 </h3>
 
                 <p className="exo-muted mt-1 text-sm">
-                    Host star: {planet.hostname ?? "—"}
+                    {t.explorer.hostStar}: {planet.hostname ?? "—"}
                 </p>
 
                 <div className="mt-5 grid gap-2 text-sm text-[var(--color-text-muted)]">
-                    <ExoplanetRow label="Year" value={planet.disc_year} />
+                    <ExoplanetRow label={t.explorer.year} value={planet.disc_year} />
 
                     <ExoplanetRow
-                        label="Distance"
+                        label={t.explorer.distance}
                         value={
                             planet.sy_dist !== null
                                 ? `${planet.sy_dist.toFixed(2)} pc`
@@ -51,7 +53,7 @@ export const ExoplanetCard = ({planet, index}: Props) => {
                     />
 
                     <ExoplanetRow
-                        label="Radius"
+                        label={t.explorer.radius}
                         value={
                             planet.pl_rade !== null
                                 ? `${planet.pl_rade} R⊕`
@@ -60,7 +62,7 @@ export const ExoplanetCard = ({planet, index}: Props) => {
                     />
 
                     <ExoplanetRow
-                        label="Mass"
+                        label={t.explorer.mass}
                         value={
                             planet.pl_bmasse !== null
                                 ? `${planet.pl_bmasse} M⊕`
@@ -69,7 +71,7 @@ export const ExoplanetCard = ({planet, index}: Props) => {
                     />
 
                     <ExoplanetRow
-                        label="Orbit"
+                        label={t.explorer.orbit}
                         value={
                             planet.pl_orbper !== null
                                 ? `${planet.pl_orbper} days`
@@ -78,7 +80,7 @@ export const ExoplanetCard = ({planet, index}: Props) => {
                     />
 
                     <ExoplanetRow
-                        label="Temp"
+                        label={t.explorer.temperature}
                         value={
                             planet.pl_eqt !== null
                                 ? `${planet.pl_eqt} K`

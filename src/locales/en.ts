@@ -622,6 +622,51 @@ const en = {
             openSource: "Open Source",
         },
     },
+
+    exoplanets: {
+        hero: {
+            eyebrow: "NASA Exoplanet Archive",
+            title: "Worlds Beyond Our Solar System",
+            description:
+                "Explore confirmed exoplanets, host stars, discovery methods, orbital parameters, planetary radius, mass, temperature and distance using NASA Exoplanet Archive TAP.",
+            source: "Source",
+            dataset: "Dataset",
+            mode: "Mode",
+            data: "Data",
+        },
+
+        explorer: {
+            title: "Exoplanet Explorer",
+            description: "Direct TAP query to NASA Exoplanet Archive.",
+            loaded: "loaded",
+            search: "Search",
+            searchPlaceholder: "Kepler, TOI, TRAPPIST...",
+            discovery: "Discovery",
+            all: "All",
+            yearFrom: "Year from",
+            yearTo: "Year to",
+            maxRadius: "Max radius",
+            tempMin: "Temp min",
+            tempMax: "Temp max",
+            sortBy: "Sort by",
+            order: "Order",
+            desc: "Desc",
+            asc: "Asc",
+            discoveryYear: "Discovery year",
+            planetName: "Planet name",
+            distance: "Distance",
+            radius: "Radius",
+            mass: "Mass",
+            temperature: "Temperature",
+            unknownMethod: "Unknown method",
+            unknownPlanet: "Unknown planet",
+            hostStar: "Host star",
+            year: "Year",
+            orbit: "Orbit",
+            requestError: "Exoplanet Archive request failed",
+            unknownError: "Unknown Exoplanet Archive error.",
+        },
+    }
 };
 
 export default en;

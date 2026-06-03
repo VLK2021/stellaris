@@ -1,0 +1,42 @@
+export type ExoplanetsLocale = {
+    hero: {
+        eyebrow: string;
+        title: string;
+        description: string;
+        source: string;
+        dataset: string;
+        mode: string;
+        data: string;
+    };
+    explorer: {
+        title: string;
+        description: string;
+        loaded: string;
+        search: string;
+        searchPlaceholder: string;
+        discovery: string;
+        all: string;
+        yearFrom: string;
+        yearTo: string;
+        maxRadius: string;
+        tempMin: string;
+        tempMax: string;
+        sortBy: string;
+        order: string;
+        desc: string;
+        asc: string;
+        discoveryYear: string;
+        planetName: string;
+        distance: string;
+        radius: string;
+        mass: string;
+        temperature: string;
+        unknownMethod: string;
+        unknownPlanet: string;
+        hostStar: string;
+        year: string;
+        orbit: string;
+        requestError: string;
+        unknownError: string;
+    };
+};

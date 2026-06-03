@@ -622,6 +622,50 @@ const uk = {
             openSource: "Відкрити джерело",
         },
     },
+
+    exoplanets: {
+        hero: {
+            eyebrow: "Архів екзопланет NASA",
+            title: "Світи за межами Сонячної системи",
+            description:
+                "Досліджуй підтверджені екзопланети, зоряні системи, методи відкриття, орбіти, радіуси, маси, температури та відстані через NASA Exoplanet Archive TAP.",
+            source: "Джерело",
+            dataset: "Набір даних",
+            mode: "Режим",
+            data: "Дані",
+        },
+        explorer: {
+            title: "Провідник екзопланет",
+            description: "Прямий TAP-запит до NASA Exoplanet Archive.",
+            loaded: "завантажено",
+            search: "Пошук",
+            searchPlaceholder: "Kepler, TOI, TRAPPIST...",
+            discovery: "Метод відкриття",
+            all: "Усі",
+            yearFrom: "Рік від",
+            yearTo: "Рік до",
+            maxRadius: "Макс. радіус",
+            tempMin: "Темп. мін",
+            tempMax: "Темп. макс",
+            sortBy: "Сортувати за",
+            order: "Порядок",
+            desc: "Спадання",
+            asc: "Зростання",
+            discoveryYear: "Рік відкриття",
+            planetName: "Назва планети",
+            distance: "Відстань",
+            radius: "Радіус",
+            mass: "Маса",
+            temperature: "Температура",
+            unknownMethod: "Невідомий метод",
+            unknownPlanet: "Невідома планета",
+            hostStar: "Зірка-хост",
+            year: "Рік",
+            orbit: "Орбіта",
+            requestError: "Помилка запиту до Exoplanet Archive",
+            unknownError: "Невідома помилка Exoplanet Archive.",
+        },
+    }
 };
 
 export default uk;
