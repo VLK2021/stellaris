@@ -5,3 +5,5 @@ export * from './ExoplanetsFilters';
 export * from './ExoplanetCard';
 export * from './ExoplanetRow';
 export * from './ExoplanetsCommandCenter';
+export * from './ExoplanetsOrbitField';
+export * from './ExoplanetsControlNode';
