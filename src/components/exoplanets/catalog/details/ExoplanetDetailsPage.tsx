@@ -5,7 +5,6 @@ import type {ReactNode} from "react";
 import {useEffect, useMemo, useState} from "react";
 import {motion} from "framer-motion";
 import {
-    Activity,
     ArrowLeft,
     Calendar,
     Database,
@@ -62,12 +61,12 @@ const format = (value: number | null, suffix = "", digits = 2) => {
 };
 
 const getPlanetSize = (radius: number | null) => {
-    if (!radius) return 210;
-    if (radius < 1) return 150;
-    if (radius < 2) return 185;
-    if (radius < 5) return 230;
-    if (radius < 10) return 270;
-    return 310;
+    if (!radius) return 230;
+    if (radius < 1) return 160;
+    if (radius < 2) return 190;
+    if (radius < 5) return 240;
+    if (radius < 10) return 290;
+    return 330;
 };
 
 const getPlanetGradient = (temperature: number | null) => {
@@ -126,16 +125,18 @@ export const ExoplanetDetailsPage = ({planet}: {planet: string}) => {
 
     if (loading) {
         return (
-            <main className="grid min-h-screen place-items-center bg-[var(--color-background)] text-[var(--color-text)]">
-                <Loader2 className="h-10 w-10 animate-spin text-[var(--color-accent)]" />
+            <main className="relative grid min-h-screen place-items-center overflow-hidden bg-[var(--color-background)] text-[var(--color-text)]">
+                <SpaceBackground />
+                <Loader2 className="relative z-10 h-10 w-10 animate-spin text-[var(--color-accent)]" />
             </main>
         );
     }
 
     if (error || !data) {
         return (
-            <main className="grid min-h-screen place-items-center bg-[var(--color-background)] p-6 text-[var(--color-text)]">
-                <div className="rounded-[2rem] border border-[var(--color-error)]/40 bg-[var(--color-error)]/10 p-6 text-[var(--color-error)]">
+            <main className="relative grid min-h-screen place-items-center overflow-hidden bg-[var(--color-background)] p-6 text-[var(--color-text)]">
+                <SpaceBackground />
+                <div className="relative z-10 rounded-[2rem] border border-[var(--color-error)]/40 bg-[var(--color-error)]/10 p-6 text-[var(--color-error)] backdrop-blur-xl">
                     {error ?? t.notFound}
                 </div>
             </main>
@@ -144,15 +145,14 @@ export const ExoplanetDetailsPage = ({planet}: {planet: string}) => {
 
     return (
         <main className="relative min-h-screen overflow-hidden bg-[var(--color-background)] text-[var(--color-text)]">
-            <div className="pointer-events-none fixed inset-0 opacity-90" style={{background: "var(--body-bg)"}} />
-            <div className="pointer-events-none fixed inset-0 opacity-30 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:36px_36px]" />
+            <SpaceBackground />
 
             <div className="relative z-10 mx-auto grid max-w-[1500px] gap-5 px-4 py-6 sm:px-6 lg:px-8">
                 <Link
                     href="/exoplanets/catalog"
-                    className="w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-accent)] backdrop-blur-xl"
+                    className="group w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-accent)] shadow-[var(--shadow-soft)] backdrop-blur-xl transition hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
                 >
-                    <ArrowLeft className="mr-2 inline h-4 w-4" />
+                    <ArrowLeft className="mr-2 inline h-4 w-4 transition group-hover:-translate-x-1" />
                     {t.back}
                 </Link>
 
@@ -200,32 +200,77 @@ export const ExoplanetDetailsPage = ({planet}: {planet: string}) => {
     );
 };
 
+const SpaceBackground = () => (
+    <>
+        <div className="pointer-events-none fixed inset-0 opacity-95" style={{background: "var(--body-bg)"}} />
+
+        <motion.div
+            className="pointer-events-none fixed inset-0"
+            style={{
+                background:
+                    "radial-gradient(circle at 18% 20%, var(--color-accent-soft), transparent 32%), radial-gradient(circle at 84% 16%, rgba(139, 92, 246, .16), transparent 34%), radial-gradient(circle at 48% 105%, rgba(236, 72, 153, .12), transparent 36%)",
+            }}
+            animate={{
+                scale: [1, 1.04, 1],
+                opacity: [0.55, 0.95, 0.55],
+            }}
+            transition={{duration: 12, repeat: Infinity, ease: "easeInOut"}}
+        />
+
+        <motion.div
+            className="pointer-events-none fixed inset-0 opacity-30 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:34px_34px]"
+            animate={{x: [0, -18, 0], y: [0, 12, 0]}}
+            transition={{duration: 16, repeat: Infinity, ease: "easeInOut"}}
+        />
+
+        <div className="pointer-events-none fixed inset-0 opacity-[0.12] [background-image:linear-gradient(var(--color-border)_1px,transparent_1px),linear-gradient(90deg,var(--color-border)_1px,transparent_1px)] [background-size:88px_88px]" />
+    </>
+);
+
 const Hero = ({data, t}: {data: ExoplanetDetails; t: ExoplanetsLocale["details"]}) => {
     const size = getPlanetSize(data.pl_rade);
     const gradient = getPlanetGradient(data.pl_eqt);
 
     return (
-        <section className="relative overflow-hidden rounded-[2.4rem] border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl lg:p-8">
+        <section className="relative overflow-hidden rounded-[2.5rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl lg:p-8">
             <motion.div
                 className="absolute inset-0"
                 style={{background: "var(--hero-bg)"}}
-                animate={{opacity: [0.55, 0.95, 0.55], scale: [1, 1.03, 1]}}
-                transition={{duration: 9, repeat: Infinity, ease: "easeInOut"}}
+                animate={{opacity: [0.45, 0.85, 0.45], scale: [1, 1.035, 1]}}
+                transition={{duration: 10, repeat: Infinity, ease: "easeInOut"}}
             />
 
-            <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:32px_32px]" />
+            <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:30px_30px]" />
 
-            <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_440px]">
-                <div>
-                    <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
+            <motion.div
+                className="absolute -right-32 -top-32 h-[520px] w-[520px] rounded-full border border-[var(--color-accent)]/20"
+                animate={{rotate: 360}}
+                transition={{duration: 70, repeat: Infinity, ease: "linear"}}
+            />
+
+            <motion.div
+                className="absolute -right-10 top-20 h-[340px] w-[340px] rounded-full border border-[var(--color-brand-secondary)]/20"
+                animate={{rotate: -360}}
+                transition={{duration: 52, repeat: Infinity, ease: "linear"}}
+            />
+
+            <motion.div
+                className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
+                animate={{x: ["-30%", "30%", "-30%"], opacity: [0.15, 0.75, 0.15]}}
+                transition={{duration: 6, repeat: Infinity, ease: "easeInOut"}}
+            />
+
+            <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_460px]">
+                <div className="flex flex-col justify-center">
+                    <p className="text-[11px] font-black uppercase tracking-[0.26em] text-[var(--color-accent)]">
                         {t.eyebrow}
                     </p>
 
-                    <h1 className="mt-4 bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-4xl font-black uppercase tracking-[-0.06em] text-transparent sm:text-5xl">
+                    <h1 className="mt-4 max-w-4xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-4xl font-black uppercase leading-[0.95] tracking-[-0.06em] text-transparent sm:text-5xl">
                         {data.pl_name ?? t.unknown}
                     </h1>
 
-                    <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)]">
+                    <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)]">
                         {t.confirmed} {t.orbiting}{" "}
                         <span className="font-bold text-[var(--color-text)]">
                             {data.hostname ?? t.unknown}
@@ -241,21 +286,29 @@ const Hero = ({data, t}: {data: ExoplanetDetails; t: ExoplanetsLocale["details"]
                     </div>
                 </div>
 
-                <div className="relative grid min-h-[380px] place-items-center overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-glass)] backdrop-blur-xl">
+                <div className="relative grid min-h-[420px] place-items-center overflow-hidden rounded-[2.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] backdrop-blur-xl">
+                    <div className="absolute inset-0 opacity-30" style={{background: "var(--hero-bg)"}} />
+
                     <motion.div
-                        className="absolute h-[360px] w-[360px] rounded-full border border-[var(--color-accent)]/30"
+                        className="absolute h-[390px] w-[390px] rounded-full border border-[var(--color-accent)]/30"
                         animate={{rotate: 360}}
                         transition={{duration: 44, repeat: Infinity, ease: "linear"}}
                     />
 
                     <motion.div
-                        className="absolute h-[255px] w-[255px] rounded-full border border-[var(--color-brand-secondary)]/30"
+                        className="absolute h-[285px] w-[285px] rounded-full border border-[var(--color-brand-secondary)]/30"
                         animate={{rotate: -360}}
                         transition={{duration: 31, repeat: Infinity, ease: "linear"}}
                     />
 
                     <motion.div
-                        className="rounded-full"
+                        className="absolute h-[185px] w-[185px] rounded-full border border-[var(--color-border)]"
+                        animate={{rotate: 360}}
+                        transition={{duration: 22, repeat: Infinity, ease: "linear"}}
+                    />
+
+                    <motion.div
+                        className="relative z-10 rounded-full"
                         style={{
                             width: size,
                             height: size,
@@ -265,11 +318,17 @@ const Hero = ({data, t}: {data: ExoplanetDetails; t: ExoplanetsLocale["details"]
                             scale: [1, 1.045, 1],
                             boxShadow: [
                                 "0 0 50px rgba(56,189,248,.18)",
-                                "0 0 110px rgba(56,189,248,.38)",
+                                "0 0 120px rgba(56,189,248,.42)",
                                 "0 0 50px rgba(56,189,248,.18)",
                             ],
                         }}
                         transition={{duration: 4, repeat: Infinity, ease: "easeInOut"}}
+                    />
+
+                    <motion.div
+                        className="absolute left-1/2 top-1/2 h-px w-[120%] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
+                        animate={{rotate: 360, opacity: [0.08, 0.38, 0.08]}}
+                        transition={{duration: 9, repeat: Infinity, ease: "linear"}}
                     />
 
                     <p className="absolute bottom-5 left-5 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)]">
@@ -290,11 +349,15 @@ const Stat = ({
     label: string;
     value: string | number;
 }) => (
-    <div className="rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 backdrop-blur-xl">
-        <Icon className="h-4 w-4 text-[var(--color-accent)]" />
-        <p className="mt-3 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">{label}</p>
-        <p className="mt-1 text-sm font-black text-[var(--color-text)]">{value}</p>
-    </div>
+    <motion.div
+        whileHover={{y: -3, scale: 1.02}}
+        className="relative overflow-hidden rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 backdrop-blur-xl"
+    >
+        <div className="absolute inset-0 opacity-0 transition group-hover:opacity-40" style={{background: "var(--hero-bg)"}} />
+        <Icon className="relative z-10 h-4 w-4 text-[var(--color-accent)]" />
+        <p className="relative z-10 mt-3 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">{label}</p>
+        <p className="relative z-10 mt-1 text-sm font-black text-[var(--color-text)]">{value}</p>
+    </motion.div>
 );
 
 const Panel = ({title, children}: {title: string; children: ReactNode}) => (
@@ -302,18 +365,28 @@ const Panel = ({title, children}: {title: string; children: ReactNode}) => (
         initial={{opacity: 0, y: 18}}
         whileInView={{opacity: 1, y: 0}}
         viewport={{once: true, amount: 0.2}}
-        className="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl"
+        className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl"
     >
-        <h2 className="bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-2xl font-black uppercase tracking-[-0.05em] text-transparent">
-            {title}
-        </h2>
+        <div className="absolute inset-0 opacity-20" style={{background: "var(--hero-bg)"}} />
 
-        <div className="mt-5 grid gap-3">{children}</div>
+        <motion.div
+            className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
+            animate={{x: ["-100%", "100%"]}}
+            transition={{duration: 4, repeat: Infinity, ease: "linear"}}
+        />
+
+        <div className="relative z-10">
+            <h2 className="bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-2xl font-black uppercase tracking-[-0.05em] text-transparent">
+                {title}
+            </h2>
+
+            <div className="mt-5 grid gap-3">{children}</div>
+        </div>
     </motion.article>
 );
 
 const Info = ({label, value}: {label: string; value: string | number}) => (
-    <div className="flex items-center justify-between gap-4 border-b border-[var(--color-border)]/60 pb-2 text-sm">
+    <div className="flex items-center justify-between gap-4 rounded-[1rem] border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-3 text-sm backdrop-blur-xl">
         <span className="text-[var(--color-text-muted)]">{label}</span>
         <span className="text-right font-black text-[var(--color-text)]">{value}</span>
     </div>
