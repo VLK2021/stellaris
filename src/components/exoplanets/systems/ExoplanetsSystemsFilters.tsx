@@ -1,6 +1,7 @@
 "use client";
 
 import {Search} from "lucide-react";
+
 import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 
 type Props = {
@@ -77,18 +78,24 @@ type SelectProps = {
     options: [string, string][];
 };
 
-const Select = ({label, value, onChange, options}: SelectProps) => (
-    <label className="grid gap-2">
-        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            {label}
-        </span>
+const Select = ({label, value, onChange, options}: SelectProps) => {
+    return (
+        <label className="grid gap-2">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)]">
+                {label}
+            </span>
 
-        <select value={value} onChange={(event) => onChange(event.target.value)} className="input">
-            {options.map(([optionValue, optionLabel]) => (
-                <option key={optionValue} value={optionValue}>
-                    {optionLabel}
-                </option>
-            ))}
-        </select>
-    </label>
-);
+            <select
+                value={value}
+                onChange={(event) => onChange(event.target.value)}
+                className="input"
+            >
+                {options.map(([optionValue, optionLabel]) => (
+                    <option key={optionValue} value={optionValue}>
+                        {optionLabel}
+                    </option>
+                ))}
+            </select>
+        </label>
+    );
+};

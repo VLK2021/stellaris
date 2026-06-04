@@ -61,7 +61,7 @@ export const ExoplanetsSystemsPage = () => {
         try {
             const params = new URLSearchParams({
                 page: String(page),
-                limit: "12",
+                limit: "9",
                 search,
                 sortBy,
                 order,
@@ -108,22 +108,44 @@ export const ExoplanetsSystemsPage = () => {
                 <motion.section
                     initial={{opacity: 0, y: 18}}
                     animate={{opacity: 1, y: 0}}
-                    className="relative overflow-hidden rounded-[2.3rem] border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl"
+                    className="relative overflow-hidden rounded-[2.5rem] border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl lg:p-8"
                 >
-                    <div className="absolute inset-0 opacity-35" style={{background: "var(--hero-bg)"}} />
+                    <motion.div
+                        className="absolute inset-0"
+                        style={{background: "var(--hero-bg)"}}
+                        animate={{opacity: [0.4, 0.85, 0.4], scale: [1, 1.03, 1]}}
+                        transition={{duration: 10, repeat: Infinity, ease: "easeInOut"}}
+                    />
+
+                    <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:30px_30px]" />
+
+                    <motion.div
+                        className="absolute -right-28 -top-32 h-[460px] w-[460px] rounded-full border border-[var(--color-accent)]/25"
+                        animate={{rotate: 360}}
+                        transition={{duration: 70, repeat: Infinity, ease: "linear"}}
+                    />
 
                     <div className="relative z-10">
                         <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
                             {t.eyebrow}
                         </p>
 
-                        <h1 className="mt-3 max-w-4xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-3xl font-black uppercase tracking-[-0.05em] text-transparent sm:text-4xl">
+                        <h1 className="mt-4 max-w-4xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-3xl font-black uppercase tracking-[-0.05em] text-transparent sm:text-5xl">
                             {t.title}
                         </h1>
 
                         <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)]">
                             {t.description}
                         </p>
+
+                        <div className="mt-7 flex flex-wrap gap-3 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+                            <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2">
+                                {t.total}: {total}
+                            </span>
+                            <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2">
+                                {t.page} {page} / {totalPages}
+                            </span>
+                        </div>
                     </div>
                 </motion.section>
 
@@ -147,7 +169,7 @@ export const ExoplanetsSystemsPage = () => {
                 />
 
                 {loading && (
-                    <div className="grid min-h-[300px] place-items-center rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)]">
+                    <div className="grid min-h-[360px] place-items-center rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)]">
                         <Loader2 className="h-9 w-9 animate-spin text-[var(--color-accent)]" />
                     </div>
                 )}
@@ -160,12 +182,7 @@ export const ExoplanetsSystemsPage = () => {
 
                 {!loading && !error && (
                     <>
-                        <div className="flex items-center justify-between gap-4 rounded-[1.4rem] border border-[var(--color-border)] bg-[var(--color-card)] px-5 py-4 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
-                            <span>{t.total}: {total}</span>
-                            <span>{t.page} {page} / {totalPages}</span>
-                        </div>
-
-                        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                        <section className="grid gap-5">
                             {items.map((item, index) => (
                                 <ExoplanetsSystemsCard
                                     key={`${item.hostname}-${index}`}
