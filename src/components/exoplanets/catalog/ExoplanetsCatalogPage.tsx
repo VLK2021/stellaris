@@ -2,7 +2,7 @@
 
 import {useCallback, useEffect, useState} from "react";
 import {motion} from "framer-motion";
-import {Loader2} from "lucide-react";
+import {ArrowLeft, Loader2} from "lucide-react";
 
 import {Pagination} from "@/src/common/pagination";
 import {useLanguage} from "@/src/context/LanguageContext";
@@ -10,6 +10,7 @@ import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 
 import {ExoplanetsCatalogCard} from "./ExoplanetsCatalogCard";
 import {ExoplanetsCatalogFilters} from "./ExoplanetsCatalogFilters";
+import Link from "next/link";
 
 export type ExoplanetCatalogItem = {
     pl_name: string | null;
@@ -98,6 +99,14 @@ export const ExoplanetsCatalogPage = () => {
         <main className="relative min-h-screen overflow-hidden bg-[var(--color-background)] text-[var(--color-text)]">
             <div className="pointer-events-none fixed inset-0 opacity-90" style={{background: "var(--body-bg)"}} />
             <div className="pointer-events-none fixed inset-0 opacity-30 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:36px_36px]" />
+
+            <Link
+                href="/exoplanets"
+                className="group ml-8 mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-accent)] backdrop-blur-xl transition hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
+            >
+                <ArrowLeft className="h-4 w-4 transition group-hover:-translate-x-1" />
+                {t.backToExoplanets}
+            </Link>
 
             <div className="relative z-10 mx-auto grid max-w-[1500px] gap-5 px-4 py-6 sm:px-6 lg:px-8">
                 <motion.section

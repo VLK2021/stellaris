@@ -103,5 +103,6 @@ export type ExoplanetsLocale = {
         hostStar: string;
         orbit: string;
         details: string;
+        backToExoplanets: string;
     };
 };

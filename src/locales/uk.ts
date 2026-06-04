@@ -737,6 +737,7 @@ const uk = {
             hostStar: "Зірка-хост",
             orbit: "Орбіта",
             details: "Деталі",
+            backToExoplanets: "Назад до екзопланет",
         },
     }
 };

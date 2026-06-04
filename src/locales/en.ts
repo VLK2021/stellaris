@@ -737,6 +737,7 @@ const en = {
             hostStar: "Host star",
             orbit: "Orbit",
             details: "Details",
+            backToExoplanets: "Back to Exoplanets",
         },
     }
 };
