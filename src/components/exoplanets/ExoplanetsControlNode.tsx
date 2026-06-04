@@ -4,6 +4,8 @@ import Link from "next/link";
 import {motion} from "framer-motion";
 import type {LucideIcon} from "lucide-react";
 
+import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
+
 type Node = {
     href: string;
     title: string;
@@ -15,9 +17,10 @@ type Node = {
 type Props = {
     node: Node;
     index: number;
+    t: ExoplanetsLocale;
 };
 
-export const ExoplanetsControlNode = ({node, index}: Props) => {
+export const ExoplanetsControlNode = ({node, index, t}: Props) => {
     const Icon = node.icon;
 
     return (
@@ -52,7 +55,7 @@ export const ExoplanetsControlNode = ({node, index}: Props) => {
                         </div>
 
                         <span className="exo-label text-[10px] font-black uppercase tracking-[0.18em]">
-                            Online
+                            {t.portal.online}
                         </span>
                     </div>
 
@@ -65,7 +68,7 @@ export const ExoplanetsControlNode = ({node, index}: Props) => {
                     </p>
 
                     <p className="exo-label mt-4 text-xs font-black uppercase tracking-[0.18em]">
-                        Відкрити →
+                        {t.portal.open} →
                     </p>
                 </div>
             </Link>

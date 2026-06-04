@@ -625,47 +625,49 @@ const uk = {
 
     exoplanets: {
         hero: {
-            eyebrow: "Архів екзопланет NASA",
+            eyebrow: "NASA Exoplanet Archive",
             title: "Світи за межами Сонячної системи",
             description:
-                "Досліджуй підтверджені екзопланети, зоряні системи, методи відкриття, орбіти, радіуси, маси, температури та відстані через NASA Exoplanet Archive TAP.",
-            source: "Джерело",
-            dataset: "Набір даних",
-            mode: "Режим",
-            data: "Дані",
+                "Досліджуй підтверджені екзопланети, зоряні системи, методи відкриття, орбіти, маси, радіуси, температури та відстані через наукові дані NASA.",
         },
-        explorer: {
-            title: "Провідник екзопланет",
-            description: "Прямий TAP-запит до NASA Exoplanet Archive.",
-            loaded: "завантажено",
-            search: "Пошук",
-            searchPlaceholder: "Kepler, TOI, TRAPPIST...",
-            discovery: "Метод відкриття",
-            all: "Усі",
-            yearFrom: "Рік від",
-            yearTo: "Рік до",
-            maxRadius: "Макс. радіус",
-            tempMin: "Темп. мін",
-            tempMax: "Темп. макс",
-            sortBy: "Сортувати за",
-            order: "Порядок",
-            desc: "Спадання",
-            asc: "Зростання",
-            discoveryYear: "Рік відкриття",
-            planetName: "Назва планети",
-            distance: "Відстань",
-            radius: "Радіус",
-            mass: "Маса",
-            temperature: "Температура",
-            unknownMethod: "Невідомий метод",
-            unknownPlanet: "Невідома планета",
-            hostStar: "Зірка-хост",
-            year: "Рік",
-            orbit: "Орбіта",
-            requestError: "Помилка запиту до Exoplanet Archive",
-            unknownError: "Невідома помилка Exoplanet Archive.",
+        portal: {
+            eyebrow: "Exoplanet Portal",
+            title: "Командний центр екзопланет",
+            description:
+                "Обери напрям дослідження архіву NASA: планети, системи, зірки, атмосфери, методи відкриття та наукові таблиці.",
+            open: "Відкрити",
+            online: "Online",
+            catalog: {
+                title: "Каталог екзопланет",
+                description:
+                    "Підтверджені планети, параметри, орбіти, температура, маса та радіус.",
+            },
+            systems: {
+                title: "Зоряні системи",
+                description:
+                    "Планетні системи, хост-зірки, кількість планет і відстані.",
+            },
+            stars: {
+                title: "Зірки-хости",
+                description:
+                    "Зорі, навколо яких обертаються підтверджені екзопланети.",
+            },
+            methods: {
+                title: "Методи відкриття",
+                description:
+                    "Transit, Radial Velocity, Imaging, Microlensing та інші методи.",
+            },
+            atmospheres: {
+                title: "Атмосфери",
+                description:
+                    "Спектроскопія атмосфер і наукові спостереження екзопланет.",
+            },
+            archive: {
+                title: "NASA Archive",
+                description:
+                    "TAP-таблиці, datasets і структура NASA Exoplanet Archive.",
+            },
         },
-
         details: {
             back: "Назад до каталогу",
             eyebrow: "Об'єкт NASA Exoplanet Archive",
@@ -706,7 +708,7 @@ const uk = {
             loadingError: "Не вдалося завантажити екзопланету.",
             notFound: "Планету не знайдено.",
             unknown: "Невідомо",
-        }
+        },
     }
 };
 

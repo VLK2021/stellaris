@@ -7,3 +7,4 @@ export * from './ExoplanetRow';
 export * from './ExoplanetsCommandCenter';
 export * from './ExoplanetsOrbitField';
 export * from './ExoplanetsControlNode';
+export * from './ExoplanetsSpaceBackground';

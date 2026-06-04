@@ -628,45 +628,46 @@ const en = {
             eyebrow: "NASA Exoplanet Archive",
             title: "Worlds Beyond Our Solar System",
             description:
-                "Explore confirmed exoplanets, host stars, discovery methods, orbital parameters, planetary radius, mass, temperature and distance using NASA Exoplanet Archive TAP.",
-            source: "Source",
-            dataset: "Dataset",
-            mode: "Mode",
-            data: "Data",
+                "Explore confirmed exoplanets, star systems, discovery methods, orbits, masses, radii, temperatures and distances through NASA scientific data.",
         },
-
-        explorer: {
-            title: "Exoplanet Explorer",
-            description: "Direct TAP query to NASA Exoplanet Archive.",
-            loaded: "loaded",
-            search: "Search",
-            searchPlaceholder: "Kepler, TOI, TRAPPIST...",
-            discovery: "Discovery",
-            all: "All",
-            yearFrom: "Year from",
-            yearTo: "Year to",
-            maxRadius: "Max radius",
-            tempMin: "Temp min",
-            tempMax: "Temp max",
-            sortBy: "Sort by",
-            order: "Order",
-            desc: "Desc",
-            asc: "Asc",
-            discoveryYear: "Discovery year",
-            planetName: "Planet name",
-            distance: "Distance",
-            radius: "Radius",
-            mass: "Mass",
-            temperature: "Temperature",
-            unknownMethod: "Unknown method",
-            unknownPlanet: "Unknown planet",
-            hostStar: "Host star",
-            year: "Year",
-            orbit: "Orbit",
-            requestError: "Exoplanet Archive request failed",
-            unknownError: "Unknown Exoplanet Archive error.",
+        portal: {
+            eyebrow: "Exoplanet Portal",
+            title: "Exoplanet Command Center",
+            description:
+                "Choose a NASA archive research direction: planets, systems, host stars, atmospheres, discovery methods and scientific tables.",
+            open: "Open",
+            online: "Online",
+            catalog: {
+                title: "Exoplanet Catalog",
+                description:
+                    "Confirmed planets, parameters, orbits, temperature, mass and radius.",
+            },
+            systems: {
+                title: "Star Systems",
+                description:
+                    "Planetary systems, host stars, planet counts and distances.",
+            },
+            stars: {
+                title: "Host Stars",
+                description:
+                    "Stars orbited by confirmed exoplanets.",
+            },
+            methods: {
+                title: "Discovery Methods",
+                description:
+                    "Transit, Radial Velocity, Imaging, Microlensing and other methods.",
+            },
+            atmospheres: {
+                title: "Atmospheres",
+                description:
+                    "Atmospheric spectroscopy and scientific observations of exoplanets.",
+            },
+            archive: {
+                title: "NASA Archive",
+                description:
+                    "TAP tables, datasets and NASA Exoplanet Archive structure.",
+            },
         },
-
         details: {
             back: "Back to catalog",
             eyebrow: "NASA Exoplanet Archive Object",
@@ -707,7 +708,7 @@ const en = {
             loadingError: "Failed to load exoplanet.",
             notFound: "Planet not found.",
             unknown: "Unknown",
-        }
+        },
     }
 };
 
