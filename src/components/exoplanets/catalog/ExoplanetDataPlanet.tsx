@@ -9,12 +9,12 @@ type Props = {
 };
 
 const getPlanetSize = (radius: number | null) => {
-    if (!radius) return 66;
-    if (radius < 1) return 48;
-    if (radius < 2) return 58;
-    if (radius < 5) return 70;
-    if (radius < 10) return 82;
-    return 92;
+    if (!radius) return 74;
+    if (radius < 1) return 58;
+    if (radius < 2) return 72;
+    if (radius < 5) return 88;
+    if (radius < 10) return 104;
+    return 118;
 };
 
 const getPlanetGradient = (temperature: number | null) => {
@@ -42,28 +42,49 @@ export const ExoplanetDataPlanet = ({item}: Props) => {
     const gradient = getPlanetGradient(item.pl_eqt);
 
     return (
-        <div className="relative grid h-[108px] w-[108px] shrink-0 place-items-center overflow-hidden rounded-full">
+        <div className="relative h-[140px] w-[140px] shrink-0">
             <motion.div
-                className="absolute h-[104px] w-[104px] rounded-full border border-[var(--color-accent)]/25"
+                className="absolute inset-0 rounded-full border border-[var(--color-border)]"
                 animate={{rotate: 360}}
-                transition={{duration: 34, repeat: Infinity, ease: "linear"}}
+                transition={{duration: 28, repeat: Infinity, ease: "linear"}}
             />
 
             <motion.div
-                className="absolute h-[78px] w-[78px] rounded-full border border-[var(--color-brand-secondary)]/25"
+                className="absolute left-1/2 top-1/2 rounded-full border border-[var(--color-accent)]/35"
+                style={{
+                    width: size + 38,
+                    height: size + 38,
+                    x: "-50%",
+                    y: "-50%",
+                }}
                 animate={{rotate: -360}}
-                transition={{duration: 24, repeat: Infinity, ease: "linear"}}
+                transition={{duration: 38, repeat: Infinity, ease: "linear"}}
             />
 
             <motion.div
-                className="relative z-10 rounded-full shadow-[var(--shadow-glow)]"
+                className="absolute left-1/2 top-1/2 rounded-full shadow-[var(--shadow-glow)]"
                 style={{
                     width: size,
                     height: size,
+                    x: "-50%",
+                    y: "-50%",
                     background: gradient,
                 }}
-                animate={{scale: [1, 1.035, 1]}}
+                animate={{
+                    scale: [1, 1.045, 1],
+                    boxShadow: [
+                        "0 0 35px rgba(56,189,248,.14)",
+                        "0 0 70px rgba(56,189,248,.28)",
+                        "0 0 35px rgba(56,189,248,.14)",
+                    ],
+                }}
                 transition={{duration: 4, repeat: Infinity, ease: "easeInOut"}}
+            />
+
+            <motion.span
+                className="absolute left-[18%] top-[26%] h-2 w-2 rounded-full bg-[var(--color-accent)] shadow-[var(--shadow-glow)]"
+                animate={{scale: [1, 1.8, 1], opacity: [0.45, 1, 0.45]}}
+                transition={{duration: 2.5, repeat: Infinity}}
             />
         </div>
     );
