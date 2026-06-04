@@ -105,4 +105,35 @@ export type ExoplanetsLocale = {
         details: string;
         backToExoplanets: string;
     };
+
+    systems: {
+        backToExoplanets: string;
+        eyebrow: string;
+        title: string;
+        description: string;
+        search: string;
+        searchPlaceholder: string;
+        sortBy: string;
+        order: string;
+        asc: string;
+        desc: string;
+        hostName: string;
+        distance: string;
+        planets: string;
+        stars: string;
+        moons: string;
+        temperature: string;
+        radius: string;
+        mass: string;
+        age: string;
+        spectralType: string;
+        metallicity: string;
+        gravity: string;
+        total: string;
+        page: string;
+        open: string;
+        unknown: string;
+        loadingError: string;
+        unknownError: string;
+    };
 };
