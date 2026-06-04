@@ -1,12 +1,14 @@
 "use client";
 
 import {Search} from "lucide-react";
+import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 
 type Props = {
     search: string;
     method: string;
     sortBy: string;
     order: string;
+    t: ExoplanetsLocale["catalog"];
     onSearch: (value: string) => void;
     onMethod: (value: string) => void;
     onSortBy: (value: string) => void;
@@ -18,6 +20,7 @@ export const ExoplanetsCatalogFilters = ({
                                              method,
                                              sortBy,
                                              order,
+                                             t,
                                              onSearch,
                                              onMethod,
                                              onSortBy,
@@ -28,7 +31,7 @@ export const ExoplanetsCatalogFilters = ({
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
                 <label className="grid gap-2 xl:col-span-2">
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                        Пошук
+                        {t.search}
                     </span>
 
                     <div className="relative">
@@ -36,18 +39,18 @@ export const ExoplanetsCatalogFilters = ({
                         <input
                             value={search}
                             onChange={(event) => onSearch(event.target.value)}
-                            placeholder="Kepler, TOI, TRAPPIST..."
+                            placeholder={t.searchPlaceholder}
                             className="input pl-10"
                         />
                     </div>
                 </label>
 
                 <Select
-                    label="Метод відкриття"
+                    label={t.discoveryMethod}
                     value={method}
                     onChange={onMethod}
                     options={[
-                        ["", "Усі"],
+                        ["", t.all],
                         ["Transit", "Transit"],
                         ["Radial Velocity", "Radial Velocity"],
                         ["Microlensing", "Microlensing"],
@@ -56,26 +59,26 @@ export const ExoplanetsCatalogFilters = ({
                 />
 
                 <Select
-                    label="Сортувати"
+                    label={t.sortBy}
                     value={sortBy}
                     onChange={onSortBy}
                     options={[
-                        ["disc_year", "Рік відкриття"],
-                        ["pl_name", "Назва"],
-                        ["sy_dist", "Відстань"],
-                        ["pl_rade", "Радіус"],
-                        ["pl_bmasse", "Маса"],
-                        ["pl_eqt", "Температура"],
+                        ["disc_year", t.discoveryYear],
+                        ["pl_name", t.planetName],
+                        ["sy_dist", t.distance],
+                        ["pl_rade", t.radius],
+                        ["pl_bmasse", t.mass],
+                        ["pl_eqt", t.temperature],
                     ]}
                 />
 
                 <Select
-                    label="Порядок"
+                    label={t.order}
                     value={order}
                     onChange={onOrder}
                     options={[
-                        ["desc", "Спадання"],
-                        ["asc", "Зростання"],
+                        ["desc", t.desc],
+                        ["asc", t.asc],
                     ]}
                 />
             </div>

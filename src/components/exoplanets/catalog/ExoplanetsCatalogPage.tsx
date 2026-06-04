@@ -5,6 +5,8 @@ import {motion} from "framer-motion";
 import {Loader2} from "lucide-react";
 
 import {Pagination} from "@/src/common/pagination";
+import {useLanguage} from "@/src/context/LanguageContext";
+import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 
 import {ExoplanetsCatalogCard} from "./ExoplanetsCatalogCard";
 import {ExoplanetsCatalogFilters} from "./ExoplanetsCatalogFilters";
@@ -39,6 +41,9 @@ type ApiResponse = {
 };
 
 export const ExoplanetsCatalogPage = () => {
+    const {locale} = useLanguage();
+    const t = (locale.exoplanets as ExoplanetsLocale).catalog;
+
     const [items, setItems] = useState<ExoplanetCatalogItem[]>([]);
     const [search, setSearch] = useState("");
     const [method, setMethod] = useState("");
@@ -68,7 +73,7 @@ export const ExoplanetsCatalogPage = () => {
             const json = (await response.json()) as ApiResponse;
 
             if (!response.ok || !json.success) {
-                throw new Error(json.message ?? "Failed to load exoplanets.");
+                throw new Error(json.message ?? t.loadingError);
             }
 
             setItems(json.data);
@@ -76,11 +81,11 @@ export const ExoplanetsCatalogPage = () => {
             setTotalPages(json.pagination.totalPages);
         } catch (error) {
             setItems([]);
-            setError(error instanceof Error ? error.message : "Unknown error.");
+            setError(error instanceof Error ? error.message : t.unknownError);
         } finally {
             setLoading(false);
         }
-    }, [page, search, method, sortBy, order]);
+    }, [page, search, method, sortBy, order, t.loadingError, t.unknownError]);
 
     useEffect(() => {
         const timeout = window.setTimeout(loadData, 300);
@@ -101,16 +106,15 @@ export const ExoplanetsCatalogPage = () => {
                     className="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl"
                 >
                     <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
-                        NASA Exoplanet Archive
+                        {t.eyebrow}
                     </p>
 
                     <h1 className="mt-3 max-w-4xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-3xl font-black uppercase tracking-[-0.05em] text-transparent sm:text-4xl">
-                        Каталог підтверджених екзопланет
+                        {t.title}
                     </h1>
 
                     <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)]">
-                        Реальні дані з NASA Exoplanet Archive TAP: планети, зорі-хости,
-                        методи відкриття, орбіти, маса, радіус, температура та відстань.
+                        {t.description}
                     </p>
                 </motion.section>
 
@@ -119,6 +123,7 @@ export const ExoplanetsCatalogPage = () => {
                     method={method}
                     sortBy={sortBy}
                     order={order}
+                    t={t}
                     onSearch={(value) => {
                         setSearch(value);
                         resetPage();
@@ -152,8 +157,8 @@ export const ExoplanetsCatalogPage = () => {
                 {!loading && !error && (
                     <>
                         <div className="flex items-center justify-between gap-4 rounded-[1.4rem] border border-[var(--color-border)] bg-[var(--color-card)] px-5 py-4 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
-                            <span>Total: {total}</span>
-                            <span>Page {page} / {totalPages}</span>
+                            <span>{t.total}: {total}</span>
+                            <span>{t.page} {page} / {totalPages}</span>
                         </div>
 
                         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -162,6 +167,7 @@ export const ExoplanetsCatalogPage = () => {
                                     key={`${item.pl_name}-${item.hostname}-${index}`}
                                     item={item}
                                     index={index}
+                                    t={t}
                                 />
                             ))}
                         </section>
