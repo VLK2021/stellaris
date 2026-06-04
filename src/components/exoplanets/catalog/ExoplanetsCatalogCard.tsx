@@ -29,29 +29,32 @@ export const ExoplanetsCatalogCard = ({item, index, t}: Props) => {
 
     return (
         <motion.article
-            initial={{opacity: 0, y: 22, scale: 0.96}}
-            whileInView={{opacity: 1, y: 0, scale: 1}}
+            initial={{opacity: 0, y: 18}}
+            whileInView={{opacity: 1, y: 0}}
             viewport={{once: true, amount: 0.2}}
-            transition={{duration: 0.4, delay: Math.min(index * 0.035, 0.22)}}
-            className="group relative min-h-[350px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] backdrop-blur-2xl transition duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
+            transition={{duration: 0.32, delay: Math.min(index * 0.025, 0.16)}}
+            className="group relative isolate min-h-[330px] overflow-hidden rounded-[1.7rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] transition-transform duration-300 will-change-transform hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
         >
-            <div className="absolute inset-0 opacity-25 transition duration-500 group-hover:opacity-55" style={{background: "var(--hero-bg)"}} />
-            <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:26px_26px]" />
-
-            <motion.div
-                className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
-                animate={{x: ["-100%", "100%"]}}
-                transition={{duration: 3.5, repeat: Infinity, ease: "linear"}}
+            <div
+                className="pointer-events-none absolute inset-0 opacity-30"
+                style={{background: "var(--hero-bg)"}}
             />
 
-            <Link href={getPlanetHref(item.pl_name)} className="relative z-10 flex min-h-[350px] flex-col p-5">
+            <div className="pointer-events-none absolute inset-0 opacity-15 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:28px_28px]" />
+
+            <div className="pointer-events-none absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-40" />
+
+            <Link
+                href={getPlanetHref(item.pl_name)}
+                className="relative z-10 flex min-h-[330px] flex-col p-5"
+            >
                 <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
                         <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-accent)]">
                             {item.discoverymethod ?? t.unknownMethod}
                         </p>
 
-                        <h2 className="mt-3 bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-[1.35rem] font-black uppercase leading-[1] tracking-[-0.045em] text-transparent">
+                        <h2 className="mt-3 bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-[1.3rem] font-black uppercase leading-[1] tracking-[-0.045em] text-transparent">
                             {planetName}
                         </h2>
 
@@ -98,7 +101,7 @@ const Metric = ({
     label: string;
     value: string;
 }) => (
-    <div className="rounded-[1rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-3 backdrop-blur-xl">
+    <div className="rounded-[1rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-3">
         <Icon className="h-4 w-4 text-[var(--color-accent)]" />
 
         <p className="mt-2 text-[9px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">

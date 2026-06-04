@@ -99,7 +99,7 @@ export const ExoplanetsSystemsPage = () => {
             <div className="relative z-10 mx-auto grid max-w-[1500px] gap-5 px-4 py-6 sm:px-6 lg:px-8">
                 <Link
                     href="/exoplanets"
-                    className="w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-accent)] backdrop-blur-xl transition hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
+                    className="w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-accent)] transition hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
                 >
                     <ArrowLeft className="mr-2 inline h-4 w-4" />
                     {t.backToExoplanets}
@@ -108,29 +108,16 @@ export const ExoplanetsSystemsPage = () => {
                 <motion.section
                     initial={{opacity: 0, y: 18}}
                     animate={{opacity: 1, y: 0}}
-                    className="relative overflow-hidden rounded-[2.5rem] border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl lg:p-8"
+                    className="relative overflow-hidden rounded-[2.2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)]"
                 >
-                    <motion.div
-                        className="absolute inset-0"
-                        style={{background: "var(--hero-bg)"}}
-                        animate={{opacity: [0.4, 0.85, 0.4], scale: [1, 1.03, 1]}}
-                        transition={{duration: 10, repeat: Infinity, ease: "easeInOut"}}
-                    />
-
-                    <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:30px_30px]" />
-
-                    <motion.div
-                        className="absolute -right-28 -top-32 h-[460px] w-[460px] rounded-full border border-[var(--color-accent)]/25"
-                        animate={{rotate: 360}}
-                        transition={{duration: 70, repeat: Infinity, ease: "linear"}}
-                    />
+                    <div className="absolute inset-0 opacity-30" style={{background: "var(--hero-bg)"}} />
 
                     <div className="relative z-10">
                         <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
                             {t.eyebrow}
                         </p>
 
-                        <h1 className="mt-4 max-w-4xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-3xl font-black uppercase tracking-[-0.05em] text-transparent sm:text-5xl">
+                        <h1 className="mt-3 max-w-4xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-3xl font-black uppercase tracking-[-0.05em] text-transparent sm:text-4xl">
                             {t.title}
                         </h1>
 
@@ -138,7 +125,7 @@ export const ExoplanetsSystemsPage = () => {
                             {t.description}
                         </p>
 
-                        <div className="mt-7 flex flex-wrap gap-3 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+                        <div className="mt-6 flex flex-wrap gap-3 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
                             <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2">
                                 {t.total}: {total}
                             </span>
@@ -169,7 +156,7 @@ export const ExoplanetsSystemsPage = () => {
                 />
 
                 {loading && (
-                    <div className="grid min-h-[360px] place-items-center rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)]">
+                    <div className="grid min-h-[300px] place-items-center rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card)]">
                         <Loader2 className="h-9 w-9 animate-spin text-[var(--color-accent)]" />
                     </div>
                 )}
@@ -182,7 +169,7 @@ export const ExoplanetsSystemsPage = () => {
 
                 {!loading && !error && (
                     <>
-                        <section className="grid gap-5">
+                        <section className="grid gap-4 xl:grid-cols-2">
                             {items.map((item, index) => (
                                 <ExoplanetsSystemsCard
                                     key={`${item.hostname}-${index}`}
