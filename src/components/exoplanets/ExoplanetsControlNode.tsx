@@ -25,32 +25,37 @@ export const ExoplanetsControlNode = ({node, index, t}: Props) => {
 
     return (
         <motion.div
-            initial={{opacity: 0, y: 20, scale: 0.94}}
-            whileInView={{opacity: 1, y: 0, scale: 1}}
+            initial={{opacity: 0, y: 16}}
+            whileInView={{opacity: 1, y: 0}}
             viewport={{once: true, amount: 0.25}}
-            transition={{duration: 0.35, delay: index * 0.05}}
+            transition={{duration: 0.3, delay: index * 0.04}}
             className={`xl:absolute xl:z-30 xl:w-[390px] ${node.position}`}
+            style={{
+                transform: "translateZ(0)",
+                backfaceVisibility: "hidden",
+            }}
         >
             <Link
                 href={node.href}
-                className="group relative block min-h-[175px] overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
+                className="group relative block min-h-[175px] overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)] transition-colors duration-200 hover:border-[var(--color-accent)]"
+                style={{
+                    transform: "translateZ(0)",
+                    backfaceVisibility: "hidden",
+                    WebkitFontSmoothing: "antialiased",
+                }}
             >
-                <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-50"
+                <div
+                    className="pointer-events-none absolute inset-0 opacity-25"
                     style={{background: "var(--hero-bg)"}}
-                    animate={{x: ["-20%", "20%", "-20%"]}}
-                    transition={{duration: 6, repeat: Infinity, ease: "easeInOut"}}
                 />
 
-                <motion.div
-                    className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
-                    animate={{x: ["-100%", "100%"]}}
-                    transition={{duration: 3.5, repeat: Infinity, ease: "linear"}}
-                />
+                <div className="pointer-events-none absolute inset-0 opacity-15 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:30px_30px]" />
+
+                <div className="pointer-events-none absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-45" />
 
                 <div className="relative z-10">
                     <div className="flex items-start justify-between gap-4">
-                        <div className="grid h-11 w-11 place-items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-glass)] text-[var(--color-accent)]">
+                        <div className="grid h-11 w-11 place-items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-glass)] text-[var(--color-accent)] transition-colors duration-200 group-hover:border-[var(--color-accent)]">
                             <Icon className="h-5 w-5" />
                         </div>
 
