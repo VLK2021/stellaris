@@ -19,7 +19,7 @@ const format = (value: number | null, suffix = "", digits = 2) => {
 
 const getStarSize = (radius: number | null) => {
     if (!radius) return 72;
-    if (radius < 0.8) return 58;
+    if (radius < 0.8) return 56;
     if (radius < 1.2) return 76;
     if (radius < 2) return 92;
     return 108;
@@ -40,17 +40,16 @@ export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
 
     return (
         <motion.article
-            initial={{opacity: 0, y: 18}}
+            initial={{opacity: 0, y: 16}}
             whileInView={{opacity: 1, y: 0}}
             viewport={{once: true, amount: 0.2}}
-            transition={{duration: 0.32, delay: Math.min(index * 0.03, 0.18)}}
-            className="group relative isolate min-h-[360px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] transition-transform duration-300 will-change-transform hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
+            transition={{duration: 0.3, delay: Math.min(index * 0.025, 0.16)}}
+            className="group relative min-h-[340px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] backdrop-blur-2xl transition duration-300 hover:border-[var(--color-accent)]"
         >
-            <div className="pointer-events-none absolute inset-0 opacity-30" style={{background: "var(--hero-bg)"}} />
+            <div className="pointer-events-none absolute inset-0 opacity-28" style={{background: "var(--hero-bg)"}} />
             <div className="pointer-events-none absolute inset-0 opacity-15 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:28px_28px]" />
-            <div className="pointer-events-none absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-40" />
 
-            <div className="relative z-10 grid min-h-[360px] gap-4 p-5 lg:grid-cols-[1fr_220px]">
+            <div className="relative z-10 grid min-h-[340px] gap-4 p-5 lg:grid-cols-[1fr_220px]">
                 <div className="flex min-w-0 flex-col">
                     <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
                         {t.hostName}
@@ -81,18 +80,9 @@ export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
                     </div>
                 </div>
 
-                <div className="relative grid min-h-[230px] place-items-center overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)]">
-                    <motion.div
-                        className="absolute h-[190px] w-[190px] rounded-full border border-[var(--color-accent)]/25"
-                        animate={{rotate: 360}}
-                        transition={{duration: 42, repeat: Infinity, ease: "linear"}}
-                    />
-
-                    <motion.div
-                        className="absolute h-[140px] w-[140px] rounded-full border border-[var(--color-brand-secondary)]/25"
-                        animate={{rotate: -360}}
-                        transition={{duration: 30, repeat: Infinity, ease: "linear"}}
-                    />
+                <div className="relative grid min-h-[220px] place-items-center overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)]">
+                    <div className="absolute h-[190px] w-[190px] rounded-full border border-[var(--color-accent)]/25" />
+                    <div className="absolute h-[140px] w-[140px] rounded-full border border-[var(--color-brand-secondary)]/25" />
 
                     <motion.div
                         className="relative z-10 rounded-full shadow-[var(--shadow-glow)]"
@@ -107,12 +97,12 @@ export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
 
                     {Array.from({length: Math.min(planetCount || 1, 5)}).map((_, planetIndex) => {
                         const orbitSize = 88 + planetIndex * 24;
-                        const duration = 16 + planetIndex * 4;
+                        const duration = 18 + planetIndex * 5;
 
                         return (
                             <motion.div
                                 key={planetIndex}
-                                className="absolute rounded-full border border-[var(--color-border)]/60"
+                                className="absolute rounded-full border border-[var(--color-border)]/55"
                                 style={{
                                     width: orbitSize,
                                     height: orbitSize,
