@@ -46,14 +46,14 @@ export const ExoplanetsCommandCenter = ({t}: Props) => {
             title: t.portal.atmospheres.title,
             text: t.portal.atmospheres.description,
             icon: Atom,
-            position: "xl:left-1/2 xl:top-[6%] xl:-translate-x-1/2",
+            position: "xl:left-1/2 xl:top-[1%] xl:-translate-x-1/2",
         },
         {
             href: "/exoplanets/archive",
             title: t.portal.archive.title,
             text: t.portal.archive.description,
             icon: Telescope,
-            position: "xl:left-1/2 xl:bottom-[6%] xl:-translate-x-1/2",
+            position: "xl:left-1/2 xl:bottom-[1%] xl:-translate-x-1/2",
         },
     ];
 
