@@ -17,6 +17,38 @@ type FetchTextOptions = {
     cache?: RequestCache;
 };
 
+const sleep = (ms: number) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+const fetchWithRetry = async (
+    url: string,
+    init: RequestInit,
+    retries = 2,
+): Promise<Response> => {
+    let lastResponse: Response | null = null;
+
+    for (let attempt = 0; attempt <= retries; attempt += 1) {
+        const response = await fetch(url, init);
+
+        if (response.ok) {
+            return response;
+        }
+
+        lastResponse = response;
+
+        if (![429, 500, 502, 503, 504].includes(response.status)) {
+            return response;
+        }
+
+        if (attempt < retries) {
+            await sleep(600 * (attempt + 1));
+        }
+    }
+
+    return lastResponse as Response;
+};
+
 export const fetchEarthJson = async <T>({
                                             url,
                                             revalidate,
@@ -27,7 +59,7 @@ export const fetchEarthJson = async <T>({
         ? `${url}${url.includes("?") ? "&" : "?"}api_key=${getNasaApiKey()}`
         : url;
 
-    const response = await fetch(requestUrl, {
+    const response = await fetchWithRetry(requestUrl, {
         cache,
         next: cache === "no-store" ? undefined : revalidate ? {revalidate} : undefined,
     });
@@ -44,7 +76,7 @@ export const fetchEarthText = async ({
                                          revalidate,
                                          cache,
                                      }: FetchTextOptions): Promise<string> => {
-    const response = await fetch(url, {
+    const response = await fetchWithRetry(url, {
         cache,
         next: cache === "no-store" ? undefined : revalidate ? {revalidate} : undefined,
     });

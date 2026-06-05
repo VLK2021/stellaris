@@ -21,18 +21,6 @@ export const getEarthOverview = async (): Promise<EarthOverviewResponse> => {
         }),
     ]);
 
-    if (eventsResult.status === "rejected") {
-        console.error("EONET failed:", eventsResult.reason);
-    }
-
-    if (epicResult.status === "rejected") {
-        console.error("EPIC failed:", epicResult.reason);
-    }
-
-    if (layersResult.status === "rejected") {
-        console.error("GIBS failed:", layersResult.reason);
-    }
-
     const events =
         eventsResult.status === "fulfilled"
             ? eventsResult.value.data
