@@ -4,7 +4,6 @@ import Link from "next/link";
 import {motion} from "framer-motion";
 import type {LucideIcon} from "lucide-react";
 
-import {usePageAnimationState} from "@/src/hooks/usePageAnimationState";
 import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 
 type Node = {
@@ -23,7 +22,6 @@ type Props = {
 
 export const ExoplanetsControlNode = ({node, index, t}: Props) => {
     const Icon = node.icon;
-    const animationsEnabled = usePageAnimationState();
 
     return (
         <motion.div
@@ -35,37 +33,8 @@ export const ExoplanetsControlNode = ({node, index, t}: Props) => {
         >
             <Link
                 href={node.href}
-                className="group relative flex h-[250px] flex-col overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
+                className="group relative flex h-[250px] flex-col overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-5 transition duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
             >
-                <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-50"
-                    style={{background: "var(--hero-bg)"}}
-                    animate={
-                        animationsEnabled
-                            ? {x: ["-20%", "20%", "-20%"]}
-                            : {x: 0}
-                    }
-                    transition={{
-                        duration: 6,
-                        repeat: animationsEnabled ? Infinity : 0,
-                        ease: "easeInOut",
-                    }}
-                />
-
-                <motion.div
-                    className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
-                    animate={
-                        animationsEnabled
-                            ? {x: ["-100%", "100%"]}
-                            : {x: 0}
-                    }
-                    transition={{
-                        duration: 3.5,
-                        repeat: animationsEnabled ? Infinity : 0,
-                        ease: "linear",
-                    }}
-                />
-
                 <div className="relative z-10 flex h-full flex-col">
                     <div className="flex items-start justify-between gap-4">
                         <div className="grid h-11 w-11 place-items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-glass)] text-[var(--color-accent)]">
