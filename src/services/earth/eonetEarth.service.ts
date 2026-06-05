@@ -1,5 +1,4 @@
 import {
-    EARTH_REVALIDATE_SECONDS,
     EONET_API_URL,
 } from "@/src/constants/earth/earth.constants";
 
@@ -37,7 +36,7 @@ export const getEonetEvents = async ({
                                      }: EarthEventsQuery): Promise<EarthEventsResponse> => {
     const response = await fetchEarthJson<RawEonetEventsResponse>({
         url: `${EONET_API_URL}/events`,
-        revalidate: EARTH_REVALIDATE_SECONDS.eonet,
+        cache: "no-store",
         withApiKey: false,
     });
 
@@ -81,7 +80,7 @@ export const getEonetEventById = async (
 
     const response = await fetchEarthJson<RawEonetEvent>({
         url: `${EONET_API_URL}/events/${encodeURIComponent(eventId)}`,
-        revalidate: EARTH_REVALIDATE_SECONDS.eonet,
+        cache: "no-store",
         withApiKey: false,
     });
 

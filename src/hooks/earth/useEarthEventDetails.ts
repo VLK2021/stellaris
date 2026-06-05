@@ -15,21 +15,29 @@ type State = {
 
 const detailsCache = new Map<string, EarthEventEnrichment>();
 
-export const useEarthEventDetails = (eventId: string) => {
-    const [state, setState] = useState<State>({
-        data: detailsCache.get(eventId) ?? null,
-        loading: !detailsCache.has(eventId),
+const getInitialState = (eventId: string): State => {
+    const cached = detailsCache.get(eventId);
+
+    return {
+        data: cached ?? null,
+        loading: !cached,
         error: null,
-    });
+    };
+};
+
+export const useEarthEventDetails = (eventId: string) => {
+    const [state, setState] = useState<State>(() => getInitialState(eventId));
 
     useEffect(() => {
         const cached = detailsCache.get(eventId);
 
         if (cached) {
-            setState({
-                data: cached,
-                loading: false,
-                error: null,
+            queueMicrotask(() => {
+                setState({
+                    data: cached,
+                    loading: false,
+                    error: null,
+                });
             });
 
             return;
@@ -81,7 +89,7 @@ export const useEarthEventDetails = (eventId: string) => {
             }
         };
 
-        loadDetails();
+        void loadDetails();
 
         return () => controller.abort();
     }, [eventId]);

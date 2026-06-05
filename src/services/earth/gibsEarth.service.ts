@@ -1,5 +1,4 @@
 import {
-    EARTH_REVALIDATE_SECONDS,
     GIBS_WMTS_CAPABILITIES_URL,
 } from "@/src/constants/earth/earth.constants";
 
@@ -54,9 +53,7 @@ const getLayerBlockById = (xml: string, layerId: string) => {
 };
 
 const getResourceTemplate = (xml: string) => {
-    const match = xml.match(
-        /template=['"]([^'"]+)['"]/i,
-    );
+    const match = xml.match(/template=['"]([^'"]+)['"]/i);
 
     return decodeXml(match?.[1] ?? null);
 };
@@ -124,7 +121,7 @@ export const getGibsLayers = async ({
                                     }: EarthLayersQuery = {}): Promise<EarthLayersResponse> => {
     const xml = await fetchEarthText({
         url: GIBS_WMTS_CAPABILITIES_URL,
-        revalidate: EARTH_REVALIDATE_SECONDS.gibs,
+        cache: "no-store",
     });
 
     let layers = parseGibsWmtsLayers(xml);
@@ -172,7 +169,7 @@ export const getGibsLayerDetails = async (
 ): Promise<EarthLayerDetails> => {
     const xml = await fetchEarthText({
         url: GIBS_WMTS_CAPABILITIES_URL,
-        revalidate: EARTH_REVALIDATE_SECONDS.gibs,
+        cache: "no-store",
     });
 
     const layers = parseGibsWmtsLayers(xml);

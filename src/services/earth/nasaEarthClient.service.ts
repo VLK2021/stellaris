@@ -6,28 +6,30 @@ const getNasaApiKey = () => {
 
 type FetchJsonOptions = {
     url: string;
-    revalidate: number;
+    revalidate?: number;
     withApiKey?: boolean;
+    cache?: RequestCache;
 };
 
 type FetchTextOptions = {
     url: string;
-    revalidate: number;
+    revalidate?: number;
+    cache?: RequestCache;
 };
 
 export const fetchEarthJson = async <T>({
                                             url,
                                             revalidate,
                                             withApiKey = true,
+                                            cache,
                                         }: FetchJsonOptions): Promise<T> => {
     const requestUrl = withApiKey
         ? `${url}${url.includes("?") ? "&" : "?"}api_key=${getNasaApiKey()}`
         : url;
 
     const response = await fetch(requestUrl, {
-        next: {
-            revalidate,
-        },
+        cache,
+        next: cache === "no-store" ? undefined : revalidate ? {revalidate} : undefined,
     });
 
     if (!response.ok) {
@@ -40,11 +42,11 @@ export const fetchEarthJson = async <T>({
 export const fetchEarthText = async ({
                                          url,
                                          revalidate,
+                                         cache,
                                      }: FetchTextOptions): Promise<string> => {
     const response = await fetch(url, {
-        next: {
-            revalidate,
-        },
+        cache,
+        next: cache === "no-store" ? undefined : revalidate ? {revalidate} : undefined,
     });
 
     if (!response.ok) {
