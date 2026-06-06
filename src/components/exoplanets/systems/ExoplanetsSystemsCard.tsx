@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {motion} from "framer-motion";
-import {Orbit, Sparkles} from "lucide-react";
+import {ArrowRight, Orbit, Sparkles} from "lucide-react";
 
 import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 import type {ExoplanetSystemItem} from "./ExoplanetsSystemsPage";
@@ -18,38 +18,16 @@ const format = (value: number | null, suffix = "", digits = 2) => {
     return `${Number(value.toFixed(digits))}${suffix}`;
 };
 
-const getStarSize = (radius: number | null) => {
-    if (!radius) return 72;
-    if (radius < 0.8) return 56;
-    if (radius < 1.2) return 76;
-    if (radius < 2) return 92;
-    return 108;
-};
-
 const getStarGradient = (temperature: number | null) => {
-    if (!temperature) {
-        return "radial-gradient(circle at 35% 30%, #e0f2fe, #38bdf8, #0f172a)";
-    }
-
-    if (temperature < 3700) {
-        return "radial-gradient(circle at 35% 30%, #fecaca, #ef4444, #450a0a)";
-    }
-
-    if (temperature < 5200) {
-        return "radial-gradient(circle at 35% 30%, #fed7aa, #f97316, #7c2d12)";
-    }
-
-    if (temperature < 6500) {
-        return "radial-gradient(circle at 35% 30%, #fef9c3, #facc15, #713f12)";
-    }
-
+    if (!temperature) return "radial-gradient(circle at 35% 30%, #e0f2fe, #38bdf8, #0f172a)";
+    if (temperature < 3700) return "radial-gradient(circle at 35% 30%, #fecaca, #ef4444, #450a0a)";
+    if (temperature < 5200) return "radial-gradient(circle at 35% 30%, #fed7aa, #f97316, #7c2d12)";
+    if (temperature < 6500) return "radial-gradient(circle at 35% 30%, #fef9c3, #facc15, #713f12)";
     return "radial-gradient(circle at 35% 30%, #e0f2fe, #38bdf8, #1e3a8a)";
 };
 
 export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
     const planetCount = item.sy_pnum ?? 0;
-    const starSize = getStarSize(item.st_rad);
-    const starGradient = getStarGradient(item.st_teff);
     const href = `/exoplanets/systems/${encodeURIComponent(item.hostname ?? "")}`;
 
     return (
@@ -58,16 +36,12 @@ export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
             whileInView={{opacity: 1, y: 0}}
             viewport={{once: true, amount: 0.2}}
             transition={{duration: 0.3, delay: Math.min(index * 0.025, 0.16)}}
-            className="group relative min-h-[340px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] transition duration-300 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
+            className="group relative min-h-[360px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] transition duration-300 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
         >
-            <div className="pointer-events-none absolute inset-0 opacity-28" style={{background: "var(--hero-bg)"}} />
-
+            <div className="pointer-events-none absolute inset-0 opacity-30" style={{background: "var(--hero-bg)"}} />
             <div className="pointer-events-none absolute inset-0 opacity-15 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:28px_28px]" />
 
-            <Link
-                href={href}
-                className="relative z-10 grid min-h-[340px] gap-4 p-5 lg:grid-cols-[1fr_220px]"
-            >
+            <div className="relative z-10 grid min-h-[360px] gap-4 p-5 lg:grid-cols-[1fr_230px]">
                 <div className="flex min-w-0 flex-col">
                     <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
                         {t.hostName}
@@ -96,53 +70,47 @@ export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
                         <Metric label={t.mass} value={format(item.st_mass, " M☉")} />
                         <Metric label={t.age} value={format(item.st_age, " Gyr")} />
                     </div>
+
+                    <Link
+                        href={href}
+                        className="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-accent)] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--color-accent)] transition hover:bg-[var(--color-accent)] hover:text-black"
+                    >
+                        {t.open}
+                        <ArrowRight className="h-4 w-4" />
+                    </Link>
                 </div>
 
-                <div className="relative grid min-h-[220px] place-items-center overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)]">
+                <Link
+                    href={href}
+                    className="relative grid min-h-[230px] place-items-center overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)] transition hover:border-[var(--color-accent)]"
+                >
                     <div className="absolute h-[190px] w-[190px] rounded-full border border-[var(--color-accent)]/25" />
                     <div className="absolute h-[140px] w-[140px] rounded-full border border-[var(--color-brand-secondary)]/25" />
 
-                    <motion.div
-                        className="relative z-10 rounded-full shadow-[var(--shadow-glow)]"
-                        style={{
-                            width: starSize,
-                            height: starSize,
-                            background: starGradient,
-                        }}
-                        animate={{scale: [1, 1.06, 1]}}
-                        transition={{duration: 3.4, repeat: Infinity, ease: "easeInOut"}}
+                    <div
+                        className="relative z-10 h-[82px] w-[82px] rounded-full shadow-[var(--shadow-glow)]"
+                        style={{background: getStarGradient(item.st_teff)}}
                     />
 
-                    {Array.from({length: Math.min(planetCount || 1, 5)}).map((_, planetIndex) => {
-                        const orbitSize = 88 + planetIndex * 24;
-                        const duration = 18 + planetIndex * 5;
-
-                        return (
-                            <motion.div
-                                key={planetIndex}
-                                className="absolute rounded-full border border-[var(--color-border)]/55"
-                                style={{
-                                    width: orbitSize,
-                                    height: orbitSize,
-                                }}
-                                animate={{rotate: 360}}
-                                transition={{
-                                    duration,
-                                    repeat: Infinity,
-                                    ease: "linear",
-                                }}
-                            >
-                                <span className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 rounded-full bg-[var(--color-accent)] shadow-[var(--shadow-glow)]" />
-                            </motion.div>
-                        );
-                    })}
+                    {Array.from({length: Math.min(planetCount || 1, 5)}).map((_, planetIndex) => (
+                        <div
+                            key={planetIndex}
+                            className="absolute rounded-full border border-[var(--color-border)]/55"
+                            style={{
+                                width: 88 + planetIndex * 24,
+                                height: 88 + planetIndex * 24,
+                            }}
+                        >
+                            <span className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 rounded-full bg-[var(--color-accent)] shadow-[var(--shadow-glow)]" />
+                        </div>
+                    ))}
 
                     <div className="absolute bottom-4 left-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-accent)]">
                         <Orbit className="h-4 w-4" />
                         {t.open}
                     </div>
-                </div>
-            </Link>
+                </Link>
+            </div>
         </motion.article>
     );
 };
@@ -152,7 +120,6 @@ const Mini = ({label, value}: {label: string; value: string | number}) => (
         <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
             {label}
         </p>
-
         <p className="mt-1 truncate text-sm font-black text-[var(--color-text)]">
             {value}
         </p>
@@ -170,11 +137,9 @@ const Metric = ({
 }) => (
     <div className="rounded-[1rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-3">
         {Icon && <Icon className="h-4 w-4 text-[var(--color-accent)]" />}
-
         <p className={`${Icon ? "mt-2" : ""} text-[9px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]`}>
             {label}
         </p>
-
         <p className="mt-1 truncate text-xs font-black text-[var(--color-text)]">
             {value}
         </p>
