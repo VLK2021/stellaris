@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {motion} from "framer-motion";
 import {Orbit, Sparkles} from "lucide-react";
 
@@ -26,10 +27,22 @@ const getStarSize = (radius: number | null) => {
 };
 
 const getStarGradient = (temperature: number | null) => {
-    if (!temperature) return "radial-gradient(circle at 35% 30%, #e0f2fe, #38bdf8, #0f172a)";
-    if (temperature < 3700) return "radial-gradient(circle at 35% 30%, #fecaca, #ef4444, #450a0a)";
-    if (temperature < 5200) return "radial-gradient(circle at 35% 30%, #fed7aa, #f97316, #7c2d12)";
-    if (temperature < 6500) return "radial-gradient(circle at 35% 30%, #fef9c3, #facc15, #713f12)";
+    if (!temperature) {
+        return "radial-gradient(circle at 35% 30%, #e0f2fe, #38bdf8, #0f172a)";
+    }
+
+    if (temperature < 3700) {
+        return "radial-gradient(circle at 35% 30%, #fecaca, #ef4444, #450a0a)";
+    }
+
+    if (temperature < 5200) {
+        return "radial-gradient(circle at 35% 30%, #fed7aa, #f97316, #7c2d12)";
+    }
+
+    if (temperature < 6500) {
+        return "radial-gradient(circle at 35% 30%, #fef9c3, #facc15, #713f12)";
+    }
+
     return "radial-gradient(circle at 35% 30%, #e0f2fe, #38bdf8, #1e3a8a)";
 };
 
@@ -37,6 +50,7 @@ export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
     const planetCount = item.sy_pnum ?? 0;
     const starSize = getStarSize(item.st_rad);
     const starGradient = getStarGradient(item.st_teff);
+    const href = `/exoplanets/systems/${encodeURIComponent(item.hostname ?? "")}`;
 
     return (
         <motion.article
@@ -44,12 +58,16 @@ export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
             whileInView={{opacity: 1, y: 0}}
             viewport={{once: true, amount: 0.2}}
             transition={{duration: 0.3, delay: Math.min(index * 0.025, 0.16)}}
-            className="group relative min-h-[340px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] backdrop-blur-2xl transition duration-300 hover:border-[var(--color-accent)]"
+            className="group relative min-h-[340px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] transition duration-300 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
         >
             <div className="pointer-events-none absolute inset-0 opacity-28" style={{background: "var(--hero-bg)"}} />
+
             <div className="pointer-events-none absolute inset-0 opacity-15 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:28px_28px]" />
 
-            <div className="relative z-10 grid min-h-[340px] gap-4 p-5 lg:grid-cols-[1fr_220px]">
+            <Link
+                href={href}
+                className="relative z-10 grid min-h-[340px] gap-4 p-5 lg:grid-cols-[1fr_220px]"
+            >
                 <div className="flex min-w-0 flex-col">
                     <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
                         {t.hostName}
@@ -124,7 +142,7 @@ export const ExoplanetsSystemsCard = ({item, index, t}: Props) => {
                         {t.open}
                     </div>
                 </div>
-            </div>
+            </Link>
         </motion.article>
     );
 };
@@ -134,6 +152,7 @@ const Mini = ({label, value}: {label: string; value: string | number}) => (
         <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
             {label}
         </p>
+
         <p className="mt-1 truncate text-sm font-black text-[var(--color-text)]">
             {value}
         </p>
