@@ -30,7 +30,7 @@ export type ExoplanetsLocale = {
             title: string;
             description: string;
         };
-        archive: {
+        habitable: {
             title: string;
             description: string;
         };

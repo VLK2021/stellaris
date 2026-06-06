@@ -37,9 +37,9 @@ export const ExoplanetsCommandCenter = ({t}: Props) => {
                 position: "xl:left-[4%] xl:bottom-[10%]",
             },
             {
-                href: "/exoplanets/archive",
-                title: t.portal.archive.title,
-                text: t.portal.archive.description,
+                href: "/exoplanets/habitable",
+                title: t.portal.habitable.title,
+                text: t.portal.habitable.description,
                 icon: Telescope,
                 position: "xl:right-[4%] xl:bottom-[10%]",
             },

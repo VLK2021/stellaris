@@ -662,10 +662,10 @@ const en = {
                 description:
                     "Atmospheric spectroscopy and scientific observations of exoplanets.",
             },
-            archive: {
-                title: "NASA Archive",
+            habitable: {
+                title: "Habitable Worlds",
                 description:
-                    "TAP tables, datasets and NASA Exoplanet Archive structure.",
+                    "Planets closest to Earth-like conditions: temperature, radius, mass, distance and potential habitability zone.",
             },
         },
         details: {

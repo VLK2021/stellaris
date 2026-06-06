@@ -662,10 +662,10 @@ const uk = {
                 description:
                     "Спектроскопія атмосфер і наукові спостереження екзопланет.",
             },
-            archive: {
-                title: "NASA Archive",
+            habitable: {
+                title: "Придатні світи",
                 description:
-                    "TAP-таблиці, datasets і структура NASA Exoplanet Archive.",
+                    "Планети, найближчі до земних умов: температура, радіус, маса, відстань і потенційна зона життя.",
             },
         },
         details: {
