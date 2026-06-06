@@ -11,6 +11,7 @@ import {ExoplanetMissionRail} from "./ExoplanetMissionRail";
 import {ExoplanetScienceConsole} from "./ExoplanetScienceConsole";
 import {ExoplanetTelemetry} from "./ExoplanetTelemetry";
 import {ExoplanetVisualPlanet} from "./ExoplanetVisualPlanet";
+import {BackButton} from "@/src/common";
 
 type Props = {
     data: ExoplanetDetails;
@@ -41,13 +42,7 @@ export const ExoplanetSpaceScene = ({data, t}: Props) => {
             <div className="fixed inset-0 opacity-[0.1] [background-image:linear-gradient(var(--color-border)_1px,transparent_1px),linear-gradient(90deg,var(--color-border)_1px,transparent_1px)] [background-size:90px_90px]" />
 
             <div className="relative z-10 mx-auto max-w-[1500px] px-4 py-5 sm:px-6 lg:px-8">
-                <Link
-                    href="/exoplanets/catalog"
-                    className="group mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-accent)] backdrop-blur-xl transition hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
-                >
-                    <ArrowLeft className="h-4 w-4 transition group-hover:-translate-x-1" />
-                    {t.back}
-                </Link>
+                <BackButton label={t.back} />
 
                 <section className="relative min-h-[760px] overflow-hidden rounded-[2.6rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] backdrop-blur-2xl">
                     <motion.div

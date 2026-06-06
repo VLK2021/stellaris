@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import {useCallback, useEffect, useState} from "react";
 import {motion} from "framer-motion";
-import {ArrowLeft, Loader2} from "lucide-react";
+import {Loader2} from "lucide-react";
 
 import {Pagination} from "@/src/common/pagination";
 import {useLanguage} from "@/src/context/LanguageContext";
@@ -11,6 +10,7 @@ import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 
 import {ExoplanetsSystemsCard} from "./ExoplanetsSystemsCard";
 import {ExoplanetsSystemsFilters} from "./ExoplanetsSystemsFilters";
+import {BackButton} from "@/src/common";
 
 export type ExoplanetSystemItem = {
     hostname: string | null;
@@ -97,13 +97,9 @@ export const ExoplanetsSystemsPage = () => {
             <div className="pointer-events-none fixed inset-0 opacity-25 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:38px_38px]" />
 
             <div className="relative z-10 mx-auto grid max-w-[1500px] gap-5 px-4 py-6 sm:px-6 lg:px-8">
-                <Link
-                    href="/exoplanets"
-                    className="w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--color-accent)] backdrop-blur-xl transition hover:border-[var(--color-accent)]"
-                >
-                    <ArrowLeft className="mr-2 inline h-4 w-4" />
-                    {t.backToExoplanets}
-                </Link>
+                <BackButton
+                    label={t.backToSystems}
+                />
 
                 <motion.section
                     initial={{opacity: 0, y: 18}}
