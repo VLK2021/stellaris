@@ -1,6 +1,7 @@
 "use client";
 
-import {Atom, Database, Orbit, Radar, Sparkles, Telescope} from "lucide-react";
+import {useMemo} from "react";
+import {Atom, Database, Orbit, Radar, Telescope} from "lucide-react";
 
 import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
 
@@ -12,59 +13,55 @@ type Props = {
 };
 
 export const ExoplanetsCommandCenter = ({t}: Props) => {
-    const nodes = [
-        {
-            href: "/exoplanets/catalog",
-            title: t.portal.catalog.title,
-            text: t.portal.catalog.description,
-            icon: Database,
-            position: "xl:left-[4%] xl:top-[10%]",
-        },
-        {
-            href: "/exoplanets/systems",
-            title: t.portal.systems.title,
-            text: t.portal.systems.description,
-            icon: Orbit,
-            position: "xl:right-[4%] xl:top-[56%]",
-        },
-        {
-            href: "/exoplanets/stars",
-            title: t.portal.stars.title,
-            text: t.portal.stars.description,
-            icon: Sparkles,
-            position: "xl:right-[4%] xl:top-[10%]",
-        },
-        {
-            href: "/exoplanets/methods",
-            title: t.portal.methods.title,
-            text: t.portal.methods.description,
-            icon: Radar,
-            position: "xl:left-[4%] xl:bottom-[10%]",
-        },
-        {
-            href: "/exoplanets/atmospheres",
-            title: t.portal.atmospheres.title,
-            text: t.portal.atmospheres.description,
-            icon: Atom,
-            position: "xl:left-1/2 xl:top-[-2%] xl:-translate-x-1/2",
-        },
-        {
-            href: "/exoplanets/archive",
-            title: t.portal.archive.title,
-            text: t.portal.archive.description,
-            icon: Telescope,
-            position: "xl:left-1/2 xl:bottom-[-2%] xl:-translate-x-1/2",
-        },
-    ];
+    const nodes = useMemo(
+        () => [
+            {
+                href: "/exoplanets/catalog",
+                title: t.portal.catalog.title,
+                text: t.portal.catalog.description,
+                icon: Database,
+                position: "xl:left-[4%] xl:top-[10%]",
+            },
+            {
+                href: "/exoplanets/atmospheres",
+                title: t.portal.atmospheres.title,
+                text: t.portal.atmospheres.description,
+                icon: Atom,
+                position: "xl:right-[4%] xl:top-[10%]",
+            },
+            {
+                href: "/exoplanets/methods",
+                title: t.portal.methods.title,
+                text: t.portal.methods.description,
+                icon: Radar,
+                position: "xl:left-[4%] xl:bottom-[10%]",
+            },
+            {
+                href: "/exoplanets/archive",
+                title: t.portal.archive.title,
+                text: t.portal.archive.description,
+                icon: Telescope,
+                position: "xl:right-[4%] xl:bottom-[10%]",
+            },
+            {
+                href: "/exoplanets/systems",
+                title: t.portal.systems.title,
+                text: t.portal.systems.description,
+                icon: Orbit,
+                position: "xl:left-1/2 xl:bottom-[4%] xl:-translate-x-1/2",
+            },
+        ],
+        [t],
+    );
 
     return (
-        <section className="relative min-h-[720px] overflow-hidden rounded-[2.4rem] border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-[var(--shadow-card)] backdrop-blur-2xl sm:p-6">
+        <section className="relative min-h-[720px] overflow-hidden rounded-[2.4rem] border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-[var(--shadow-card)] sm:p-6">
             <ExoplanetsOrbitField />
 
             <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:36px_36px]" />
 
             <div className="relative z-20 mx-auto flex min-h-[680px] max-w-[1380px] items-center justify-center">
-                <div className="absolute left-1/2 top-1/2 z-10 w-[260px] -translate-x-1/2 -translate-y-1/2 text-center">
+                <div className="pointer-events-none absolute left-1/2 top-[46%] z-10 w-[270px] -translate-x-1/2 -translate-y-1/2 text-center">
                     <p className="exo-label text-[10px] font-black uppercase tracking-[0.24em]">
                         {t.portal.eyebrow}
                     </p>
