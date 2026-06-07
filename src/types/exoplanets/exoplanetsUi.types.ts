@@ -248,5 +248,8 @@ export type ExoplanetsLocale = {
         loadingError: string;
         unknownError: string;
         notFound: string;
+        facility: string;
+        instrument: string;
+        spectrumType: string;
     };
 };
