@@ -222,14 +222,6 @@ export const ExoplanetHabitableDetailsPage = ({planet}: {planet: string}) => {
                         <Metric icon={Earth} label={t.habitabilityZone} value={getZoneLabel(data.habitabilityZone, t)} />
                     </Panel>
                 </section>
-
-                {/*<Link*/}
-                {/*    href={`/exoplanets/catalog/${encodeURIComponent(data.pl_name ?? "")}`}*/}
-                {/*    className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-accent)] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--color-accent)] transition hover:bg-[var(--color-accent)] hover:text-black"*/}
-                {/*>*/}
-                {/*    {t.open}*/}
-                {/*    <ArrowRight className="h-4 w-4" />*/}
-                {/*</Link>*/}
             </div>
         </main>
     );
