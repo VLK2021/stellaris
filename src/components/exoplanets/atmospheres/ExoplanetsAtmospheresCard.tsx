@@ -2,7 +2,16 @@
 
 import Link from "next/link";
 import {motion} from "framer-motion";
-import {ArrowRight, Gauge, Orbit, Ruler, Sparkles, Thermometer, Waves, Weight} from "lucide-react";
+import {
+    ArrowRight,
+    Gauge,
+    Orbit,
+    Ruler,
+    Sparkles,
+    Thermometer,
+    Waves,
+    Weight,
+} from "lucide-react";
 
 import type {AtmosphereItem} from "@/src/types/exoplanets/atmospheres.types";
 import type {ExoplanetsLocale} from "@/src/types/exoplanets/exoplanetsUi.types";
@@ -32,13 +41,16 @@ export const ExoplanetsAtmospheresCard = ({item, index, t}: Props) => {
             whileInView={{opacity: 1, y: 0}}
             viewport={{once: true, amount: 0.2}}
             transition={{duration: 0.3, delay: Math.min(index * 0.025, 0.15)}}
-            className="group relative min-h-[320px] overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] transition duration-300 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
+            className="group relative overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] transition duration-300 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
         >
-            <div className="pointer-events-none absolute inset-0 opacity-45" style={{background: getAtmosphereGradient(item.atmosphereClass)}} />
+            <div
+                className="pointer-events-none absolute inset-0 opacity-45"
+                style={{background: getAtmosphereGradient(item.atmosphereClass)}}
+            />
             <div className="pointer-events-none absolute inset-0 opacity-18" style={{background: "var(--hero-bg)"}} />
             <div className="pointer-events-none absolute inset-0 opacity-15 [background-image:radial-gradient(var(--star-color)_1px,transparent_1px)] [background-size:28px_28px]" />
 
-            <div className="relative z-10 grid min-h-[320px] gap-4 p-5 lg:grid-cols-[1fr_210px]">
+            <div className="relative z-10 grid gap-4 p-5 lg:grid-cols-[minmax(0,1fr)_250px]">
                 <div className="flex min-w-0 flex-col">
                     <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
                         {getAtmosphereClassLabel(item.atmosphereClass, t)}
@@ -64,14 +76,14 @@ export const ExoplanetsAtmospheresCard = ({item, index, t}: Props) => {
 
                     <Link
                         href={href}
-                        className="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-accent)] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--color-accent)] transition hover:bg-[var(--color-accent)] hover:text-black"
+                        className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-accent)] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--color-accent)] transition hover:bg-[var(--color-accent)] hover:text-black"
                     >
                         {t.details}
                         <ArrowRight className="h-4 w-4" />
                     </Link>
                 </div>
 
-                <div className="relative flex min-h-[210px] flex-col justify-between overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4">
+                <aside className="relative flex min-w-0 flex-col justify-between overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4">
                     <div>
                         <div className="grid h-11 w-11 place-items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-accent)]">
                             <Waves className="h-5 w-5" />
@@ -92,15 +104,27 @@ export const ExoplanetsAtmospheresCard = ({item, index, t}: Props) => {
                         </div>
 
                         <div className="mt-3 h-2 overflow-hidden rounded-full bg-[var(--color-card)]">
-                            <div className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-500" style={{width: `${score}%`}} />
+                            <div
+                                className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-500"
+                                style={{width: `${score}%`}}
+                            />
                         </div>
                     </div>
 
                     <div className="mt-5 grid gap-2">
-                        <AtmosphereLine icon={Sparkles} label={t.candidateType} value={getAtmosphereCandidateLabel(item.candidateType, t)} />
-                        <AtmosphereLine icon={Orbit} label={t.orbit} value={formatAtmosphereValue(item.pl_orbper, " d")} />
+                        <AtmosphereLine
+                            icon={Sparkles}
+                            label={t.candidateType}
+                            value={getAtmosphereCandidateLabel(item.candidateType, t)}
+                        />
+
+                        <AtmosphereLine
+                            icon={Orbit}
+                            label={t.orbit}
+                            value={formatAtmosphereValue(item.pl_orbper, " d")}
+                        />
                     </div>
-                </div>
+                </aside>
             </div>
         </motion.article>
     );
@@ -115,10 +139,16 @@ const AtmosphereMini = ({
     label: string;
     value: string;
 }) => (
-    <div className="rounded-[1rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-3">
+    <div className="min-w-0 rounded-[1rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-3">
         <Icon className="h-4 w-4 text-[var(--color-accent)]" />
-        <p className="mt-2 text-[8px] font-black uppercase tracking-[0.16em] text-[var(--color-text-muted)]">{label}</p>
-        <p className="mt-1 truncate text-xs font-black text-[var(--color-text)]">{value}</p>
+
+        <p className="mt-2 text-[8px] font-black uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+            {label}
+        </p>
+
+        <p className="mt-1 truncate text-xs font-black text-[var(--color-text)]">
+            {value}
+        </p>
     </div>
 );
 
@@ -131,10 +161,17 @@ const AtmosphereLine = ({
     label: string;
     value: string;
 }) => (
-    <div className="flex items-center gap-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]/50 px-3 py-2">
-        <Icon className="h-3.5 w-3.5 shrink-0 text-[var(--color-accent)]" />
-        <p className="min-w-0 truncate text-[10px] font-black uppercase tracking-[0.14em] text-[var(--color-text-muted)]">
-            {label}: <span className="text-[var(--color-text)]">{value}</span>
-        </p>
+    <div className="flex min-w-0 items-start gap-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]/50 px-3 py-2">
+        <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--color-accent)]" />
+
+        <div className="min-w-0">
+            <p className="text-[9px] font-black uppercase tracking-[0.14em] text-[var(--color-text-muted)]">
+                {label}
+            </p>
+
+            <p className="mt-1 break-words text-xs font-black leading-5 text-[var(--color-text)]">
+                {value}
+            </p>
+        </div>
     </div>
 );
