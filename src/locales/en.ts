@@ -885,6 +885,8 @@ const en = {
             loadingError: "Failed to load atmospheric candidates.",
             unknownError: "Unknown error.",
             notFound: "Atmospheric candidate not found.",
+            distance: "Distance",
+            discoveryYear: "Discovery Year",
         },
     }
 };

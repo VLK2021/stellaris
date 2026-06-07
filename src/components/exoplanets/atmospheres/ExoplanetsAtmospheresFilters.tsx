@@ -53,11 +53,15 @@ export const ExoplanetsAtmospheresFilters = ({
                     value={sortBy}
                     onChange={onSortBy}
                     options={[
+                        ["pl_eqt", t.equilibriumTemp],
                         ["pl_name", t.planetName],
                         ["hostname", t.hostName],
-                        ["facility", t.facility],
-                        ["instrument", t.instrument],
-                        ["spec_type", t.spectrumType],
+                        ["sy_dist", t.distance],
+                        ["pl_rade", t.radius],
+                        ["pl_bmasse", t.mass],
+                        ["pl_dens", t.density],
+                        ["pl_insol", t.insolation],
+                        ["disc_year", t.discoveryYear],
                     ]}
                 />
 
