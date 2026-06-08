@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
                 protocol: "https",
                 hostname: "images.nasa.gov",
             },
+            {
+                protocol: "https",
+                hostname: "mars.nasa.gov",
+            },
+            {
+                protocol: "https",
+                hostname: "mars.jpl.nasa.gov",
+            },
         ],
     },
 };
