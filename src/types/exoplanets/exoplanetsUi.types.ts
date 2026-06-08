@@ -251,4 +251,71 @@ export type ExoplanetsLocale = {
         distance: string;
         discoveryYear: string;
     };
+
+    methods: {
+        backToExoplanets: string;
+        eyebrow: string;
+        title: string;
+        description: string;
+        search: string;
+        searchPlaceholder: string;
+        sortBy: string;
+        order: string;
+        asc: string;
+        desc: string;
+        total: string;
+        page: string;
+        method: string;
+        discoveryMethod: string;
+        planets: string;
+        systems: string;
+        firstYear: string;
+        lastYear: string;
+        avgDistance: string;
+        avgRadius: string;
+        avgMass: string;
+        avgTemperature: string;
+        methodStats: string;
+        confirmedPlanets: string;
+        details: string;
+        transitDescription: string;
+        radialVelocityDescription: string;
+        imagingDescription: string;
+        microlensingDescription: string;
+        timingDescription: string;
+        astrometryDescription: string;
+        otherDescription: string;
+        loadingError: string;
+        unknownError: string;
+        backToMethods: string;
+        advantages: string;
+        limitations: string;
+        knownExamples: string;
+        openPlanetCatalog: string;
+        notFound: string;
+
+        transitProOne: string;
+        transitProTwo: string;
+        transitProThree: string;
+        transitConOne: string;
+        transitConTwo: string;
+
+        radialVelocityProOne: string;
+        radialVelocityProTwo: string;
+        radialVelocityProThree: string;
+        radialVelocityConOne: string;
+        radialVelocityConTwo: string;
+
+        imagingProOne: string;
+        imagingProTwo: string;
+        imagingProThree: string;
+        imagingConOne: string;
+        imagingConTwo: string;
+
+        generalProOne: string;
+        generalProTwo: string;
+        generalProThree: string;
+        generalConOne: string;
+        generalConTwo: string;
+    };
 };

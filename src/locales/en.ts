@@ -888,6 +888,81 @@ const en = {
             distance: "Distance",
             discoveryYear: "Discovery Year",
         },
+
+        methods: {
+            backToExoplanets: "Back to Exoplanets",
+            eyebrow: "Discovery Methods",
+            title: "How Exoplanets Are Discovered",
+            description:
+                "Discovery method statistics from NASA Exoplanet Archive: transits, radial velocity, direct imaging, microlensing and other detection techniques.",
+            search: "Search",
+            searchPlaceholder: "Search method...",
+            sortBy: "Sort By",
+            order: "Order",
+            asc: "Ascending",
+            desc: "Descending",
+            total: "Total",
+            page: "Page",
+            method: "Method",
+            discoveryMethod: "Discovery Method",
+            planets: "Planets",
+            systems: "Systems",
+            firstYear: "First Year",
+            lastYear: "Last Year",
+            avgDistance: "Avg Distance",
+            avgRadius: "Avg Radius",
+            avgMass: "Avg Mass",
+            avgTemperature: "Avg Temperature",
+            methodStats: "Method Stats",
+            confirmedPlanets: "Confirmed Planets",
+            details: "Details",
+            transitDescription:
+                "A planet is detected by a brief dip in starlight as it crosses in front of its host star.",
+            radialVelocityDescription:
+                "This method measures small stellar wobble caused by a planet’s gravitational pull.",
+            imagingDescription:
+                "The planet is detected directly in images by separating its light from the host star.",
+            microlensingDescription:
+                "A planet is detected through gravitational magnification of light from a distant star.",
+            timingDescription:
+                "This method searches for timing variations in transits, eclipses or system signals.",
+            astrometryDescription:
+                "This method tracks tiny shifts in a star’s position on the sky caused by a planet.",
+            otherDescription:
+                "Another or combined exoplanet discovery technique.",
+            loadingError: "Failed to load discovery methods.",
+            unknownError: "Unknown error.",
+            backToMethods: "Back to Methods",
+            advantages: "Advantages",
+            limitations: "Limitations",
+            knownExamples: "Known Examples",
+            openPlanetCatalog: "Open in Catalog",
+            notFound: "Discovery method not found.",
+
+            transitProOne: "Well suited for finding small planets.",
+            transitProTwo: "Allows planetary radius to be measured.",
+            transitProThree: "The most productive method in modern surveys.",
+            transitConOne: "Requires the orbit to be aligned with our line of sight.",
+            transitConTwo: "Not every planet crosses in front of its host star.",
+
+            radialVelocityProOne: "Allows planetary mass to be estimated.",
+            radialVelocityProTwo: "Works even when the planet does not transit.",
+            radialVelocityProThree: "Effective for massive close-in planets.",
+            radialVelocityConOne: "Less effective for very small planets.",
+            radialVelocityConTwo: "Requires extremely precise spectroscopic measurements.",
+
+            imagingProOne: "Allows the planet to be observed directly.",
+            imagingProTwo: "Useful for young massive planets.",
+            imagingProThree: "Can study light from the planet itself.",
+            imagingConOne: "The planet is difficult to separate from the bright host star.",
+            imagingConTwo: "Works only for a limited number of systems.",
+
+            generalProOne: "Helps detect planets in special systems.",
+            generalProTwo: "Complements other discovery methods.",
+            generalProThree: "Expands the statistical picture of exoplanets.",
+            generalConOne: "Has limited precision or applicability.",
+            generalConTwo: "Often requires additional confirmation.",
+        },
     }
 };
 
