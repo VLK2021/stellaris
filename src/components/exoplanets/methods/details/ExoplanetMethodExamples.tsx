@@ -11,7 +11,7 @@ const EXAMPLES: Record<string, string[]> = {
     imaging: ["HR 8799 b", "Beta Pic b", "2M1207 b"],
     microlensing: ["OGLE-2005-BLG-390L b", "OGLE-2016-BLG-1195L b"],
     timing: ["Kepler-19 c", "Kepler-88 c"],
-    astrometry: ["VB 10 b"],
+    astrometry: ["VB 10"],
     other: ["Kepler-22 b", "K2-18 b", "WASP-12 b"],
 };
 
@@ -49,7 +49,7 @@ export const ExoplanetMethodExamples = ({method, t}: Props) => {
                     {examples.map((planet) => (
                         <Link
                             key={planet}
-                            href={`/exoplanets/catalog/${encodeURIComponent(planet)}`}
+                            href={`/exoplanets/catalog?search=${encodeURIComponent(planet)}`}
                             className="group rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 transition hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-glow)]"
                         >
                             <Orbit className="h-4 w-4 text-[var(--color-accent)]" />
