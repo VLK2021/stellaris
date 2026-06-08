@@ -963,7 +963,60 @@ const en = {
             generalConOne: "Has limited precision or applicability.",
             generalConTwo: "Often requires additional confirmation.",
         },
-    }
+    },
+
+    mars: {
+        heroEyebrow: "Mars Mission Control",
+        heroTitle: "Mars",
+        heroAccent: "command center",
+        heroDescription:
+            "A futuristic Mars exploration hub: active rovers, archived missions, cameras, sol data and real surface imagery.",
+        roverNetwork: "Rover network",
+        surfaceImages: "Surface images",
+        nasaStream: "NASA stream",
+        telemetry: "Telemetry",
+        rovers: "Rovers",
+        activeMissions: "Active missions",
+        loadedPhotos: "Loaded photos",
+        latestTransmission: "Latest transmission",
+        navigationTitle: "Navigation deck",
+        navigationDescription:
+            "Quick access to upcoming Mars sections: rovers, photo archive, missions and cameras.",
+        openRovers: "Rovers",
+        openPhotos: "Photos",
+        openMissions: "Missions",
+        openCameras: "Cameras",
+        telemetryTitle: "Telemetry panel",
+        telemetryDescription:
+            "Summary of available Mars Rover API data sources and current module state.",
+        totalRovers: "Total rovers",
+        activeRovers: "Active",
+        archivedRovers: "Archived",
+        photoStream: "Photos in stream",
+        roverCommandTitle: "Rover Command Center",
+        roverCommandDescription:
+            "Each rover includes status, launch date, landing date, max sol and available cameras.",
+        landing: "Landing",
+        launch: "Launch",
+        maxSol: "Max sol",
+        maxDate: "Max date",
+        cameras: "Cameras",
+        active: "Active",
+        complete: "Complete",
+        surfaceStreamTitle: "Surface stream",
+        surfaceStreamDescription:
+            "Latest available images from Mars rover cameras.",
+        sol: "Sol",
+        camera: "Camera",
+        rover: "Rover",
+        timelineTitle: "Mission timeline",
+        timelineDescription:
+            "Key rover landings on the Martian surface.",
+        cameraNetworkTitle: "Camera network",
+        cameraNetworkDescription:
+            "Cameras available for future photo archive filtering.",
+        availableCameras: "Available cameras",
+    },
 };
 
 export default en;

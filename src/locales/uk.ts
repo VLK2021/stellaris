@@ -965,6 +965,59 @@ const uk = {
             generalConTwo: "Часто потребує додаткового підтвердження.",
         },
     },
+
+    mars: {
+        heroEyebrow: "Mars Mission Control",
+        heroTitle: "Марс",
+        heroAccent: "центр керування",
+        heroDescription:
+            "Футуристичний центр дослідження Марса: активні ровери, архівні місії, камери, sol-дані та реальні знімки поверхні.",
+        roverNetwork: "Мережа роверів",
+        surfaceImages: "Знімки поверхні",
+        nasaStream: "NASA потік",
+        telemetry: "Телеметрія",
+        rovers: "Роверів",
+        activeMissions: "Активні місії",
+        loadedPhotos: "Завантажено фото",
+        latestTransmission: "Останній сигнал",
+        navigationTitle: "Навігаційна палуба",
+        navigationDescription:
+            "Швидкий доступ до майбутніх підрозділів Марса: ровери, фотоархів, місії та камери.",
+        openRovers: "Ровери",
+        openPhotos: "Фото",
+        openMissions: "Місії",
+        openCameras: "Камери",
+        telemetryTitle: "Панель телеметрії",
+        telemetryDescription:
+            "Зведення по доступних джерелах даних Mars Rover API та поточному стану модуля.",
+        totalRovers: "Усього роверів",
+        activeRovers: "Активних",
+        archivedRovers: "Архівних",
+        photoStream: "Фото у стрічці",
+        roverCommandTitle: "Rover Command Center",
+        roverCommandDescription:
+            "Кожен ровер має свій статус, дату запуску, дату посадки, максимальний sol і набір камер.",
+        landing: "Посадка",
+        launch: "Запуск",
+        maxSol: "Max sol",
+        maxDate: "Max date",
+        cameras: "Камери",
+        active: "Активний",
+        complete: "Завершений",
+        surfaceStreamTitle: "Потік поверхні",
+        surfaceStreamDescription:
+            "Останні доступні знімки з камер марсіанських роверів.",
+        sol: "Sol",
+        camera: "Камера",
+        rover: "Ровер",
+        timelineTitle: "Хронологія місій",
+        timelineDescription:
+            "Ключові посадки роверів на поверхню Марса.",
+        cameraNetworkTitle: "Мережа камер",
+        cameraNetworkDescription:
+            "Камери, доступні для фільтрації фотоархіву в майбутньому підрозділі.",
+        availableCameras: "Доступні камери",
+    },
 };
 
 export default uk;
