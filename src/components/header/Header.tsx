@@ -38,15 +38,14 @@ export const Header = () => {
         {label: locale.nav.mars, href: "/mars", icon: Orbit},
         {label: locale.nav.media, href: "/media", icon: GalleryHorizontal},
         {label: locale.nav.missions, href: "/missions", icon: Rocket},
+        {label: locale.nav.asteroids, href: "/asteroids", icon: CircleDot},
     ];
 
     const exploreLinks: HeaderNavItem[] = [
         {label: locale.nav.apod, href: "/apod", icon: Aperture},
-        {label: locale.nav.asteroids, href: "/asteroids", icon: CircleDot},
         {label: locale.nav.spaceWeather, href: "/space-weather", icon: CloudSun},
         {label: locale.nav.exoplanets, href: "/exoplanets", icon: Telescope},
         {label: locale.nav.satellites, href: "/orbits", icon: Satellite},
-        {label: locale.nav.openData, href: "/datasets", icon: Database},
     ];
 
     const isActive = (href: string) => {
