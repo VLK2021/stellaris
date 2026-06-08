@@ -6,7 +6,6 @@ import {
     Aperture,
     CircleDot,
     CloudSun,
-    Database,
     Earth,
     GalleryHorizontal,
     Menu,
