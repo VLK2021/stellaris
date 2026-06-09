@@ -11,15 +11,15 @@ export const MarsTelemetryPanel = ({data, t}: Props) => {
     const archived = data.stats.rovers - data.stats.activeRovers;
 
     return (
-        <aside className="relative overflow-hidden rounded-[2.4rem] border border-orange-200/12 bg-black/35 p-6">
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(56,189,248,.08),rgba(249,115,22,.12),transparent_70%)]" />
+        <aside className="relative overflow-hidden rounded-[2.4rem] border border-[var(--mars-border)] bg-[var(--mars-surface)] p-6 shadow-[var(--mars-glow)]">
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(56,189,248,.10),rgba(249,115,22,.13),transparent_70%)]" />
 
             <div className="relative z-10">
-                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-orange-300">
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-[var(--mars-accent)]">
                     {t.telemetryTitle}
                 </p>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[var(--mars-muted)]">
                     {t.telemetryDescription}
                 </p>
 
@@ -34,15 +34,26 @@ export const MarsTelemetryPanel = ({data, t}: Props) => {
     );
 };
 
-const Line = ({icon: Icon, label, value}: {icon: typeof Rocket; label: string; value: string | number}) => (
-    <div className="flex items-center justify-between gap-4 rounded-[1rem] border border-white/10 bg-white/[0.035] p-3">
+const Line = ({
+                  icon: Icon,
+                  label,
+                  value,
+              }: {
+    icon: typeof Rocket;
+    label: string;
+    value: string | number;
+}) => (
+    <div className="flex items-center justify-between gap-4 rounded-[1rem] border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] p-3">
         <div className="flex items-center gap-3">
-            <Icon className="h-4 w-4 text-orange-300" />
-            <span className="text-[10px] font-black uppercase tracking-[0.16em] text-white/45">
+            <Icon className="h-4 w-4 text-[var(--mars-accent)]" />
+
+            <span className="text-[10px] font-black uppercase tracking-[0.16em] text-[var(--mars-muted)]">
                 {label}
             </span>
         </div>
 
-        <strong className="text-sm font-black text-white">{value}</strong>
+        <strong className="text-sm font-black text-[var(--mars-text)]">
+            {value}
+        </strong>
     </div>
 );
