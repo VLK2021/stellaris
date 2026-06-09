@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import {useEffect, useMemo, useState} from "react";
 import {useSearchParams} from "next/navigation";
-import {ArrowLeft, Loader2} from "lucide-react";
+import {Loader2} from "lucide-react";
 
+import {BackButton} from "@/src/common/BackButton";
 import {Pagination} from "@/src/common/pagination";
 import {useLanguage} from "@/src/context/LanguageContext";
 import {
@@ -34,6 +34,10 @@ export type MarsPhotoFormState = {
 
 const ESTIMATED_TOTAL_PAGES = 25;
 
+const isMarsRoverName = (value: string | null): value is MarsRoverName => {
+    return ["perseverance", "curiosity", "opportunity", "spirit"].includes(value ?? "");
+};
+
 const sortPhotos = (photos: MarsPhoto[], sort: MarsPhotoSort) => {
     return photos.slice().sort((a, b) => {
         if (sort === "newest") return b.earth_date.localeCompare(a.earth_date);
@@ -47,14 +51,7 @@ const sortPhotos = (photos: MarsPhoto[], sort: MarsPhotoSort) => {
 export const MarsPhotosPage = () => {
     const {locale} = useLanguage();
     const t = locale.mars as MarsLocale;
-
     const searchParams = useSearchParams();
-
-    const roverFromUrl = searchParams.get("rover") as MarsRoverName | null;
-    const cameraFromUrl = searchParams.get("camera") ?? "";
-    const earthDateFromUrl = searchParams.get("earthDate") ?? "";
-    const solFromUrl = searchParams.get("sol") ?? "";
-    const pageFromUrl = Number(searchParams.get("page") ?? 1);
 
     const [filters, setFilters] = useState<MarsFilters | null>(null);
     const [photos, setPhotos] = useState<MarsPhoto[]>([]);
@@ -63,11 +60,11 @@ export const MarsPhotosPage = () => {
     const [error, setError] = useState<string | null>(null);
 
     const [form, setForm] = useState<MarsPhotoFormState>({
-        rover: roverFromUrl ?? "perseverance",
-        camera: cameraFromUrl,
-        earthDate: earthDateFromUrl || "2025-11-06",
-        sol: solFromUrl,
-        page: Number.isFinite(pageFromUrl) ? pageFromUrl : 1,
+        rover: "perseverance",
+        camera: "",
+        earthDate: "",
+        sol: "",
+        page: 1,
         sort: "newest",
     });
 
@@ -77,63 +74,66 @@ export const MarsPhotosPage = () => {
 
             try {
                 const data = await fetchMarsFiltersClient();
-                const first = data.rovers[0];
+
+                const roverParam = searchParams.get("rover");
+                const selectedRover =
+                    data.rovers.find((rover) => rover.name === roverParam) ??
+                    data.rovers[0];
+
+                if (!selectedRover) {
+                    setFilters(data);
+                    return;
+                }
+
+                const pageParam = Number(searchParams.get("page") ?? 1);
 
                 setFilters(data);
-
-                if (first) {
-                    const selectedRover =
-                        data.rovers.find((item) => item.name === roverFromUrl) ?? first;
-
-                    setForm((prev) => ({
-                        ...prev,
-                        rover: selectedRover.name,
-                        camera: cameraFromUrl,
-                        earthDate: earthDateFromUrl || selectedRover.defaultEarthDate,
-                        sol: solFromUrl,
-                        page: Number.isFinite(pageFromUrl) ? pageFromUrl : 1,
-                    }));
-                }
+                setForm({
+                    rover: selectedRover.name,
+                    camera: searchParams.get("camera") ?? "",
+                    earthDate:
+                        searchParams.get("earthDate") ??
+                        selectedRover.defaultEarthDate,
+                    sol: searchParams.get("sol") ?? "",
+                    page: Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1,
+                    sort: "newest",
+                });
             } catch (error) {
-                setError(
-                    error instanceof Error
-                        ? error.message
-                        : t.emptyPhotos,
-                );
+                setError(error instanceof Error ? error.message : t.emptyPhotos);
             } finally {
                 setFiltersLoading(false);
             }
         };
 
         void loadFilters();
-    }, [cameraFromUrl,
-        earthDateFromUrl,
-        pageFromUrl,
-        roverFromUrl,
-        solFromUrl,
-        t.emptyPhotos,]);
+    }, [searchParams, t.emptyPhotos]);
 
     useEffect(() => {
         const loadPhotos = async () => {
+            if (!filters) return;
+
             setLoading(true);
             setError(null);
 
             try {
+                const activeRover = filters.rovers.find(
+                    (rover) => rover.name === form.rover,
+                );
+
                 const data = await fetchMarsPhotosClient({
                     rover: form.rover,
                     camera: form.camera || undefined,
-                    earthDate: form.earthDate || undefined,
+                    earthDate:
+                        form.earthDate ||
+                        activeRover?.defaultEarthDate ||
+                        undefined,
                     sol: form.sol ? Number(form.sol) : undefined,
                     page: form.page,
                 });
 
                 setPhotos(data.photos);
             } catch (error) {
-                setError(
-                    error instanceof Error
-                        ? error.message
-                        : t.emptyPhotos,
-                );
+                setError(error instanceof Error ? error.message : t.emptyPhotos);
             } finally {
                 setLoading(false);
             }
@@ -141,6 +141,7 @@ export const MarsPhotosPage = () => {
 
         void loadPhotos();
     }, [
+        filters,
         form.rover,
         form.camera,
         form.earthDate,
@@ -160,21 +161,15 @@ export const MarsPhotosPage = () => {
             style={{background: "var(--mars-bg)"}}
         >
             <div className="pointer-events-none fixed inset-0 opacity-70">
-                <div
-                    className="absolute inset-0"
-                    style={{background: "var(--mars-bg)"}}
-                />
+                <div className="absolute inset-0" style={{background: "var(--mars-bg)"}} />
                 <div className="absolute inset-0 opacity-[0.10] [background-image:radial-gradient(rgba(251,146,60,.8)_1px,transparent_1px)] [background-size:36px_36px]" />
             </div>
 
             <div className="relative z-10 mx-auto grid max-w-[1580px] gap-6 px-4 py-8 sm:px-6 lg:px-8">
-                <Link
-                    href="/mars"
-                    className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--mars-border)] bg-[var(--mars-surface)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--mars-accent)] transition hover:border-[var(--mars-accent)]"
-                >
-                    <ArrowLeft className="h-4 w-4" />
-                    {t.photosBack}
-                </Link>
+                <BackButton
+                    label={t.photosBack}
+                    className="border-[var(--mars-border)] bg-[var(--mars-surface)] text-[var(--mars-accent)] hover:border-[var(--mars-accent)]"
+                />
 
                 <section className="rounded-[2.6rem] border border-[var(--mars-border)] bg-[var(--mars-surface)] p-6 shadow-[var(--mars-glow)]">
                     <p className="text-[10px] font-black uppercase tracking-[0.28em] text-[var(--mars-accent)]">
@@ -209,11 +204,7 @@ export const MarsPhotosPage = () => {
                         </div>
                     </div>
                 ) : (
-                    <MarsPhotosGallery
-                        photos={sortedPhotos}
-                        error={error}
-                        t={t}
-                    />
+                    <MarsPhotosGallery photos={sortedPhotos} error={error} t={t} />
                 )}
 
                 <Pagination
