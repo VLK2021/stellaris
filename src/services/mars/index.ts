@@ -3,3 +3,4 @@ export * from './marsRovers.service';
 export * from './marsPhotos.service';
 export * from './marsOverview.service';
 export * from './marsFilters.service';
+export * from './marsPhotosClient.service';
