@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {useEffect, useMemo, useState} from "react";
+import {useSearchParams} from "next/navigation";
 import {ArrowLeft, Loader2} from "lucide-react";
 
 import {Pagination} from "@/src/common/pagination";
@@ -47,6 +48,14 @@ export const MarsPhotosPage = () => {
     const {locale} = useLanguage();
     const t = locale.mars as MarsLocale;
 
+    const searchParams = useSearchParams();
+
+    const roverFromUrl = searchParams.get("rover") as MarsRoverName | null;
+    const cameraFromUrl = searchParams.get("camera") ?? "";
+    const earthDateFromUrl = searchParams.get("earthDate") ?? "";
+    const solFromUrl = searchParams.get("sol") ?? "";
+    const pageFromUrl = Number(searchParams.get("page") ?? 1);
+
     const [filters, setFilters] = useState<MarsFilters | null>(null);
     const [photos, setPhotos] = useState<MarsPhoto[]>([]);
     const [loading, setLoading] = useState(true);
@@ -54,11 +63,11 @@ export const MarsPhotosPage = () => {
     const [error, setError] = useState<string | null>(null);
 
     const [form, setForm] = useState<MarsPhotoFormState>({
-        rover: "perseverance",
-        camera: "",
-        earthDate: "2025-11-06",
-        sol: "",
-        page: 1,
+        rover: roverFromUrl ?? "perseverance",
+        camera: cameraFromUrl,
+        earthDate: earthDateFromUrl || "2025-11-06",
+        sol: solFromUrl,
+        page: Number.isFinite(pageFromUrl) ? pageFromUrl : 1,
         sort: "newest",
     });
 
@@ -73,10 +82,16 @@ export const MarsPhotosPage = () => {
                 setFilters(data);
 
                 if (first) {
+                    const selectedRover =
+                        data.rovers.find((item) => item.name === roverFromUrl) ?? first;
+
                     setForm((prev) => ({
                         ...prev,
-                        rover: first.name,
-                        earthDate: first.defaultEarthDate,
+                        rover: selectedRover.name,
+                        camera: cameraFromUrl,
+                        earthDate: earthDateFromUrl || selectedRover.defaultEarthDate,
+                        sol: solFromUrl,
+                        page: Number.isFinite(pageFromUrl) ? pageFromUrl : 1,
                     }));
                 }
             } catch (error) {
@@ -91,7 +106,12 @@ export const MarsPhotosPage = () => {
         };
 
         void loadFilters();
-    }, [t.emptyPhotos]);
+    }, [cameraFromUrl,
+        earthDateFromUrl,
+        pageFromUrl,
+        roverFromUrl,
+        solFromUrl,
+        t.emptyPhotos,]);
 
     useEffect(() => {
         const loadPhotos = async () => {

@@ -1060,6 +1060,16 @@ const uk = {
         loadingPhotos: "Завантаження фото...",
         photoDetails: "Дані знімка",
         openOriginal: "Відкрити оригінал",
+        roversBack: "Назад до Марса",
+        roversEyebrow: "Mars Rover Network",
+        roversTitle: "Ровери Марса",
+        roversDescription:
+            "Огляд марсіанських роверів: статус місії, дата запуску, посадка, доступні камери, максимальний sol та прямий перехід до фотоархіву кожного ровера.",
+        roverDetails: "Детальніше про ровер",
+        openRoverPhotos: "Фото цього ровера",
+        missionStatus: "Статус місії",
+        defaultPhotoDate: "Дата фото за замовчуванням",
+        availableCameraCount: "Доступних камер",
     },
 };
 

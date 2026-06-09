@@ -1059,6 +1059,16 @@ const en = {
         loadingPhotos: "Loading photos...",
         photoDetails: "Photo details",
         openOriginal: "Open original",
+        roversBack: "Back to Mars",
+        roversEyebrow: "Mars Rover Network",
+        roversTitle: "Mars rovers",
+        roversDescription:
+            "Overview of Mars rovers: mission status, launch date, landing date, available cameras, max sol and direct access to each rover photo archive.",
+        roverDetails: "Rover details",
+        openRoverPhotos: "Rover photos",
+        missionStatus: "Mission status",
+        defaultPhotoDate: "Default photo date",
+        availableCameraCount: "Available cameras",
     },
 };
 
