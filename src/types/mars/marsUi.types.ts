@@ -17,6 +17,7 @@ export type MarsLocale = {
     openPhotos: string;
     openMissions: string;
     openCameras: string;
+    openSection: string;
     telemetryTitle: string;
     telemetryDescription: string;
     totalRovers: string;
@@ -42,4 +43,7 @@ export type MarsLocale = {
     cameraNetworkTitle: string;
     cameraNetworkDescription: string;
     availableCameras: string;
+    openCameraArchive: string;
+    cameraArchiveSoon: string;
+    cameraFallbackName: string;
 };
