@@ -970,25 +970,26 @@ const en = {
         heroTitle: "Mars",
         heroAccent: "command center",
         heroDescription:
-            "A futuristic Mars exploration hub: active rovers, archived missions, cameras, sol data and real surface imagery.",
+            "A dedicated Red Planet exploration center: active rovers, archived missions, real NASA imagery, cameras, sol data and a future photo archive.",
         roverNetwork: "Rover network",
         surfaceImages: "Surface images",
         nasaStream: "NASA stream",
         telemetry: "Telemetry",
         rovers: "Rovers",
         activeMissions: "Active missions",
-        loadedPhotos: "Loaded photos",
+        loadedPhotos: "Photos in stream",
         latestTransmission: "Latest transmission",
         navigationTitle: "Navigation deck",
         navigationDescription:
             "Quick access to upcoming Mars sections: rovers, photo archive, missions and cameras.",
         openRovers: "Rovers",
-        openPhotos: "Photos",
+        openPhotos: "Photo archive",
         openMissions: "Missions",
         openCameras: "Cameras",
+        openSection: "Open",
         telemetryTitle: "Telemetry panel",
         telemetryDescription:
-            "Summary of available Mars Rover API data sources and current module state.",
+            "Summary of available Mars Rover API sources and current module state.",
         totalRovers: "Total rovers",
         activeRovers: "Active",
         archivedRovers: "Archived",
@@ -1012,10 +1013,13 @@ const en = {
         timelineTitle: "Mission timeline",
         timelineDescription:
             "Key rover landings on the Martian surface.",
-        cameraNetworkTitle: "Camera network",
+        cameraNetworkTitle: "Camera Access Network",
         cameraNetworkDescription:
-            "Cameras available for future photo archive filtering.",
+            "A navigation layer for the future photo archive: every camera will open a dedicated filtered collection.",
         availableCameras: "Available cameras",
+        openCameraArchive: "Open archive",
+        cameraArchiveSoon: "Future photo archive",
+        cameraFallbackName: "NASA camera",
     },
 };
 

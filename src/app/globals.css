@@ -50,6 +50,16 @@
             linear-gradient(180deg, #f8fbff, #eaf2ff 46%, #dbeafe);
 
     --star-color: rgba(15, 23, 42, 0.28);
+
+    --mars-bg: linear-gradient(180deg, #fff7ed 0%, #f8fafc 42%, #eef2ff 100%);
+    --mars-surface: rgba(255, 255, 255, 0.68);
+    --mars-surface-strong: rgba(255, 247, 237, 0.82);
+    --mars-border: rgba(194, 65, 12, 0.18);
+    --mars-text: #1f130c;
+    --mars-muted: rgba(31, 19, 12, 0.58);
+    --mars-accent: #ea580c;
+    --mars-blue: #0284c7;
+    --mars-glow: 0 0 70px rgba(234, 88, 12, 0.22);
 }
 
 .dark {
@@ -102,6 +112,17 @@
             linear-gradient(180deg, #020617, #07111f 48%, #050b16);
 
     --star-color: rgba(248, 250, 252, 0.48);
+
+
+    --mars-bg: linear-gradient(180deg, #030308 0%, #0b0507 44%, #030308 100%);
+    --mars-surface: rgba(255, 255, 255, 0.035);
+    --mars-surface-strong: rgba(0, 0, 0, 0.35);
+    --mars-border: rgba(254, 215, 170, 0.14);
+    --mars-text: #ffffff;
+    --mars-muted: rgba(255, 255, 255, 0.58);
+    --mars-accent: #fb923c;
+    --mars-blue: #38bdf8;
+    --mars-glow: 0 0 90px rgba(249, 115, 22, 0.18);
 }
 
 * {
