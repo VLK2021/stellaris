@@ -1070,6 +1070,12 @@ const uk = {
         missionStatus: "Статус місії",
         defaultPhotoDate: "Дата фото за замовчуванням",
         availableCameraCount: "Доступних камер",
+        roverDetailsBack: "Назад до роверів",
+        roverProfile: "Профіль ровера",
+        roverMissionProfile: "Паспорт місії",
+        roverPhotoArchive: "Фотоархів ровера",
+        cameraArchiveByRover: "Камери цього ровера",
+        openCameraPhotos: "Фото з цієї камери",
     },
 };
 

@@ -1069,6 +1069,12 @@ const en = {
         missionStatus: "Mission status",
         defaultPhotoDate: "Default photo date",
         availableCameraCount: "Available cameras",
+        roverDetailsBack: "Back to rovers",
+        roverProfile: "Rover profile",
+        roverMissionProfile: "Mission profile",
+        roverPhotoArchive: "Rover photo archive",
+        cameraArchiveByRover: "Rover cameras",
+        openCameraPhotos: "Photos from this camera",
     },
 };
 

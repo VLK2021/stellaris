@@ -93,4 +93,10 @@ export type MarsLocale = {
     missionStatus: string;
     defaultPhotoDate: string;
     availableCameraCount: string;
+    roverDetailsBack: string;
+    roverProfile: string;
+    roverMissionProfile: string;
+    roverPhotoArchive: string;
+    cameraArchiveByRover: string;
+    openCameraPhotos: string;
 };
