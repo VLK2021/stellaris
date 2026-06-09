@@ -1020,6 +1020,18 @@ const en = {
         openCameraArchive: "Open archive",
         cameraArchiveSoon: "Future photo archive",
         cameraFallbackName: "NASA camera",
+        details: "Details",
+        openTelemetry: "Open telemetry",
+        openPhotoArchive: "Open photo archive",
+        openRoverArchive: "Open rovers",
+        openMissionArchive: "Open missions",
+        heroRoversDescription: "Open Mars rovers",
+        heroPhotosDescription: "Open surface photo archive",
+        heroStreamDescription: "Open NASA image stream",
+        telemetryRoversHint: "All rovers and missions",
+        telemetryPhotosHint: "Latest surface images",
+        telemetryActiveHint: "Active vehicles",
+        telemetryLatestHint: "Latest available date",
     },
 };
 

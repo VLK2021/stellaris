@@ -1021,6 +1021,18 @@ const uk = {
         openCameraArchive: "Відкрити архів",
         cameraArchiveSoon: "Майбутній фотоархів",
         cameraFallbackName: "NASA камера",
+        details: "Детальніше",
+        openTelemetry: "Відкрити телеметрію",
+        openPhotoArchive: "Відкрити фотоархів",
+        openRoverArchive: "Відкрити ровери",
+        openMissionArchive: "Відкрити місії",
+        heroRoversDescription: "Перейти до роверів Марса",
+        heroPhotosDescription: "Перейти до фотоархіву поверхні",
+        heroStreamDescription: "Перейти до потоку NASA",
+        telemetryRoversHint: "Всі ровери та їхні місії",
+        telemetryPhotosHint: "Останні фото з поверхні",
+        telemetryActiveHint: "Активні апарати",
+        telemetryLatestHint: "Остання доступна дата",
     },
 };
 

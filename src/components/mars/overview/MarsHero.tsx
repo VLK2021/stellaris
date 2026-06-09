@@ -1,4 +1,5 @@
-import {Activity, Camera, Radio, Rocket, Satellite} from "lucide-react";
+import Link from "next/link";
+import {Activity, ArrowRight, Camera, Radio, Rocket, Satellite} from "lucide-react";
 
 import type {MarsLocale, MarsOverview} from "@/src/types/mars";
 
@@ -7,24 +8,38 @@ type Props = {
     t: MarsLocale;
 };
 
+const heroLinks = [
+    {
+        href: "/mars/rovers",
+        icon: Rocket,
+        labelKey: "roverNetwork",
+        descKey: "heroRoversDescription",
+    },
+    {
+        href: "/mars/photos",
+        icon: Camera,
+        labelKey: "surfaceImages",
+        descKey: "heroPhotosDescription",
+    },
+    {
+        href: "/mars/photos",
+        icon: Satellite,
+        labelKey: "nasaStream",
+        descKey: "heroStreamDescription",
+    },
+];
+
 export const MarsHero = ({data, t}: Props) => {
     return (
         <section className="relative overflow-hidden rounded-[3rem] border border-[var(--mars-border)] bg-[var(--mars-surface)] p-6 shadow-[var(--mars-glow)] sm:p-8">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_76%_42%,rgba(249,115,22,.22),transparent_30%),radial-gradient(circle_at_18%_16%,rgba(56,189,248,.11),transparent_30%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(249,115,22,.2),transparent_30%),radial-gradient(circle_at_18%_18%,rgba(56,189,248,.12),transparent_28%)]" />
             <div className="pointer-events-none absolute left-0 top-1/2 h-px w-full bg-gradient-to-r from-transparent via-[var(--mars-accent)]/35 to-transparent" />
 
-            <div className="pointer-events-none absolute right-[8%] top-[12%] hidden h-[420px] w-[420px] rounded-full border border-[var(--mars-border)] xl:block" />
-            <div className="pointer-events-none absolute right-[14%] top-[22%] hidden h-[260px] w-[260px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#fed7aa,#f97316_34%,#7c2d12_72%)] shadow-[var(--mars-glow)] xl:block" />
-
-            <div className="relative z-10 grid min-h-[620px] items-center gap-8 xl:grid-cols-[1fr_430px]">
+            <div className="relative z-10 grid min-h-[520px] items-center gap-8 xl:grid-cols-[1fr_460px]">
                 <div>
-                    <div className="inline-flex items-center gap-3 rounded-full border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-4 py-2 backdrop-blur-xl">
-                        <span className="h-2 w-2 rounded-full bg-[var(--mars-accent)] shadow-[0_0_18px_rgba(251,146,60,.9)]" />
-
-                        <p className="text-[10px] font-black uppercase tracking-[0.28em] text-[var(--mars-accent)]">
-                            {t.heroEyebrow}
-                        </p>
-                    </div>
+                    <p className="inline-flex rounded-full border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.28em] text-[var(--mars-accent)]">
+                        {t.heroEyebrow}
+                    </p>
 
                     <h1 className="mt-6 max-w-5xl text-5xl font-black uppercase leading-[0.86] tracking-[-0.08em] text-[var(--mars-text)] sm:text-7xl lg:text-8xl">
                         {t.heroTitle}
@@ -37,15 +52,38 @@ export const MarsHero = ({data, t}: Props) => {
                         {t.heroDescription}
                     </p>
 
-                    <div className="mt-8 flex flex-wrap gap-3">
-                        <MissionPill icon={Rocket} label={t.roverNetwork} />
-                        <MissionPill icon={Camera} label={t.surfaceImages} />
-                        <MissionPill icon={Satellite} label={t.nasaStream} />
+                    <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                        {heroLinks.map((item) => {
+                            const Icon = item.icon;
+
+                            return (
+                                <Link
+                                    key={item.href + item.labelKey}
+                                    href={item.href}
+                                    className="group rounded-[1.3rem] border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] p-4 transition hover:-translate-y-1 hover:border-[var(--mars-accent)] hover:shadow-[var(--mars-glow)]"
+                                >
+                                    <Icon className="h-5 w-5 text-[var(--mars-accent)]" />
+
+                                    <p className="mt-3 text-sm font-black uppercase tracking-[-0.02em] text-[var(--mars-text)]">
+                                        {t[item.labelKey as keyof MarsLocale]}
+                                    </p>
+
+                                    <p className="mt-2 text-xs leading-5 text-[var(--mars-muted)]">
+                                        {t[item.descKey as keyof MarsLocale]}
+                                    </p>
+
+                                    <p className="mt-4 inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--mars-accent)]">
+                                        {t.details}
+                                        <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                                    </p>
+                                </Link>
+                            );
+                        })}
                     </div>
                 </div>
 
                 <aside className="relative overflow-hidden rounded-[2rem] border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] p-5 backdrop-blur-xl">
-                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(251,146,60,.16),rgba(56,189,248,.08),transparent_70%)]" />
+                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(251,146,60,.14),rgba(56,189,248,.08),transparent_70%)]" />
 
                     <div className="relative z-10">
                         <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[var(--mars-muted)]">
@@ -53,10 +91,10 @@ export const MarsHero = ({data, t}: Props) => {
                         </p>
 
                         <div className="mt-5 grid gap-3">
-                            <HeroSignal icon={Rocket} label={t.rovers} value={data.stats.rovers} />
-                            <HeroSignal icon={Activity} label={t.activeMissions} value={data.stats.activeRovers} />
-                            <HeroSignal icon={Camera} label={t.loadedPhotos} value={data.stats.totalPhotos} />
-                            <HeroSignal icon={Radio} label={t.latestTransmission} value={data.stats.latestEarthDate ?? "—"} />
+                            <HeroSignal href="/mars/rovers" icon={Rocket} label={t.rovers} value={data.stats.rovers} hint={t.telemetryRoversHint} />
+                            <HeroSignal href="/mars/rovers" icon={Activity} label={t.activeMissions} value={data.stats.activeRovers} hint={t.telemetryActiveHint} />
+                            <HeroSignal href="/mars/photos" icon={Camera} label={t.loadedPhotos} value={data.stats.totalPhotos} hint={t.telemetryPhotosHint} />
+                            <HeroSignal href="/mars/photos" icon={Radio} label={t.latestTransmission} value={data.stats.latestEarthDate ?? "—"} hint={t.telemetryLatestHint} />
                         </div>
                     </div>
                 </aside>
@@ -65,23 +103,23 @@ export const MarsHero = ({data, t}: Props) => {
     );
 };
 
-const MissionPill = ({icon: Icon, label}: {icon: typeof Rocket; label: string}) => (
-    <span className="inline-flex items-center gap-2 rounded-full border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--mars-muted)] backdrop-blur-xl">
-        <Icon className="h-4 w-4 text-[var(--mars-accent)]" />
-        {label}
-    </span>
-);
-
 const HeroSignal = ({
+                        href,
                         icon: Icon,
                         label,
                         value,
+                        hint,
                     }: {
+    href: string;
     icon: typeof Rocket;
     label: string;
     value: string | number;
+    hint: string;
 }) => (
-    <div className="rounded-[1.3rem] border border-[var(--mars-border)] bg-[var(--mars-surface)] p-4 transition hover:border-[var(--mars-accent)] hover:shadow-[var(--mars-glow)]">
+    <Link
+        href={href}
+        className="group rounded-[1.3rem] border border-[var(--mars-border)] bg-[var(--mars-surface)] p-4 transition hover:border-[var(--mars-accent)] hover:shadow-[var(--mars-glow)]"
+    >
         <Icon className="h-4 w-4 text-[var(--mars-accent)]" />
 
         <p className="mt-3 text-[9px] font-black uppercase tracking-[0.2em] text-[var(--mars-muted)]">
@@ -91,5 +129,10 @@ const HeroSignal = ({
         <p className="mt-1 truncate text-xl font-black text-[var(--mars-text)]">
             {value}
         </p>
-    </div>
+
+        <p className="mt-2 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.14em] text-[var(--mars-accent)]">
+            {hint}
+            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+        </p>
+    </Link>
 );
