@@ -19,9 +19,17 @@ const buildQuery = (query: MarsPhotosClientQuery) => {
     params.set("rover", query.rover);
     params.set("page", String(query.page ?? 1));
 
-    if (query.earthDate) params.set("earthDate", query.earthDate);
-    if (query.sol !== undefined) params.set("sol", String(query.sol));
-    if (query.camera) params.set("camera", query.camera);
+    if (query.earthDate) {
+        params.set("earthDate", query.earthDate);
+    }
+
+    if (query.sol !== undefined) {
+        params.set("sol", String(query.sol));
+    }
+
+    if (query.camera) {
+        params.set("camera", query.camera);
+    }
 
     return params.toString();
 };

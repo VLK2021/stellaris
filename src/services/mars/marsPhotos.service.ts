@@ -1,11 +1,9 @@
 import {fetchMarsJson} from "./marsClient.service";
-import {getMarsRoverMeta} from "./marsRovers.service";
 
 import type {
     MarsPhoto,
     MarsPhotosQuery,
     MarsPhotosResponse,
-    MarsRoverName,
 } from "@/src/types/mars";
 
 type RawPhotosResponse = {
@@ -14,56 +12,64 @@ type RawPhotosResponse = {
     data?: MarsPhoto[];
 };
 
+const MARS_PHOTOS_PAGE_SIZE = 25;
+
+const normalizeCamera = (camera?: string) => {
+    return camera ? camera.toLowerCase() : undefined;
+};
+
 const normalizePhotosResponse = (response: RawPhotosResponse | MarsPhoto[]) => {
     if (Array.isArray(response)) return response;
 
     return response.photos ?? response.latest_photos ?? response.data ?? [];
 };
 
-export const getMarsRoverPhotos = async ({
-                                             rover,
-                                             sol,
-                                             earthDate,
-                                             camera,
-                                             page = 1,
-                                         }: MarsPhotosQuery): Promise<MarsPhotosResponse> => {
+export const getMarsRoverPhotos = async (
+    query: MarsPhotosQuery,
+): Promise<MarsPhotosResponse> => {
     const params: Record<string, string | number | undefined> = {
-        camera,
-        page,
+        page: query.page ?? 1,
     };
 
-    if (earthDate) {
-        params.earth_date = earthDate;
-    } else {
-        params.sol = sol ?? getMarsRoverMeta(rover).defaultSol;
+    if (query.earthDate) {
+        params.earth_date = query.earthDate;
+    }
+
+    if (query.sol !== undefined) {
+        params.sol = query.sol;
+    }
+
+    const camera = normalizeCamera(query.camera);
+
+    if (camera) {
+        params.camera = camera;
     }
 
     const response = await fetchMarsJson<RawPhotosResponse | MarsPhoto[]>({
-        path: `/rovers/${rover}/photos`,
+        path: `/rovers/${query.rover}/photos`,
         revalidate: 60 * 60,
         params,
     });
 
+    const photos = normalizePhotosResponse(response);
+
     return {
-        photos: normalizePhotosResponse(response),
-        query: {
-            rover,
-            sol,
-            earthDate,
-            camera,
-            page,
+        photos,
+        query,
+        meta: {
+            page: query.page ?? 1,
+            pageSize: MARS_PHOTOS_PAGE_SIZE,
+            count: photos.length,
+            hasNextPage: photos.length === MARS_PHOTOS_PAGE_SIZE,
         },
     };
 };
 
 export const getLatestMarsRoverPhotos = async (
-    rover: MarsRoverName,
+    rover: MarsPhotosQuery["rover"],
 ): Promise<MarsPhoto[]> => {
-    const meta = getMarsRoverMeta(rover);
-
     const response = await getMarsRoverPhotos({
         rover,
-        earthDate: meta.defaultEarthDate,
         page: 1,
     });
 

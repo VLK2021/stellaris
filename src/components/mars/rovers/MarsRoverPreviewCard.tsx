@@ -1,5 +1,11 @@
 import Link from "next/link";
-import {ArrowRight, CalendarDays, Camera, CircleDot, Rocket} from "lucide-react";
+import {
+    ArrowRight,
+    CalendarDays,
+    Camera,
+    CircleDot,
+    Rocket,
+} from "lucide-react";
 
 import type {MarsLocale, MarsRoverSummary} from "@/src/types/mars";
 
@@ -9,6 +15,8 @@ type Props = {
 };
 
 export const MarsRoverPreviewCard = ({rover, t}: Props) => {
+    const roverPhotosHref = `/mars/photos?rover=${rover.name}&earthDate=${rover.defaultEarthDate}`;
+
     return (
         <article className="relative overflow-hidden rounded-[2rem] border border-[var(--mars-border)] bg-[var(--mars-surface)] p-5 shadow-[var(--mars-glow)] transition hover:border-[var(--mars-accent)]">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(249,115,22,.16),transparent_34%)]" />
@@ -28,10 +36,29 @@ export const MarsRoverPreviewCard = ({rover, t}: Props) => {
                     </h2>
 
                     <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                        <Info icon={CalendarDays} label={t.launch} value={rover.launchDate} />
-                        <Info icon={CalendarDays} label={t.landing} value={rover.landingDate} />
-                        <Info icon={CircleDot} label={t.maxSol} value={rover.maxSol} />
-                        <Info icon={Camera} label={t.availableCameraCount} value={rover.cameras.length} />
+                        <Info
+                            icon={CalendarDays}
+                            label={t.launch}
+                            value={rover.launchDate}
+                        />
+
+                        <Info
+                            icon={CalendarDays}
+                            label={t.landing}
+                            value={rover.landingDate}
+                        />
+
+                        <Info
+                            icon={CircleDot}
+                            label={t.maxSol}
+                            value={rover.maxSol}
+                        />
+
+                        <Info
+                            icon={Camera}
+                            label={t.availableCameraCount}
+                            value={rover.cameras.length}
+                        />
                     </div>
 
                     <div className="mt-6 flex flex-wrap gap-3">
@@ -41,7 +68,7 @@ export const MarsRoverPreviewCard = ({rover, t}: Props) => {
                         />
 
                         <LinkButton
-                            href={`/mars/photos?rover=${rover.name}&earthDate=${rover.defaultEarthDate}`}
+                            href={roverPhotosHref}
                             label={t.openRoverPhotos}
                         />
                     </div>
@@ -53,15 +80,21 @@ export const MarsRoverPreviewCard = ({rover, t}: Props) => {
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-2">
-                        {rover.cameras.slice(0, 8).map((camera) => (
-                            <Link
-                                key={camera}
-                                href={`/mars/photos?rover=${rover.name}&camera=${encodeURIComponent(camera)}&earthDate=${rover.defaultEarthDate}`}
-                                className="rounded-full border border-[var(--mars-border)] bg-[var(--mars-surface)] px-3 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-[var(--mars-accent)] transition hover:border-[var(--mars-accent)]"
-                            >
-                                {camera}
-                            </Link>
-                        ))}
+                        {rover.cameras.slice(0, 8).map((camera) => {
+                            const cameraHref = `/mars/photos?rover=${rover.name}&camera=${encodeURIComponent(
+                                camera,
+                            )}&earthDate=${rover.defaultEarthDate}`;
+
+                            return (
+                                <Link
+                                    key={camera}
+                                    href={cameraHref}
+                                    className="rounded-full border border-[var(--mars-border)] bg-[var(--mars-surface)] px-3 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-[var(--mars-accent)] transition hover:border-[var(--mars-accent)]"
+                                >
+                                    {camera}
+                                </Link>
+                            );
+                        })}
                     </div>
                 </aside>
             </div>
@@ -91,7 +124,13 @@ const Info = ({
     </div>
 );
 
-const LinkButton = ({href, label}: {href: string; label: string}) => (
+const LinkButton = ({
+                        href,
+                        label,
+                    }: {
+    href: string;
+    label: string;
+}) => (
     <Link
         href={href}
         className="inline-flex items-center gap-2 rounded-full border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.14em] text-[var(--mars-accent)] transition hover:border-[var(--mars-accent)] hover:shadow-[var(--mars-glow)]"

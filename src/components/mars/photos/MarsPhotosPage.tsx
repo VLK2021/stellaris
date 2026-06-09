@@ -15,6 +15,7 @@ import type {
     MarsFilters,
     MarsLocale,
     MarsPhoto,
+    MarsPhotosResponse,
     MarsRoverName,
 } from "@/src/types/mars";
 
@@ -32,10 +33,8 @@ export type MarsPhotoFormState = {
     sort: MarsPhotoSort;
 };
 
-const ESTIMATED_TOTAL_PAGES = 25;
-
-const isMarsRoverName = (value: string | null): value is MarsRoverName => {
-    return ["perseverance", "curiosity", "opportunity", "spirit"].includes(value ?? "");
+const isValidPage = (value: number) => {
+    return Number.isFinite(value) && value > 0;
 };
 
 const sortPhotos = (photos: MarsPhoto[], sort: MarsPhotoSort) => {
@@ -54,7 +53,8 @@ export const MarsPhotosPage = () => {
     const searchParams = useSearchParams();
 
     const [filters, setFilters] = useState<MarsFilters | null>(null);
-    const [photos, setPhotos] = useState<MarsPhoto[]>([]);
+    const [photosResponse, setPhotosResponse] =
+        useState<MarsPhotosResponse | null>(null);
     const [loading, setLoading] = useState(true);
     const [filtersLoading, setFiltersLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -75,19 +75,19 @@ export const MarsPhotosPage = () => {
             try {
                 const data = await fetchMarsFiltersClient();
 
-                const roverParam = searchParams.get("rover");
+                const roverFromUrl = searchParams.get("rover");
                 const selectedRover =
-                    data.rovers.find((rover) => rover.name === roverParam) ??
+                    data.rovers.find((rover) => rover.name === roverFromUrl) ??
                     data.rovers[0];
 
+                const pageFromUrl = Number(searchParams.get("page") ?? 1);
+
+                setFilters(data);
+
                 if (!selectedRover) {
-                    setFilters(data);
                     return;
                 }
 
-                const pageParam = Number(searchParams.get("page") ?? 1);
-
-                setFilters(data);
                 setForm({
                     rover: selectedRover.name,
                     camera: searchParams.get("camera") ?? "",
@@ -95,7 +95,7 @@ export const MarsPhotosPage = () => {
                         searchParams.get("earthDate") ??
                         selectedRover.defaultEarthDate,
                     sol: searchParams.get("sol") ?? "",
-                    page: Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1,
+                    page: isValidPage(pageFromUrl) ? pageFromUrl : 1,
                     sort: "newest",
                 });
             } catch (error) {
@@ -131,8 +131,9 @@ export const MarsPhotosPage = () => {
                     page: form.page,
                 });
 
-                setPhotos(data.photos);
+                setPhotosResponse(data);
             } catch (error) {
+                setPhotosResponse(null);
                 setError(error instanceof Error ? error.message : t.emptyPhotos);
             } finally {
                 setLoading(false);
@@ -150,10 +151,17 @@ export const MarsPhotosPage = () => {
         t.emptyPhotos,
     ]);
 
+    const photos = photosResponse?.photos ?? [];
+
     const sortedPhotos = useMemo(
         () => sortPhotos(photos, form.sort),
         [photos, form.sort],
     );
+
+    const totalPagesForPagination =
+        photosResponse?.meta.hasNextPage
+            ? form.page + 1
+            : form.page;
 
     return (
         <main
@@ -161,7 +169,10 @@ export const MarsPhotosPage = () => {
             style={{background: "var(--mars-bg)"}}
         >
             <div className="pointer-events-none fixed inset-0 opacity-70">
-                <div className="absolute inset-0" style={{background: "var(--mars-bg)"}} />
+                <div
+                    className="absolute inset-0"
+                    style={{background: "var(--mars-bg)"}}
+                />
                 <div className="absolute inset-0 opacity-[0.10] [background-image:radial-gradient(rgba(251,146,60,.8)_1px,transparent_1px)] [background-size:36px_36px]" />
             </div>
 
@@ -204,12 +215,16 @@ export const MarsPhotosPage = () => {
                         </div>
                     </div>
                 ) : (
-                    <MarsPhotosGallery photos={sortedPhotos} error={error} t={t} />
+                    <MarsPhotosGallery
+                        photos={sortedPhotos}
+                        error={error}
+                        t={t}
+                    />
                 )}
 
                 <Pagination
                     currentPage={form.page}
-                    totalPages={ESTIMATED_TOTAL_PAGES}
+                    totalPages={totalPagesForPagination}
                     isLoading={loading}
                     onPageChange={(page) =>
                         setForm((prev) => ({

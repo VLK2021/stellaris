@@ -1,4 +1,4 @@
-import type {Dispatch, SetStateAction} from "react";
+import type {Dispatch, ReactNode, SetStateAction} from "react";
 
 import type {MarsFilters, MarsLocale} from "@/src/types/mars";
 
@@ -11,6 +11,9 @@ type Props = {
     t: MarsLocale;
 };
 
+const marsInputClassName =
+    "h-12 w-full rounded-xl border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-3 text-sm font-bold text-[var(--mars-text)] outline-none transition focus:border-[var(--mars-accent)] focus:shadow-[var(--mars-glow)]";
+
 const sortOptions: {value: MarsPhotoSort; labelKey: keyof MarsLocale}[] = [
     {value: "newest", labelKey: "sortNewest"},
     {value: "oldest", labelKey: "sortOldest"},
@@ -19,7 +22,9 @@ const sortOptions: {value: MarsPhotoSort; labelKey: keyof MarsLocale}[] = [
 ];
 
 export const MarsPhotosFilters = ({filters, form, setForm, t}: Props) => {
-    const activeRover = filters.rovers.find((rover) => rover.name === form.rover);
+    const activeRover = filters.rovers.find(
+        (rover) => rover.name === form.rover,
+    );
 
     const update = <K extends keyof MarsPhotoFormState>(
         key: K,
@@ -28,7 +33,7 @@ export const MarsPhotosFilters = ({filters, form, setForm, t}: Props) => {
         setForm((prev) => ({
             ...prev,
             [key]: value,
-            page: key === "page" ? value as number : 1,
+            page: key === "page" ? (value as number) : 1,
         }));
     };
 
@@ -73,7 +78,7 @@ export const MarsPhotosFilters = ({filters, form, setForm, t}: Props) => {
                                 page: 1,
                             }));
                         }}
-                        className="h-12 w-full rounded-xl border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-3 text-sm font-bold text-[var(--mars-text)] outline-none transition focus:border-[var(--mars-accent)] focus:shadow-[var(--mars-glow)]"
+                        className={marsInputClassName}
                     >
                         {filters.rovers.map((rover) => (
                             <option key={rover.name} value={rover.name}>
@@ -87,9 +92,10 @@ export const MarsPhotosFilters = ({filters, form, setForm, t}: Props) => {
                     <select
                         value={form.camera}
                         onChange={(event) => update("camera", event.target.value)}
-                        className="h-12 w-full rounded-xl border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-3 text-sm font-bold text-[var(--mars-text)] outline-none transition focus:border-[var(--mars-accent)] focus:shadow-[var(--mars-glow)]"
+                        className={marsInputClassName}
                     >
                         <option value="">{t.allCameras}</option>
+
                         {(activeRover?.cameras ?? []).map((camera) => (
                             <option key={camera} value={camera}>
                                 {camera}
@@ -102,8 +108,15 @@ export const MarsPhotosFilters = ({filters, form, setForm, t}: Props) => {
                     <input
                         type="date"
                         value={form.earthDate}
-                        onChange={(event) => update("earthDate", event.target.value)}
-                        className="h-12 w-full rounded-xl border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-3 text-sm font-bold text-[var(--mars-text)] outline-none transition focus:border-[var(--mars-accent)] focus:shadow-[var(--mars-glow)]"
+                        onChange={(event) => {
+                            setForm((prev) => ({
+                                ...prev,
+                                earthDate: event.target.value,
+                                sol: "",
+                                page: 1,
+                            }));
+                        }}
+                        className={marsInputClassName}
                     />
                 </Field>
 
@@ -112,17 +125,26 @@ export const MarsPhotosFilters = ({filters, form, setForm, t}: Props) => {
                         type="number"
                         min={0}
                         value={form.sol}
-                        onChange={(event) => update("sol", event.target.value)}
+                        onChange={(event) => {
+                            setForm((prev) => ({
+                                ...prev,
+                                sol: event.target.value,
+                                earthDate: event.target.value ? "" : prev.earthDate,
+                                page: 1,
+                            }));
+                        }}
                         placeholder={String(activeRover?.defaultSol ?? "")}
-                        className="h-12 w-full rounded-xl border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-3 text-sm font-bold text-[var(--mars-text)] outline-none transition focus:border-[var(--mars-accent)] focus:shadow-[var(--mars-glow)]"
+                        className={marsInputClassName}
                     />
                 </Field>
 
                 <Field label={t.sortBy}>
                     <select
                         value={form.sort}
-                        onChange={(event) => update("sort", event.target.value as MarsPhotoSort)}
-                        className="h-12 w-full rounded-xl border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] px-3 text-sm font-bold text-[var(--mars-text)] outline-none transition focus:border-[var(--mars-accent)] focus:shadow-[var(--mars-glow)]"
+                        onChange={(event) =>
+                            update("sort", event.target.value as MarsPhotoSort)
+                        }
+                        className={marsInputClassName}
                     >
                         {sortOptions.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -136,7 +158,7 @@ export const MarsPhotosFilters = ({filters, form, setForm, t}: Props) => {
                     <button
                         type="button"
                         onClick={reset}
-                        className="h-12 w-full rounded-xl border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] text-[10px] font-black uppercase tracking-[0.16em] text-[var(--mars-accent)] transition hover:border-[var(--mars-accent)]"
+                        className="h-12 w-full rounded-xl border border-[var(--mars-border)] bg-[var(--mars-surface-strong)] text-[10px] font-black uppercase tracking-[0.16em] text-[var(--mars-accent)] transition hover:border-[var(--mars-accent)] hover:shadow-[var(--mars-glow)]"
                     >
                         {t.resetFilters}
                     </button>
@@ -146,11 +168,18 @@ export const MarsPhotosFilters = ({filters, form, setForm, t}: Props) => {
     );
 };
 
-const Field = ({label, children}: {label: string; children: React.ReactNode}) => (
+const Field = ({
+                   label,
+                   children,
+               }: {
+    label: string;
+    children: ReactNode;
+}) => (
     <label className="grid gap-2">
         <span className="text-[9px] font-black uppercase tracking-[0.18em] text-[var(--mars-muted)]">
             {label}
         </span>
+
         {children}
     </label>
 );

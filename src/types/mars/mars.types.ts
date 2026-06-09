@@ -55,6 +55,12 @@ export type MarsPhotosQuery = {
 export type MarsPhotosResponse = {
     photos: MarsPhoto[];
     query: MarsPhotosQuery;
+    meta: {
+        page: number;
+        pageSize: number;
+        count: number;
+        hasNextPage: boolean;
+    };
 };
 
 export type MarsFilters = {
