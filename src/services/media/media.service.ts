@@ -15,33 +15,29 @@ export type NormalizedMediaAssets = {
     audio: string | null;
 };
 
+const EMPTY_ASSETS: NormalizedMediaAssets = {
+    assets: [],
+    preview: null,
+    video: null,
+    audio: null,
+};
+
 const buildSearchParams = (query: MediaSearchQuery) => {
     const params = new URLSearchParams();
 
     params.set("page", String(query.page ?? 1));
 
-    if (query.query) {
-        params.set("q", query.query);
-    }
-
-    if (query.mediaType) {
-        params.set("media_type", query.mediaType);
-    }
-
-    if (query.center) {
-        params.set("center", query.center);
-    }
-
-    if (query.yearStart) {
-        params.set("year_start", query.yearStart);
-    }
-
-    if (query.yearEnd) {
-        params.set("year_end", query.yearEnd);
-    }
+    if (query.query) params.set("q", query.query);
+    if (query.mediaType) params.set("media_type", query.mediaType);
+    if (query.center) params.set("center", query.center);
+    if (query.yearStart) params.set("year_start", query.yearStart);
+    if (query.yearEnd) params.set("year_end", query.yearEnd);
 
     return params;
 };
+
+const normalizeValue = (value: string) =>
+    decodeURIComponent(value).trim().toLowerCase();
 
 const isImageAsset = (asset: string) => {
     const value = asset.toLowerCase();
@@ -122,7 +118,7 @@ export const getMediaAssets = async (
     );
 
     if (!response.ok) {
-        throw new Error("Failed to load NASA assets.");
+        return EMPTY_ASSETS;
     }
 
     const data = (await response.json()) as MediaAssetResponse;
@@ -130,31 +126,13 @@ export const getMediaAssets = async (
     return normalizeMediaAssets(data);
 };
 
-export const getRawMediaAssets = async (
-    nasaId: string,
-): Promise<MediaAssetResponse> => {
-    const response = await fetch(
-        `${NASA_MEDIA_URL}/asset/${encodeURIComponent(nasaId)}`,
-        {
-            next: {
-                revalidate: 60 * 60,
-            },
-        },
-    );
-
-    if (!response.ok) {
-        throw new Error("Failed to load NASA assets.");
-    }
-
-    return (await response.json()) as MediaAssetResponse;
-};
-
 export const getMediaByNasaId = async (
     nasaId: string,
 ): Promise<MediaItem | null> => {
-    const params = new URLSearchParams();
+    const decodedId = decodeURIComponent(nasaId);
 
-    params.set("nasa_id", nasaId);
+    const params = new URLSearchParams();
+    params.set("nasa_id", decodedId);
 
     const response = await fetch(
         `${NASA_MEDIA_URL}/search?${params.toString()}`,
@@ -165,16 +143,41 @@ export const getMediaByNasaId = async (
         },
     );
 
-    if (!response.ok) {
-        throw new Error("Failed to load NASA media item.");
+    if (response.ok) {
+        const data = (await response.json()) as MediaSearchResponse;
+
+        const item =
+            data.collection.items.find((media) => {
+                const mediaData = media.data[0];
+
+                if (!mediaData) return false;
+
+                return normalizeValue(mediaData.nasa_id) === normalizeValue(decodedId);
+            }) ??
+            data.collection.items[0] ??
+            null;
+
+        if (item) return item;
     }
 
-    const data = (await response.json()) as MediaSearchResponse;
+    const fallback = await searchMedia({
+        query: decodedId,
+        page: 1,
+    });
 
     return (
-        data.collection.items.find(
-            (item) => item.data?.[0]?.nasa_id === nasaId,
-        ) ?? null
+        fallback.collection.items.find((media) => {
+            const mediaData = media.data[0];
+
+            if (!mediaData) return false;
+
+            return (
+                normalizeValue(mediaData.nasa_id) === normalizeValue(decodedId) ||
+                normalizeValue(mediaData.title) === normalizeValue(decodedId)
+            );
+        }) ??
+        fallback.collection.items[0] ??
+        null
     );
 };
 
@@ -194,7 +197,7 @@ export const mapMediaDetails = async (
         location: data.location ?? null,
         photographer: data.photographer ?? null,
         keywords: data.keywords ?? [],
-        preview: item.links?.[0]?.href ?? media.preview,
+        preview: media.preview ?? item.links?.[0]?.href ?? null,
         assets: media.assets,
     };
 };
