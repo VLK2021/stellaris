@@ -44,7 +44,6 @@ export const Header = () => {
         {label: locale.nav.apod, href: "/apod", icon: Aperture},
         {label: locale.nav.spaceWeather, href: "/space-weather", icon: CloudSun},
         {label: locale.nav.exoplanets, href: "/exoplanets", icon: Telescope},
-        {label: locale.nav.satellites, href: "/orbits", icon: Satellite},
     ];
 
     const isActive = (href: string) => {
