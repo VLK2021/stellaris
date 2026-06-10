@@ -1,13 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import {ExternalLink, X} from "lucide-react";
+import {ExternalLink, FileAudio, ImageIcon, Video, X} from "lucide-react";
 
-import type {MediaItem, MediaLocale} from "@/src/types/media";
+import type {MediaItem, MediaLocale, MediaType} from "@/src/types/media";
 
 type Props = {
     item: MediaItem;
     onClose: () => void;
     t: MediaLocale;
+};
+
+const getIcon = (type: MediaType) => {
+    if (type === "video") return Video;
+    if (type === "audio") return FileAudio;
+
+    return ImageIcon;
 };
 
 export const MediaPreviewModal = ({item, onClose, t}: Props) => {
@@ -16,27 +23,46 @@ export const MediaPreviewModal = ({item, onClose, t}: Props) => {
     if (!data) return null;
 
     const preview = item.links?.[0]?.href ?? null;
-
     const assetHref =
         item.links?.find((link) => link.rel === "preview")?.href ??
         item.links?.[0]?.href ??
         null;
 
-    return (
-        <div className="fixed inset-0 z-[999] grid place-items-center bg-black/75 p-4 backdrop-blur-xl md:p-8">
-            <section className="relative grid max-h-[calc(100vh-11rem)] w-full max-w-6xl overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card-solid)] shadow-[0_30px_120px_rgba(0,0,0,.55)]">
-                <button
-                    type="button"
-                    onClick={onClose}
-                    aria-label={t.close}
-                    className="absolute right-4 top-4 z-20 grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-glass-strong)] text-[var(--color-text)] transition hover:border-[var(--color-accent)]"
-                >
-                    <X className="h-5 w-5" />
-                </button>
+    const Icon = getIcon(data.media_type);
 
-                <div className="grid max-h-[calc(100vh-5rem)] overflow-y-auto lg:grid-cols-[1.25fr_.75fr]">
-                    <div className="bg-[var(--color-card-deep)] p-4 lg:p-5">
-                        <div className="relative aspect-video overflow-hidden rounded-[1.3rem] border border-[var(--color-border)] bg-black/20">
+    return (
+        <div className="fixed inset-0 z-[999] grid place-items-center bg-black/75 px-4 py-24 backdrop-blur-xl">
+            <section className="relative flex h-[72vh] w-full max-w-5xl flex-col overflow-hidden rounded-[1.8rem] border border-[var(--color-border)] bg-[var(--color-card-solid)] shadow-[0_30px_120px_rgba(0,0,0,.55)]">
+                <header className="flex shrink-0 items-center justify-between gap-4 border-b border-[var(--color-border)] bg-[var(--color-glass)] px-5 py-4">
+                    <div className="flex items-center gap-3">
+                        <div className="grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-accent)]">
+                            <Icon className="h-5 w-5" />
+                        </div>
+
+                        <div>
+                            <p className="text-[9px] font-black uppercase tracking-[0.22em] text-[var(--color-accent)]">
+                                {data.media_type}
+                            </p>
+
+                            <h2 className="line-clamp-1 text-lg font-black uppercase tracking-[-0.04em] text-[var(--color-text)]">
+                                {data.title}
+                            </h2>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        aria-label={t.close}
+                        className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-text)] transition hover:border-[var(--color-accent)]"
+                    >
+                        <X className="h-5 w-5" />
+                    </button>
+                </header>
+
+                <div className="grid min-h-0 flex-1 overflow-hidden lg:grid-cols-[1.15fr_.85fr]">
+                    <section className="min-h-0 overflow-y-auto bg-[var(--color-card-deep)] p-5">
+                        <div className="relative aspect-video overflow-hidden rounded-[1.3rem] border border-[var(--color-border)] bg-black/30">
                             {preview ? (
                                 <Image
                                     src={preview}
@@ -47,29 +73,23 @@ export const MediaPreviewModal = ({item, onClose, t}: Props) => {
                                     unoptimized
                                 />
                             ) : (
-                                <div className="grid h-full place-items-center text-[var(--color-text-muted)]">
-                                    {data.media_type}
+                                <div className="grid h-full place-items-center text-[var(--color-accent)]">
+                                    <Icon className="h-16 w-16" />
                                 </div>
                             )}
                         </div>
-                    </div>
-
-                    <aside className="p-5 lg:p-6">
-                        <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
-                            {data.media_type}
-                        </p>
-
-                        <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.05em] text-[var(--color-text)] lg:text-3xl">
-                            {data.title}
-                        </h2>
 
                         {data.description && (
-                            <p className="mt-4 max-h-[180px] overflow-y-auto pr-2 text-sm leading-7 text-[var(--color-text-muted)]">
-                                {data.description}
-                            </p>
+                            <article className="mt-5 rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5">
+                                <p className="text-sm leading-7 text-[var(--color-text-muted)]">
+                                    {data.description}
+                                </p>
+                            </article>
                         )}
+                    </section>
 
-                        <div className="mt-5 grid gap-3">
+                    <aside className="min-h-0 overflow-y-auto border-t border-[var(--color-border)] p-5 lg:border-l lg:border-t-0">
+                        <div className="grid gap-3">
                             <Meta label={t.nasaId} value={data.nasa_id} />
                             <Meta label={t.center} value={data.center} />
                             <Meta
@@ -81,29 +101,29 @@ export const MediaPreviewModal = ({item, onClose, t}: Props) => {
                         </div>
 
                         {data.keywords?.length ? (
-                            <div className="mt-5">
-                                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+                            <section className="mt-5 rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4">
+                                <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
                                     {t.keywords}
                                 </p>
 
                                 <div className="mt-3 flex flex-wrap gap-2">
-                                    {data.keywords.slice(0, 14).map((keyword) => (
+                                    {data.keywords.slice(0, 24).map((keyword) => (
                                         <span
                                             key={keyword}
-                                            className="rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-3 py-1 text-[9px] font-black uppercase tracking-[0.12em] text-[var(--color-accent)]"
+                                            className="rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-1 text-[9px] font-black uppercase tracking-[0.12em] text-[var(--color-accent)]"
                                         >
                                             {keyword}
                                         </span>
                                     ))}
                                 </div>
-                            </div>
+                            </section>
                         ) : null}
 
                         {assetHref && (
                             <Link
                                 href={assetHref}
                                 target="_blank"
-                                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-white shadow-[var(--shadow-glow)]"
+                                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-white shadow-[var(--shadow-glow)]"
                             >
                                 {t.openAsset}
                                 <ExternalLink className="h-3.5 w-3.5" />
