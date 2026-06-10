@@ -28,19 +28,6 @@ export const Footer = () => {
                 {label: locale.nav.media, href: "/media"},
                 {label: locale.nav.exoplanets, href: "/exoplanets"},
                 {label: locale.nav.missions, href: "/missions"},
-                {label: locale.nav.satellites, href: "/orbits"},
-                {label: locale.nav.live, href: "/live"},
-            ],
-        },
-        {
-            title: locale.footer.research,
-            links: [
-                {label: locale.nav.technology, href: "/technology"},
-                {label: locale.nav.openData, href: "/datasets"},
-                {label: locale.nav.climate, href: "/climate"},
-                {label: locale.nav.cneos, href: "/cneos"},
-                {label: locale.nav.genelab, href: "/genelab"},
-                {label: locale.nav.search, href: "/search"},
             ],
         },
     ];
