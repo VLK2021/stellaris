@@ -36,11 +36,12 @@ const buildSearchParams = (query: MediaSearchQuery) => {
     return params;
 };
 
-const normalizeValue = (value: string) =>
-    decodeURIComponent(value).trim().toLowerCase();
+const getCleanAssetUrl = (asset: string) => {
+    return decodeURIComponent(asset).split("?")[0].toLowerCase();
+};
 
 const isImageAsset = (asset: string) => {
-    const value = asset.toLowerCase();
+    const value = getCleanAssetUrl(asset);
 
     return (
         value.endsWith(".jpg") ||
@@ -51,36 +52,43 @@ const isImageAsset = (asset: string) => {
 };
 
 const isVideoAsset = (asset: string) => {
-    const value = asset.toLowerCase();
+    const value = getCleanAssetUrl(asset);
 
     return (
-        value.endsWith(".mp4") ||
-        value.endsWith(".mov") ||
-        value.endsWith(".m4v")
+        value.includes(".mp4") ||
+        value.includes(".mov") ||
+        value.includes(".m4v")
     );
 };
 
 const isAudioAsset = (asset: string) => {
-    const value = asset.toLowerCase();
+    const value = getCleanAssetUrl(asset);
 
     return (
-        value.endsWith(".mp3") ||
-        value.endsWith(".wav") ||
-        value.endsWith(".m4a")
+        value.includes(".mp3") ||
+        value.includes(".wav") ||
+        value.includes(".m4a")
     );
+};
+
+const normalizeValue = (value: string) => {
+    return decodeURIComponent(value).trim().toLowerCase();
 };
 
 const normalizeMediaAssets = (
     data: MediaAssetResponse,
 ): NormalizedMediaAssets => {
-    const assets =
-        data.collection?.items?.map((item) => item.href) ?? [];
+    const assets = data.collection?.items?.map((item) => item.href) ?? [];
+
+    const video = assets.find(isVideoAsset) ?? null;
+    const audio = assets.find(isAudioAsset) ?? null;
+    const preview = assets.find(isImageAsset) ?? null;
 
     return {
         assets,
-        preview: assets.find(isImageAsset) ?? null,
-        video: assets.find(isVideoAsset) ?? null,
-        audio: assets.find(isAudioAsset) ?? null,
+        preview,
+        video,
+        audio,
     };
 };
 

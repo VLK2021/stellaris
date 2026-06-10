@@ -18,8 +18,13 @@ export default async function Page({params}: Props) {
         notFound();
     }
 
-    const media = await getMediaAssets(nasaId);
+    const data = item.data[0];
 
+    if (!data) {
+        notFound();
+    }
+
+    const media = await getMediaAssets(data.nasa_id);
     const itemPreview = item.links?.[0]?.href ?? null;
 
     return (
