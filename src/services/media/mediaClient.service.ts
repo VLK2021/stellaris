@@ -1,9 +1,10 @@
 import type {
     MediaApiResponse,
-    MediaAssetResponse,
     MediaSearchQuery,
     MediaSearchResponse,
 } from "@/src/types/media";
+
+import type {NormalizedMediaAssets} from "./media.service";
 
 export const fetchMediaSearchClient = async (
     query: MediaSearchQuery,
@@ -19,7 +20,6 @@ export const fetchMediaSearchClient = async (
     params.set("page", String(query.page ?? 1));
 
     const response = await fetch(`/api/media/search?${params.toString()}`);
-
     const json = (await response.json()) as MediaApiResponse<MediaSearchResponse>;
 
     if (!response.ok || !json.success) {
@@ -31,10 +31,9 @@ export const fetchMediaSearchClient = async (
 
 export const fetchMediaAssetsClient = async (
     nasaId: string,
-): Promise<MediaAssetResponse> => {
-    const response = await fetch(`/api/media/assets/${nasaId}`);
-
-    const json = (await response.json()) as MediaApiResponse<MediaAssetResponse>;
+): Promise<NormalizedMediaAssets> => {
+    const response = await fetch(`/api/media/assets/${encodeURIComponent(nasaId)}`);
+    const json = (await response.json()) as MediaApiResponse<NormalizedMediaAssets>;
 
     if (!response.ok || !json.success) {
         throw new Error(json.message ?? "Failed to load media assets.");

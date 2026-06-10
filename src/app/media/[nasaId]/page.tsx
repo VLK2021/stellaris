@@ -20,11 +20,13 @@ export default async function Page({params}: Props) {
 
     const media = await getMediaAssets(nasaId);
 
+    const itemPreview = item.links?.[0]?.href ?? null;
+
     return (
         <MediaDetailsPage
             item={item}
             assets={media.assets}
-            preview={media.preview}
+            preview={media.preview ?? itemPreview}
             video={media.video}
             audio={media.audio}
         />

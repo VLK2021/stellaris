@@ -50,7 +50,7 @@ export const MediaDetailsPage = ({
                 <BackButton label={t.back} />
 
                 <section className="overflow-hidden rounded-[2.4rem] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)]">
-                    <div className="grid gap-0 xl:grid-cols-[1.15fr_.85fr]">
+                    <div className="grid xl:grid-cols-[1.15fr_.85fr]">
                         <div className="bg-[var(--color-card-deep)] p-5">
                             <div className="relative overflow-hidden rounded-[1.6rem] border border-[var(--color-border)] bg-black/30">
                                 {video ? (
@@ -64,9 +64,11 @@ export const MediaDetailsPage = ({
                                     <div className="grid min-h-[420px] place-items-center p-8">
                                         <div className="w-full max-w-xl rounded-[1.6rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-8">
                                             <FileAudio className="h-14 w-14 text-[var(--color-accent)]" />
+
                                             <h1 className="mt-6 text-3xl font-black uppercase tracking-[-0.05em]">
                                                 {data.title}
                                             </h1>
+
                                             <audio
                                                 controls
                                                 src={audio}
@@ -83,6 +85,7 @@ export const MediaDetailsPage = ({
                                             sizes="100vw"
                                             className="object-contain"
                                             unoptimized
+                                            priority
                                         />
                                     </div>
                                 ) : (
@@ -123,10 +126,7 @@ export const MediaDetailsPage = ({
                                     value={data.date_created?.slice(0, 10)}
                                 />
                                 <Meta label={t.location} value={data.location} />
-                                <Meta
-                                    label={t.photographer}
-                                    value={data.photographer}
-                                />
+                                <Meta label={t.photographer} value={data.photographer} />
                             </div>
 
                             {data.keywords?.length ? (
