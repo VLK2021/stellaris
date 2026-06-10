@@ -1077,6 +1077,38 @@ const uk = {
         cameraArchiveByRover: "Камери цього ровера",
         openCameraPhotos: "Фото з цієї камери",
     },
+
+    media: {
+        back: "Назад",
+        eyebrow: "NASA Media Library",
+        title: "Медіаархів NASA",
+        description:
+            "Пошук по фото, відео та аудіо NASA: місії, планети, космос, архівні матеріали, події, центри NASA та оригінальні assets.",
+        search: "Пошук",
+        searchPlaceholder: "Mars, Apollo, Moon, ISS...",
+        mediaType: "Тип медіа",
+        allTypes: "Усі типи",
+        images: "Фото",
+        videos: "Відео",
+        audio: "Аудіо",
+        center: "NASA Center",
+        centerPlaceholder: "JPL, HQ, JSC, KSC...",
+        yearStart: "Рік від",
+        yearEnd: "Рік до",
+        apply: "Застосувати",
+        reset: "Скинути",
+        results: "Результати",
+        noResults: "Нічого не знайдено.",
+        loading: "Завантаження медіа...",
+        details: "Детальніше",
+        openAsset: "Відкрити asset",
+        close: "Закрити",
+        nasaId: "NASA ID",
+        dateCreated: "Дата створення",
+        keywords: "Ключові слова",
+        photographer: "Фотограф",
+        location: "Локація",
+    },
 };
 
 export default uk;

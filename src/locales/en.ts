@@ -1076,6 +1076,38 @@ const en = {
         cameraArchiveByRover: "Rover cameras",
         openCameraPhotos: "Photos from this camera",
     },
+
+    media: {
+        back: "Back",
+        eyebrow: "NASA Media Library",
+        title: "NASA media archive",
+        description:
+            "Search NASA images, videos and audio: missions, planets, space, archival materials, events, NASA centers and original assets.",
+        search: "Search",
+        searchPlaceholder: "Mars, Apollo, Moon, ISS...",
+        mediaType: "Media type",
+        allTypes: "All types",
+        images: "Images",
+        videos: "Videos",
+        audio: "Audio",
+        center: "NASA Center",
+        centerPlaceholder: "JPL, HQ, JSC, KSC...",
+        yearStart: "Year from",
+        yearEnd: "Year to",
+        apply: "Apply",
+        reset: "Reset",
+        results: "Results",
+        noResults: "No media found.",
+        loading: "Loading media...",
+        details: "Details",
+        openAsset: "Open asset",
+        close: "Close",
+        nasaId: "NASA ID",
+        dateCreated: "Date created",
+        keywords: "Keywords",
+        photographer: "Photographer",
+        location: "Location",
+    },
 };
 
 export default en;
