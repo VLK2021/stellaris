@@ -10,11 +10,16 @@ type Props = {
     t: MediaLocale;
 };
 
-const getIcon = (type: MediaType) => {
-    if (type === "video") return Video;
-    if (type === "audio") return FileAudio;
+const MediaTypeIcon = ({type, className}: {type: MediaType; className?: string}) => {
+    if (type === "video") {
+        return <Video className={className} />;
+    }
 
-    return ImageIcon;
+    if (type === "audio") {
+        return <FileAudio className={className} />;
+    }
+
+    return <ImageIcon className={className} />;
 };
 
 export const MediaPreviewModal = ({item, onClose, t}: Props) => {
@@ -23,12 +28,11 @@ export const MediaPreviewModal = ({item, onClose, t}: Props) => {
     if (!data) return null;
 
     const preview = item.links?.[0]?.href ?? null;
+
     const assetHref =
         item.links?.find((link) => link.rel === "preview")?.href ??
         item.links?.[0]?.href ??
         null;
-
-    const Icon = getIcon(data.media_type);
 
     return (
         <div className="fixed inset-0 z-[999] grid place-items-center bg-black/75 px-4 py-24 backdrop-blur-xl">
@@ -36,7 +40,7 @@ export const MediaPreviewModal = ({item, onClose, t}: Props) => {
                 <header className="flex shrink-0 items-center justify-between gap-4 border-b border-[var(--color-border)] bg-[var(--color-glass)] px-5 py-4">
                     <div className="flex items-center gap-3">
                         <div className="grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-accent)]">
-                            <Icon className="h-5 w-5" />
+                            <MediaTypeIcon type={data.media_type} className="h-5 w-5" />
                         </div>
 
                         <div>
@@ -74,7 +78,7 @@ export const MediaPreviewModal = ({item, onClose, t}: Props) => {
                                 />
                             ) : (
                                 <div className="grid h-full place-items-center text-[var(--color-accent)]">
-                                    <Icon className="h-16 w-16" />
+                                    <MediaTypeIcon type={data.media_type} className="h-16 w-16" />
                                 </div>
                             )}
                         </div>
@@ -92,10 +96,7 @@ export const MediaPreviewModal = ({item, onClose, t}: Props) => {
                         <div className="grid gap-3">
                             <Meta label={t.nasaId} value={data.nasa_id} />
                             <Meta label={t.center} value={data.center} />
-                            <Meta
-                                label={t.dateCreated}
-                                value={data.date_created?.slice(0, 10)}
-                            />
+                            <Meta label={t.dateCreated} value={data.date_created?.slice(0, 10)} />
                             <Meta label={t.location} value={data.location} />
                             <Meta label={t.photographer} value={data.photographer} />
                         </div>
@@ -136,13 +137,7 @@ export const MediaPreviewModal = ({item, onClose, t}: Props) => {
     );
 };
 
-const Meta = ({
-                  label,
-                  value,
-              }: {
-    label: string;
-    value?: string;
-}) => {
+const Meta = ({label, value}: {label: string; value?: string}) => {
     if (!value) return null;
 
     return (
