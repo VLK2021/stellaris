@@ -1,8 +1,8 @@
+import {MissionsPage} from "@/src/components/mission";
 import {
     getMissionStats,
     getMissions,
 } from "@/src/services/missions";
-import {MissionsPage} from "@/src/components/mission";
 
 export default function Page() {
     const missions = getMissions();
