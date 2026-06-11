@@ -1,7 +1,10 @@
 import {
-    getMissionCatalogItemBySlug, MISSIONS_CATALOG,
+    getMissionCatalogItemBySlug,
+    MISSIONS_CATALOG,
 } from "@/src/constants/missions";
 import {searchMedia} from "@/src/services/media";
+
+import {getWikidataMissionDetails} from "./wikidataMission.service";
 
 import type {MissionAggregated} from "@/src/types/missions";
 
@@ -98,20 +101,55 @@ export const getAggregatedMissionBySlug = async (
         }),
     ]);
 
+    const wikidata = await getWikidataMissionDetails(wikidataId);
+
+    const mediaItems = mediaResponse.collection.items ?? [];
+
+    const images = mediaItems.filter(
+        (item) => item.data[0]?.media_type === "image",
+    );
+
+    const videos = mediaItems.filter(
+        (item) => item.data[0]?.media_type === "video",
+    );
+
+    const audio = mediaItems.filter(
+        (item) => item.data[0]?.media_type === "audio",
+    );
+
     return {
         id: mission.slug,
+        slug: mission.slug,
         title: wiki?.title ?? mission.name,
         description: wiki?.description ?? "",
         extract: wiki?.extract ?? "",
         thumbnail: wiki?.thumbnail?.source ?? null,
         wikipediaUrl: wiki?.content_urls?.desktop?.page ?? null,
         wikidataId,
-        media: mediaResponse.collection.items.slice(0, 12),
-        crew: [],
+
+        category: mission.category,
+        target: mission.target,
+
+        launchDate: wikidata.launchDate,
+        endDate: wikidata.endDate,
+
+        operators: wikidata.operators,
+        launchVehicles: wikidata.launchVehicles,
+        spacecraft: wikidata.spacecraft,
+        crew: wikidata.crew,
+        timeline: wikidata.timeline,
+
+        media: {
+            images: images.slice(0, 12),
+            videos: videos.slice(0, 8),
+            audio: audio.slice(0, 8),
+            all: mediaItems.slice(0, 24),
+        },
+
         source: {
             wikipedia: Boolean(wiki),
             wikidata: Boolean(wikidataId),
-            nasaMedia: mediaResponse.collection.items.length > 0,
+            nasaMedia: mediaItems.length > 0,
         },
     };
 };
