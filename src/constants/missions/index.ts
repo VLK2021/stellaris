@@ -1,1 +1,1 @@
-export * from './missions.data';
+export * from './missionsCatalog.constants';
