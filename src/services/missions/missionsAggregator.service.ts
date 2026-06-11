@@ -4,6 +4,7 @@ import {
 } from "@/src/constants/missions";
 import {searchMedia} from "@/src/services/media";
 
+import {normalizeMission} from "./missionNormalizer.service";
 import {getWikidataMissionDetails} from "./wikidataMission.service";
 
 import type {MissionAggregated} from "@/src/types/missions";
@@ -102,22 +103,9 @@ export const getAggregatedMissionBySlug = async (
     ]);
 
     const wikidata = await getWikidataMissionDetails(wikidataId);
-
     const mediaItems = mediaResponse.collection.items ?? [];
 
-    const images = mediaItems.filter(
-        (item) => item.data[0]?.media_type === "image",
-    );
-
-    const videos = mediaItems.filter(
-        (item) => item.data[0]?.media_type === "video",
-    );
-
-    const audio = mediaItems.filter(
-        (item) => item.data[0]?.media_type === "audio",
-    );
-
-    return {
+    return normalizeMission({
         id: mission.slug,
         slug: mission.slug,
         title: wiki?.title ?? mission.name,
@@ -139,17 +127,12 @@ export const getAggregatedMissionBySlug = async (
         crew: wikidata.crew,
         timeline: wikidata.timeline,
 
-        media: {
-            images: images.slice(0, 12),
-            videos: videos.slice(0, 8),
-            audio: audio.slice(0, 8),
-            all: mediaItems.slice(0, 24),
-        },
+        mediaItems,
 
         source: {
             wikipedia: Boolean(wiki),
             wikidata: Boolean(wikidataId),
             nasaMedia: mediaItems.length > 0,
         },
-    };
+    });
 };
