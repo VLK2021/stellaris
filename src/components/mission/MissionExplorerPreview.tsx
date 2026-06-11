@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {ArrowRight, Database, Globe2, Rocket} from "lucide-react";
+import {ArrowRight, Database, Globe2, Rocket, Sparkles} from "lucide-react";
 
 import type {MissionCatalogItem} from "@/src/constants/missions";
 
@@ -10,12 +10,16 @@ type Props = {
 export const MissionExplorerPreview = ({mission}: Props) => {
     return (
         <section className="relative overflow-hidden p-5 md:p-8">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,.14),transparent_28%),radial-gradient(circle_at_15%_90%,rgba(139,92,246,.12),transparent_34%)]" />
+            <div className="pointer-events-none absolute inset-0">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,.18),transparent_28%),radial-gradient(circle_at_15%_90%,rgba(139,92,246,.16),transparent_34%)]" />
+                <div className="absolute right-10 top-10 h-56 w-56 rounded-full border border-[var(--color-accent)]/20" />
+                <div className="absolute right-24 top-24 h-32 w-32 rounded-full border border-[var(--color-accent)]/15" />
+            </div>
 
             <div className="relative z-10 grid h-full content-between gap-8">
                 <div>
                     <p className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                        <Rocket className="h-4 w-4" />
+                        <Sparkles className="h-4 w-4" />
                         Selected mission
                     </p>
 
@@ -24,9 +28,8 @@ export const MissionExplorerPreview = ({mission}: Props) => {
                     </h2>
 
                     <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--color-text-muted)]">
-                        Ця місія відкривається через агрегатор: Wikipedia summary,
-                        Wikidata entities та NASA Media Archive. На детальній сторінці
-                        показуються фото, відео, аудіо, екіпаж, техніка, оператори і джерела.
+                        Відкрий детальний профіль місії: опис, екіпаж, техніка,
+                        оператори, timeline, фото, відео, аудіо та джерела.
                     </p>
 
                     <div className="mt-7 grid gap-3 sm:grid-cols-3">
@@ -67,7 +70,7 @@ const Info = ({
     label: string;
     value: string;
 }) => (
-    <div className="rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4">
+    <div className="rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 backdrop-blur-xl">
         <Icon className="h-5 w-5 text-[var(--color-accent)]" />
 
         <p className="mt-3 text-[9px] font-black uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
