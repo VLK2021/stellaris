@@ -5,14 +5,14 @@ export const MISSION_TIMELINE: MissionTimelineMission[] = [
         id: "apollo11",
         year: "1969",
         tone: "cyan",
-        href: "/missions/apollo11",
+        href: "/missions/apollo-11",
         image: "https://images-assets.nasa.gov/image/as11-40-5927/as11-40-5927~orig.jpg",
     },
     {
         id: "voyager1",
         year: "1977",
         tone: "blue",
-        href: "/missions/voyager1",
+        href: "/missions/voyager-1",
         image: "https://images-assets.nasa.gov/image/PIA17046/PIA17046~orig.jpg",
     },
     {
