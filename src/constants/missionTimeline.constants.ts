@@ -19,7 +19,7 @@ export const MISSION_TIMELINE: MissionTimelineMission[] = [
         id: "hubble",
         year: "1990",
         tone: "violet",
-        href: "/missions/hubble",
+        href: "/missions/hubble-space-telescope",
         image: "https://images-assets.nasa.gov/image/0201238/0201238~orig.jpg",
     },
     {
@@ -40,7 +40,7 @@ export const MISSION_TIMELINE: MissionTimelineMission[] = [
         id: "artemis",
         year: "2024+",
         tone: "cyan",
-        href: "/missions/artemis",
+        href: "/missions/artemis-1",
         image: "https://images-assets.nasa.gov/image/artemis-i-launch/artemis-i-launch~orig.jpg",
     },
 ];
