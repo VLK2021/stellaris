@@ -1,7 +1,8 @@
-import type {MediaItem} from "@/src/types/media";
+import type {MediaItem, MediaType} from "@/src/types/media";
 import type {
     MissionAggregated,
     MissionAggregatedCrewMember,
+    MissionMediaResource,
     MissionNamedEntity,
     MissionTimelineEvent,
 } from "@/src/types/missions";
@@ -28,6 +29,34 @@ type NormalizeMissionPayload = {
     source: MissionAggregated["source"];
 };
 
+const getPreview = (item: MediaItem) => {
+    return item.links?.find((link) => link.render === "image")?.href ?? item.links?.[0]?.href ?? null;
+};
+
+const normalizeMediaItem = (item: MediaItem): MissionMediaResource | null => {
+    const data = item.data[0];
+
+    if (!data) return null;
+
+    return {
+        nasaId: data.nasa_id,
+        title: data.title,
+        description: data.description ?? "",
+        mediaType: data.media_type,
+        preview: getPreview(item),
+        center: data.center ?? null,
+        dateCreated: data.date_created ?? null,
+        keywords: data.keywords ?? [],
+    };
+};
+
+const filterByType = (
+    items: MissionMediaResource[],
+    type: MediaType,
+) => {
+    return items.filter((item) => item.mediaType === type);
+};
+
 export const normalizeMission = ({
                                      id,
                                      slug,
@@ -49,17 +78,13 @@ export const normalizeMission = ({
                                      mediaItems,
                                      source,
                                  }: NormalizeMissionPayload): MissionAggregated => {
-    const images = mediaItems.filter(
-        (item) => item.data[0]?.media_type === "image",
-    );
+    const normalizedMedia = mediaItems
+        .map(normalizeMediaItem)
+        .filter(Boolean) as MissionMediaResource[];
 
-    const videos = mediaItems.filter(
-        (item) => item.data[0]?.media_type === "video",
-    );
-
-    const audio = mediaItems.filter(
-        (item) => item.data[0]?.media_type === "audio",
-    );
+    const images = filterByType(normalizedMedia, "image");
+    const videos = filterByType(normalizedMedia, "video");
+    const audio = filterByType(normalizedMedia, "audio");
 
     return {
         id,
@@ -87,7 +112,7 @@ export const normalizeMission = ({
             images: images.slice(0, 12),
             videos: videos.slice(0, 8),
             audio: audio.slice(0, 8),
-            all: mediaItems.slice(0, 24),
+            all: normalizedMedia.slice(0, 24),
         },
 
         source,

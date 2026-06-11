@@ -1,2 +1,2 @@
-export * from './mission.types';
-export * from './missionAggregator.types';
+export * from "./mission.types";
+export * from "./missionAggregator.types";

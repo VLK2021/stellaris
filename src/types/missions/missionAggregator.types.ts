@@ -1,5 +1,3 @@
-import type {MediaItem} from "@/src/types/media";
-
 export type MissionSourceStatus = {
     wikipedia: boolean;
     wikidata: boolean;
@@ -22,12 +20,25 @@ export type MissionTimelineEvent = {
     date: string;
 };
 
+export type MissionMediaResource = {
+    nasaId: string;
+    title: string;
+    description: string;
+    mediaType: "image" | "video" | "audio";
+    preview: string | null;
+    center: string | null;
+    dateCreated: string | null;
+    keywords: string[];
+};
+
 export type MissionAggregated = {
     id: string;
     slug: string;
+
     title: string;
     description: string;
     extract: string;
+
     thumbnail: string | null;
     wikipediaUrl: string | null;
     wikidataId: string | null;
@@ -46,10 +57,10 @@ export type MissionAggregated = {
     timeline: MissionTimelineEvent[];
 
     media: {
-        images: MediaItem[];
-        videos: MediaItem[];
-        audio: MediaItem[];
-        all: MediaItem[];
+        images: MissionMediaResource[];
+        videos: MissionMediaResource[];
+        audio: MissionMediaResource[];
+        all: MissionMediaResource[];
     };
 
     source: MissionSourceStatus;
