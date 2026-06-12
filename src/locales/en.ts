@@ -1237,6 +1237,37 @@ const en = {
             openMedia: "Open media",
         },
     },
+
+    manifestPage: {
+        seoTitle: "Stellaris Manifest — About the Project",
+        seoDescription:
+            "Stellaris is an independent educational web project powered by NASA open data.",
+        eyebrow: "Project Manifest",
+        title: "Stellaris",
+        subtitle:
+            "An independent space exploration platform built on NASA open data.",
+        aboutTitle: "About the project",
+        aboutText:
+            "Stellaris is an educational and research-oriented web project created to make NASA open space data easier to access and explore. The platform brings imagery, missions, planetary data, asteroids, space weather and other public sources into one modern interface.",
+        dataTitle: "Data sources",
+        dataText:
+            "The platform uses open NASA data through official APIs and public data catalogs. Stellaris is not a source of scientific data itself; it provides a structured interface for viewing, organizing and exploring that data.",
+        techTitle: "Technology",
+        techText:
+            "The project is built as a modern frontend/web application focused on performance, responsive design, localization, dark and light themes, and real API integration.",
+        disclaimerTitle: "Important notice",
+        disclaimerText:
+            "Stellaris is not an official NASA product. The project was created strictly for educational, research and portfolio purposes and uses NASA open data sources.",
+        nasaBadge: "NASA Open Data",
+        nasaLabel: "Built on NASA public data sources",
+        facts: [
+            {value: "NASA", label: "open data"},
+            {value: "API", label: "real sources"},
+            {value: "UI", label: "modern interface"},
+            {value: "EDU", label: "educational purpose"},
+        ],
+        technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "NASA APIs"],
+    },
 };
 
 export default en;
