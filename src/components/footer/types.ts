@@ -1,7 +1,10 @@
+export type FooterNavLink = {
+    label: string;
+    href: string;
+    external?: boolean;
+};
+
 export type FooterNavGroup = {
     title: string;
-    links: {
-        label: string;
-        href: string;
-    }[];
+    links: FooterNavLink[];
 };

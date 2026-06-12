@@ -32,14 +32,19 @@ const uk = {
 
     footer: {
         subtitle: "Дослідник Всесвіту",
+        eyebrow: "Stellaris Platform",
+        title: "Досліджуй космос через відкриті дані NASA.",
+        text: "Stellaris обʼєднує зображення, місії, планетарні дані, екзопланети, астероїди та космічну погоду в єдину інтерактивну платформу.",
         startExploring: "Почати дослідження",
-        about: "Про Stellaris",
+        manifest: "Маніфест",
         powered: "Працює на відкритих даних NASA",
         independent: "Не є офіційним продуктом NASA",
         copyright: "Створено як незалежний освітній проєкт.",
         explore: "Огляд",
         universe: "Всесвіт",
         research: "Дослідження",
+        platform: "Платформа",
+        nasaApi: "NASA API",
     },
 
     brand: {

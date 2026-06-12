@@ -32,14 +32,19 @@ const en = {
 
     footer: {
         subtitle: "Universe Explorer",
+        eyebrow: "Stellaris Platform",
+        title: "Explore space through NASA open data.",
+        text: "Stellaris connects imagery, missions, planetary data, exoplanets, asteroids and space weather into one interactive exploration platform.",
         startExploring: "Start exploring",
-        about: "About Stellaris",
+        manifest: "Manifest",
         powered: "Powered by NASA Open Data",
         independent: "Not affiliated with NASA",
         copyright: "Built as an independent educational project.",
         explore: "Explore",
         universe: "Universe",
         research: "Research",
+        platform: "Platform",
+        nasaApi: "NASA API",
     },
 
     brand: {
