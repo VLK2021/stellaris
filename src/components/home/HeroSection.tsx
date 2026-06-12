@@ -88,7 +88,7 @@ export const HeroSection = ({assets}: Props) => {
 
                     <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                         <Link
-                            href="/explore"
+                            href="/exoplanets"
                             className="group inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-400 px-6 py-4 text-sm font-bold text-white shadow-[0_0_42px_rgba(56,189,248,0.35)] transition hover:scale-[1.02]"
                         >
                             {locale.home.primaryAction}
@@ -96,7 +96,7 @@ export const HeroSection = ({assets}: Props) => {
                         </Link>
 
                         <Link
-                            href="/live"
+                            href="/missions"
                             className="inline-flex items-center justify-center gap-3 rounded-xl border border-white/16 bg-slate-950/46 px-6 py-4 text-sm font-bold text-white backdrop-blur-xl transition hover:border-cyan-300/40 hover:text-cyan-100"
                         >
                             <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_#34d399]" />
