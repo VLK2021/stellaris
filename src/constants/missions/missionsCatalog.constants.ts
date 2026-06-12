@@ -38,8 +38,15 @@ export const MISSIONS_CATALOG: MissionCatalogItem[] = [
     {slug: "artemis-1", name: "Artemis I", wikipediaTitle: "Artemis 1", wikidataSearch: "Artemis 1", nasaMediaQuery: "Artemis I", category: "crewed", target: "moon"},
     {slug: "artemis-2", name: "Artemis II", wikipediaTitle: "Artemis 2", wikidataSearch: "Artemis 2", nasaMediaQuery: "Artemis II", category: "crewed", target: "moon"},
 
+    {slug: "mariner-1", name: "Mariner 1", wikipediaTitle: "Mariner 1", wikidataSearch: "Mariner 1", nasaMediaQuery: "Mariner 1", category: "robotic", target: "venus"},
     {slug: "mariner-2", name: "Mariner 2", wikipediaTitle: "Mariner 2", wikidataSearch: "Mariner 2", nasaMediaQuery: "Mariner 2", category: "robotic", target: "venus"},
+    {slug: "mariner-3", name: "Mariner 3", wikipediaTitle: "Mariner 3", wikidataSearch: "Mariner 3", nasaMediaQuery: "Mariner 3 Mars", category: "robotic", target: "mars"},
     {slug: "mariner-4", name: "Mariner 4", wikipediaTitle: "Mariner 4", wikidataSearch: "Mariner 4", nasaMediaQuery: "Mariner 4 Mars", category: "robotic", target: "mars"},
+    {slug: "mariner-5", name: "Mariner 5", wikipediaTitle: "Mariner 5", wikidataSearch: "Mariner 5", nasaMediaQuery: "Mariner 5 Venus", category: "robotic", target: "venus"},
+    {slug: "mariner-6", name: "Mariner 6", wikipediaTitle: "Mariner 6", wikidataSearch: "Mariner 6", nasaMediaQuery: "Mariner 6 Mars", category: "robotic", target: "mars"},
+    {slug: "mariner-7", name: "Mariner 7", wikipediaTitle: "Mariner 7", wikidataSearch: "Mariner 7", nasaMediaQuery: "Mariner 7 Mars", category: "robotic", target: "mars"},
+    {slug: "mariner-9", name: "Mariner 9", wikipediaTitle: "Mariner 9", wikidataSearch: "Mariner 9", nasaMediaQuery: "Mariner 9 Mars", category: "robotic", target: "mars"},
+
     {slug: "viking-1", name: "Viking 1", wikipediaTitle: "Viking 1", wikidataSearch: "Viking 1", nasaMediaQuery: "Viking 1 Mars", category: "robotic", target: "mars"},
     {slug: "viking-2", name: "Viking 2", wikipediaTitle: "Viking 2", wikidataSearch: "Viking 2", nasaMediaQuery: "Viking 2 Mars", category: "robotic", target: "mars"},
     {slug: "mars-pathfinder", name: "Mars Pathfinder", wikipediaTitle: "Mars Pathfinder", wikidataSearch: "Mars Pathfinder", nasaMediaQuery: "Mars Pathfinder Sojourner", category: "robotic", target: "mars"},
@@ -54,8 +61,14 @@ export const MISSIONS_CATALOG: MissionCatalogItem[] = [
     {slug: "insight", name: "InSight", wikipediaTitle: "InSight", wikidataSearch: "InSight", nasaMediaQuery: "InSight Mars", category: "robotic", target: "mars"},
     {slug: "perseverance", name: "Perseverance", wikipediaTitle: "Perseverance rover", wikidataSearch: "Perseverance rover", nasaMediaQuery: "Perseverance rover Mars", category: "robotic", target: "mars"},
 
+    {slug: "pioneer-5", name: "Pioneer 5", wikipediaTitle: "Pioneer 5", wikidataSearch: "Pioneer 5", nasaMediaQuery: "Pioneer 5", category: "robotic", target: "deep-space"},
+    {slug: "pioneer-6", name: "Pioneer 6", wikipediaTitle: "Pioneer 6", wikidataSearch: "Pioneer 6", nasaMediaQuery: "Pioneer 6", category: "robotic", target: "deep-space"},
+    {slug: "pioneer-7", name: "Pioneer 7", wikipediaTitle: "Pioneer 7", wikidataSearch: "Pioneer 7", nasaMediaQuery: "Pioneer 7", category: "robotic", target: "deep-space"},
+    {slug: "pioneer-8", name: "Pioneer 8", wikipediaTitle: "Pioneer 8", wikidataSearch: "Pioneer 8", nasaMediaQuery: "Pioneer 8", category: "robotic", target: "deep-space"},
+    {slug: "pioneer-9", name: "Pioneer 9", wikipediaTitle: "Pioneer 9", wikidataSearch: "Pioneer 9", nasaMediaQuery: "Pioneer 9", category: "robotic", target: "deep-space"},
     {slug: "pioneer-10", name: "Pioneer 10", wikipediaTitle: "Pioneer 10", wikidataSearch: "Pioneer 10", nasaMediaQuery: "Pioneer 10", category: "robotic", target: "deep-space"},
     {slug: "pioneer-11", name: "Pioneer 11", wikipediaTitle: "Pioneer 11", wikidataSearch: "Pioneer 11", nasaMediaQuery: "Pioneer 11", category: "robotic", target: "deep-space"},
+
     {slug: "voyager-1", name: "Voyager 1", wikipediaTitle: "Voyager 1", wikidataSearch: "Voyager 1", nasaMediaQuery: "Voyager 1", category: "robotic", target: "deep-space"},
     {slug: "voyager-2", name: "Voyager 2", wikipediaTitle: "Voyager 2", wikidataSearch: "Voyager 2", nasaMediaQuery: "Voyager 2", category: "robotic", target: "deep-space"},
     {slug: "galileo", name: "Galileo", wikipediaTitle: "Galileo (spacecraft)", wikidataSearch: "Galileo spacecraft", nasaMediaQuery: "Galileo spacecraft Jupiter", category: "robotic", target: "jupiter"},
@@ -65,31 +78,6 @@ export const MISSIONS_CATALOG: MissionCatalogItem[] = [
     {slug: "osiris-rex", name: "OSIRIS-REx", wikipediaTitle: "OSIRIS-REx", wikidataSearch: "OSIRIS-REx", nasaMediaQuery: "OSIRIS-REx Bennu", category: "robotic", target: "asteroid"},
     {slug: "dart", name: "DART", wikipediaTitle: "Double Asteroid Redirection Test", wikidataSearch: "Double Asteroid Redirection Test", nasaMediaQuery: "DART asteroid", category: "robotic", target: "asteroid"},
 
-    {slug: "hubble-space-telescope", name: "Hubble Space Telescope", wikipediaTitle: "Hubble Space Telescope", wikidataSearch: "Hubble Space Telescope", nasaMediaQuery: "Hubble Space Telescope", category: "telescope", target: "earth-orbit"},
-    {slug: "chandra-x-ray-observatory", name: "Chandra X-ray Observatory", wikipediaTitle: "Chandra X-ray Observatory", wikidataSearch: "Chandra X-ray Observatory", nasaMediaQuery: "Chandra X-ray Observatory", category: "telescope", target: "earth-orbit"},
-    {slug: "spitzer-space-telescope", name: "Spitzer Space Telescope", wikipediaTitle: "Spitzer Space Telescope", wikidataSearch: "Spitzer Space Telescope", nasaMediaQuery: "Spitzer Space Telescope", category: "telescope", target: "earth-orbit"},
-    {slug: "kepler", name: "Kepler", wikipediaTitle: "Kepler space telescope", wikidataSearch: "Kepler space telescope", nasaMediaQuery: "Kepler space telescope", category: "telescope", target: "earth-orbit"},
-    {slug: "james-webb-space-telescope", name: "James Webb Space Telescope", wikipediaTitle: "James Webb Space Telescope", wikidataSearch: "James Webb Space Telescope", nasaMediaQuery: "James Webb Space Telescope", category: "telescope", target: "deep-space"},
-
-    {slug: "mariner-1", name: "Mariner 1", wikipediaTitle: "Mariner 1", wikidataSearch: "Mariner 1", nasaMediaQuery: "Mariner 1", category: "robotic", target: "venus"},
-    {slug: "mariner-3", name: "Mariner 3", wikipediaTitle: "Mariner 3", wikidataSearch: "Mariner 3", nasaMediaQuery: "Mariner 3", category: "robotic", target: "mars"},
-    {slug: "mariner-5", name: "Mariner 5", wikipediaTitle: "Mariner 5", wikidataSearch: "Mariner 5", nasaMediaQuery: "Mariner 5 Venus", category: "robotic", target: "venus"},
-    {slug: "mariner-6", name: "Mariner 6", wikipediaTitle: "Mariner 6", wikidataSearch: "Mariner 6", nasaMediaQuery: "Mariner 6 Mars", category: "robotic", target: "mars"},
-    {slug: "mariner-7", name: "Mariner 7", wikipediaTitle: "Mariner 7", wikidataSearch: "Mariner 7", nasaMediaQuery: "Mariner 7 Mars", category: "robotic", target: "mars"},
-    {slug: "mariner-9", name: "Mariner 9", wikipediaTitle: "Mariner 9", wikidataSearch: "Mariner 9", nasaMediaQuery: "Mariner 9 Mars", category: "robotic", target: "mars"},
-
-    {slug: "pioneer-5", name: "Pioneer 5", wikipediaTitle: "Pioneer 5", wikidataSearch: "Pioneer 5", nasaMediaQuery: "Pioneer 5", category: "robotic", target: "deep-space"},
-    {slug: "pioneer-6", name: "Pioneer 6", wikipediaTitle: "Pioneer 6", wikidataSearch: "Pioneer 6", nasaMediaQuery: "Pioneer 6", category: "robotic", target: "deep-space"},
-    {slug: "pioneer-7", name: "Pioneer 7", wikipediaTitle: "Pioneer 7", wikidataSearch: "Pioneer 7", nasaMediaQuery: "Pioneer 7", category: "robotic", target: "deep-space"},
-    {slug: "pioneer-8", name: "Pioneer 8", wikipediaTitle: "Pioneer 8", wikidataSearch: "Pioneer 8", nasaMediaQuery: "Pioneer 8", category: "robotic", target: "deep-space"},
-    {slug: "pioneer-9", name: "Pioneer 9", wikipediaTitle: "Pioneer 9", wikidataSearch: "Pioneer 9", nasaMediaQuery: "Pioneer 9", category: "robotic", target: "deep-space"},
-
-    {slug: "lunar-orbiter-1", name: "Lunar Orbiter 1", wikipediaTitle: "Lunar Orbiter 1", wikidataSearch: "Lunar Orbiter 1", nasaMediaQuery: "Lunar Orbiter 1", category: "robotic", target: "moon"},
-    {slug: "lunar-orbiter-2", name: "Lunar Orbiter 2", wikipediaTitle: "Lunar Orbiter 2", wikidataSearch: "Lunar Orbiter 2", nasaMediaQuery: "Lunar Orbiter 2", category: "robotic", target: "moon"},
-    {slug: "lunar-orbiter-3", name: "Lunar Orbiter 3", wikipediaTitle: "Lunar Orbiter 3", wikidataSearch: "Lunar Orbiter 3", nasaMediaQuery: "Lunar Orbiter 3", category: "robotic", target: "moon"},
-    {slug: "lunar-orbiter-4", name: "Lunar Orbiter 4", wikipediaTitle: "Lunar Orbiter 4", wikidataSearch: "Lunar Orbiter 4", nasaMediaQuery: "Lunar Orbiter 4", category: "robotic", target: "moon"},
-    {slug: "lunar-orbiter-5", name: "Lunar Orbiter 5", wikipediaTitle: "Lunar Orbiter 5", wikidataSearch: "Lunar Orbiter 5", nasaMediaQuery: "Lunar Orbiter 5", category: "robotic", target: "moon"},
-
     {slug: "surveyor-1", name: "Surveyor 1", wikipediaTitle: "Surveyor 1", wikidataSearch: "Surveyor 1", nasaMediaQuery: "Surveyor 1 Moon", category: "robotic", target: "moon"},
     {slug: "surveyor-2", name: "Surveyor 2", wikipediaTitle: "Surveyor 2", wikidataSearch: "Surveyor 2", nasaMediaQuery: "Surveyor 2 Moon", category: "robotic", target: "moon"},
     {slug: "surveyor-3", name: "Surveyor 3", wikipediaTitle: "Surveyor 3", wikidataSearch: "Surveyor 3", nasaMediaQuery: "Surveyor 3 Moon", category: "robotic", target: "moon"},
@@ -97,6 +85,12 @@ export const MISSIONS_CATALOG: MissionCatalogItem[] = [
     {slug: "surveyor-5", name: "Surveyor 5", wikipediaTitle: "Surveyor 5", wikidataSearch: "Surveyor 5", nasaMediaQuery: "Surveyor 5 Moon", category: "robotic", target: "moon"},
     {slug: "surveyor-6", name: "Surveyor 6", wikipediaTitle: "Surveyor 6", wikidataSearch: "Surveyor 6", nasaMediaQuery: "Surveyor 6 Moon", category: "robotic", target: "moon"},
     {slug: "surveyor-7", name: "Surveyor 7", wikipediaTitle: "Surveyor 7", wikidataSearch: "Surveyor 7", nasaMediaQuery: "Surveyor 7 Moon", category: "robotic", target: "moon"},
+
+    {slug: "lunar-orbiter-1", name: "Lunar Orbiter 1", wikipediaTitle: "Lunar Orbiter 1", wikidataSearch: "Lunar Orbiter 1", nasaMediaQuery: "Lunar Orbiter 1", category: "robotic", target: "moon"},
+    {slug: "lunar-orbiter-2", name: "Lunar Orbiter 2", wikipediaTitle: "Lunar Orbiter 2", wikidataSearch: "Lunar Orbiter 2", nasaMediaQuery: "Lunar Orbiter 2", category: "robotic", target: "moon"},
+    {slug: "lunar-orbiter-3", name: "Lunar Orbiter 3", wikipediaTitle: "Lunar Orbiter 3", wikidataSearch: "Lunar Orbiter 3", nasaMediaQuery: "Lunar Orbiter 3", category: "robotic", target: "moon"},
+    {slug: "lunar-orbiter-4", name: "Lunar Orbiter 4", wikipediaTitle: "Lunar Orbiter 4", wikidataSearch: "Lunar Orbiter 4", nasaMediaQuery: "Lunar Orbiter 4", category: "robotic", target: "moon"},
+    {slug: "lunar-orbiter-5", name: "Lunar Orbiter 5", wikipediaTitle: "Lunar Orbiter 5", wikidataSearch: "Lunar Orbiter 5", nasaMediaQuery: "Lunar Orbiter 5", category: "robotic", target: "moon"},
 
     {slug: "ranger-1", name: "Ranger 1", wikipediaTitle: "Ranger 1", wikidataSearch: "Ranger 1", nasaMediaQuery: "Ranger 1", category: "robotic", target: "moon"},
     {slug: "ranger-2", name: "Ranger 2", wikipediaTitle: "Ranger 2", wikidataSearch: "Ranger 2", nasaMediaQuery: "Ranger 2", category: "robotic", target: "moon"},
@@ -114,6 +108,11 @@ export const MISSIONS_CATALOG: MissionCatalogItem[] = [
     {slug: "grail", name: "GRAIL", wikipediaTitle: "GRAIL", wikidataSearch: "GRAIL", nasaMediaQuery: "GRAIL Moon", category: "robotic", target: "moon"},
     {slug: "lunar-reconnaissance-orbiter", name: "Lunar Reconnaissance Orbiter", wikipediaTitle: "Lunar Reconnaissance Orbiter", wikidataSearch: "Lunar Reconnaissance Orbiter", nasaMediaQuery: "Lunar Reconnaissance Orbiter", category: "robotic", target: "moon"},
 
+    {slug: "hubble-space-telescope", name: "Hubble Space Telescope", wikipediaTitle: "Hubble Space Telescope", wikidataSearch: "Hubble Space Telescope", nasaMediaQuery: "Hubble Space Telescope", category: "telescope", target: "earth-orbit"},
+    {slug: "chandra-x-ray-observatory", name: "Chandra X-ray Observatory", wikipediaTitle: "Chandra X-ray Observatory", wikidataSearch: "Chandra X-ray Observatory", nasaMediaQuery: "Chandra X-ray Observatory", category: "telescope", target: "earth-orbit"},
+    {slug: "spitzer-space-telescope", name: "Spitzer Space Telescope", wikipediaTitle: "Spitzer Space Telescope", wikidataSearch: "Spitzer Space Telescope", nasaMediaQuery: "Spitzer Space Telescope", category: "telescope", target: "earth-orbit"},
+    {slug: "kepler", name: "Kepler", wikipediaTitle: "Kepler space telescope", wikidataSearch: "Kepler space telescope", nasaMediaQuery: "Kepler space telescope", category: "telescope", target: "earth-orbit"},
+    {slug: "james-webb-space-telescope", name: "James Webb Space Telescope", wikipediaTitle: "James Webb Space Telescope", wikidataSearch: "James Webb Space Telescope", nasaMediaQuery: "James Webb Space Telescope", category: "telescope", target: "deep-space"},
 ];
 
 export const getMissionCatalogItemBySlug = (slug: string) => {
