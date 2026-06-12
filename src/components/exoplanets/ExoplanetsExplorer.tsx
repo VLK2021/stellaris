@@ -96,21 +96,22 @@ export const ExoplanetsExplorer = ({t}: Props) => {
             const response = await fetch(url);
 
             if (!response.ok) {
-                throw new Error(`${t.explorer.requestError}: ${response.status}`);
+                throw new Error(`${t.catalog.loadingError}: ${response.status}`);
             }
 
             const data = (await response.json()) as ExoplanetPlanet[];
             setItems(data);
         } catch (error) {
             setItems([]);
-            setError(error instanceof Error ? error.message : t.explorer.unknownError);
+            setError(error instanceof Error ? error.message : t.catalog.unknownError);
         } finally {
             setLoading(false);
         }
-    }, [url, t.explorer.requestError, t.explorer.unknownError]);
+    }, [url, t.catalog.loadingError, t.catalog.unknownError]);
 
     useEffect(() => {
         const timeout = window.setTimeout(loadPlanets, 350);
+
         return () => window.clearTimeout(timeout);
     }, [loadPlanets]);
 
@@ -122,16 +123,16 @@ export const ExoplanetsExplorer = ({t}: Props) => {
                 <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
                     <div>
                         <h2 className="text-2xl font-black uppercase tracking-[-0.05em]">
-                            {t.explorer.title}
+                            {t.catalog.title}
                         </h2>
 
                         <p className="exo-muted mt-2 text-sm">
-                            {t.explorer.description}
+                            {t.catalog.description}
                         </p>
                     </div>
 
                     <span className="exo-label text-[10px] font-black uppercase tracking-[0.18em]">
-                        {items.length} {t.explorer.loaded}
+                        {t.catalog.total}: {items.length}
                     </span>
                 </div>
 
@@ -161,7 +162,7 @@ export const ExoplanetsExplorer = ({t}: Props) => {
                                     key={`${planet.pl_name}-${planet.hostname}-${index}`}
                                     planet={planet}
                                     index={index}
-                                    t={t}
+                                    t={t.catalog}
                                 />
                             ))}
                         </div>
