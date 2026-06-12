@@ -1191,6 +1191,20 @@ const en = {
             deepSpace: "Deep space",
             earthOrbit: "Earth orbit",
         },
+
+        pipelineSteps: {
+            catalog: "Catalog",
+            wikipedia: "Wikipedia",
+            wikidata: "Wikidata",
+            nasaMedia: "NASA Media",
+            normalizer: "Normalizer",
+        },
+        sourceLabels: {
+            summary: "Summary",
+            media: "Media",
+            data: "Data",
+            signal: "Signal",
+        },
     },
 };
 

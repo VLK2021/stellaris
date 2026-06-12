@@ -92,7 +92,22 @@ export const MissionExplorerSidebar = ({
     const t = locale.missions;
 
     return (
-        <aside className="border-b border-[var(--color-border)] bg-[var(--color-glass)] backdrop-blur-xl xl:border-b-0 xl:border-r">
+        <aside className="relative overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-glass)] backdrop-blur-xl xl:border-b-0 xl:border-r">
+            <div className="pointer-events-none absolute inset-0">
+                <motion.div
+                    animate={{
+                        opacity: [0.4, 0.75, 0.4],
+                        backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+                    }}
+                    transition={{
+                        duration: 14,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                    className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,var(--color-accent-soft),transparent_28%),radial-gradient(circle_at_90%_70%,var(--color-glass-strong),transparent_34%)] bg-[length:140%_140%]"
+                />
+            </div>
+
             <div className="sticky top-0 z-20 border-b border-[var(--color-border)] bg-[var(--color-glass-strong)] p-4 backdrop-blur-2xl">
                 <div className="flex items-start justify-between gap-4">
                     <div>
@@ -106,7 +121,10 @@ export const MissionExplorerSidebar = ({
                     </div>
 
                     <motion.div
-                        animate={{rotate: [0, 8, -8, 0]}}
+                        animate={{
+                            rotate: [0, 8, -8, 0],
+                            scale: [1, 1.06, 1],
+                        }}
                         transition={{
                             duration: 5,
                             repeat: Infinity,
@@ -166,7 +184,7 @@ export const MissionExplorerSidebar = ({
                 </div>
             </div>
 
-            <div className="max-h-[460px] overflow-y-auto p-3 xl:max-h-[calc(100vh-24rem)]">
+            <div className="relative z-10 max-h-[460px] overflow-y-auto p-3 xl:max-h-[calc(100vh-24rem)]">
                 <div className="grid gap-2">
                     {missions.map((mission, index) => {
                         const active = mission.slug === activeSlug;
@@ -187,7 +205,11 @@ export const MissionExplorerSidebar = ({
                                 type="button"
                                 initial={{opacity: 0, x: -10}}
                                 animate={{opacity: 1, x: 0}}
-                                transition={{duration: 0.25, delay: Math.min(index * 0.015, 0.25)}}
+                                whileHover={{x: 4}}
+                                transition={{
+                                    duration: 0.25,
+                                    delay: Math.min(index * 0.015, 0.25),
+                                }}
                                 onClick={() => onSelect(mission.slug)}
                                 className={`group grid w-full grid-cols-[56px_1fr] items-center gap-3 rounded-[1.25rem] border p-3 text-left transition duration-200 ${
                                     active
@@ -197,7 +219,7 @@ export const MissionExplorerSidebar = ({
                             >
                                 <div className={`grid h-12 w-12 place-items-center rounded-2xl border transition ${
                                     active
-                                        ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-white"
+                                        ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-card-solid)]"
                                         : "border-[var(--color-border)] bg-[var(--color-glass-strong)] text-[var(--color-accent)] group-hover:border-[var(--color-accent)]"
                                 }`}>
                                     <Icon className="h-5 w-5" />
@@ -205,7 +227,11 @@ export const MissionExplorerSidebar = ({
 
                                 <div className="min-w-0">
                                     <div className="flex items-center justify-between gap-3">
-                                        <h3 className="truncate text-sm font-black uppercase tracking-[-0.03em] text-[var(--color-text)]">
+                                        <h3 className={`truncate text-sm font-black uppercase tracking-[-0.03em] ${
+                                            active
+                                                ? "bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-transparent"
+                                                : "text-[var(--color-text)]"
+                                        }`}>
                                             {mission.name}
                                         </h3>
 

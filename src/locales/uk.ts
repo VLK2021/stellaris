@@ -1192,6 +1192,20 @@ const uk = {
             deepSpace: "Далекий космос",
             earthOrbit: "Орбіта Землі",
         },
+
+        pipelineSteps: {
+            catalog: "Catalog",
+            wikipedia: "Wikipedia",
+            wikidata: "Wikidata",
+            nasaMedia: "NASA Media",
+            normalizer: "Normalizer",
+        },
+        sourceLabels: {
+            summary: "Summary",
+            media: "Media",
+            data: "Data",
+            signal: "Signal",
+        },
     },
 };
 
