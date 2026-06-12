@@ -21,12 +21,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     metadataBase: new URL(BRAND.url),
+
     title: {
         default: "Stellaris — Explore the Universe Through NASA Data",
         template: "%s | Stellaris",
     },
+
     description:
         "Stellaris is a premium space exploration platform powered by NASA open data. Explore Mars, Earth, asteroids, space weather, missions, cosmic media, and the universe through an immersive digital experience.",
+
     keywords: [
         "Stellaris",
         "NASA API",
@@ -40,8 +43,16 @@ export const metadata: Metadata = {
         "exoplanets",
         "NASA media library",
     ],
+
     authors: [{name: BRAND.author}],
     creator: BRAND.author,
+
+    icons: {
+        icon: "/favicon.png",
+        shortcut: "/favicon.png",
+        apple: "/favicon.png",
+    },
+
     openGraph: {
         title: "Stellaris — Explore the Universe Through NASA Data",
         description:
@@ -51,12 +62,14 @@ export const metadata: Metadata = {
         type: "website",
         locale: "en_US",
     },
+
     twitter: {
         card: "summary_large_image",
         title: "Stellaris — Explore the Universe Through NASA Data",
         description:
             "A cinematic space exploration platform powered by NASA open data.",
     },
+
     robots: {
         index: true,
         follow: true,
