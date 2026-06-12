@@ -42,9 +42,7 @@ export const getSpaceWeatherNotifications = async ({
         path: DONKI_API_PATHS.notifications,
         startDate,
         endDate,
-        extraParams: {
-            type,
-        },
+        extraParams: type === "all" ? {} : {type},
         chunked: true,
     });
 

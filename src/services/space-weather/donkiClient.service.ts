@@ -1,5 +1,4 @@
 import {fetchNasaJson} from "@/src/services/nasaClient.service";
-
 import {splitDateRangeIntoChunks} from "@/src/helpers/space-weather/spaceWeatherDate.helpers";
 
 type FetchDonkiRangeOptions<T> = {
@@ -12,14 +11,17 @@ type FetchDonkiRangeOptions<T> = {
     chunked?: boolean;
 };
 
+const DEFAULT_REVALIDATE = 60 * 30;
+const DEFAULT_TIMEOUT_MS = 20000;
+
 export const fetchDonkiJson = async <T>(
     path: string,
     params: Record<string, string | number | boolean | null | undefined>,
 ) => {
     return fetchNasaJson<T>(path, {
         params,
-        revalidate: 60 * 30,
-        timeoutMs: 60000,
+        revalidate: DEFAULT_REVALIDATE,
+        timeoutMs: DEFAULT_TIMEOUT_MS,
     });
 };
 
@@ -28,15 +30,15 @@ export const fetchDonkiRange = async <T>({
                                              startDate,
                                              endDate,
                                              extraParams = {},
-                                             revalidate = 60 * 30,
-                                             timeoutMs = 60000,
+                                             revalidate = DEFAULT_REVALIDATE,
+                                             timeoutMs = DEFAULT_TIMEOUT_MS,
                                              chunked = true,
                                          }: FetchDonkiRangeOptions<T>): Promise<T[]> => {
     const chunks = chunked
         ? splitDateRangeIntoChunks(startDate, endDate)
         : [{startDate, endDate}];
 
-    const responses = await Promise.all(
+    const responses = await Promise.allSettled(
         chunks.map((chunk) =>
             fetchNasaJson<T[]>(path, {
                 params: {
@@ -50,5 +52,11 @@ export const fetchDonkiRange = async <T>({
         ),
     );
 
-    return responses.flat();
+    return responses.flatMap((response) => {
+        if (response.status === "fulfilled") {
+            return response.value;
+        }
+
+        return [];
+    });
 };

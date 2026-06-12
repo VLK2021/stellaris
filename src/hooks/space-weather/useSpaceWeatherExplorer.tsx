@@ -27,6 +27,18 @@ type OverviewResponse = {
     message?: string;
 };
 
+type CachedSpaceWeatherState = Omit<SpaceWeatherApiState, "loading" | "error">;
+
+const CACHE_TTL_MS = 1000 * 60 * 5;
+
+const spaceWeatherCache = new Map<
+    string,
+    {
+        expiresAt: number;
+        state: CachedSpaceWeatherState;
+    }
+>();
+
 export const initialSpaceWeatherState: SpaceWeatherExplorerState = {
     tab: "overview",
     startDate: getDateMinusDays(30),
@@ -34,6 +46,43 @@ export const initialSpaceWeatherState: SpaceWeatherExplorerState = {
     type: "all",
     page: 1,
     limit: 24,
+};
+
+const getCacheKey = (values: SpaceWeatherExplorerState) => {
+    return [
+        values.tab,
+        values.startDate,
+        values.endDate,
+        values.type,
+        values.page,
+        values.limit,
+    ].join("|");
+};
+
+const getCachedState = (
+    values: SpaceWeatherExplorerState,
+): CachedSpaceWeatherState | null => {
+    const key = getCacheKey(values);
+    const cached = spaceWeatherCache.get(key);
+
+    if (!cached) return null;
+
+    if (cached.expiresAt < Date.now()) {
+        spaceWeatherCache.delete(key);
+        return null;
+    }
+
+    return cached.state;
+};
+
+const setCachedState = (
+    values: SpaceWeatherExplorerState,
+    state: CachedSpaceWeatherState,
+) => {
+    spaceWeatherCache.set(getCacheKey(values), {
+        expiresAt: Date.now() + CACHE_TTL_MS,
+        state,
+    });
 };
 
 const getErrorMessage = (message: string) => {
@@ -75,6 +124,18 @@ export const useSpaceWeatherExplorer = () => {
 
         setExplorer(nextValues);
 
+        const cachedState = getCachedState(nextValues);
+
+        if (cachedState) {
+            setState({
+                ...cachedState,
+                loading: false,
+                error: null,
+            });
+
+            return;
+        }
+
         setState((prev) => ({
             ...prev,
             loading: true,
@@ -90,7 +151,6 @@ export const useSpaceWeatherExplorer = () => {
             if (nextValues.tab === "overview") {
                 const response = await fetch(
                     `/api/space-weather/overview?${params.toString()}`,
-                    {cache: "no-store"},
                 );
 
                 const json = (await response.json()) as OverviewResponse;
@@ -101,12 +161,18 @@ export const useSpaceWeatherExplorer = () => {
                     );
                 }
 
-                setState({
+                const nextState: CachedSpaceWeatherState = {
                     overview: json.data,
                     events: json.data.latestEvents,
                     notifications: json.data.latestNotifications,
                     stats: json.data.stats,
                     pagination: null,
+                };
+
+                setCachedState(nextValues, nextState);
+
+                setState({
+                    ...nextState,
                     loading: false,
                     error: null,
                 });
@@ -121,7 +187,6 @@ export const useSpaceWeatherExplorer = () => {
 
                 const response = await fetch(
                     `/api/space-weather/events?${params.toString()}`,
-                    {cache: "no-store"},
                 );
 
                 const json = (await response.json()) as SpaceWeatherEventsResponse & {
@@ -134,12 +199,18 @@ export const useSpaceWeatherExplorer = () => {
                     );
                 }
 
-                setState({
+                const nextState: CachedSpaceWeatherState = {
                     overview: null,
                     events: json.data,
                     notifications: [],
                     stats: json.stats,
                     pagination: json.pagination,
+                };
+
+                setCachedState(nextValues, nextState);
+
+                setState({
+                    ...nextState,
                     loading: false,
                     error: null,
                 });
@@ -153,7 +224,6 @@ export const useSpaceWeatherExplorer = () => {
 
             const response = await fetch(
                 `/api/space-weather/notifications?${params.toString()}`,
-                {cache: "no-store"},
             );
 
             const json = (await response.json()) as SpaceWeatherNotificationsResponse & {
@@ -164,12 +234,18 @@ export const useSpaceWeatherExplorer = () => {
                 throw new Error(json.message ?? "Failed to load notifications.");
             }
 
-            setState({
+            const nextState: CachedSpaceWeatherState = {
                 overview: null,
                 events: [],
                 notifications: json.data,
                 stats: null,
                 pagination: json.pagination,
+            };
+
+            setCachedState(nextValues, nextState);
+
+            setState({
+                ...nextState,
                 loading: false,
                 error: null,
             });

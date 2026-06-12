@@ -58,7 +58,18 @@ const filterByType = (
     type: SpaceWeatherTypeFilter = "all",
 ) => {
     if (type === "all") return events;
+
     return events.filter((event) => event.type === type);
+};
+
+const getFulfilledValue = <T>(
+    result: PromiseSettledResult<T[]>,
+): T[] => {
+    if (result.status === "fulfilled") {
+        return result.value;
+    }
+
+    return [];
 };
 
 export const getSpaceWeatherEvents = async ({
@@ -71,17 +82,17 @@ export const getSpaceWeatherEvents = async ({
     validateDateRange(startDate, endDate);
 
     const [
-        cme,
-        cmeAnalysis,
-        gst,
-        ips,
-        flr,
-        sep,
-        mpc,
-        rbe,
-        hss,
-        enlil,
-    ] = await Promise.all([
+        cmeResult,
+        cmeAnalysisResult,
+        gstResult,
+        ipsResult,
+        flrResult,
+        sepResult,
+        mpcResult,
+        rbeResult,
+        hssResult,
+        enlilResult,
+    ] = await Promise.allSettled([
         fetchDonkiRange<RawDonkiCme>({
             path: DONKI_API_PATHS.cme,
             startDate,
@@ -143,17 +154,29 @@ export const getSpaceWeatherEvents = async ({
         }),
     ]);
 
+    const cme = getFulfilledValue(cmeResult).map(normalizeCme);
+    const cmeAnalysis =
+        getFulfilledValue(cmeAnalysisResult).map(normalizeCmeAnalysis);
+    const gst = getFulfilledValue(gstResult).map(normalizeGst);
+    const ips = getFulfilledValue(ipsResult).map(normalizeIps);
+    const flr = getFulfilledValue(flrResult).map(normalizeFlr);
+    const sep = getFulfilledValue(sepResult).map(normalizeSep);
+    const mpc = getFulfilledValue(mpcResult).map(normalizeMpc);
+    const rbe = getFulfilledValue(rbeResult).map(normalizeRbe);
+    const hss = getFulfilledValue(hssResult).map(normalizeHss);
+    const enlil = getFulfilledValue(enlilResult).map(normalizeEnlil);
+
     const allEvents: SpaceWeatherEvent[] = [
-        ...cme.map(normalizeCme),
-        ...cmeAnalysis.map(normalizeCmeAnalysis),
-        ...gst.map(normalizeGst),
-        ...ips.map(normalizeIps),
-        ...flr.map(normalizeFlr),
-        ...sep.map(normalizeSep),
-        ...mpc.map(normalizeMpc),
-        ...rbe.map(normalizeRbe),
-        ...hss.map(normalizeHss),
-        ...enlil.map(normalizeEnlil),
+        ...cme,
+        ...cmeAnalysis,
+        ...gst,
+        ...ips,
+        ...flr,
+        ...sep,
+        ...mpc,
+        ...rbe,
+        ...hss,
+        ...enlil,
     ];
 
     const sortedEvents = sortEventsByDateDesc(allEvents);
