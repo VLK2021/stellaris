@@ -16,7 +16,6 @@ export const Footer = () => {
             title: locale.footer.explore,
             links: [
                 {label: locale.nav.home, href: "/"},
-                {label: locale.nav.explore, href: "/explore"},
                 {label: locale.nav.earth, href: "/earth"},
                 {label: locale.nav.mars, href: "/mars"},
                 {label: locale.nav.asteroids, href: "/asteroids"},

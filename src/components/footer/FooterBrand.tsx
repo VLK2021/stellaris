@@ -39,7 +39,7 @@ export const FooterBrand = ({locale}: FooterBrandProps) => {
 
             <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                    href="/explore"
+                    href="/missions"
                     className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-black text-[var(--color-card-solid)] shadow-[var(--shadow-glow)] transition hover:-translate-y-0.5"
                 >
                     <Rocket className="h-4 w-4" />
