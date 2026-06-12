@@ -1,7 +1,7 @@
 "use client";
 
 import {motion} from "framer-motion";
-import {ExternalLink, PlayCircle} from "lucide-react";
+import {ExternalLink, PlayCircle, Download} from "lucide-react";
 
 import type {ApodExplorerLocale, ApodItem} from "@/src/types/apod/apod.types";
 
@@ -70,6 +70,16 @@ export const ApodCard = ({item, locale}: Props) => {
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-2.5">
+                    {item.mediaType === "image" && (
+                        <a
+                            href={`/api/apod/download?url=${encodeURIComponent(item.hdUrl ?? item.url ?? "")}`}
+                            className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-3.5 py-2 text-[11px] font-black text-white transition hover:scale-105"
+                        >
+                            <Download className="h-3.5 w-3.5" />
+                            Завантажити фото
+                        </a>
+                    )}
+
                     {item.hdUrl && (
                         <a
                             href={item.hdUrl}
@@ -89,7 +99,9 @@ export const ApodCard = ({item, locale}: Props) => {
                             rel="noreferrer"
                             className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] px-3.5 py-2 text-[11px] font-black text-[var(--color-text-muted)] transition hover:border-[var(--color-border-strong)]"
                         >
-                            {locale.source}
+                            {item.mediaType === "video"
+                                ? "Відкрити відео"
+                                : locale.source}
                         </a>
                     )}
                 </div>
