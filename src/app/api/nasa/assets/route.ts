@@ -1,8 +1,8 @@
-import {NextResponse} from "next/server";
+import { NextResponse } from "next/server";
 
-import {getNasaAssets} from "@/src/services/nasaAssets.service";
+import { getNasaAssets } from "@/src/services/nasaAssets.service";
 
-export const revalidate = 60 * 60 * 24;
+export const revalidate = 86400;
 
 export async function GET() {
     try {
@@ -19,7 +19,7 @@ export async function GET() {
                 data: [],
                 message: "Failed to fetch NASA assets",
             },
-            {status: 500},
+            { status: 500 },
         );
     }
 }
