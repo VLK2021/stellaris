@@ -67,30 +67,42 @@ const getPreviewImage = (item: NasaImageSearchItem) => {
     return item.links?.find((link) => link.render === "image")?.href ?? "";
 };
 
-const searchNasaImage = async (query: string) => {
-    const params = new URLSearchParams({
-        q: query,
-        media_type: "image",
-        page_size: "12",
-    });
+const searchNasaImage = async (
+    query: string,
+): Promise<NasaImageSearchItem | null> => {
+    try {
+        const params = new URLSearchParams({
+            q: query,
+            media_type: "image",
+            page_size: "12",
+        });
 
-    const response = await fetch(`${NASA_IMAGES_BASE_URL}/search?${params.toString()}`, {
-        next: {
-            revalidate: 60 * 60 * 24,
-        },
-    });
+        const response = await fetch(
+            `${NASA_IMAGES_BASE_URL}/search?${params.toString()}`,
+            {
+                next: {
+                    revalidate: 60 * 60 * 24,
+                },
+                headers: {
+                    Accept: "application/json",
+                },
+            },
+        );
 
-    if (!response.ok) {
+        if (!response.ok) {
+            return null;
+        }
+
+        const data = (await response.json()) as NasaImageSearchResponse;
+
+        return (
+            data.collection.items.find((item) => {
+                return item.data?.length && Boolean(getPreviewImage(item));
+            }) ?? null
+        );
+    } catch {
         return null;
     }
-
-    const data = (await response.json()) as NasaImageSearchResponse;
-
-    return (
-        data.collection.items.find((item) => {
-            return item.data?.length && Boolean(getPreviewImage(item));
-        }) ?? null
-    );
 };
 
 export const getNasaAsset = async (
@@ -106,6 +118,10 @@ export const getNasaAsset = async (
         }
 
         const meta = item.data[0];
+
+        if (!meta) {
+            continue;
+        }
 
         return {
             key,
@@ -123,7 +139,13 @@ export const getNasaAsset = async (
 export const getNasaAssets = async (): Promise<NasaAsset[]> => {
     const keys = Object.keys(ASSET_CONFIG) as NasaAssetKey[];
 
-    const assets = await Promise.all(keys.map((key) => getNasaAsset(key)));
+    const results = await Promise.allSettled(
+        keys.map((key) => getNasaAsset(key)),
+    );
 
-    return assets.filter(Boolean) as NasaAsset[];
+    return results
+        .map((result) =>
+            result.status === "fulfilled" ? result.value : null,
+        )
+        .filter(Boolean) as NasaAsset[];
 };

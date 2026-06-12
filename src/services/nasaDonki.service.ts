@@ -15,6 +15,7 @@ type DonkiEvent = {
 const getDateDaysAgo = (days: number) => {
     const date = new Date();
     date.setDate(date.getDate() - days);
+
     return date.toISOString().slice(0, 10);
 };
 
@@ -32,13 +33,19 @@ const getLatestDate = (events: DonkiEvent[]) => {
 const getDonkiEvents = async <T>(
     endpoint: string,
     params: DonkiDateParams = {},
-) => {
-    return fetchNasaJson<T[]>(`/DONKI/${endpoint}`, {
-        params: {
-            startDate: params.startDate ?? getDateDaysAgo(7),
-            endDate: params.endDate ?? getToday(),
-        },
-    });
+): Promise<T[]> => {
+    try {
+        return await fetchNasaJson<T[]>(`/DONKI/${endpoint}`, {
+            params: {
+                startDate: params.startDate ?? getDateDaysAgo(7),
+                endDate: params.endDate ?? getToday(),
+            },
+            revalidate: 60 * 30,
+            timeoutMs: 20000,
+        });
+    } catch {
+        return [];
+    }
 };
 
 export const getDonkiCme = (params?: DonkiDateParams) =>
@@ -74,11 +81,12 @@ export const getNasaDonkiSummary = async (): Promise<NasaLiveDonki> => {
         endDate: getToday(),
     };
 
-    const [solarFlares, cmeEvents, geomagneticStorms] = await Promise.all([
-        getDonkiFlr(params),
-        getDonkiCme(params),
-        getDonkiGst(params),
-    ]);
+    const [solarFlares, cmeEvents, geomagneticStorms] =
+        await Promise.all([
+            getDonkiFlr(params),
+            getDonkiCme(params),
+            getDonkiGst(params),
+        ]);
 
     return {
         solarFlares: solarFlares.length,
