@@ -1,5 +1,6 @@
 import {CalendarDays, Flag, Globe2, Rocket} from "lucide-react";
 
+import {useLanguage} from "@/src/context";
 import type {MissionAggregated} from "@/src/types/missions";
 
 type Props = {
@@ -7,12 +8,15 @@ type Props = {
 };
 
 export const MissionFactsPanel = ({mission}: Props) => {
+    const {locale} = useLanguage();
+    const t = locale.missions.missionDetails;
+
     return (
         <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <Fact icon={Rocket} label="Категорія" value={mission.category} />
-            <Fact icon={Globe2} label="Ціль" value={mission.target} />
-            <Fact icon={CalendarDays} label="Старт" value={mission.launchDate ?? "Невідомо"} />
-            <Fact icon={Flag} label="Завершення" value={mission.endDate ?? "Активна / невідомо"} />
+            <Fact icon={Rocket} label={t.category} value={mission.category} />
+            <Fact icon={Globe2} label={t.target} value={mission.target} />
+            <Fact icon={CalendarDays} label={t.launchDate} value={mission.launchDate ?? t.unknown} />
+            <Fact icon={Flag} label={t.endDate} value={mission.endDate ?? t.activeOrUnknown} />
         </section>
     );
 };
@@ -26,14 +30,14 @@ const Fact = ({
     label: string;
     value: string;
 }) => (
-    <article className="rounded-[1.4rem] border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-[var(--shadow-card)]">
+    <article className="rounded-[1.4rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-5 shadow-[var(--shadow-card)] backdrop-blur-2xl transition hover:border-[var(--color-accent)]">
         <Icon className="h-5 w-5 text-[var(--color-accent)]" />
 
         <p className="mt-4 text-[9px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
             {label}
         </p>
 
-        <p className="mt-1 text-lg font-black uppercase">
+        <p className="mt-1 bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-lg font-black uppercase text-transparent">
             {value}
         </p>
     </article>

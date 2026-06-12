@@ -1,7 +1,7 @@
 import {notFound} from "next/navigation";
 
-import {getAggregatedMissionBySlug} from "@/src/services/missions/missionsAggregator.service";
 import {MissionDetailsPage} from "@/src/components/mission/details";
+import {getAggregatedMissionBySlug} from "@/src/services/missions/missionsAggregator.service";
 
 type Props = {
     params: Promise<{

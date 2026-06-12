@@ -1,8 +1,10 @@
 "use client";
 
 import {BackButton} from "@/src/common/BackButton";
+import {useLanguage} from "@/src/context";
 import type {MissionAggregated} from "@/src/types/missions";
 
+import {MissionSpaceBackground} from "../MissionSpaceBackground";
 import {MissionCrewPanel} from "./MissionCrewPanel";
 import {MissionDetailsHero} from "./MissionDetailsHero";
 import {MissionFactsPanel} from "./MissionFactsPanel";
@@ -16,16 +18,15 @@ type Props = {
 };
 
 export const MissionDetailsPage = ({mission}: Props) => {
+    const {locale} = useLanguage();
+    const t = locale.missions.missionDetails;
+
     return (
         <main className="relative min-h-screen overflow-hidden bg-[var(--body-bg)] text-[var(--color-text)]">
-            <div className="pointer-events-none fixed inset-0 opacity-80">
-                <div className="absolute inset-0" style={{background: "var(--hero-bg)"}} />
-                <div className="absolute left-[-14rem] top-[12rem] h-[34rem] w-[34rem] rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
-                <div className="absolute right-[-16rem] top-[6rem] h-[38rem] w-[38rem] rounded-full bg-[var(--color-brand-secondary)]/10 blur-3xl" />
-            </div>
+            <MissionSpaceBackground />
 
             <div className="relative z-10 mx-auto grid max-w-[1500px] gap-5 px-4 py-6 sm:px-6 lg:px-8">
-                <BackButton label="Назад" />
+                <BackButton label={t.back} />
 
                 <MissionDetailsHero mission={mission} />
 
@@ -33,6 +34,7 @@ export const MissionDetailsPage = ({mission}: Props) => {
 
                 <div className="grid gap-5 xl:grid-cols-2">
                     <MissionCrewPanel crew={mission.crew} />
+
                     <MissionVehiclesPanel
                         spacecraft={mission.spacecraft}
                         launchVehicles={mission.launchVehicles}
@@ -43,19 +45,19 @@ export const MissionDetailsPage = ({mission}: Props) => {
                 <MissionTimelinePanel timeline={mission.timeline} />
 
                 <MissionMediaSection
-                    title="Фото місії"
+                    title={t.images}
                     type="image"
                     items={mission.media.images}
                 />
 
                 <MissionMediaSection
-                    title="Відео місії"
+                    title={t.videos}
                     type="video"
                     items={mission.media.videos}
                 />
 
                 <MissionMediaSection
-                    title="Аудіо місії"
+                    title={t.audio}
                     type="audio"
                     items={mission.media.audio}
                 />
