@@ -15,7 +15,7 @@ export const ExoplanetsAtmospheresList = ({items, t}: Props) => {
         <section className="grid gap-4 xl:grid-cols-2">
             {items.map((item, index) => (
                 <ExoplanetsAtmospheresCard
-                    key={`${item.pl_name}-${item.instrument}-${index}`}
+                    key={`${item.pl_name}-${index}`}
                     item={item}
                     index={index}
                     t={t}
