@@ -25,7 +25,7 @@ export const ExoplanetsFilters = ({filters, onChange, t}: Props) => {
         <div className="mb-5 grid gap-3 md:grid-cols-2 xl:grid-cols-6">
             <label className="grid gap-2 xl:col-span-2">
                 <span className="exo-label text-[10px] font-black uppercase tracking-[0.18em]">
-                    {t.explorer.search}
+                    {t.catalog.search}
                 </span>
 
                 <div className="relative">
@@ -34,18 +34,18 @@ export const ExoplanetsFilters = ({filters, onChange, t}: Props) => {
                     <input
                         value={filters.search}
                         onChange={(event) => update({search: event.target.value})}
-                        placeholder={t.explorer.searchPlaceholder}
+                        placeholder={t.catalog.searchPlaceholder}
                         className="input pl-10"
                     />
                 </div>
             </label>
 
             <Select
-                label={t.explorer.discovery}
+                label={t.catalog.discoveryMethod}
                 value={filters.discoveryMethod}
                 onChange={(value) => update({discoveryMethod: value})}
                 options={[
-                    ["", t.explorer.all],
+                    ["", t.catalog.all],
                     ["Transit", "Transit"],
                     ["Radial Velocity", "Radial Velocity"],
                     ["Microlensing", "Microlensing"],
@@ -53,33 +53,57 @@ export const ExoplanetsFilters = ({filters, onChange, t}: Props) => {
                 ]}
             />
 
-            <FilterInput label={t.explorer.yearFrom} value={filters.yearFrom} onChange={(value) => update({yearFrom: value})} />
-            <FilterInput label={t.explorer.yearTo} value={filters.yearTo} onChange={(value) => update({yearTo: value})} />
-            <FilterInput label={t.explorer.maxRadius} value={filters.radiusMax} onChange={(value) => update({radiusMax: value})} />
-            <FilterInput label={t.explorer.tempMin} value={filters.tempMin} onChange={(value) => update({tempMin: value})} />
-            <FilterInput label={t.explorer.tempMax} value={filters.tempMax} onChange={(value) => update({tempMax: value})} />
+            <FilterInput
+                label={`${t.catalog.discoveryYear} ${t.catalog.asc}`}
+                value={filters.yearFrom}
+                onChange={(value) => update({yearFrom: value})}
+            />
+
+            <FilterInput
+                label={`${t.catalog.discoveryYear} ${t.catalog.desc}`}
+                value={filters.yearTo}
+                onChange={(value) => update({yearTo: value})}
+            />
+
+            <FilterInput
+                label={t.catalog.radius}
+                value={filters.radiusMax}
+                onChange={(value) => update({radiusMax: value})}
+            />
+
+            <FilterInput
+                label={`${t.catalog.temperature} min`}
+                value={filters.tempMin}
+                onChange={(value) => update({tempMin: value})}
+            />
+
+            <FilterInput
+                label={`${t.catalog.temperature} max`}
+                value={filters.tempMax}
+                onChange={(value) => update({tempMax: value})}
+            />
 
             <Select
-                label={t.explorer.sortBy}
+                label={t.catalog.sortBy}
                 value={filters.sortBy}
                 onChange={(value) => update({sortBy: value as ExoplanetFilters["sortBy"]})}
                 options={[
-                    ["disc_year", t.explorer.discoveryYear],
-                    ["pl_name", t.explorer.planetName],
-                    ["sy_dist", t.explorer.distance],
-                    ["pl_rade", t.explorer.radius],
-                    ["pl_bmasse", t.explorer.mass],
-                    ["pl_eqt", t.explorer.temperature],
+                    ["disc_year", t.catalog.discoveryYear],
+                    ["pl_name", t.catalog.planetName],
+                    ["sy_dist", t.catalog.distance],
+                    ["pl_rade", t.catalog.radius],
+                    ["pl_bmasse", t.catalog.mass],
+                    ["pl_eqt", t.catalog.temperature],
                 ]}
             />
 
             <Select
-                label={t.explorer.order}
+                label={t.catalog.order}
                 value={filters.order}
                 onChange={(value) => update({order: value as ExoplanetFilters["order"]})}
                 options={[
-                    ["desc", t.explorer.desc],
-                    ["asc", t.explorer.asc],
+                    ["desc", t.catalog.desc],
+                    ["asc", t.catalog.asc],
                 ]}
             />
         </div>
