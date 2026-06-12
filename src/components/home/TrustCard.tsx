@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-// import Link from "next/link";
 import {motion} from "framer-motion";
-// import {ArrowRight} from "lucide-react";
 
 import type {TrustCardItem} from "@/src/types/trustCards";
 
@@ -60,26 +58,18 @@ export const TrustCard = ({card, index}: Props) => {
                     <p className="mt-4 text-sm leading-7 text-[var(--color-text-muted)]">
                         {card.text}
                     </p>
-
-                    <div className="mt-5 flex flex-wrap gap-2">
-                        {card.facts.map((fact) => (
-                            <span
-                                key={fact}
-                                className="rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-1 text-xs font-semibold text-[var(--color-text-muted)]"
-                            >
-                                {fact}
-                            </span>
-                        ))}
-                    </div>
                 </div>
 
-                {/*<Link*/}
-                {/*    href={card.href}*/}
-                {/*    className="mt-7 inline-flex items-center gap-2 text-sm font-black text-[var(--color-accent)] transition group-hover:gap-3"*/}
-                {/*>*/}
-                {/*    {card.action}*/}
-                {/*    <ArrowRight className="h-4 w-4" />*/}
-                {/*</Link>*/}
+                <div className="mt-7 flex flex-wrap gap-2">
+                    {card.facts.map((fact) => (
+                        <span
+                            key={fact}
+                            className="rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-1 text-xs font-semibold text-[var(--color-text-muted)]"
+                        >
+                            {fact}
+                        </span>
+                    ))}
+                </div>
             </div>
         </motion.article>
     );

@@ -1,4 +1,29 @@
 const en = {
+    platformPrinciples: {
+        title: "Built as a research platform, not just a NASA gallery.",
+        text: "Stellaris combines open data, visual exploration and live space signals in one interface.",
+        cards: {
+            openData: {
+                title: "Open Data Core",
+                text: "At the center of the project are NASA open sources: imagery, missions, asteroids, planetary data and space weather.",
+                badge: "NASA DATA",
+                facts: ["NASA API", "Open Data", "Real Sources"],
+            },
+            cinematic: {
+                title: "Cinematic Interface",
+                text: "Data is presented not as dry tables, but as a visual experience: imagery, orbits, maps, timelines and interactive modules.",
+                badge: "VISUAL UI",
+                facts: ["3D Visuals", "Timeline", "Responsive UI"],
+            },
+            exploration: {
+                title: "Exploration System",
+                text: "Each section works as a separate research module: from Mars and Earth to missions, asteroids and space weather.",
+                badge: "SYSTEM",
+                facts: ["Modules", "Live Signals", "Space Archive"],
+            },
+        },
+    },
+
     nav: {
         home: "Home",
         explore: "Explore",

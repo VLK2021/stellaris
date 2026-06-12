@@ -1,4 +1,29 @@
 const uk = {
+    platformPrinciples: {
+        title: "Побудовано як дослідницька платформа, а не просто галерея NASA.",
+        text: "Stellaris поєднує відкриті дані, візуальний досвід і живі космічні сигнали в одному інтерфейсі.",
+        cards: {
+            openData: {
+                title: "Open Data Core",
+                text: "У центрі проєкту — відкриті джерела NASA: зображення, місії, астероїди, планетарні дані та космічна погода.",
+                badge: "NASA DATA",
+                facts: ["NASA API", "Open Data", "Real Sources"],
+            },
+            cinematic: {
+                title: "Cinematic Interface",
+                text: "Дані подані не як сухі таблиці, а як візуальний досвід: зображення, орбіти, карти, таймлайни та інтерактивні модулі.",
+                badge: "VISUAL UI",
+                facts: ["3D Visuals", "Timeline", "Responsive UI"],
+            },
+            exploration: {
+                title: "Exploration System",
+                text: "Кожен розділ працює як окремий дослідницький модуль: від Марса й Землі до місій, астероїдів і космічної погоди.",
+                badge: "SYSTEM",
+                facts: ["Modules", "Live Signals", "Space Archive"],
+            },
+        },
+    },
+
     nav: {
         home: "Головна",
         explore: "Огляд",
