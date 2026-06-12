@@ -1,2 +1,6 @@
-export * from './apod.types';
-export * from './apodPagination.types';
+export * from "./apod.types";
+
+export {
+    type ApodPaginatedResponse,
+    type ApodPaginationQuery,
+} from "./apodPagination.types";
