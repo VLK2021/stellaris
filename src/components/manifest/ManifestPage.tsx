@@ -3,12 +3,14 @@
 import {
     Code2,
     Database,
-    Orbit,
     ShieldCheck,
     Sparkles,
 } from "lucide-react";
 
 import {useLanguage} from "@/src/context";
+
+const NASA_LOGO_URL =
+    "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg";
 
 export const ManifestPage = () => {
     const {locale} = useLanguage();
@@ -17,7 +19,10 @@ export const ManifestPage = () => {
     return (
         <main className="relative min-h-screen overflow-hidden bg-[var(--body-bg)] text-[var(--color-text)]">
             <div className="pointer-events-none fixed inset-0">
-                <div className="absolute inset-0" style={{background: "var(--hero-bg)"}} />
+                <div
+                    className="absolute inset-0"
+                    style={{background: "var(--hero-bg)"}}
+                />
                 <div className="absolute inset-0 bg-[linear-gradient(var(--color-border)_1px,transparent_1px),linear-gradient(90deg,var(--color-border)_1px,transparent_1px)] bg-[size:72px_72px] opacity-20" />
                 <div className="absolute left-[-16rem] top-[8rem] h-[36rem] w-[36rem] rounded-full bg-[var(--color-accent-soft)] blur-3xl" />
                 <div className="absolute right-[-18rem] bottom-[-12rem] h-[40rem] w-[40rem] rounded-full bg-[var(--color-glass)] blur-3xl" />
@@ -27,7 +32,7 @@ export const ManifestPage = () => {
                 <section className="relative overflow-hidden rounded-[2.6rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl md:p-10">
                     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,var(--color-accent-soft),transparent_34%)]" />
 
-                    <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_360px] lg:items-center">
+                    <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_380px] lg:items-center">
                         <div>
                             <p className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass-strong)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
                                 <Sparkles className="h-4 w-4" />
@@ -43,19 +48,27 @@ export const ManifestPage = () => {
                             </p>
                         </div>
 
-                        <div className="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-glass-strong)] p-6 backdrop-blur-xl">
-                            <div className="grid h-24 w-24 place-items-center rounded-full border border-[var(--color-accent)] bg-[var(--color-accent-soft)] shadow-[var(--shadow-glow)]">
-                                <Orbit className="h-11 w-11 text-[var(--color-accent)]" />
+                        <aside className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-glass-strong)] p-6 backdrop-blur-xl">
+                            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,var(--color-accent-soft),transparent_42%)]" />
+
+                            <div className="relative z-10">
+                                <div className="grid h-32 w-32 place-items-center rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-card-solid)] p-5 shadow-[var(--shadow-glow)]">
+                                    <img
+                                        src={NASA_LOGO_URL}
+                                        alt="NASA logo"
+                                        className="h-full w-full object-contain"
+                                    />
+                                </div>
+
+                                <p className="mt-6 text-[10px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
+                                    {t.nasaBadge}
+                                </p>
+
+                                <p className="mt-3 text-2xl font-black uppercase tracking-[-0.05em] text-[var(--color-text)]">
+                                    {t.nasaLabel}
+                                </p>
                             </div>
-
-                            <p className="mt-6 text-[10px] font-black uppercase tracking-[0.24em] text-[var(--color-accent)]">
-                                {t.nasaBadge}
-                            </p>
-
-                            <p className="mt-3 text-2xl font-black uppercase tracking-[-0.05em]">
-                                {t.nasaLabel}
-                            </p>
-                        </div>
+                        </aside>
                     </div>
                 </section>
 
