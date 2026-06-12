@@ -68,6 +68,7 @@ export type EarthEventsQuery = {
     limit?: number;
     sortBy?: EarthEventsSortBy;
     order?: EarthSortOrder;
+    days?: number;
 };
 
 export type EarthEventsResponse = {
