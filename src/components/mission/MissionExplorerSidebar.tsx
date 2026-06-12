@@ -4,8 +4,6 @@ import {motion} from "framer-motion";
 import {
     Bot,
     CircleDot,
-    Crosshair,
-    Moon,
     Orbit,
     Rocket,
     Search,
@@ -15,6 +13,8 @@ import {
 
 import {useLanguage} from "@/src/context";
 import type {MissionCatalogItem} from "@/src/constants/missions";
+
+import {MissionListItem} from "./MissionListItem";
 
 type Props = {
     missions: MissionCatalogItem[];
@@ -49,7 +49,7 @@ const CATEGORIES = [
     "station",
 ];
 
-const CATEGORY_ICONS: Record<string, typeof Rocket> = {
+const CATEGORY_ICONS = {
     all: CircleDot,
     crewed: Users,
     robotic: Bot,
@@ -69,11 +69,11 @@ const TARGET_SHORT: Record<string, string> = {
     "earth-orbit": "ORB",
 };
 
-const getTargetLocaleKey = (target: string) => {
-    if (target === "deep-space") return "deepSpace";
-    if (target === "earth-orbit") return "earthOrbit";
+const getTargetLocaleKey = (value: string) => {
+    if (value === "deep-space") return "deepSpace";
+    if (value === "earth-orbit") return "earthOrbit";
 
-    return target;
+    return value;
 };
 
 export const MissionExplorerSidebar = ({
@@ -154,10 +154,7 @@ export const MissionExplorerSidebar = ({
                         className="input cursor-pointer text-xs font-black uppercase tracking-[0.12em]"
                     >
                         {CATEGORIES.map((item) => (
-                            <option
-                                key={item}
-                                value={item}
-                            >
+                            <option key={item} value={item}>
                                 {t.categories[item as keyof typeof t.categories] ?? item}
                             </option>
                         ))}
@@ -172,10 +169,7 @@ export const MissionExplorerSidebar = ({
                             const key = getTargetLocaleKey(item);
 
                             return (
-                                <option
-                                    key={item}
-                                    value={item}
-                                >
+                                <option key={item} value={item}>
                                     {t.targets[key as keyof typeof t.targets] ?? item}
                                 </option>
                             );
@@ -188,67 +182,33 @@ export const MissionExplorerSidebar = ({
                 <div className="grid gap-2">
                     {missions.map((mission, index) => {
                         const active = mission.slug === activeSlug;
-                        const Icon =
-                            CATEGORY_ICONS[mission.category] ?? Rocket;
-
                         const targetKey = getTargetLocaleKey(mission.target);
+
                         const categoryLabel =
                             t.categories[mission.category as keyof typeof t.categories] ??
                             mission.category;
+
                         const targetLabel =
                             t.targets[targetKey as keyof typeof t.targets] ??
                             mission.target;
 
+                        const Icon =
+                            CATEGORY_ICONS[
+                                mission.category as keyof typeof CATEGORY_ICONS
+                                ] ?? Rocket;
+
                         return (
-                            <motion.button
+                            <MissionListItem
                                 key={mission.slug}
-                                type="button"
-                                initial={{opacity: 0, x: -10}}
-                                animate={{opacity: 1, x: 0}}
-                                whileHover={{x: 4}}
-                                transition={{
-                                    duration: 0.25,
-                                    delay: Math.min(index * 0.015, 0.25),
-                                }}
-                                onClick={() => onSelect(mission.slug)}
-                                className={`group grid w-full grid-cols-[56px_1fr] items-center gap-3 rounded-[1.25rem] border p-3 text-left transition duration-200 ${
-                                    active
-                                        ? "border-[var(--color-accent)] bg-[var(--color-accent-soft)] shadow-[var(--shadow-glow)]"
-                                        : "border-[var(--color-border)] bg-[var(--color-glass)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent-soft)]"
-                                }`}
-                            >
-                                <div className={`grid h-12 w-12 place-items-center rounded-2xl border transition ${
-                                    active
-                                        ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-card-solid)]"
-                                        : "border-[var(--color-border)] bg-[var(--color-glass-strong)] text-[var(--color-accent)] group-hover:border-[var(--color-accent)]"
-                                }`}>
-                                    <Icon className="h-5 w-5" />
-                                </div>
-
-                                <div className="min-w-0">
-                                    <div className="flex items-center justify-between gap-3">
-                                        <h3 className={`truncate text-sm font-black uppercase tracking-[-0.03em] ${
-                                            active
-                                                ? "bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-transparent"
-                                                : "text-[var(--color-text)]"
-                                        }`}>
-                                            {mission.name}
-                                        </h3>
-
-                                        <span className="shrink-0 rounded-full border border-[var(--color-border)] bg-[var(--color-glass-strong)] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em] text-[var(--color-accent)]">
-                                            {TARGET_SHORT[mission.target] ?? "NASA"}
-                                        </span>
-                                    </div>
-
-                                    <p className="mt-1 truncate text-[11px] text-[var(--color-text-muted)]">
-                                        {categoryLabel} / {targetLabel}
-                                    </p>
-
-                                    <p className="mt-1 truncate text-[10px] text-[var(--color-text-soft)]">
-                                        {mission.nasaMediaQuery}
-                                    </p>
-                                </div>
-                            </motion.button>
+                                mission={mission}
+                                active={active}
+                                icon={Icon}
+                                categoryLabel={categoryLabel}
+                                targetLabel={targetLabel}
+                                targetShort={TARGET_SHORT[mission.target] ?? "NASA"}
+                                index={index}
+                                onSelect={onSelect}
+                            />
                         );
                     })}
                 </div>
