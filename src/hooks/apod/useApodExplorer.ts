@@ -26,16 +26,26 @@ type State = {
 const getApodErrorMessage = (message: string) => {
     const normalized = message.toLowerCase();
 
-    if (normalized.includes("aborted")) {
-        return "NASA API занадто довго відповідає. Спробуй менший діапазон дат або повтори запит.";
+    if (
+        normalized.includes("aborted") ||
+        normalized.includes("timeout")
+    ) {
+        return "NASA API відповідає занадто довго. Спробуй менший діапазон дат.";
     }
 
     if (normalized.includes("maximum period")) {
-        return "Максимальний період для APOD — 365 днів.";
+        return "Максимальний період для APOD — 90 днів.";
     }
 
     if (normalized.includes("invalid apod date")) {
-        return "Некоректна дата. Для APOD можна вибирати дати від 1995-06-16 до сьогодні.";
+        return "Некоректна дата APOD.";
+    }
+
+    if (
+        normalized.includes("503") ||
+        normalized.includes("504")
+    ) {
+        return "NASA сервер тимчасово недоступний. Спробуй ще раз через кілька секунд.";
     }
 
     return message;
@@ -44,8 +54,8 @@ const getApodErrorMessage = (message: string) => {
 export const initialApodExplorerState: ApodExplorerState = {
     mode: "today",
     date: getTodayDate(),
-    startDate: getTodayDate(),
-    endDate: getTodayDate(),
+    startDate: "",
+    endDate: "",
     count: 6,
     sort: "newest",
     mediaFilter: "all",
@@ -53,7 +63,9 @@ export const initialApodExplorerState: ApodExplorerState = {
 
 export const useApodExplorer = () => {
     const [explorer, setExplorer] =
-        useState<ApodExplorerState>(initialApodExplorerState);
+        useState<ApodExplorerState>(
+            initialApodExplorerState,
+        );
 
     const [state, setState] = useState<State>({
         data: null,
@@ -75,49 +87,95 @@ export const useApodExplorer = () => {
         }));
 
         try {
-            const params = new URLSearchParams();
+            const params =
+                new URLSearchParams();
 
-            if (values.mode === "date") {
-                params.set("date", values.date);
+            if (
+                values.mode === "date" &&
+                values.date
+            ) {
+                params.set(
+                    "date",
+                    values.date,
+                );
             }
 
-            if (values.mode === "range") {
-                params.set("start_date", values.startDate);
-                params.set("end_date", values.endDate);
-                params.set("page", String(page));
-                params.set("limit", "24");
+            if (
+                values.mode === "range" &&
+                values.startDate &&
+                values.endDate
+            ) {
+                params.set(
+                    "start_date",
+                    values.startDate,
+                );
+
+                params.set(
+                    "end_date",
+                    values.endDate,
+                );
+
+                params.set(
+                    "page",
+                    String(page),
+                );
+
+                params.set(
+                    "limit",
+                    "24",
+                );
             }
 
-            if (values.mode === "random") {
-                params.set("count", String(values.count));
+            if (
+                values.mode === "random"
+            ) {
+                params.set(
+                    "count",
+                    String(values.count),
+                );
             }
 
-            params.set("thumbs", "true");
+            params.set(
+                "thumbs",
+                "true",
+            );
 
-            const response = await fetch(`/api/apod?${params.toString()}`, {
-                cache: "no-store",
-            });
+            const response =
+                await fetch(
+                    `/api/apod?${params.toString()}`,
+                );
 
             const json =
-                (await response.json()) as ApodExplorerApiResponseWithPagination & {
+                (await response.json()) as
+                    ApodExplorerApiResponseWithPagination & {
                     message?: string;
                 };
 
-            if (!response.ok || !json.success) {
-                throw new Error(json.message ?? "Failed to load APOD data");
+            if (
+                !response.ok ||
+                !json.success
+            ) {
+                throw new Error(
+                    json.message ??
+                    "Failed to load APOD",
+                );
             }
 
             setState({
                 data: json.data,
-                pagination: json.pagination ?? null,
+                pagination:
+                    json.pagination ??
+                    null,
                 loading: false,
                 error: null,
             });
         } catch (error) {
             const message =
                 error instanceof Error
-                    ? getApodErrorMessage(error.message)
-                    : "Невідома помилка APOD";
+                    ? getApodErrorMessage(
+                        error.message,
+                    )
+                    : "Unknown APOD error";
 
             setState({
                 data: null,
@@ -128,16 +186,28 @@ export const useApodExplorer = () => {
         }
     };
 
-    const visibleItems = useMemo(() => {
-        const items = asApodArray(state.data);
+    const visibleItems =
+        useMemo(() => {
+            const items =
+                asApodArray(
+                    state.data,
+                );
 
-        return sortApodItems(
-            filterApodItems(items, explorer.mediaFilter),
+            return sortApodItems(
+                filterApodItems(
+                    items,
+                    explorer.mediaFilter,
+                ),
+                explorer.sort,
+            );
+        }, [
+            state.data,
+            explorer.mediaFilter,
             explorer.sort,
-        );
-    }, [state.data, explorer.mediaFilter, explorer.sort]);
+        ]);
 
-    const featured = visibleItems[0] ?? null;
+    const featured =
+        visibleItems[0] ?? null;
 
     return {
         explorer,
