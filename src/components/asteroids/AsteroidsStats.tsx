@@ -74,7 +74,7 @@ export const AsteroidsStats = ({locale, stats}: Props) => {
                                     {card.value}
                                 </h3>
 
-                                {card.meta && (
+                                {"meta" in card && card.meta && (
                                     <p className="mt-1 text-xs text-[var(--color-text-muted)]">
                                         {card.meta}
                                     </p>
