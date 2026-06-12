@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import {motion} from "framer-motion";
-import {ArrowRight} from "lucide-react";
+// import {ArrowRight} from "lucide-react";
 
 import type {TrustCardItem} from "@/src/types/trustCards";
 
@@ -73,13 +73,13 @@ export const TrustCard = ({card, index}: Props) => {
                     </div>
                 </div>
 
-                <Link
-                    href={card.href}
-                    className="mt-7 inline-flex items-center gap-2 text-sm font-black text-[var(--color-accent)] transition group-hover:gap-3"
-                >
-                    {card.action}
-                    <ArrowRight className="h-4 w-4" />
-                </Link>
+                {/*<Link*/}
+                {/*    href={card.href}*/}
+                {/*    className="mt-7 inline-flex items-center gap-2 text-sm font-black text-[var(--color-accent)] transition group-hover:gap-3"*/}
+                {/*>*/}
+                {/*    {card.action}*/}
+                {/*    <ArrowRight className="h-4 w-4" />*/}
+                {/*</Link>*/}
             </div>
         </motion.article>
     );
