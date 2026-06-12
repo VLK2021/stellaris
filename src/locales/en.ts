@@ -1148,8 +1148,6 @@ const en = {
         wikidataSearch: "Wikidata search",
         pipeline: "Aggregation pipeline",
         details: "Details",
-        aggregateJson: "Aggregate JSON",
-        debugData: "Debug data",
 
         noResults: "No results found",
         noResultsText:

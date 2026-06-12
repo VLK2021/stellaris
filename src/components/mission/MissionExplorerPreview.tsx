@@ -4,10 +4,8 @@ import Link from "next/link";
 import {motion} from "framer-motion";
 import {
     ArrowRight,
-    BadgeCheck,
     Braces,
     Database,
-    ExternalLink,
     FileJson,
     Globe2,
     Layers3,
@@ -42,9 +40,6 @@ export const MissionExplorerPreview = ({mission}: Props) => {
     const {locale} = useLanguage();
     const t = locale.missions;
 
-    const aggregateUrl = `/api/missions/aggregate?slug=${mission.slug}`;
-    const debugUrl = `/api/missions/debug?slug=${mission.slug}`;
-
     const targetKey = getTargetLocaleKey(mission.target);
 
     const categoryLabel =
@@ -65,7 +60,7 @@ export const MissionExplorerPreview = ({mission}: Props) => {
                         repeat: Infinity,
                         ease: "easeInOut",
                     }}
-                    className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(56,189,248,.17),transparent_28%),radial-gradient(circle_at_14%_88%,rgba(139,92,246,.15),transparent_34%),radial-gradient(circle_at_55%_55%,rgba(236,72,153,.08),transparent_30%)]"
+                    className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,var(--color-accent-soft),transparent_28%),radial-gradient(circle_at_14%_88%,var(--color-glass),transparent_34%),radial-gradient(circle_at_55%_55%,var(--color-card),transparent_30%)]"
                 />
 
                 <motion.div
@@ -88,7 +83,7 @@ export const MissionExplorerPreview = ({mission}: Props) => {
                     className="absolute right-[4rem] top-[5rem] h-48 w-48 rounded-full border border-dashed border-[var(--color-border-strong)]"
                 />
 
-                <div className="absolute bottom-[-8rem] left-[14%] h-64 w-64 rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
+                <div className="absolute bottom-[-8rem] left-[14%] h-64 w-64 rounded-full bg-[var(--color-accent-soft)] blur-3xl" />
             </div>
 
             <motion.div
@@ -111,7 +106,7 @@ export const MissionExplorerPreview = ({mission}: Props) => {
                         </p>
                     </div>
 
-                    <h2 className="mt-6 max-w-4xl text-5xl font-black uppercase leading-[0.88] tracking-[-0.08em] md:text-7xl xl:text-8xl">
+                    <h2 className="mt-6 max-w-4xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-accent)] to-[var(--color-brand-secondary)] bg-clip-text text-4xl font-black uppercase leading-[0.94] tracking-[-0.07em] text-transparent md:text-5xl xl:text-6xl">
                         {mission.name}
                     </h2>
 
@@ -187,28 +182,10 @@ export const MissionExplorerPreview = ({mission}: Props) => {
                 <div className="flex flex-wrap items-center gap-3">
                     <Link
                         href={`/missions/${mission.slug}`}
-                        className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-white shadow-[var(--shadow-glow)] transition hover:scale-[1.02]"
+                        className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--color-card-solid)] shadow-[var(--shadow-glow)] transition hover:scale-[1.02]"
                     >
                         {t.details}
                         <ArrowRight className="h-4 w-4" />
-                    </Link>
-
-                    <Link
-                        href={aggregateUrl}
-                        target="_blank"
-                        className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-5 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--color-text)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-                    >
-                        {t.aggregateJson}
-                        <ExternalLink className="h-4 w-4" />
-                    </Link>
-
-                    <Link
-                        href={debugUrl}
-                        target="_blank"
-                        className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-5 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--color-accent)] transition hover:border-[var(--color-accent)]"
-                    >
-                        {t.debugData}
-                        <BadgeCheck className="h-4 w-4" />
                     </Link>
                 </div>
             </motion.div>

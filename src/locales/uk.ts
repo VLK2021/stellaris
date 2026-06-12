@@ -1149,8 +1149,6 @@ const uk = {
         wikidataSearch: "Wikidata search",
         pipeline: "Aggregation pipeline",
         details: "Детальніше",
-        aggregateJson: "Aggregate JSON",
-        debugData: "Debug data",
 
         noResults: "Нічого не знайдено",
         noResultsText:
