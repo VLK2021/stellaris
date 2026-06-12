@@ -1108,6 +1108,92 @@ const en = {
         photographer: "Photographer",
         location: "Location",
     },
+
+    missions: {
+        heroBadge: "Mission Control Archive",
+        heroTitle: "NASA space mission archive.",
+        heroText:
+            "An interactive mission catalog powered by the internal Stellaris catalog, Wikipedia, Wikidata and NASA Media Archive.",
+        totalArchive: "Total archive",
+        crewed: "Crewed",
+        robotic: "Robotic",
+        telescopes: "Telescopes",
+        stations: "Stations",
+        wiki: "Wikipedia",
+        nasaMedia: "NASA Media",
+        normalized: "Normalized",
+        online: "Online",
+
+        archiveBadge: "Interactive archive",
+        archiveTitle: "Mission index",
+        archiveText:
+            "Select a mission from the archive, inspect catalog metadata, then open the full aggregated profile or debug response.",
+        visible: "Visible",
+        total: "Total",
+
+        missionList: "Mission list",
+        missionsVisible: "missions visible",
+        searchPlaceholder: "Search mission, slug, target...",
+        all: "All",
+        allTargets: "All targets",
+
+        selectedMission: "Selected mission",
+        liveSources: "Live sources",
+        previewText:
+            "The details page is built from real sources: Wikipedia summary, Wikidata entities and NASA Image and Video Library. The frontend works only with normalized aggregator-layer data.",
+        category: "Category",
+        target: "Target",
+        nasaQuery: "NASA query",
+        wikipediaTitle: "Wikipedia title",
+        wikidataSearch: "Wikidata search",
+        pipeline: "Aggregation pipeline",
+        details: "Details",
+        aggregateJson: "Aggregate JSON",
+        debugData: "Debug data",
+
+        noResults: "No results found",
+        noResultsText:
+            "Change search, category or mission target to restore archive results.",
+        filtersActive: "Filters active",
+
+        categories: {
+            all: "All",
+            crewed: "Crewed",
+            robotic: "Robotic",
+            telescope: "Telescope",
+            station: "Station",
+        },
+
+        targets: {
+            all: "All targets",
+            moon: "Moon",
+            mars: "Mars",
+            venus: "Venus",
+            jupiter: "Jupiter",
+            saturn: "Saturn",
+            asteroid: "Asteroid",
+            deepSpace: "Deep space",
+            earthOrbit: "Earth orbit",
+        },
+
+        categoryLabels: {
+            crewed: "Crewed mission",
+            robotic: "Robotic mission",
+            telescope: "Space telescope",
+            station: "Orbital station",
+        },
+
+        targetLabels: {
+            moon: "Lunar target",
+            mars: "Mars system",
+            venus: "Venus target",
+            jupiter: "Jupiter system",
+            saturn: "Saturn system",
+            asteroid: "Asteroid target",
+            deepSpace: "Deep space",
+            earthOrbit: "Earth orbit",
+        },
+    },
 };
 
 export default en;

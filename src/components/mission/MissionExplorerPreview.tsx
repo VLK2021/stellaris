@@ -1,41 +1,186 @@
-import Link from "next/link";
-import {ArrowRight, Database, Globe2, Rocket, Sparkles} from "lucide-react";
+"use client";
 
+import Link from "next/link";
+import {motion} from "framer-motion";
+import {
+    ArrowRight,
+    BadgeCheck,
+    Braces,
+    Database,
+    ExternalLink,
+    FileJson,
+    Globe2,
+    Layers3,
+    Radio,
+    Rocket,
+    Sparkles,
+} from "lucide-react";
+
+import {useLanguage} from "@/src/context";
 import type {MissionCatalogItem} from "@/src/constants/missions";
 
 type Props = {
     mission: MissionCatalogItem;
 };
 
+const PIPELINE = [
+    "Catalog",
+    "Wikipedia",
+    "Wikidata",
+    "NASA Media",
+    "Normalizer",
+];
+
+const getTargetLocaleKey = (target: string) => {
+    if (target === "deep-space") return "deepSpace";
+    if (target === "earth-orbit") return "earthOrbit";
+
+    return target;
+};
+
 export const MissionExplorerPreview = ({mission}: Props) => {
+    const {locale} = useLanguage();
+    const t = locale.missions;
+
+    const aggregateUrl = `/api/missions/aggregate?slug=${mission.slug}`;
+    const debugUrl = `/api/missions/debug?slug=${mission.slug}`;
+
+    const targetKey = getTargetLocaleKey(mission.target);
+
+    const categoryLabel =
+        t.categoryLabels[mission.category as keyof typeof t.categoryLabels] ??
+        mission.category;
+
+    const targetLabel =
+        t.targetLabels[targetKey as keyof typeof t.targetLabels] ??
+        mission.target;
+
     return (
-        <section className="relative overflow-hidden p-5 md:p-8">
+        <section className="relative overflow-hidden p-5 md:p-7">
             <div className="pointer-events-none absolute inset-0">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,.18),transparent_28%),radial-gradient(circle_at_15%_90%,rgba(139,92,246,.16),transparent_34%)]" />
-                <div className="absolute right-10 top-10 h-56 w-56 rounded-full border border-[var(--color-accent)]/20" />
-                <div className="absolute right-24 top-24 h-32 w-32 rounded-full border border-[var(--color-accent)]/15" />
+                <motion.div
+                    animate={{opacity: [0.45, 0.85, 0.45]}}
+                    transition={{
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                    className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(56,189,248,.17),transparent_28%),radial-gradient(circle_at_14%_88%,rgba(139,92,246,.15),transparent_34%),radial-gradient(circle_at_55%_55%,rgba(236,72,153,.08),transparent_30%)]"
+                />
+
+                <motion.div
+                    animate={{rotate: 360}}
+                    transition={{
+                        duration: 60,
+                        repeat: Infinity,
+                        ease: "linear",
+                    }}
+                    className="absolute right-[-5rem] top-[-5rem] h-80 w-80 rounded-full border border-dashed border-[var(--color-border)]"
+                />
+
+                <motion.div
+                    animate={{rotate: -360}}
+                    transition={{
+                        duration: 48,
+                        repeat: Infinity,
+                        ease: "linear",
+                    }}
+                    className="absolute right-[4rem] top-[5rem] h-48 w-48 rounded-full border border-dashed border-[var(--color-border-strong)]"
+                />
+
+                <div className="absolute bottom-[-8rem] left-[14%] h-64 w-64 rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
             </div>
 
-            <div className="relative z-10 grid h-full content-between gap-8">
+            <motion.div
+                key={mission.slug}
+                initial={{opacity: 0, y: 18}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.35}}
+                className="relative z-10 grid h-full content-between gap-8"
+            >
                 <div>
-                    <p className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                        <Sparkles className="h-4 w-4" />
-                        Selected mission
-                    </p>
+                    <div className="flex flex-wrap items-center gap-3">
+                        <p className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)] backdrop-blur-xl">
+                            <Sparkles className="h-4 w-4" />
+                            {t.selectedMission}
+                        </p>
 
-                    <h2 className="mt-6 max-w-3xl text-5xl font-black uppercase leading-[0.88] tracking-[-0.08em] md:text-7xl">
+                        <p className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-text-muted)] backdrop-blur-xl">
+                            <Radio className="h-4 w-4 text-[var(--color-success)]" />
+                            {t.liveSources}
+                        </p>
+                    </div>
+
+                    <h2 className="mt-6 max-w-4xl text-5xl font-black uppercase leading-[0.88] tracking-[-0.08em] md:text-7xl xl:text-8xl">
                         {mission.name}
                     </h2>
 
-                    <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--color-text-muted)]">
-                        Відкрий детальний профіль місії: опис, екіпаж, техніка,
-                        оператори, timeline, фото, відео, аудіо та джерела.
+                    <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)] md:text-base">
+                        {t.previewText}
                     </p>
 
-                    <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                        <Info icon={Database} label="Category" value={mission.category} />
-                        <Info icon={Globe2} label="Target" value={mission.target} />
-                        <Info icon={Rocket} label="NASA query" value={mission.nasaMediaQuery} />
+                    <div className="mt-7 grid gap-3 md:grid-cols-3">
+                        <Info
+                            icon={Database}
+                            label={t.category}
+                            value={categoryLabel}
+                        />
+
+                        <Info
+                            icon={Globe2}
+                            label={t.target}
+                            value={targetLabel}
+                        />
+
+                        <Info
+                            icon={Rocket}
+                            label={t.nasaQuery}
+                            value={mission.nasaMediaQuery}
+                        />
+                    </div>
+
+                    <div className="mt-5 grid gap-3 md:grid-cols-2">
+                        <SourceCard
+                            icon={Braces}
+                            label={t.wikipediaTitle}
+                            value={mission.wikipediaTitle}
+                        />
+
+                        <SourceCard
+                            icon={FileJson}
+                            label={t.wikidataSearch}
+                            value={mission.wikidataSearch}
+                        />
+                    </div>
+
+                    <div className="mt-6 rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 backdrop-blur-xl">
+                        <div className="mb-4 flex items-center gap-2">
+                            <Layers3 className="h-5 w-5 text-[var(--color-accent)]" />
+
+                            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+                                {t.pipeline}
+                            </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2">
+                            {PIPELINE.map((item, index) => (
+                                <div
+                                    key={item}
+                                    className="flex items-center gap-2"
+                                >
+                                    <motion.span
+                                        whileHover={{y: -3}}
+                                        className="rounded-full border border-[var(--color-border)] bg-[var(--color-glass-strong)] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.14em] text-[var(--color-text)]"
+                                    >
+                                        {item}
+                                    </motion.span>
+
+                                    {index < PIPELINE.length - 1 && (
+                                        <ArrowRight className="h-3.5 w-3.5 text-[var(--color-text-soft)]" />
+                                    )}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
@@ -44,19 +189,29 @@ export const MissionExplorerPreview = ({mission}: Props) => {
                         href={`/missions/${mission.slug}`}
                         className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-white shadow-[var(--shadow-glow)] transition hover:scale-[1.02]"
                     >
-                        Детальніше
+                        {t.details}
                         <ArrowRight className="h-4 w-4" />
                     </Link>
 
                     <Link
-                        href={`/api/missions/debug?slug=${mission.slug}`}
+                        href={aggregateUrl}
+                        target="_blank"
+                        className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-5 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--color-text)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                    >
+                        {t.aggregateJson}
+                        <ExternalLink className="h-4 w-4" />
+                    </Link>
+
+                    <Link
+                        href={debugUrl}
                         target="_blank"
                         className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-glass)] px-5 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--color-accent)] transition hover:border-[var(--color-accent)]"
                     >
-                        Debug data
+                        {t.debugData}
+                        <BadgeCheck className="h-4 w-4" />
                     </Link>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };
@@ -70,15 +225,49 @@ const Info = ({
     label: string;
     value: string;
 }) => (
-    <div className="rounded-[1.2rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 backdrop-blur-xl">
+    <motion.div
+        whileHover={{y: -4}}
+        className="rounded-[1.25rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 backdrop-blur-xl transition hover:border-[var(--color-accent)] hover:bg-[var(--color-accent-soft)]"
+    >
         <Icon className="h-5 w-5 text-[var(--color-accent)]" />
 
         <p className="mt-3 text-[9px] font-black uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
             {label}
         </p>
 
-        <p className="mt-1 line-clamp-2 text-sm font-black">
+        <p className="mt-1 line-clamp-2 text-sm font-black text-[var(--color-text)]">
             {value}
         </p>
-    </div>
+    </motion.div>
+);
+
+const SourceCard = ({
+                        icon: Icon,
+                        label,
+                        value,
+                    }: {
+    icon: typeof Braces;
+    label: string;
+    value: string;
+}) => (
+    <motion.div
+        whileHover={{y: -4}}
+        className="rounded-[1.25rem] border border-[var(--color-border)] bg-[var(--color-glass)] p-4 backdrop-blur-xl transition hover:border-[var(--color-accent)]"
+    >
+        <div className="flex items-start gap-3">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-accent-soft)]">
+                <Icon className="h-4 w-4 text-[var(--color-accent)]" />
+            </div>
+
+            <div className="min-w-0">
+                <p className="text-[9px] font-black uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                    {label}
+                </p>
+
+                <p className="mt-1 truncate text-sm font-black text-[var(--color-text)]">
+                    {value}
+                </p>
+            </div>
+        </div>
+    </motion.div>
 );

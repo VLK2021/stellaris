@@ -1109,6 +1109,92 @@ const uk = {
         photographer: "Фотограф",
         location: "Локація",
     },
+
+    missions: {
+        heroBadge: "Mission Control Archive",
+        heroTitle: "Архів космічних місій NASA.",
+        heroText:
+            "Інтерактивний каталог місій, зібраний з внутрішнього каталогу Stellaris, Wikipedia, Wikidata та NASA Media Archive.",
+        totalArchive: "Усього місій",
+        crewed: "Пілотовані",
+        robotic: "Роботизовані",
+        telescopes: "Телескопи",
+        stations: "Станції",
+        wiki: "Wikipedia",
+        nasaMedia: "NASA Media",
+        normalized: "Нормалізовано",
+        online: "Online",
+
+        archiveBadge: "Інтерактивний архів",
+        archiveTitle: "Індекс місій",
+        archiveText:
+            "Обери місію з архіву, переглянь її каталогові дані, відкрий детальний профіль або debug-відповідь агрегатора.",
+        visible: "Показано",
+        total: "Усього",
+
+        missionList: "Список місій",
+        missionsVisible: "місій показано",
+        searchPlaceholder: "Пошук місії, slug, ціль...",
+        all: "Усі",
+        allTargets: "Усі цілі",
+
+        selectedMission: "Обрана місія",
+        liveSources: "Живі джерела",
+        previewText:
+            "Детальна сторінка збирається з реальних джерел: Wikipedia summary, Wikidata entities та NASA Image and Video Library. Frontend працює тільки з нормалізованими даними aggregator layer.",
+        category: "Категорія",
+        target: "Ціль",
+        nasaQuery: "NASA query",
+        wikipediaTitle: "Wikipedia title",
+        wikidataSearch: "Wikidata search",
+        pipeline: "Aggregation pipeline",
+        details: "Детальніше",
+        aggregateJson: "Aggregate JSON",
+        debugData: "Debug data",
+
+        noResults: "Нічого не знайдено",
+        noResultsText:
+            "Зміни пошук, категорію або ціль місії, щоб повернути результати.",
+        filtersActive: "Фільтри активні",
+
+        categories: {
+            all: "Усі",
+            crewed: "Пілотовані",
+            robotic: "Роботизовані",
+            telescope: "Телескоп",
+            station: "Станція",
+        },
+
+        targets: {
+            all: "Усі цілі",
+            moon: "Місяць",
+            mars: "Марс",
+            venus: "Венера",
+            jupiter: "Юпітер",
+            saturn: "Сатурн",
+            asteroid: "Астероїд",
+            deepSpace: "Deep space",
+            earthOrbit: "Орбіта Землі",
+        },
+
+        categoryLabels: {
+            crewed: "Пілотована місія",
+            robotic: "Роботизована місія",
+            telescope: "Космічний телескоп",
+            station: "Орбітальна станція",
+        },
+
+        targetLabels: {
+            moon: "Місячна місія",
+            mars: "Система Марса",
+            venus: "Венера",
+            jupiter: "Система Юпітера",
+            saturn: "Система Сатурна",
+            asteroid: "Астероїд",
+            deepSpace: "Далекий космос",
+            earthOrbit: "Орбіта Землі",
+        },
+    },
 };
 
 export default uk;
