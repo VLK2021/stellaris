@@ -5,4 +5,5 @@ export const BRAND = {
         "Stellaris is a cinematic space exploration platform powered by NASA open data, built to transform cosmic datasets, imagery, missions, and space events into an immersive digital experience.",
     url: "https://stellaris.vercel.app",
     author: "Volodymyr Kostiuk",
+    telegram: "https://t.me/kvm20232023",
 };

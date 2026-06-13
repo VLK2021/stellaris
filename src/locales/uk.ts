@@ -70,6 +70,8 @@ const uk = {
         research: "Дослідження",
         platform: "Платформа",
         nasaApi: "NASA API",
+        authorCredit: "Дизайн та розробка",
+        telegram: "Telegram",
     },
 
     brand: {

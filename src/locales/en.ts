@@ -70,6 +70,8 @@ const en = {
         research: "Research",
         platform: "Platform",
         nasaApi: "NASA API",
+        authorCredit: "Design and development by",
+        telegram: "Telegram",
     },
 
     brand: {
