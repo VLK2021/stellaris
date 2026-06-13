@@ -2,8 +2,18 @@
 
 import Link from "next/link";
 import {motion} from "framer-motion";
-import {ArrowRight, Calendar, Rocket, ShieldCheck, Star} from "lucide-react";
-import type {MissionTimelineLocale, MissionTimelineMission} from "@/src/types/missionTimeline";
+import {
+    ArrowRight,
+    Calendar,
+    Rocket,
+    ShieldCheck,
+    Star,
+} from "lucide-react";
+
+import type {
+    MissionTimelineLocale,
+    MissionTimelineMission,
+} from "@/src/types/missionTimeline";
 
 type Props = {
     mission: MissionTimelineMission;
@@ -42,35 +52,80 @@ export const MissionTimelinePreview = ({mission, locale}: Props) => {
                     {copy.name}
                 </h3>
 
-                <p className="mt-3 text-lg text-slate-200">{copy.short}</p>
+                <p className="mt-3 text-lg text-slate-200">
+                    {copy.short}
+                </p>
 
                 <p className="mt-5 max-w-md text-sm leading-7 text-slate-300">
                     {copy.description}
                 </p>
 
                 <div className="mt-6 grid max-w-md gap-3 border-t border-white/10 pt-5">
-                    <Info icon={Calendar} label={locale.labels.launch} value={copy.launch} />
-                    <Info icon={Rocket} label={locale.labels.type} value={copy.type} />
-                    <Info icon={ShieldCheck} label={locale.labels.status} value={copy.status} />
-                    <Info icon={Star} label={locale.labels.legacy} value={copy.legacy} />
+                    <Info
+                        icon={Calendar}
+                        label={locale.labels.launch}
+                        value={copy.launch}
+                    />
+
+                    <Info
+                        icon={Rocket}
+                        label={locale.labels.type}
+                        value={copy.type}
+                    />
+
+                    <Info
+                        icon={ShieldCheck}
+                        label={locale.labels.status}
+                        value={copy.status}
+                    />
+
+                    <Info
+                        icon={Star}
+                        label={locale.labels.legacy}
+                        value={copy.legacy}
+                    />
                 </div>
 
-                <Link
-                    href={mission.href}
-                    className="mt-7 inline-flex items-center gap-3 rounded-full border border-cyan-300/25 bg-cyan-300/8 px-5 py-3 text-sm font-black text-cyan-300 transition hover:gap-4"
-                >
-                    {locale.explore}
-                    <ArrowRight className="h-4 w-4" />
-                </Link>
+                <div className="mt-7 flex flex-row flex-wrap items-center gap-3">
+                    <Link
+                        href={mission.href}
+                        className="inline-flex items-center gap-3 rounded-full border border-cyan-300/25 bg-cyan-300/8 px-5 py-3 text-sm font-black text-cyan-300 transition hover:gap-4"
+                    >
+                        {locale.explore}
+                        <ArrowRight className="h-4 w-4" />
+                    </Link>
+
+                    <Link
+                        href="/missions"
+                        className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-black text-white transition hover:border-cyan-300/25 hover:text-cyan-300"
+                    >
+                        Усі місії
+                        <ArrowRight className="h-4 w-4" />
+                    </Link>
+                </div>
             </div>
         </motion.article>
     );
 };
 
-const Info = ({icon: Icon, label, value}: {icon: typeof Calendar; label: string; value: string}) => (
+const Info = ({
+                  icon: Icon,
+                  label,
+                  value,
+              }: {
+    icon: typeof Calendar;
+    label: string;
+    value: string;
+}) => (
     <div className="grid grid-cols-[22px_104px_1fr] items-center gap-3 text-sm">
         <Icon className="h-4 w-4 text-cyan-300" />
-        <span className="text-xs text-slate-400">{label}</span>
-        <span className="text-sm font-bold text-white">{value}</span>
+
+        <span className="text-xs text-slate-400">
+            {label}
+        </span>
+
+        <span className="text-sm font-bold text-white">
+            {value}
+        </span>
     </div>
 );
